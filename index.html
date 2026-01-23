@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="LAP MOSUL - الوجهة الأولى للحواسيب المحمولة ومحطات العمل في الموصل.">
+    <title>LAP MOSUL | لاب الموصل - الفخامة في عالم الحواسيب</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Configuration -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0f9ff', 100: '#e0f2fe', 500: '#0ea5e9', 600: '#0284c7', 900: '#0c4a6e' },
+                        accent: { purple: '#8b5cf6', pink: '#ec4899', gold: '#f59e0b', teal: '#0d9488' },
+                        dark: { 900: '#020617', 800: '#0f172a' }
+                    },
+                    fontFamily: { sans: ['Tajawal', 'sans-serif'] },
+                    animation: { 
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'float': 'float 3s ease-in-out infinite',
+                        'glow': 'glow 2s ease-in-out infinite alternate',
+                        'bounce-slow': 'bounce 3s infinite'
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        },
+                        glow: {
+                            'from': { boxShadow: '0 0 5px rgba(14, 165, 233, 0.2), 0 0 10px rgba(14, 165, 233, 0.1)' },
+                            'to': { boxShadow: '0 0 20px rgba(14, 165, 233, 0.6), 0 0 30px rgba(14, 165, 233, 0.4)' }
+                        }
+                    }
+                }
+            }
+        }
+        
+        // Immediate Theme Check
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark')
+        } else {
+            document.documentElement.classList.remove('dark')
+        }
+
+        // Toggle Dark Mode Function
+        function toggleDarkMode() {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+        .dark ::-webkit-scrollbar-thumb { background: #1e293b; }
+        ::-webkit-scrollbar-thumb:hover { background: #0ea5e9; }
+
+        /* Splash Screen */
+        #splash-screen {
+            position: fixed; inset: 0;
+            background: #020617;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            z-index: 10000; transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Glassmorphism */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .dark .glass-card {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* Hover Effects */
+        .service-card:hover .icon-box {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 0 30px var(--glow-color);
+            background-color: var(--glow-color);
+            color: white;
+        }
+
+        .laptop-card {
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        
+        .laptop-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px -5px rgba(0, 0, 0, 0.1);
+        }
+        .dark .laptop-card:hover {
+            box-shadow: 0 15px 30px -5px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Background Decor */
+        .glow-blob {
+            position: fixed;
+            width: 600px;
+            height: 600px;
+            filter: blur(100px);
+            opacity: 0.15;
+            z-index: -1;
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .phone-number { direction: ltr !important; unicode-bidi: bidi-override !important; display: inline-block; }
+
+        /* Chat Widget Animations */
+        .chat-enter { animation: chatEnter 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        @keyframes chatEnter {
+            from { opacity: 0; transform: translateY(20px) scale(0.95); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        .typing-dot { animation: typing 1.4s infinite ease-in-out both; }
+        .typing-dot:nth-child(1) { animation-delay: -0.32s; }
+        .typing-dot:nth-child(2) { animation-delay: -0.16s; }
+        @keyframes typing { 0%, 80%, 100% { transform: scale(0); } 40% { transform: scale(1); } }
+        
+        /* Markdown Style for Chat */
+        .chat-content ul { list-style-type: disc; margin-right: 1.5rem; }
+        .chat-content strong { font-weight: 700; color: #0ea5e9; }
+        .dark .chat-content strong { color: #38bdf8; }
+    </style>
+    
+    <!-- Gemini SDK Import -->
+    <script type="importmap">
+      {
+        "imports": {
+          "@google/generative-ai": "https://esm.run/@google/generative-ai"
+        }
+      }
+    </script>
+</head>
+<body class="bg-slate-50 dark:bg-dark-900 text-slate-900 dark:text-slate-100 antialiased transition-colors duration-300 overflow-x-hidden selection:bg-brand-500 selection:text-white">
+
+    <!-- Dynamic Background Decor -->
+    <div class="glow-blob bg-brand-500 top-[-20%] right-[-10%] animate-pulse-slow"></div>
+    <div class="glow-blob bg-accent-purple bottom-[-20%] left-[-10%] animate-pulse-slow" style="animation-delay: 2s;"></div>
+
+    <!-- Splash Screen -->
+    <div id="splash-screen">
+        <div class="relative">
+            <div class="w-24 h-24 border-4 border-brand-500/20 border-t-brand-500 rounded-full animate-spin"></div>
+            <div class="absolute inset-0 flex items-center justify-center">
+                <i class="fas fa-laptop text-brand-500 text-2xl animate-pulse"></i>
+            </div>
+        </div>
+        <h1 class="text-4xl font-black text-white mt-8 tracking-widest">LAP <span class="text-brand-500">MOSUL</span></h1>
+        <p class="text-slate-500 mt-2 font-light tracking-wide text-sm uppercase">Luxury Computing</p>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-[100] transition-all duration-300 border-b border-transparent" id="main-nav">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
+            <div class="flex items-center gap-12">
+                <a href="#" class="text-2xl font-black tracking-tighter group flex items-center gap-2">
+                    <span class="w-8 h-8 bg-gradient-to-tr from-brand-600 to-brand-400 rounded-lg flex items-center justify-center text-white text-sm shadow-lg shadow-brand-500/30">
+                        <i class="fas fa-laptop"></i>
+                    </span>
+                    <span class="bg-clip-text text-transparent bg-gradient-to-l from-brand-500 via-accent-purple to-slate-800 dark:to-white group-hover:from-accent-pink group-hover:to-brand-500 transition-all duration-500">LAP MOSUL</span>
+                </a>
+                <div class="hidden lg:flex items-center gap-8 text-sm font-bold text-slate-600 dark:text-slate-300">
+                    <a href="#home" class="hover:text-brand-500 transition-colors">الرئيسية</a>
+                    <a href="#services" class="hover:text-brand-500 transition-colors">خدماتنا</a>
+                    <a href="#store" class="hover:text-brand-500 transition-colors">المعرض</a>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-4">
+                <button onclick="toggleDarkMode()" aria-label="Toggle Dark Mode" class="w-10 h-10 rounded-full border border-slate-200 dark:border-slate-700 flex items-center justify-center hover:bg-slate-100 dark:hover:bg-slate-800 transition-all group">
+                    <i class="fas fa-moon dark:hidden text-slate-600 group-hover:rotate-12 transition-transform"></i>
+                    <i class="fas fa-sun hidden dark:block text-amber-400 group-hover:rotate-90 transition-transform"></i>
+                </button>
+                <a href="https://wa.me/9647777111558" target="_blank" class="hidden sm:flex relative overflow-hidden group bg-slate-900 dark:bg-white dark:text-slate-950 text-white px-6 py-2.5 rounded-full font-bold text-sm transition-all hover:shadow-[0_0_20px_rgba(14,165,233,0.4)]">
+                    <span class="relative z-10 flex items-center gap-2">
+                        <span>تواصل معنا</span>
+                        <i class="fab fa-whatsapp"></i>
+                    </span>
+                    <div class="absolute inset-0 bg-brand-500 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative pt-48 pb-32 px-6 overflow-hidden">
+        <div class="max-w-5xl mx-auto text-center relative z-10">
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-500/10 border border-brand-500/20 text-brand-600 dark:text-brand-400 text-xs font-bold mb-8 animate-fade-in-up">
+                <span class="flex h-2 w-2 rounded-full bg-brand-500 animate-pulse"></span>
+                الوجهة الأولى للمحترفين في نينوى
+            </div>
+            
+            <h1 id="hero-headline" class="text-5xl md:text-7xl lg:text-8xl font-black mb-8 leading-tight tracking-tight min-h-[3.5em] md:min-h-[2.5em] flex flex-col justify-center transition-opacity duration-500">
+                فخامة الأداء <br> 
+                <span class="bg-clip-text text-transparent bg-gradient-to-r from-brand-500 to-accent-purple italic pb-2">بين يديك</span>
+            </h1>
+            
+            <p class="text-slate-600 dark:text-slate-400 text-lg md:text-xl mb-12 mx-auto max-w-2xl font-medium leading-relaxed">
+                في لاب الموصل، نجمع لك بين قوة الـ Workstation وجمالية التصميم. أجهزة مختارة بعناية لتناسب طموحاتك الهندسية والبرمجية.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+                <a href="#store" class="w-full sm:w-auto px-8 py-4 bg-brand-600 hover:bg-brand-500 text-white rounded-xl font-bold shadow-lg shadow-brand-500/25 hover:-translate-y-1 transition-all duration-300">
+                    تصفح المعرض
+                </a>
+                <a href="#services" class="w-full sm:w-auto px-8 py-4 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-xl font-bold hover:bg-slate-50 dark:hover:bg-slate-700 transition-all duration-300">
+                    الخدمات التقنية
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Grid -->
+    <section class="py-10">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="glass-card p-8 rounded-3xl text-center group hover:border-brand-500/30 transition-all duration-500">
+                <div class="w-16 h-16 bg-brand-500/10 text-brand-500 rounded-2xl flex items-center justify-center mx-auto mb-6 text-2xl group-hover:scale-110 transition-transform duration-300">
+                    <i class="fas fa-microchip"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-3">أداء فائق</h3>
+                <p class="text-slate-500 dark:text-slate-400 text-sm">نركز على المعالجات القوية وكروت الشاشة الاحترافية من فئة Quadro و RTX.</p>
+            </div>
+            <div class="glass-card p-8 rounded-3xl text-center group hover:border-accent-purple/30 transition-all duration-500">
+                <div class="w-16 h-16 bg-accent-purple/10 text-accent-purple rounded-2xl flex items-center justify-center mx-auto mb-6 text-2xl group-hover:scale-110 transition-transform duration-300">
+                    <i class="fas fa-shield-halved"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-3">ضمان حقيقي</h3>
+                <p class="text-slate-500 dark:text-slate-400 text-sm">كل قطعة تخرج من متجرنا مدعومة بضمان فحص وصيانة حقيقي لمدة شهر.</p>
+            </div>
+            <div class="glass-card p-8 rounded-3xl text-center group hover:border-accent-pink/30 transition-all duration-500">
+                <div class="w-16 h-16 bg-accent-pink/10 text-accent-pink rounded-2xl flex items-center justify-center mx-auto mb-6 text-2xl group-hover:scale-110 transition-transform duration-300">
+                    <i class="fas fa-headset"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-3">دعم فني</h3>
+                <p class="text-slate-500 dark:text-slate-400 text-sm">خبراؤنا معك دائماً لتنصيب البرامج الهندسية وحل المشاكل التقنية.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-24 px-6 relative">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-5xl font-black mb-4">خدماتنا المميزة</h2>
+                <p class="text-slate-400 font-bold tracking-widest uppercase text-xs md:text-sm">Expert Technical Solutions</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Hardware -->
+                <div class="service-card group p-8 md:p-10 bg-white dark:bg-slate-800 rounded-[2.5rem] border border-slate-100 dark:border-slate-700 shadow-xl dark:shadow-none hover:shadow-2xl transition-all duration-300" style="--glow-color: #0ea5e9;">
+                    <div class="icon-box w-16 h-16 bg-slate-50 dark:bg-slate-700 text-brand-500 rounded-2xl flex items-center justify-center text-2xl mb-8 transition-all duration-300">
+                        <i class="fas fa-screwdriver-wrench"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">الصيانة المتقدمة</h3>
+                    <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed mb-6">إصلاح شامل للهاردوير، تنظيف التبريد، وتغيير المعجون الحراري بمواد احترافية.</p>
+                    <div class="h-1 w-12 group-hover:w-full bg-brand-500 transition-all duration-500 rounded-full"></div>
+                </div>
+
+                <!-- Software -->
+                <div class="service-card group p-8 md:p-10 bg-white dark:bg-slate-800 rounded-[2.5rem] border border-slate-100 dark:border-slate-700 shadow-xl dark:shadow-none hover:shadow-2xl transition-all duration-300" style="--glow-color: #8b5cf6;">
+                    <div class="icon-box w-16 h-16 bg-slate-50 dark:bg-slate-700 text-accent-purple rounded-2xl flex items-center justify-center text-2xl mb-8 transition-all duration-300">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">الحزم البرمجية</h3>
+                    <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed mb-6">تنصيب وتفعيل حزم Adobe، Autodesk، Office وأنظمة Windows الأصلية.</p>
+                    <div class="h-1 w-12 group-hover:w-full bg-accent-purple transition-all duration-500 rounded-full"></div>
+                </div>
+
+                <!-- Security -->
+                <div class="service-card group p-8 md:p-10 bg-white dark:bg-slate-800 rounded-[2.5rem] border border-slate-100 dark:border-slate-700 shadow-xl dark:shadow-none hover:shadow-2xl transition-all duration-300" style="--glow-color: #f59e0b;">
+                    <div class="icon-box w-16 h-16 bg-slate-50 dark:bg-slate-700 text-accent-gold rounded-2xl flex items-center justify-center text-2xl mb-8 transition-all duration-300">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">بيئات التطوير</h3>
+                    <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed mb-6">إعداد بيئات Linux، Docker، وتجهيز الأجهزة للطلاب والمبرمجين.</p>
+                    <div class="h-1 w-12 group-hover:w-full bg-accent-gold transition-all duration-500 rounded-full"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Store Section -->
+    <section id="store" class="py-24 px-6 bg-slate-50/50 dark:bg-slate-900/50">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6 border-r-4 border-brand-500 pr-6">
+                <div>
+                    <h2 class="text-4xl md:text-5xl font-black mb-2">المعرض <span class="text-brand-500">الاحترافي</span></h2>
+                    <p class="text-slate-500 dark:text-slate-400 font-bold">أجهزة مختارة بعناية (Open Box & Used A++)</p>
+                </div>
+                <div class="hidden md:block">
+                    <span class="px-4 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-full text-xs font-black uppercase tracking-widest text-brand-600 dark:text-brand-400">Premium Collection</span>
+                </div>
+            </div>
+
+            <!-- Modified Grid: Adjusted columns and gap for better density without overlapping -->
+            <div id="used-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <!-- Rendered by JS -->
+            </div>
+            
+            <div class="mt-16 text-center">
+                <a href="https://wa.me/9647777111558" class="inline-flex items-center gap-3 text-brand-600 dark:text-brand-400 font-black hover:tracking-wide transition-all border-b-2 border-brand-500 pb-1">
+                    شاهد المزيد من العروض على واتساب <i class="fas fa-arrow-left"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-20 px-6 border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 relative z-10">
+            <div>
+                <h2 class="text-3xl font-black mb-6">LAP <span class="text-brand-500">MOSUL</span></h2>
+                <p class="text-slate-500 dark:text-slate-400 font-medium leading-relaxed mb-8 max-w-md">
+                    نحن هنا لنغير مفهوم شراء اللابتوبات في الموصل. جودة، فخامة، وأداء لا يضاهى. جميع أجهزتنا تخضع لفحص دقيق من قبل مهندسين مختصين.
+                </p>
+                
+                <div class="flex gap-4">
+                    <a href="https://www.facebook.com/p/LAP-MOSUL-61576293412329/" class="w-12 h-12 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex items-center justify-center hover:bg-blue-600 hover:border-blue-600 hover:text-white transition-all"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/lap_mosul_/" class="w-12 h-12 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex items-center justify-center hover:bg-pink-600 hover:border-pink-600 hover:text-white transition-all"><i class="fab fa-instagram"></i></a>
+                    <a href="https://wa.me/9647777111558" class="w-12 h-12 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex items-center justify-center hover:bg-green-500 hover:border-green-500 hover:text-white transition-all"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+            
+            <div class="glass-card p-8 md:p-10 rounded-[2.5rem] relative overflow-hidden group border border-slate-100 dark:border-slate-800">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-brand-500/10 blur-3xl group-hover:bg-brand-500/20 transition-all"></div>
+                <h4 class="text-lg font-black mb-6 flex items-center gap-2">
+                    <i class="fas fa-map-pin text-brand-500"></i>
+                    موقعنا في الموصل
+                </h4>
+                <div class="space-y-6">
+                    <div class="pl-4 border-r-2 border-slate-200 dark:border-slate-700">
+                        <p class="font-bold text-lg">المجموعة الثقافية</p>
+                        <!-- Added Maps Link -->
+                        <a href="https://maps.app.goo.gl/EZeEuzCKKsQn8hmW8" target="_blank" class="inline-flex items-center gap-2 text-brand-500 hover:text-brand-600 mt-1 font-bold text-sm transition-colors group/map">
+                            <span class="border-b border-brand-500 border-dashed group-hover/map:border-solid">اضغط هنا لعرض الموقع</span>
+                            <i class="fas fa-location-arrow animate-bounce"></i>
+                        </a>
+                        <p class="text-slate-500 dark:text-slate-400 text-sm mt-2">فرع مطعم طماطة - داخل شركة رؤية</p>
+                    </div>
+                    <div class="pl-4 border-r-2 border-brand-500">
+                        <p class="font-bold text-lg">خدمة الزبائن</p>
+                        <a href="tel:07777111558" class="text-2xl font-black mt-1 block phone-number hover:text-brand-500 transition-colors">07777 111 558</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="text-center mt-20 border-t border-slate-100 dark:border-slate-900 pt-8">
+            <p class="text-[10px] font-bold text-slate-400 dark:text-slate-600 tracking-[0.3em] uppercase">Built with <i class="fas fa-heart text-red-500 mx-1"></i> by Lap Mosul</p>
+        </div>
+    </footer>
+
+    <!-- AI Smart Assistant Widget -->
+    <div id="ai-chat-widget" class="fixed bottom-6 left-6 z-50 flex flex-col items-start font-sans" dir="rtl">
+        <!-- Chat Window -->
+        <div id="chat-window" class="hidden w-[90vw] sm:w-[24rem] h-[550px] max-h-[80vh] bg-white dark:bg-slate-900 rounded-3xl shadow-2xl border border-slate-200 dark:border-slate-700 flex flex-col overflow-hidden mb-4 transition-all duration-300 origin-bottom-left scale-95 opacity-0">
+            
+            <!-- Header -->
+            <div class="bg-gradient-to-r from-brand-600 to-brand-500 p-4 flex justify-between items-center text-white shrink-0 shadow-md z-10">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-sm relative overflow-hidden">
+                        <i class="fas fa-brain text-lg relative z-10"></i>
+                        <div class="absolute inset-0 bg-white/10 animate-pulse"></div>
+                    </div>
+                    <div>
+                        <span class="font-bold block text-sm">مساعد الذكاء الاصطناعي</span>
+                        <span class="text-[10px] text-brand-100 opacity-90">مدعوم بواسطة Gemini &reg;</span>
+                    </div>
+                </div>
+                <button onclick="window.toggleChat()" class="hover:bg-white/20 rounded-full w-8 h-8 flex items-center justify-center transition-colors">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <!-- Messages Area -->
+            <div id="chat-messages" class="flex-1 p-4 overflow-y-auto space-y-4 bg-slate-50 dark:bg-slate-950 scroll-smooth pb-20">
+                <!-- Welcome Message -->
+                <div class="flex justify-start">
+                    <div class="bg-white dark:bg-slate-800 p-4 rounded-2xl rounded-tr-none shadow-sm text-sm max-w-[90%] border border-slate-100 dark:border-slate-800 chat-enter">
+                        <p class="mb-2 text-brand-600 dark:text-brand-400 font-bold text-xs"><i class="fas fa-robot text-brand-500 mr-1"></i> المساعد الرقمي</p>
+                        أهلاً بك! أنا ذكاء اصطناعي مطور لمساعدتك. 🤖
+                        <br>
+                        يمكنك سؤالي عن:
+                        <ul class="list-disc list-inside space-y-1 text-xs text-slate-500 dark:text-slate-400 my-2">
+                            <li>مواصفات اللابتوبات واقتراحات الشراء</li>
+                            <li>معلومات تقنية عامة (ما هو SSD؟ الفرق بين المعالجات؟)</li>
+                            <li>نصائح عامة عن الحاسبات</li>
+                        </ul>
+                        <p class="text-xs mt-2">جرب أن تسألني أي سؤال يخطر في بالك!</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Input Area -->
+            <div class="p-3 bg-white dark:bg-slate-900 border-t border-slate-100 dark:border-slate-800 flex gap-2 shrink-0 absolute bottom-0 w-full z-20">
+                <input type="text" id="chat-input" placeholder="اسألني أي شيء (تقني أو عام)..." class="flex-1 bg-slate-100 dark:bg-slate-800 rounded-2xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500/50 dark:text-white transition-all" onkeypress="window.handleEnter(event)">
+                <button onclick="window.handleUserMessage()" class="w-12 h-12 bg-brand-500 text-white rounded-2xl flex items-center justify-center hover:bg-brand-600 hover:scale-105 active:scale-95 transition-all shadow-lg shadow-brand-500/20">
+                    <i class="fas fa-paper-plane text-sm transform -rotate-90"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Toggle Button -->
+        <button onclick="window.toggleChat()" class="group relative w-16 h-16 z-50">
+            <div class="absolute inset-0 bg-brand-500 rounded-full animate-ping opacity-20 group-hover:opacity-40"></div>
+            <div class="relative w-full h-full bg-gradient-to-tr from-brand-600 to-brand-400 text-white rounded-full shadow-2xl flex items-center justify-center text-2xl hover:scale-110 hover:-translate-y-1 transition-all duration-300 border-4 border-white dark:border-slate-800">
+                <i class="fas fa-comment-dots"></i>
+                <span class="absolute top-0 right-0 w-4 h-4 bg-green-500 rounded-full border-2 border-white dark:border-slate-800"></span>
+            </div>
+        </button>
+    </div>
+
+    <!-- MAIN LOGIC (MODULE) -->
+    <script type="module">
+        import { GoogleGenerativeAI } from "https://esm.run/@google/generative-ai";
+
+        // ==========================================
+        //  ⚠️⚠️ ضع مفتاح API الخاص بك هنا ⚠️⚠️
+        // ==========================================
+        const GEMINI_API_KEY = ""; 
+        // ==========================================
+
+        let genAI = null;
+        let model = null;
+
+        // Initialize Gemini if key exists
+        if (GEMINI_API_KEY) {
+            try {
+                genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
+                model = genAI.getGenerativeModel({ model: "gemini-pro"});
+                console.log("Gemini AI Initialized ✅");
+            } catch (error) {
+                console.error("Gemini Init Failed:", error);
+            }
+        }
+
+        const laptops = [
+            { 
+                id: 1, name: "Lenovo L13 Yoga", price: "راسلنا للسعر", specs: "i5-11th Gen | 16GB RAM | 512GB NVMe | x360 Touch", 
+                category: ["student", "office", "design_light"], tags: ["خفيف", "لمس", "تابلت", "دراسة", "رخيص", "اقتصادي", "طب", "صيدلة"],
+                description: "مثالي للطلاب بفضل شاشة اللمس ووزنه الخفيف.",
+                img: "https://p1-ofp.static.pub/medias/bWFzdGVyfHJvb3R8MjEzNjQzfGltYWdlL3BuZ3xoYmIvaGFkLzE0MTEwNjI4MTUxMzI2LnBuZ3wyZDNiODQ1MjdiZTUyZDM5NjdkNGU1NDBkOGFjOTBjNDYxZDhkNDFjZjRmZjk1NzE0MWI3NWJkOGFmYmZjNDNm/lenovo-thinkpad-l13-yoga-hero.png?width=400&height=400" 
+            },
+            { 
+                id: 2, name: "Lenovo ThinkPad T480", price: "راسلنا للسعر", specs: "i5-8th Gen | 8GB RAM | 256GB SSD | Dual Battery", 
+                category: ["student", "office", "coding"], tags: ["برمجة", "كتابة", "تحمل", "بطارية", "رخيص", "عملي"],
+                description: "وحش التحمل، ممتاز للطباعة والبرمجة بفضل الكيبورد المريح.",
+                img: "https://p1-ofp.static.pub/medias/bWFzdGVyfHJvb3R8NDk0OTN8aW1hZ2UvanBlZ3xoNDkvaDJiLzk2MTA3MDg3NzkwMzguanBnfDE5NzE4YzViY2MzMzYwMTExNmIwOTIxMjExYzYzMzViYjExNzlkMDk2N2ZhNGQ3ZjlkYjE1NzBlNTJhNzQyYmI/bWFzdGVyfH.jpg" 
+            },
+            { 
+                id: 3, name: "Dell Latitude 5500", price: "راسلنا للسعر", specs: "i5-8th Gen vPro | 16GB RAM | 256GB SSD | 15.6 FHD", 
+                category: ["office", "accounting"], tags: ["حسابات", "محاسبة", "شاشة كبيرة", "ارقام", "اكسل"],
+                description: "شاشة كبيرة ولوحة أرقام جانبية، ممتاز للمحاسبين.",
+                img: "https://m.media-amazon.com/images/I/61YZm8Z6H3L._AC_SL1000_.jpg" 
+            },
+            { 
+                id: 4, name: "Lenovo ThinkPad T460", price: "راسلنا للسعر", specs: "i5-6th | 8GB RAM | 256GB SSD", 
+                category: ["student", "office"], tags: ["رخيص", "عملي", "تحمل", "طباعة", "دائم"],
+                description: "جهاز عملي جداً وقوي التحمل، مناسب للطباعة والأعمال المكتبية.",
+                img: "https://images-cdn.ubuy.co.in/6366cb9d0144da3f7e5803c0-lenovo-thinkpad-t460-14-34-laptop.jpg" 
+            },
+            { 
+                id: 5, name: "Dell Precision 5530", price: "راسلنا للسعر", specs: "i7-8850H | 32GB RAM | 512GB SSD | Nvidia P1000", 
+                category: ["engineering", "design", "gaming_light"], tags: ["هندسة", "مدني", "معماري", "رندر", "مونتاج", "تصميم", "العاب", "قوي"],
+                description: "الخيار الأول للمهندسين والمصممين. يشغل برامج مثل AutoCAD و 3Ds Max بكفاءة.",
+                img: "https://images.unsplash.com/photo-1603302576837-37561b2e2302?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
+            }
+        ];
+
+        // --- CORE BRAIN LOGIC ---
+        async function getSmartAIResponse(input) {
+            const text = input.toLowerCase();
+            
+            // 1. PRIORITY: Check Local Sales Logic (The Expert Salesman)
+            // ---------------------------------------------------------
+            // ... (Same logic as before for laptops/engineering/gaming) ...
+            const engineeringKeywords = ['هندسة', 'مدني', 'معماري', 'رسم', 'اوتوكاد', 'autocad', '3d', 'رندر', 'render', 'مخططات', 'مساحة', 'revit', 'max'];
+            const gamingKeywords = ['لعب', 'العاب', 'قيم', 'ببجي', 'pubg', 'gta', 'شاشة', 'كارت', 'جيم', 'gaming'];
+            const studentKeywords = ['طالب', 'دراسة', 'قراءة', 'بحث', 'كلية', 'معهد', 'مدرسة', 'ورد', 'اوفيس', 'office', 'pdf'];
+            const locationKeywords = ['موقع', 'مكان', 'عنوان'];
+            const priceKeywords = ['سعر', 'اسعار', 'بيش'];
+
+            if (engineeringKeywords.some(k => text.includes(k))) {
+                const recommended = laptops.filter(l => l.category.includes('engineering') || l.specs.includes('H'));
+                return { text: `للمهندسين، أوصي بـ Workstation مع كرت شاشة Quadro:`, products: recommended.slice(0, 2) };
+            }
+            if (gamingKeywords.some(k => text.includes(k))) {
+                const recommended = laptops.filter(l => l.category.includes('gaming_light'));
+                return { text: `للألعاب، تحتاج جهاز بمعالج قوي وتبريد ممتاز، مثل:`, products: recommended.slice(0, 2) };
+            }
+            if (studentKeywords.some(k => text.includes(k))) {
+                const recommended = laptops.filter(l => l.category.includes('student'));
+                return { text: `للدراسة، أوصي بأجهزة خفيفة وعملية:`, products: recommended.slice(0, 2) };
+            }
+            if (locationKeywords.some(k => text.includes(k))) return { text: `موقعنا: الموصل، المجموعة الثقافية، داخل شركة رؤية.` };
+            if (priceKeywords.some(k => text.includes(k))) return { text: `الأسعار تختلف يومياً. راسلنا واتساب للحصول على القائمة المحدثة.` };
+
+
+            // 2. SECONDARY: Call Gemini API (The Genius Brain)
+            // ------------------------------------------------
+            if (model) {
+                try {
+                    const prompt = `
+                    You are a helpful assistant for "Lap Mosul", a laptop store in Mosul, Iraq.
+                    User Input: "${input}"
+                    
+                    Instructions:
+                    - Reply in Iraqi Arabic dialect (Moslawi if possible).
+                    - Be polite, helpful, and concise (max 3 sentences).
+                    - You can answer general tech questions (what is RAM, SSD vs HDD, etc).
+                    - You can answer general greetings.
+                    - If asked about prices/stock for specific items not in your knowledge, tell them to check WhatsApp.
+                    `;
+                    
+                    const result = await model.generateContent(prompt);
+                    const response = await result.response;
+                    const text = response.text();
+                    return { text: text };
+                    
+                } catch (error) {
+                    console.error("Gemini Error:", error);
+                    // Fallthrough to local backup if API fails
+                }
+            }
+
+            // 3. FALLBACK: Expanded Local Knowledge (The Backup Brain)
+            // --------------------------------------------------------
+            // Answers tech questions if API Key is missing or fails
+            
+            // Tech Definitions
+            if (text.includes('ram') || text.includes('رام')) return { text: "الرام (RAM) هي الذاكرة العشوائية. كلما زادت، زادت قدرة الجهاز على فتح برامج أكثر في نفس الوقت. للدراسة ننصح بـ 8GB وللتصاميم 16GB فما فوق." };
+            if (text.includes('ssd') || text.includes('hdd')) return { text: "الـ SSD هو قرص تخزين أسرع بـ 10 مرات من الهارد العادي (HDD). يخلي اللابتوب يشتغل بثواني ويفتح البرامج بسرعة صاروخية. كل أجهزتنا تجي بـ SSD." };
+            if (text.includes('i5') || text.includes('i7')) return { text: "الفرق الأساسي هو قوة المعالجة. الـ i7 أقوى في المهام الثقيلة والرندر، بس الـ i5 ممتاز جداً للاستخدام العام والألعاب المتوسطة وغالباً أوفر بالسعر." };
+            if (text.includes('شاشة') || text.includes('دقة')) return { text: "دقة الشاشة مهمة لراحة العين. الـ FHD هي القياسية حالياً. الـ 2K و 4K تعطي تفاصيل أكثر وتفيد المصممين." };
+            
+            // Greetings & Chat
+            if (text.includes('هلو') || text.includes('مرحبا') || text.includes('سلام')) return { text: "يا هلا! 🌹 نورت لاب الموصل. شلون أقدر أساعدك اليوم؟" };
+            if (text.includes('شلونك') || text.includes('احوالك')) return { text: "بخير بشوفتكم! 💻 جاهز أجاوب على أي سؤال تقني عندك." };
+            if (text.includes('منو انت') || text.includes('انت منو')) return { text: "أني المساعد الذكي الخاص بلاب الموصل 🤖. مبرمج لمساعدتك باختيار لابتوبك القادم!" };
+            if (text.includes('شكرا') || text.includes('عاشت')) return { text: "تدلل! واجبنا خدمتك. ❤️" };
+
+            // Absolute Fallback
+            return { 
+                text: `سؤال حلو! 🤔 بس للأسف معلوماتي الحالية تركز على اللابتوبات. \n\n نصيحتي؟ راسل المهندس المختص على الواتساب، هو يجاوبك بدقة أكثر.`,
+            };
+        }
+
+        // --- GLOBAL WINDOW BINDINGS (Required for Modules) ---
+        window.toggleChat = function() {
+            const chatWindow = document.getElementById('chat-window');
+            chatWindow.classList.toggle('hidden');
+            setTimeout(() => {
+                chatWindow.classList.toggle('scale-95'); chatWindow.classList.toggle('opacity-0');
+                chatWindow.classList.toggle('scale-100'); chatWindow.classList.toggle('opacity-100');
+            }, 10);
+            if(!chatWindow.classList.contains('hidden')) setTimeout(() => document.getElementById('chat-input').focus(), 100);
+        };
+
+        window.handleEnter = function(e) { if (e.key === 'Enter') window.handleUserMessage(); };
+
+        window.handleUserMessage = async function() {
+            const input = document.getElementById('chat-input');
+            const message = input.value.trim();
+            if (!message) return;
+
+            addMessage(message, 'user');
+            input.value = '';
+            showTyping();
+
+            // Processing
+            try {
+                const responseData = await getSmartAIResponse(message);
+                removeTyping();
+                
+                // Markdown formatting for text (Bold)
+                let formattedText = responseData.text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+                formattedText = formattedText.replace(/\n/g, '<br>');
+                
+                addMessage(formattedText, 'bot');
+                
+                if (responseData.products && responseData.products.length > 0) {
+                    addProductCards(responseData.products);
+                }
+            } catch (e) {
+                console.error(e);
+                removeTyping();
+                addMessage("حدث خطأ بسيط، حاول مرة أخرى.", 'bot');
+            }
+        };
+
+        // --- UI HELPERS ---
+        function addMessage(text, sender) {
+            const container = document.getElementById('chat-messages');
+            const div = document.createElement('div');
+            div.className = `flex ${sender === 'user' ? 'justify-end' : 'justify-start'} chat-enter`;
+            
+            const bubbleColor = sender === 'user' 
+                ? 'bg-brand-500 text-white rounded-tl-none shadow-brand-500/20 shadow-lg' 
+                : 'bg-white dark:bg-slate-800 rounded-tr-none shadow-sm border border-slate-100 dark:border-slate-800 dark:text-slate-200';
+            
+            div.innerHTML = `<div class="${bubbleColor} p-3.5 rounded-2xl text-sm max-w-[85%] leading-relaxed shadow-sm chat-content">${text}</div>`;
+            container.appendChild(div);
+            container.scrollTop = container.scrollHeight;
+        }
+
+        function addProductCards(products) {
+            const container = document.getElementById('chat-messages');
+            products.forEach((lap, index) => {
+                const div = document.createElement('div');
+                div.className = `flex justify-start chat-enter`;
+                div.style.animationDelay = `${index * 0.1}s`;
+                div.innerHTML = `
+                    <div class="bg-white dark:bg-slate-800 rounded-2xl border border-slate-100 dark:border-slate-700 overflow-hidden w-[85%] shadow-md mb-2">
+                        <div class="h-32 bg-slate-100 dark:bg-slate-700 relative">
+                            <img src="${lap.img}" class="w-full h-full object-cover">
+                            <div class="absolute top-2 right-2 bg-brand-500 text-white text-[10px] px-2 py-0.5 rounded-full font-bold">مقترح لك</div>
+                        </div>
+                        <div class="p-3">
+                            <h4 class="font-bold text-slate-800 dark:text-white text-sm truncate">${lap.name}</h4>
+                            <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 line-clamp-2">${lap.description}</p>
+                            <a href="https://wa.me/9647777111558" target="_blank" class="block w-full text-center mt-3 bg-brand-50 text-brand-600 dark:bg-slate-700 dark:text-brand-400 py-2 rounded-xl text-xs font-bold hover:bg-brand-500 hover:text-white transition-all"><i class="fab fa-whatsapp ml-1"></i> اطلب الآن</a>
+                        </div>
+                    </div>`;
+                container.appendChild(div);
+            });
+            container.scrollTop = container.scrollHeight;
+        }
+
+        function showTyping() {
+            const container = document.getElementById('chat-messages');
+            const div = document.createElement('div'); div.id = 'typing-indicator';
+            div.className = 'flex justify-start chat-enter';
+            div.innerHTML = `<div class="bg-white dark:bg-slate-800 p-3 rounded-2xl rounded-tr-none shadow-sm border border-slate-100 dark:border-slate-800 flex items-center gap-1"><div class="w-1.5 h-1.5 bg-slate-400 rounded-full typing-dot"></div><div class="w-1.5 h-1.5 bg-slate-400 rounded-full typing-dot"></div><div class="w-1.5 h-1.5 bg-slate-400 rounded-full typing-dot"></div></div>`;
+            container.appendChild(div); container.scrollTop = container.scrollHeight;
+        }
+
+        function removeTyping() { const t = document.getElementById('typing-indicator'); if(t) t.remove(); }
+
+        // Initial Render
+        window.onload = () => {
+            setTimeout(() => { document.getElementById('splash-screen').style.opacity = 0; document.getElementById('splash-screen').style.visibility = 'hidden'; }, 1200);
+            renderLaptops();
+        };
+
+        // Standard Laptop Render (Outside Chat)
+        function renderLaptops() {
+            const grid = document.getElementById('used-grid');
+            if(!grid) return;
+            grid.innerHTML = '';
+            laptops.forEach(lap => {
+                const div = document.createElement('div');
+                // Added h-full to make cards equal height
+                div.className = "laptop-card group bg-white dark:bg-slate-800 rounded-3xl p-4 border border-slate-100 dark:border-slate-700 relative overflow-hidden flex flex-col h-full";
+                div.innerHTML = `
+                    <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-brand-500 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    
+                    <!-- Image Container: Increased height to h-48, added p-4 padding, flex center, and white background -->
+                    <div class="h-48 rounded-2xl overflow-hidden mb-3 relative bg-white dark:bg-slate-700 flex items-center justify-center p-4 border border-slate-50 dark:border-slate-600">
+                        <!-- Image: Changed to object-contain to show FULL laptop without cropping -->
+                        <img src="${lap.img}" class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-700" onerror="this.src='https://placehold.co/600x400/png?text=Laptop+Image'">
+                        <div class="absolute top-3 right-3 bg-slate-900/90 text-white text-[10px] font-bold px-2 py-1 rounded-md shadow-sm border border-slate-700/50">
+                            <span class="text-emerald-400"><i class="fas fa-check-circle"></i> متوفر</span>
+                        </div>
+                    </div>
+                    
+                    <div class="flex-1 text-right">
+                        <h3 class="text-lg font-bold mb-2 group-hover:text-brand-500 transition-colors line-clamp-1">${lap.name}</h3>
+                        <p class="text-slate-500 dark:text-slate-400 text-xs font-medium leading-relaxed mb-4 bg-slate-50 dark:bg-slate-900/50 p-3 rounded-2xl border border-slate-100 dark:border-slate-700/50 h-16 overflow-hidden">${lap.specs}</p>
+                    </div>
+                    
+                    <div class="flex justify-between items-center pt-3 mt-auto border-t border-slate-100 dark:border-slate-700">
+                        <div class="flex flex-col">
+                            <span class="text-[10px] text-slate-400 font-bold uppercase tracking-wider">السعر</span>
+                            <span class="text-brand-600 dark:text-brand-400 font-black text-lg">${lap.price}</span>
+                        </div>
+                        <a href="https://wa.me/9647777111558?text=استفسار عن ${lap.name}" target="_blank" class="w-10 h-10 rounded-xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 flex items-center justify-center hover:scale-110 hover:bg-brand-500 dark:hover:bg-brand-500 hover:text-white dark:hover:text-white transition-all shadow-lg">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>`;
+                grid.appendChild(div);
+            });
+        }
+    </script>
+</body>
+</html>
