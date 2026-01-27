@@ -34,6 +34,7 @@
                         'float': 'float 3s ease-in-out infinite',
                         'glow': 'glow 2s ease-in-out infinite alternate',
                         'bounce-in': 'bounceIn 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55)',
+                        'fade-in-text': 'fadeInText 1s ease-in-out forwards',
                     },
                     keyframes: {
                         float: {
@@ -49,6 +50,10 @@
                             '50%': { transform: 'scale(1.05)', opacity: '1' },
                             '70%': { transform: 'scale(0.9)' },
                             '100%': { transform: 'scale(1)' },
+                        },
+                        fadeInText: {
+                            '0%': { opacity: '0', transform: 'translateY(10px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' }
                         }
                     }
                 }
@@ -144,6 +149,8 @@
     <!-- Navigation -->
     <nav class="fixed w-full z-[100] transition-all duration-300 glass-card border-none shadow-sm" id="main-nav">
         <div class="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
+            
+            <!-- REVERTED LOGO TO OLD STYLE -->
             <div class="flex items-center gap-4 cursor-pointer" onclick="window.app.showView('home')">
                 <span class="w-10 h-10 bg-gradient-to-tr from-brand-600 to-brand-400 rounded-xl flex items-center justify-center text-white text-lg shadow-lg shadow-brand-500/30">
                     <i class="fas fa-laptop"></i>
@@ -179,13 +186,16 @@
             <div class="max-w-5xl mx-auto text-center relative z-10">
                 <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-500/10 border border-brand-500/20 text-brand-600 dark:text-brand-400 text-xs font-bold mb-8 animate-bounce-slow">
                     <span class="flex h-2 w-2 rounded-full bg-brand-500 animate-pulse"></span>
-                    الوجهة الأولى للمحترفين في نينوى
+                    من قلب نينوى.. نبضٌ جديد اسمه <span class="text-accent-purple font-black mx-1">LAP MOSUL</span>
                 </div>
                 
-                <h1 class="text-5xl md:text-7xl lg:text-8xl font-black mb-8 leading-tight tracking-tight">
-                    فخامة الأداء <br> 
-                    <span class="bg-clip-text text-transparent bg-gradient-to-r from-brand-500 to-accent-purple italic pb-2">بين يديك</span>
-                </h1>
+                <!-- Dynamic Title Container -->
+                <div class="min-h-[160px] md:min-h-[200px] flex items-center justify-center">
+                    <h1 class="text-5xl md:text-7xl lg:text-8xl font-black mb-8 leading-tight tracking-tight transition-all duration-1000" id="hero-headline">
+                        <span id="hero-title-l1">فخامة الأداء</span> <br> 
+                        <span id="hero-title-l2" class="bg-clip-text text-transparent bg-gradient-to-r from-brand-500 to-accent-purple italic pb-2">بين يديك</span>
+                    </h1>
+                </div>
                 
                 <p class="text-slate-600 dark:text-slate-400 text-lg md:text-xl mb-12 mx-auto max-w-2xl font-medium leading-relaxed">
                     في لاب الموصل، نجمع لك بين قوة الـ Workstation وجمالية التصميم. أجهزة مختارة بعناية لتناسب طموحاتك الهندسية والبرمجية.
@@ -193,7 +203,7 @@
                 
                 <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
                     <button onclick="window.app.showView('store')" class="w-full sm:w-auto px-8 py-4 bg-brand-600 hover:bg-brand-500 text-white rounded-2xl font-bold shadow-lg shadow-brand-500/25 hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-2">
-                        تصفح المعرض
+                        المتجر
                         <i class="fas fa-arrow-left group-hover:translate-x-[-5px] transition-transform"></i>
                     </button>
                     <a href="#services" class="w-full sm:w-auto px-8 py-4 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-2xl font-bold hover:bg-slate-50 dark:hover:bg-slate-700 transition-all duration-300">
@@ -355,7 +365,7 @@
     <!-- VIEW 2: STORE SECTION -->
     <main id="view-store" class="view-section pt-32 pb-20 min-h-screen">
         <div class="max-w-7xl mx-auto px-6">
-            <div class="flex flex-col md:flex-row justify-between items-center mb-10 gap-6">
+            <div class="flex flex-col md:flex-row justify-between items-center mb-6 gap-6">
                 <div>
                     <h2 class="text-3xl md:text-4xl font-black flex items-center gap-3">
                         المعرض <span class="text-brand-500">الرقمي</span>
@@ -363,38 +373,93 @@
                     </h2>
                     <p class="text-slate-500 dark:text-slate-400 mt-2 font-medium">تحديث مباشر من السحابة ☁️</p>
                 </div>
-                
-                <div class="w-full md:w-96 relative group">
-                    <input type="text" id="searchInput" onkeyup="window.app.filterProducts()" placeholder="ابحث عن لابتوب (مثلاً ThinkPad)..." class="w-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl px-5 py-4 pr-12 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent transition-all shadow-sm group-hover:shadow-md">
-                    <i class="fas fa-search absolute left-5 top-1/2 -translate-y-1/2 text-slate-400"></i>
+            </div>
+
+            <!-- NEW IMPORTANT INFO BANNERS (Coordinated Colors) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+                <!-- A+ Quality Badge -->
+                <div class="bg-gradient-to-r from-amber-500/10 to-amber-500/5 border border-amber-500/20 rounded-2xl p-4 flex items-center gap-4 transition-transform hover:-translate-y-1">
+                    <div class="w-12 h-12 rounded-full bg-amber-500 text-white flex items-center justify-center text-xl shadow-lg shadow-amber-500/30 shrink-0 animate-glow" style="animation-duration: 3s">
+                        <i class="fas fa-certificate"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-slate-800 dark:text-white text-lg">نظافة A+ مضمونة</h4>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">جميع الأجهزة استيراد أمريكي بحالة الوكالة (Open Box)</p>
+                    </div>
+                </div>
+
+                <!-- Free Delivery Badge -->
+                <div class="bg-gradient-to-r from-emerald-500/10 to-emerald-500/5 border border-emerald-500/20 rounded-2xl p-4 flex items-center gap-4 transition-transform hover:-translate-y-1">
+                    <div class="w-12 h-12 rounded-full bg-emerald-500 text-white flex items-center justify-center text-xl shadow-lg shadow-emerald-500/30 shrink-0 animate-glow" style="animation-duration: 3s; animation-delay: 1s;">
+                        <i class="fas fa-truck-fast"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-slate-800 dark:text-white text-lg">توصيل مجاني</h4>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">خدمة توصيل سريعة ومجانية لكل محافظات العراق 🇮🇶</p>
+                    </div>
                 </div>
             </div>
 
-            <!-- Categories -->
-            <div class="flex gap-3 overflow-x-auto pb-6 mb-4 scrollbar-hide">
-                <button onclick="window.app.filterCategory('all')" class="cat-btn active px-6 py-3 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 whitespace-nowrap text-sm font-bold hover:bg-brand-500 hover:text-white hover:border-brand-500 transition-all shadow-sm">الكل</button>
-                <button onclick="window.app.filterCategory('engineering')" class="cat-btn px-6 py-3 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 whitespace-nowrap text-sm font-bold hover:bg-brand-500 hover:text-white hover:border-brand-500 transition-all shadow-sm">هندسة وتصميم</button>
-                <button onclick="window.app.filterCategory('student')" class="cat-btn px-6 py-3 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 whitespace-nowrap text-sm font-bold hover:bg-brand-500 hover:text-white hover:border-brand-500 transition-all shadow-sm">طلاب وأعمال</button>
-                <button onclick="window.app.filterCategory('gaming')" class="cat-btn px-6 py-3 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 whitespace-nowrap text-sm font-bold hover:bg-brand-500 hover:text-white hover:border-brand-500 transition-all shadow-sm">Gaming</button>
-            </div>
-
-            <!-- Loader -->
-            <div id="loading-spinner" class="flex flex-col items-center justify-center py-32">
-                <div class="loader mb-4"></div>
-                <p class="text-slate-400 text-sm animate-pulse">جاري تحميل المنتجات...</p>
-            </div>
-
-            <!-- Products Grid -->
-            <div id="products-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 hidden">
-                <!-- Products Injected Here -->
+            <!-- TAB SWITCHER -->
+            <div class="flex justify-center mb-10">
+                <div class="bg-white dark:bg-slate-800 p-1.5 rounded-2xl border border-slate-200 dark:border-slate-700 inline-flex shadow-sm gap-2">
+                    <button onclick="window.app.switchStoreTab('used')" id="tab-used" class="px-6 sm:px-10 py-3 rounded-xl text-sm font-bold transition-all duration-300 bg-brand-600 text-white shadow-lg shadow-brand-500/30">
+                        <i class="fas fa-box-open mr-2"></i> المستعمل (الأمريكي)
+                    </button>
+                    <button onclick="window.app.switchStoreTab('new')" id="tab-new" class="px-6 sm:px-10 py-3 rounded-xl text-sm font-bold transition-all duration-300 text-slate-500 hover:text-slate-800 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-700">
+                        <i class="fas fa-fire mr-2 text-red-500"></i> الجديد (Coming Soon)
+                    </button>
+                </div>
             </div>
             
-            <!-- Empty State -->
-            <div id="no-results" class="hidden text-center py-32">
-                <i class="fas fa-search text-6xl text-slate-200 dark:text-slate-800 mb-6"></i>
-                <p class="text-slate-500 font-bold">لا توجد نتائج مطابقة</p>
-                <button onclick="window.app.filterCategory('all')" class="mt-4 text-brand-500 hover:underline">عرض الكل</button>
+            <!-- USED SECTION (DEFAULT) -->
+            <div id="used-section" class="fade-in">
+                <!-- Search & Filters -->
+                <div class="mb-8">
+                    <div class="w-full relative group mb-6">
+                        <input type="text" id="searchInput" onkeyup="window.app.filterProducts()" placeholder="ابحث عن لابتوب (مثلاً ThinkPad)..." class="w-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl px-5 py-4 pr-12 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent transition-all shadow-sm group-hover:shadow-md">
+                        <i class="fas fa-search absolute left-5 top-1/2 -translate-y-1/2 text-slate-400"></i>
+                    </div>
+
+                    <!-- Categories -->
+                    <div class="flex gap-3 overflow-x-auto pb-2 scrollbar-hide">
+                        <button onclick="window.app.filterCategory('all')" class="cat-btn active px-6 py-3 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 whitespace-nowrap text-sm font-bold hover:bg-brand-500 hover:text-white hover:border-brand-500 transition-all shadow-sm">الكل</button>
+                        <button onclick="window.app.filterCategory('engineering')" class="cat-btn px-6 py-3 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 whitespace-nowrap text-sm font-bold hover:bg-brand-500 hover:text-white hover:border-brand-500 transition-all shadow-sm">هندسة وتصميم</button>
+                        <button onclick="window.app.filterCategory('student')" class="cat-btn px-6 py-3 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 whitespace-nowrap text-sm font-bold hover:bg-brand-500 hover:text-white hover:border-brand-500 transition-all shadow-sm">طلاب وأعمال</button>
+                        <button onclick="window.app.filterCategory('gaming')" class="cat-btn px-6 py-3 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 whitespace-nowrap text-sm font-bold hover:bg-brand-500 hover:text-white hover:border-brand-500 transition-all shadow-sm">Gaming</button>
+                    </div>
+                </div>
+
+                <!-- Loader -->
+                <div id="loading-spinner" class="flex flex-col items-center justify-center py-32">
+                    <div class="loader mb-4"></div>
+                    <p class="text-slate-400 text-sm animate-pulse">جاري تحميل المنتجات...</p>
+                </div>
+
+                <!-- Products Grid -->
+                <div id="products-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 hidden">
+                    <!-- Products Injected Here -->
+                </div>
+                
+                <!-- Empty State -->
+                <div id="no-results" class="hidden text-center py-32">
+                    <i class="fas fa-search text-6xl text-slate-200 dark:text-slate-800 mb-6"></i>
+                    <p class="text-slate-500 font-bold">لا توجد نتائج مطابقة</p>
+                    <button onclick="window.app.filterCategory('all')" class="mt-4 text-brand-500 hover:underline">عرض الكل</button>
+                </div>
             </div>
+
+            <!-- NEW SECTION (COMING SOON) -->
+            <div id="new-section" class="hidden fade-in">
+                <div class="text-center mb-10">
+                    <h3 class="text-2xl font-black text-slate-800 dark:text-white mb-2">أحدث الموديلات العالمية 🔥</h3>
+                    <p class="text-slate-500">هذه الأجهزة ستتوفر قريباً في لاب الموصل. احجز نسختك الآن!</p>
+                </div>
+                <div id="new-products-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                    <!-- New Products Injected Here -->
+                </div>
+            </div>
+
         </div>
     </main>
 
@@ -416,7 +481,7 @@
                     </div>
                     <div>
                         <span class="font-black block text-lg tracking-tight">الدعم الذكي</span>
-                        <span class="text-xs text-slate-300 font-medium flex items-center gap-1"><i class="fas fa-wifi text-[10px]"></i> متصل الآن (Offline Mode)</span>
+                        <span class="text-xs text-slate-300 font-medium flex items-center gap-1"><i class="fas fa-wifi text-[10px]"></i> متصل الآن</span>
                     </div>
                 </div>
                 <button onclick="window.app.toggleChat()" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-all backdrop-blur-sm"><i class="fas fa-times"></i></button>
@@ -428,7 +493,7 @@
                 <div class="flex justify-start chat-msg bot">
                     <div class="bg-white dark:bg-slate-800 p-4 rounded-2xl rounded-tr-none shadow-sm text-sm max-w-[90%] border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200">
                         <p class="font-bold text-brand-600 dark:text-brand-400 text-xs mb-2">لاب الموصل 💻</p>
-                        أهلاً بيك أغاتي! 🌹<br>
+                        أهلاً بك في لاب الموصل! 🌹<br>
                         آني المساعد الآلي، موجود لخدمتك 24 ساعة.<br><br>
                         تكدر تسألني عن:
                         <ul class="mt-2 space-y-1 list-disc list-inside text-slate-500 dark:text-slate-400 text-xs">
@@ -481,6 +546,12 @@
                     <div class="md:col-span-2 flex gap-2">
                         <input type="text" id="p-name" placeholder="اسم الجهاز (مثلاً HP ZBook G8)" class="input-field flex-1">
                     </div>
+                    <!-- Type Selector (New/Used) -->
+                    <select id="p-type" class="input-field md:col-span-2 text-slate-800 font-bold bg-amber-50 dark:bg-amber-900/20 border-amber-200 dark:border-amber-800">
+                        <option value="used">💼 مستعمل (Available)</option>
+                        <option value="new">🔥 جديد (Coming Soon)</option>
+                    </select>
+
                     <input type="text" id="p-price" placeholder="السعر (مثلاً 450$)" class="input-field">
                     <input type="text" id="p-specs" placeholder="المواصفات (ستكتب تلقائياً)" class="input-field">
                     <input type="text" id="p-img" placeholder="رابط الصورة (URL)" class="input-field md:col-span-2">
@@ -495,31 +566,50 @@
                 </button>
             </div>
 
-            <!-- Restore Defaults Button -->
-            <div class="mb-8">
-                <button onclick="window.app.uploadDefaults()" class="w-full bg-yellow-500/10 hover:bg-yellow-500/20 text-yellow-600 dark:text-yellow-400 border border-yellow-500/30 font-bold py-3 rounded-xl transition-all flex justify-center items-center gap-2 text-sm">
-                    <i class="fas fa-database"></i> استيراد المنتجات الافتراضية (Seed Data)
+            <!-- Import Buttons -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+                <button onclick="window.app.uploadDefaults()" class="bg-blue-500/10 hover:bg-blue-500/20 text-blue-600 dark:text-blue-400 border border-blue-500/30 font-bold py-3 rounded-xl transition-all flex justify-center items-center gap-2 text-sm">
+                    <i class="fas fa-database"></i> استيراد 'المستعمل' (Used)
+                </button>
+                <button onclick="window.app.uploadNewLaptops()" class="bg-purple-500/10 hover:bg-purple-500/20 text-purple-600 dark:text-purple-400 border border-purple-500/30 font-bold py-3 rounded-xl transition-all flex justify-center items-center gap-2 text-sm">
+                    <i class="fas fa-fire"></i> استيراد 'قريباً' (New)
                 </button>
             </div>
 
-            <h3 class="font-bold mb-4">قائمة المنتجات الحالية</h3>
-            <div id="admin-list" class="space-y-3 max-h-60 overflow-y-auto pr-2 custom-scrollbar">
+            <h3 class="font-bold mb-4 border-b border-slate-200 dark:border-slate-700 pb-2">قائمة المنتجات الحالية</h3>
+            <div id="admin-list" class="space-y-3 max-h-80 overflow-y-auto pr-2 custom-scrollbar p-1">
                 <!-- List Items -->
             </div>
         </div>
     </div>
 
-    <!-- PIN Modal -->
+    <!-- Login Modal (Replacing PIN Modal) -->
     <div id="pin-modal" class="fixed inset-0 z-[210] bg-slate-900/90 hidden flex items-center justify-center backdrop-blur-sm">
-        <div class="bg-white dark:bg-slate-900 p-10 rounded-3xl text-center shadow-2xl border border-slate-700 transform transition-all scale-100">
-            <div class="w-16 h-16 bg-brand-500/10 text-brand-500 rounded-full flex items-center justify-center mx-auto mb-6 text-2xl">
-                <i class="fas fa-lock"></i>
+        <div class="bg-white dark:bg-slate-900 p-8 rounded-3xl text-center shadow-2xl border border-slate-700 w-full max-w-sm transform transition-all scale-100 relative overflow-hidden">
+            <!-- Decorative Blob -->
+            <div class="absolute -top-10 -right-10 w-32 h-32 bg-brand-500/20 rounded-full blur-2xl"></div>
+            
+            <div class="w-16 h-16 bg-brand-500/10 text-brand-500 rounded-2xl flex items-center justify-center mx-auto mb-6 text-2xl relative z-10">
+                <i class="fas fa-user-shield"></i>
             </div>
-            <h3 class="font-bold mb-6 text-xl">منطقة الإدارة</h3>
-            <input type="password" id="pin-input" placeholder="****" class="text-center text-3xl tracking-[0.5em] bg-slate-100 dark:bg-slate-800 border-none outline-none focus:ring-2 focus:ring-brand-500 rounded-xl w-48 py-3 mb-6 block mx-auto text-slate-900 dark:text-white font-bold">
-            <div class="flex gap-3 justify-center">
-                <button onclick="window.app.checkPin()" class="bg-brand-600 hover:bg-brand-500 text-white px-8 py-3 rounded-xl font-bold transition-all shadow-lg shadow-brand-500/20">دخول</button>
-                <button onclick="document.getElementById('pin-modal').classList.add('hidden')" class="px-6 py-3 rounded-xl font-bold text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all">إلغاء</button>
+            
+            <h3 class="font-bold mb-1 text-xl">تسجيل دخول الإدارة</h3>
+            <p class="text-xs text-slate-500 mb-6">يرجى ادخال بيانات المسؤول للمتابعة</p>
+            
+            <div class="space-y-4 mb-6 relative z-10">
+                <div class="relative">
+                    <input type="text" id="login-user" placeholder="اسم المستخدم" class="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-10 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 transition-all">
+                    <i class="fas fa-user absolute right-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
+                </div>
+                <div class="relative">
+                    <input type="password" id="login-pass" placeholder="كلمة المرور" class="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-10 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 transition-all">
+                    <i class="fas fa-key absolute right-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
+                </div>
+            </div>
+
+            <div class="flex flex-col gap-3 relative z-10">
+                <button onclick="window.app.checkLogin()" class="bg-gradient-to-r from-brand-600 to-brand-500 text-white w-full py-3 rounded-xl font-bold transition-all shadow-lg hover:shadow-brand-500/25 active:scale-95">دخول</button>
+                <button onclick="document.getElementById('pin-modal').classList.add('hidden')" class="text-slate-500 hover:text-slate-800 dark:hover:text-white text-sm font-medium py-2">إلغاء</button>
             </div>
         </div>
     </div>
@@ -529,6 +619,14 @@
         // Import Firebase SDKs
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getFirestore, collection, addDoc, deleteDoc, updateDoc, doc, onSnapshot, query, orderBy } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+        
+        // Import Google Generative AI
+        import { GoogleGenerativeAI } from "https://esm.run/@google/generative-ai";
+
+        // ==========================================
+        // 🔑 مكان مفتاح الذكاء الاصطناعي (ضع مفتاحك هنا)
+        // ==========================================
+        const GEMINI_API_KEY = "AIzaSyBWEZI-1Vmb25lBCzQoNMZUADUpJ8gCvJs"; // 🔴🔴 تم تصحيح المفتاح (AIza) 🔴🔴
 
         // ==========================================
         // ✅ مفاتيح الربط الحقيقية (تم الدمج)
@@ -559,7 +657,10 @@
         let allProducts = [];
         let currentCategory = 'all';
         let editingId = null; // Track Editing
-        const ADMIN_PIN = "2024";
+        
+        // LOGIN CREDENTIALS
+        const ADMIN_USER = "admin";
+        const ADMIN_PASS = "2024";
 
         // DATA: Old Laptops (Defaults)
         const defaultLaptops = [
@@ -568,6 +669,7 @@
                 price: "325,000 د.ع", 
                 specs: "i5-11th Gen | 16GB RAM | 512GB NVMe | x360 Touch", 
                 category: "student", 
+                type: "used",
                 img: "https://p1-ofp.static.pub/medias/bWFzdGVyfHJvb3R8MjEzNjQzfGltYWdlL3BuZ3xoYmIvaGFkLzE0MTEwNjI4MTUxMzI2LnBuZ3wyZDNiODQ1MjdiZTUyZDM5NjdkNGU1NDBkOGFjOTBjNDYxZDhkNDFjZjRmZjk1NzE0MWI3NWJkOGFmYmZjNDNm/lenovo-thinkpad-l13-yoga-hero.png?width=400&height=400" 
             },
             { 
@@ -575,6 +677,7 @@
                 price: "290,000 د.ع", 
                 specs: "i5-8th Gen | 8GB RAM | 256GB SSD | Dual Battery", 
                 category: "student", 
+                type: "used",
                 img: "https://p1-ofp.static.pub/medias/bWFzdGVyfHJvb3R8NDk0OTN8aW1hZ2UvanBlZ3xoNDkvaDJiLzk2MTA3MDg3NzkwMzguanBnfDE5NzE4YzViY2MzMzYwMTExNmIwOTIxMjExYzYzMzViYjExNzlkMDk2N2ZhNGQ3ZjlkYjE1NzBlNTJhNzQyYmI/bWFzdGVyfH.jpg" 
             },
             { 
@@ -582,6 +685,7 @@
                 price: "350,000 د.ع", 
                 specs: "i5-8th Gen vPro | 16GB RAM | 256GB SSD | 15.6 FHD", 
                 category: "student", 
+                type: "used",
                 img: "https://i.dell.com/is/image/DellContent/content/dam/ss2/product-images/dell-client-products/notebooks/latitude-notebooks/latitude-15-5500/media-gallery/peripherals_laptop_latitude_5500_gallery_1.psd?fmt=pjpg&pscan=auto&scl=1&hei=402&wid=536&qlt=85,0&resMode=sharp2&op_usm=1.75,0.3,2,0&iccEmbed=0&printRes=72" 
             },
             { 
@@ -589,6 +693,7 @@
                 price: "225,000 د.ع", 
                 specs: "i5-6th | 8GB RAM | 256GB SSD", 
                 category: "student", 
+                type: "used",
                 img: "https://www.lenovo.com/medias/lenovo-laptop-thinkpad-t460-hero.png?context=bWFzdGVyfHJvb3R8NTU1NDB8aW1hZ2UvcG5nfGgxMC9oZTEvOTIyOTY0ODExMDU1OC5wbmd8ZDI1MzMyZTYwN2Q2MTdhYmFiZDhhOGJlM2I5ZDY2YzI2YjZkMmI4ZWQ4ZTVlYzliYzE4MTQ0MDY5ZDM4MTNhNw" 
             },
             { 
@@ -596,8 +701,23 @@
                 price: "650,000 د.ع", 
                 specs: "i7-8850H | 32GB RAM | 512GB SSD | Nvidia P1000", 
                 category: "engineering", 
+                type: "used",
                 img: "https://i.dell.com/is/image/DellContent/content/dam/ss2/product-images/dell-client-products/notebooks/precision-notebooks/precision-15-5530/global-spi/ng/notebook-precision-15-5530-campaign-hero-504x350-ng.psd?fmt=jpg" 
             }
+        ];
+
+        // 🆕 New Products Data (Coming Soon)
+        const newLaptops = [
+            { name: "MacBook Pro 16 M3 Max", specs: "Apple M3 Max | 36GB RAM | 1TB SSD | Liquid Retina XDR", img: "https://m.media-amazon.com/images/I/618d5bS2lUL._AC_SL1500_.jpg", category: "engineering", type: "new" },
+            { name: "Dell XPS 16 9640", specs: "Ultra 7 155H | 32GB RAM | 1TB SSD | RTX 4070 | OLED Touch", img: "https://i.dell.com/is/image/DellContent/content/dam/ss2/product-images/dell-client-products/notebooks/xps-notebooks/xps-16-9640/media-gallery/touch-graphite/notebook-xps-16-9640-t-graphite-gallery-1.psd?fmt=png-alpha&wid=1280", category: "engineering", type: "new" },
+            { name: "HP Spectre x360 14", specs: "Core Ultra 7 | 32GB RAM | 2TB SSD | 2.8K OLED x360", img: "https://ssl-product-images.www8-hp.com/digmedialib/prodimg/lowres/c08493139.png", category: "student", type: "new" },
+            { name: "Lenovo Legion 9i", specs: "i9-14900HX | 64GB RAM | 2TB SSD | RTX 4090 | Liquid Cooling", img: "https://p4-ofp.static.pub/fes/cms/2023/08/25/1k21t0f1w5w5w5w5w5w5w5w5w5w5w5345678.png", category: "gaming", type: "new" },
+            { name: "ASUS ROG Zephyrus G14", specs: "Ryzen 9 8945HS | 32GB RAM | 1TB SSD | RTX 4070 | OLED 120Hz", img: "https://dlcdnwebimgs.asus.com/gain/9d57a3d8-2326-407a-97c7-055375493035/w800", category: "gaming", type: "new" },
+            { name: "MSI Titan 18 HX", specs: "i9-14900HX | 128GB RAM | 4TB SSD | RTX 4090 | 4K Mini-LED", img: "https://asset.msi.com/resize/image/global/product/notebook/Titan-18-HX-A14V-1.png62405b38c58fe0f07fcef2367d8a9ba1/1024.png", category: "gaming", type: "new" },
+            { name: "Razer Blade 16", specs: "i9-14900HX | 32GB RAM | 1TB SSD | RTX 4090 | Dual Mode Mini-LED", img: "https://assets2.razerzone.com/images/pnx.assets/381e915d58d2b9759725c30a9f2c397e/razer-blade-16-2023-black-hero-mobile.jpg", category: "gaming", type: "new" },
+            { name: "Alienware m16 R2", specs: "Ultra 9 185H | 32GB RAM | 1TB SSD | RTX 4070 | QHD+ 240Hz", img: "https://i.dell.com/is/image/DellContent/content/dam/ss2/product-images/dell-client-products/notebooks/alienware-notebooks/alienware-m16-r2/media-gallery/notebook-alienware-m16-r2-gallery-1.psd?fmt=png-alpha&wid=1280", category: "gaming", type: "new" },
+            { name: "Samsung Galaxy Book4 Ultra", specs: "Ultra 9 | 32GB RAM | 1TB SSD | RTX 4070 | 3K AMOLED", img: "https://images.samsung.com/is/image/samsung/p6pim/uk/np960xgl-xg1uk/gallery/uk-galaxy-book4-ultra-np960-np960xgl-xg1uk-539958742?$650_519_PNG$", category: "engineering", type: "new" },
+            { name: "Microsoft Surface Laptop Studio 2", specs: "i7-13800H | 64GB RAM | 1TB SSD | RTX 4060 | PixelSense Flow", img: "https://img-prod-cms-rt-microsoft-com.akamaized.net/cms/api/am/imageFileData/RW16TSo?ver=72e4&q=90&m=6&h=705&w=1253&b=%23FFFFFFFF&f=jpg&o=f&p=140&aim=true", category: "engineering", type: "new" }
         ];
 
         // Listen for Realtime Updates
@@ -609,7 +729,10 @@
                 // ⚠️ Fallback: Show default laptops locally if DB is empty
                 if(allProducts.length === 0) {
                     console.log("DB Empty: Using Local Defaults");
-                    allProducts = defaultLaptops.map((p, i) => ({...p, id: 'local-'+i}));
+                    // Combine both for local display if DB is empty
+                    const used = defaultLaptops.map((p, i) => ({...p, id: 'local-u-'+i}));
+                    const brandNew = newLaptops.map((p, i) => ({...p, id: 'local-n-'+i}));
+                    allProducts = [...used, ...brandNew];
                 }
 
                 refreshData();
@@ -622,9 +745,55 @@
         function refreshData() {
             updateUI();
             updateAdminList();
+            renderNewProducts(); // Render the new products
             const spinner = document.getElementById('loading-spinner');
             if(spinner) spinner.style.display = 'none';
             document.getElementById('products-container').classList.remove('hidden');
+        }
+
+        // Render New Products Function
+        function renderNewProducts() {
+            const container = document.getElementById('new-products-container');
+            container.innerHTML = '';
+            
+            // Filter products with type 'new' from ALL products (Live DB + Defaults)
+            const comingSoonProducts = allProducts.filter(p => p.type === 'new');
+            
+            comingSoonProducts.forEach((p, index) => {
+                const waMsg = `مرحباً لاب الموصل، مهتم بجهاز ${p.name} الجديد (Coming Soon). يرجى إعلامي عند توفره.`;
+                const waLink = `https://wa.me/9647777111558?text=${encodeURIComponent(waMsg)}`;
+                
+                const card = document.createElement('div');
+                card.className = "group bg-white dark:bg-slate-800 rounded-[2rem] p-4 border border-slate-100 dark:border-slate-700 shadow-sm hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 flex flex-col h-full relative overflow-hidden";
+                card.style.animation = `fadeIn 0.5s ease-out ${index * 0.1}s forwards`;
+                
+                card.innerHTML = `
+                    <div class="relative h-56 bg-slate-50 dark:bg-slate-900/50 rounded-3xl mb-4 p-6 flex items-center justify-center overflow-hidden">
+                        <!-- Coming Soon Overlay -->
+                        <div class="absolute inset-0 bg-black/40 z-10 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-3xl backdrop-blur-sm">
+                            <span class="text-white font-bold tracking-wider border border-white/50 px-4 py-2 rounded-full">قريباً</span>
+                        </div>
+                        <img src="${p.img}" class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-700 drop-shadow-xl" onerror="this.src='https://placehold.co/400x300?text=New+Laptop'">
+                        <div class="absolute top-3 right-3 bg-red-500 text-white text-[10px] font-bold px-3 py-1 rounded-full shadow-lg z-20 animate-pulse">
+                            COMING SOON
+                        </div>
+                    </div>
+                    
+                    <div class="flex-1 px-2">
+                        <h3 class="font-bold text-lg mb-2 leading-tight text-slate-800 dark:text-white group-hover:text-brand-500 transition-colors line-clamp-1">${p.name}</h3>
+                        <div class="text-xs text-slate-500 dark:text-slate-400 mb-4 bg-slate-50 dark:bg-slate-900/50 p-3 rounded-2xl border border-slate-100 dark:border-slate-700/50 leading-relaxed min-h-[60px]">
+                            ${p.specs}
+                        </div>
+                    </div>
+
+                    <div class="mt-auto px-2 pt-2 border-t border-slate-100 dark:border-slate-800/50">
+                        <a href="${waLink}" target="_blank" class="w-full py-3 rounded-xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-bold flex items-center justify-center gap-2 hover:bg-brand-600 dark:hover:bg-brand-500 hover:text-white dark:hover:text-white transition-all duration-300 shadow-lg">
+                            <i class="far fa-bell"></i> أعلمني عند التوفر
+                        </a>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
         }
 
         // GLOBAL APP CONTROLLER
@@ -639,6 +808,32 @@
                 target.style.display = 'block';
                 setTimeout(() => target.classList.add('active'), 10);
                 window.scrollTo(0,0);
+            },
+
+            // 🔄 Switch Store Tab Logic
+            switchStoreTab: (tab) => {
+                const usedSection = document.getElementById('used-section');
+                const newSection = document.getElementById('new-section');
+                const btnUsed = document.getElementById('tab-used');
+                const btnNew = document.getElementById('tab-new');
+
+                if (tab === 'used') {
+                    usedSection.classList.remove('hidden');
+                    newSection.classList.add('hidden');
+                    
+                    // Style Active Button
+                    btnUsed.className = "px-6 sm:px-10 py-3 rounded-xl text-sm font-bold transition-all duration-300 bg-brand-600 text-white shadow-lg shadow-brand-500/30";
+                    // Style Inactive Button
+                    btnNew.className = "px-6 sm:px-10 py-3 rounded-xl text-sm font-bold transition-all duration-300 text-slate-500 hover:text-slate-800 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-700";
+                } else {
+                    usedSection.classList.add('hidden');
+                    newSection.classList.remove('hidden');
+                    
+                    // Style Active Button
+                    btnNew.className = "px-6 sm:px-10 py-3 rounded-xl text-sm font-bold transition-all duration-300 bg-slate-800 dark:bg-white text-white dark:text-slate-900 shadow-lg";
+                    // Style Inactive Button
+                    btnUsed.className = "px-6 sm:px-10 py-3 rounded-xl text-sm font-bold transition-all duration-300 text-slate-500 hover:text-slate-800 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-700";
+                }
             },
 
             toggleTheme: () => {
@@ -663,17 +858,20 @@
             // Admin Logic
             openAdminLogin: () => {
                 document.getElementById('pin-modal').classList.remove('hidden');
-                document.getElementById('pin-input').value = '';
-                setTimeout(() => document.getElementById('pin-input').focus(), 100);
+                document.getElementById('login-user').value = '';
+                document.getElementById('login-pass').value = '';
+                setTimeout(() => document.getElementById('login-user').focus(), 100);
             },
 
-            checkPin: () => {
-                if(document.getElementById('pin-input').value === ADMIN_PIN) {
+            checkLogin: () => {
+                const user = document.getElementById('login-user').value;
+                const pass = document.getElementById('login-pass').value;
+
+                if(user === ADMIN_USER && pass === ADMIN_PASS) {
                     document.getElementById('pin-modal').classList.add('hidden');
                     document.getElementById('admin-modal').classList.remove('hidden');
                 } else {
-                    document.getElementById('pin-input').classList.add('ring-red-500');
-                    setTimeout(() => document.getElementById('pin-input').classList.remove('ring-red-500'), 500);
+                    alert("بيانات الدخول غير صحيحة ❌");
                 }
             },
 
@@ -688,10 +886,11 @@
 
                 // Fill form
                 document.getElementById('p-name').value = product.name;
-                document.getElementById('p-price').value = product.price;
+                document.getElementById('p-price').value = product.price || ''; // Price might be empty for new items
                 document.getElementById('p-specs').value = product.specs;
                 document.getElementById('p-img').value = product.img;
                 document.getElementById('p-cat').value = product.category;
+                document.getElementById('p-type').value = product.type || 'used'; // Default to used if undefined
 
                 // Set Edit Mode
                 editingId = id;
@@ -711,6 +910,7 @@
                 document.getElementById('p-price').value = '';
                 document.getElementById('p-specs').value = '';
                 document.getElementById('p-img').value = '';
+                document.getElementById('p-type').value = 'used';
                 
                 document.getElementById('form-title').innerText = "إضافة منتج جديد";
                 document.getElementById('cancel-edit-btn').classList.add('hidden');
@@ -726,8 +926,9 @@
                 const specs = document.getElementById('p-specs').value;
                 const img = document.getElementById('p-img').value;
                 const category = document.getElementById('p-cat').value;
+                const type = document.getElementById('p-type').value;
 
-                if(!name || !price) { alert('يرجى كتابة الاسم والسعر!'); return; }
+                if(!name) { alert('يرجى كتابة الاسم على الأقل!'); return; }
 
                 btn.innerHTML = '<div class="loader border-white border-t-transparent w-6 h-6"></div>';
                 
@@ -735,14 +936,14 @@
                     if (editingId) {
                         // UPDATE Existing
                         await updateDoc(doc(db, "products", editingId), {
-                            name, price, specs, img, category
+                            name, price, specs, img, category, type
                         });
                         alert("تم تحديث المنتج بنجاح! ✅");
                         window.app.cancelEdit();
                     } else {
                         // CREATE New
                         await addDoc(productsRef, {
-                            name, price, specs, img, category,
+                            name, price, specs, img, category, type,
                             createdAt: Date.now()
                         });
                         alert("تم الرفع بنجاح! ☁️");
@@ -760,26 +961,51 @@
                 }
             },
 
-            // ⚡ NEW: Upload Default Products to Cloud
+            // ⚡ Upload Default Products (Used)
             uploadDefaults: async () => {
-                if(!confirm("هل أنت متأكد؟ سيتم رفع 5 لابتوبات افتراضية إلى قاعدة البيانات.")) return;
+                if(!confirm("هل أنت متأكد؟ سيتم رفع 5 لابتوبات مستعملة (Used) إلى قاعدة البيانات.")) return;
                 
                 const btn = event.currentTarget;
-                btn.innerHTML = '<div class="loader w-4 h-4 border-yellow-600"></div> جاري الرفع...';
+                btn.innerHTML = '<div class="loader w-4 h-4 border-blue-600"></div> جاري الرفع...';
                 
                 try {
                     for (const p of defaultLaptops) {
                         await addDoc(productsRef, {
                             ...p,
+                            type: 'used', // Ensure type is set
                             createdAt: Date.now()
                         });
                     }
-                    alert("تم استيراد المنتجات بنجاح! 🚀");
+                    alert("تم استيراد المنتجات المستعملة بنجاح! 🚀");
                 } catch(e) {
                     console.error(e);
                     alert("حدث خطأ أثناء الاستيراد");
                 }
-                btn.innerHTML = '<i class="fas fa-database"></i> استيراد المنتجات الافتراضية (Seed Data)';
+                btn.innerHTML = '<i class="fas fa-database"></i> استيراد \'المستعمل\' (Used)';
+            },
+
+            // 🔥 NEW: Upload New Laptops (Coming Soon) to DB so they appear in Admin
+            uploadNewLaptops: async () => {
+                if(!confirm("هل أنت متأكد؟ سيتم رفع 10 لابتوبات جديدة (Coming Soon) إلى قاعدة البيانات لتتمكن من إدارتها.")) return;
+                
+                const btn = event.currentTarget;
+                btn.innerHTML = '<div class="loader w-4 h-4 border-purple-600"></div> جاري الرفع...';
+                
+                try {
+                    for (const p of newLaptops) {
+                        await addDoc(productsRef, {
+                            ...p,
+                            price: "قريباً", // Placeholder price for new items
+                            type: 'new', // Critical: Mark as new type
+                            createdAt: Date.now()
+                        });
+                    }
+                    alert("تم استيراد قائمة 'قريباً' بنجاح! 🔥");
+                } catch(e) {
+                    console.error(e);
+                    alert("حدث خطأ أثناء الاستيراد");
+                }
+                btn.innerHTML = '<i class="fas fa-fire"></i> استيراد \'قريباً\' (New)';
             },
 
             deleteProduct: async (id) => {
@@ -802,7 +1028,7 @@
                 }, 10);
             },
             
-            handleChat: () => {
+            handleChat: async () => {
                 const input = document.getElementById('chat-input');
                 const msg = input.value.trim();
                 if(!msg) return;
@@ -814,22 +1040,79 @@
                 // 2. Show Typing Indicator
                 const loadingId = addChatMsg('<div class="flex gap-1"><div class="w-1.5 h-1.5 bg-slate-400 rounded-full typing-dot"></div><div class="w-1.5 h-1.5 bg-slate-400 rounded-full typing-dot"></div><div class="w-1.5 h-1.5 bg-slate-400 rounded-full typing-dot"></div></div>', 'bot');
 
-                // 3. Generate Local Response (Simulate delay)
-                setTimeout(() => {
-                    const responseHTML = generateLocalResponse(msg);
+                // 3. Generate Response (AI or Local)
+                try {
+                    let responseHTML;
+                    
+                    if (GEMINI_API_KEY && GEMINI_API_KEY.length > 10) {
+                        // AI Mode 🧠
+                        responseHTML = await generateAIResponse(msg);
+                    } else {
+                        // Smart Local Mode (Fallback) 🤖
+                        // Simulate network delay for natural feel
+                        await new Promise(r => setTimeout(r, 800));
+                        responseHTML = generateLocalResponse(msg);
+                    }
+                    
                     const msgDiv = document.getElementById(loadingId);
                     msgDiv.innerHTML = responseHTML;
-                }, 800);
+                    
+                } catch (error) {
+                    console.error("Chat Error:", error);
+                    const msgDiv = document.getElementById(loadingId);
+                    msgDiv.innerHTML = "عذراً، حدث خطأ في الاتصال. يرجى المحاولة لاحقاً.";
+                }
             }
         };
 
-        // 🤖 THE BRAIN: Local Bot Logic
+        // 🧠 AI BRAIN: Google Gemini Integration
+        async function generateAIResponse(userMsg) {
+            try {
+                const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
+                // 🔴 FIX: Updated Model Name to the currently supported version 🔴
+                const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash-preview-09-2025" });
+
+                // Construct Context from Actual Data
+                const prompt = `
+                أنت مساعد ذكي لمتجر "LAP MOSUL" لبيع اللابتوبات في الموصل، العراق.
+                دورك: الإجابة على أسئلة الزبائن بلهجة عراقية ودودة ومختصرة بناءً على البيانات التالية فقط.
+
+                معلومات المتجر:
+                - الموقع: الموصل، المجموعة الثقافية، داخل شركة رؤية (فرع مطعم طماطة).
+                - الهاتف: 07777111558
+                - السياسة: توصيل مجاني لكل المحافظات، الأجهزة المستعملة نظافة A+ (Open Box)، ضمان حقيقي لمدة شهر.
+
+                المنتجات المتوفرة حالياً (المستعمل الأمريكي):
+                ${JSON.stringify(allProducts.filter(p => p.type !== 'new').map(p => `${p.name} - ${p.price} - ${p.specs}`))}
+
+                المنتجات القادمة قريباً (الجديد):
+                ${JSON.stringify(allProducts.filter(p => p.type === 'new').map(p => `${p.name} - قريباً`))}
+
+                سؤال الزبون: ${userMsg}
+                
+                الإجابة (بالعربية/اللهجة العراقية، لا تستخدم Markdown كثيراً، فقط نص واضح):
+                `;
+
+                const result = await model.generateContent(prompt);
+                const response = await result.response;
+                const text = response.text();
+                
+                // Convert simple formatting to HTML if needed (basic)
+                return text.replace(/\n/g, "<br>");
+
+            } catch (error) {
+                console.error("Gemini Error:", error);
+                return generateLocalResponse(userMsg); // Fallback to local if AI fails
+            }
+        }
+
+        // 🤖 FALLBACK BRAIN: Local Logic
         function generateLocalResponse(msg) {
             const text = msg.toLowerCase();
             
             // Greetings
             if (text.match(/هلا|مرحبا|سلام|شلونك|عيني|اغاتي|هلو/)) {
-                return "يا هلا بيك أغاتي! 🌹<br>نورت متجر لاب الموصل.<br>آني المساعد الآلي، شلون أقدر أخدمك اليوم؟<br><br>تكدر تسألني عن:<br>- لابتوبات متوفرة 💻<br>- أسعار 💰<br>- مكان المتجر 📍";
+                return "يا هلا بيك! 🌹<br>نورت متجر لاب الموصل.<br>آني المساعد الآلي، شلون أقدر أخدمك اليوم؟<br><br>تكدر تسألني عن:<br>- لابتوبات متوفرة 💻<br>- أسعار 💰<br>- مكان المتجر 📍";
             }
 
             // Location
@@ -848,7 +1131,6 @@
             }
 
             // Search Products Logic
-            // 1. Check for specific product names or specs in the message
             const foundProducts = allProducts.filter(p => 
                 text.includes(p.name.toLowerCase()) || 
                 (p.specs && text.includes(p.specs.toLowerCase()))
@@ -856,7 +1138,6 @@
             
             if (foundProducts.length > 0) {
                 let reply = `لقيت لك ${foundProducts.length} جهاز متوفر عندي: 🔥<br><br>`;
-                // Show max 3 results
                 foundProducts.slice(0, 3).forEach(p => {
                     reply += `
                     <div class="mb-2 p-2 bg-slate-100 dark:bg-slate-700/50 rounded-lg border border-slate-200 dark:border-slate-600">
@@ -865,7 +1146,6 @@
                         <div class="font-bold text-slate-800 dark:text-white mt-1">${p.price}</div>
                     </div>`;
                 });
-                
                 if (foundProducts.length > 3) reply += `<br>...وغيرهم موجود بالمتجر! سوي بحث فوق 👆`;
                 return reply;
             }
@@ -903,10 +1183,17 @@
             const query = document.getElementById('searchInput').value.toLowerCase();
             const container = document.getElementById('products-container');
             
+            // Only show USED products in the main Used tab (default filtering)
+            // Or filter based on current tab logic if implemented fully, 
+            // but here we stick to the existing logic which shows all unless filtered.
+            // Better: updateUI mainly handles the "Used" tab search.
+            
             const filtered = allProducts.filter(p => {
+                // IMPORTANT: Filter by Type 'used' (undefined is considered used for legacy compatibility)
+                const isUsed = !p.type || p.type === 'used';
                 const matchCat = currentCategory === 'all' || p.category === currentCategory;
                 const matchSearch = p.name.toLowerCase().includes(query) || (p.specs && p.specs.toLowerCase().includes(query));
-                return matchCat && matchSearch;
+                return isUsed && matchCat && matchSearch;
             });
 
             container.innerHTML = '';
@@ -959,11 +1246,18 @@
             allProducts.forEach(p => {
                 const item = document.createElement('div');
                 item.className = "flex justify-between items-center bg-slate-50 dark:bg-slate-800 p-3 rounded-xl border border-slate-100 dark:border-slate-700 group hover:border-blue-200 dark:hover:border-blue-900 transition-colors";
+                
+                // Determine Type Badge
+                const isNew = p.type === 'new';
+                const badge = isNew 
+                    ? `<span class="bg-purple-100 text-purple-600 text-[9px] px-2 py-0.5 rounded-full font-bold ml-2 border border-purple-200">جديد</span>`
+                    : `<span class="bg-blue-100 text-blue-600 text-[9px] px-2 py-0.5 rounded-full font-bold ml-2 border border-blue-200">مستعمل</span>`;
+
                 item.innerHTML = `
                     <div class="flex items-center gap-3">
                         <img src="${p.img}" class="w-10 h-10 rounded-lg object-cover bg-white" onerror="this.src='https://placehold.co/50'">
                         <div>
-                            <p class="font-bold text-sm text-slate-800 dark:text-white">${p.name}</p>
+                            <p class="font-bold text-sm text-slate-800 dark:text-slate-200 flex items-center">${p.name} ${badge}</p>
                             <p class="text-[10px] text-slate-500">${p.price}</p>
                         </div>
                     </div>
@@ -980,13 +1274,53 @@
             });
         }
 
-        // Hide Splash Screen
+        // Hide Splash Screen & Start Rotation
         window.onload = () => {
             setTimeout(() => {
                 const splash = document.getElementById('splash-screen');
                 splash.style.opacity = '0';
                 setTimeout(() => splash.style.display = 'none', 800);
             }, 1500);
+
+            // ==========================================
+            // 🔄 TAGLINE ROTATOR LOGIC
+            // ==========================================
+            const taglines = [
+                { l1: "فخامة الأداء", l2: "بين يديك" },
+                { l1: "قوة التكنولوجيا..", l2: "بلمسة واحدة" },
+                { l1: "تجاوز حدود الهندسة..", l2: "بلا قيود" },
+                { l1: "أناقة التصميم..", l2: "ووحشية الأداء" },
+                { l1: "مستقبل الأعمال..", l2: "يبدأ من هنا" },
+                { l1: "عنوان التميز..", l2: "ومحطة المحترفين" },
+                { l1: "حقق المستحيل..", l2: "بأداء استثنائي" },
+                { l1: "إبداعك لا يتوقف..", l2: "مع أداء لا يرحم" },
+                { l1: "طموحك الهندسي..", l2: "يستحق الأفضل" },
+                { l1: "استثمارك الأمثل..", l2: "لنجاح لا يتوقف" },
+                { l1: "القوة المطلقة..", l2: "لتصميم يبهر العالم" }
+            ];
+
+            let currentTagline = 0;
+            const h1 = document.getElementById('hero-headline');
+            const l1 = document.getElementById('hero-title-l1');
+            const l2 = document.getElementById('hero-title-l2');
+
+            setInterval(() => {
+                // Fade Out
+                h1.style.opacity = '0';
+                h1.style.transform = 'translateY(10px)';
+                
+                setTimeout(() => {
+                    // Update Text
+                    currentTagline = (currentTagline + 1) % taglines.length;
+                    l1.innerText = taglines[currentTagline].l1;
+                    l2.innerText = taglines[currentTagline].l2;
+                    
+                    // Fade In
+                    h1.style.opacity = '1';
+                    h1.style.transform = 'translateY(0)';
+                }, 500); // Wait for fade out to finish (0.5s)
+                
+            }, 300000); // 300,000ms = 5 Minutes
         };
     </script>
 </body>
