@@ -6,18 +6,13 @@
     <meta name="description" content="LAP MOSUL - الوجهة الأولى للحواسيب المحمولة ومحطات العمل في الموصل.">
     <title>LAP MOSUL | لاب الموصل - المتجر السحابي</title>
     
-    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
-    
-    <!-- Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- Configuration -->
     <script>
         tailwind.config = {
             darkMode: 'class',
@@ -37,10 +32,7 @@
                         'fade-in-text': 'fadeInText 1s ease-in-out forwards',
                     },
                     keyframes: {
-                        float: {
-                            '0%, 100%': { transform: 'translateY(0)' },
-                            '50%': { transform: 'translateY(-10px)' },
-                        },
+                        float: { '0%, 100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-10px)' } },
                         glow: {
                             'from': { boxShadow: '0 0 5px rgba(14, 165, 233, 0.2), 0 0 10px rgba(14, 165, 233, 0.1)' },
                             'to': { boxShadow: '0 0 20px rgba(14, 165, 233, 0.6), 0 0 30px rgba(14, 165, 233, 0.4)' }
@@ -60,7 +52,6 @@
             }
         }
         
-        // Theme Check
         if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
             document.documentElement.classList.add('dark')
         } else {
@@ -68,73 +59,11 @@
         }
     </script>
 
-    <style>
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
-        .dark ::-webkit-scrollbar-thumb { background: #1e293b; }
-        ::-webkit-scrollbar-thumb:hover { background: #0ea5e9; }
-
-        /* Splash Screen */
-        #splash-screen {
-            position: fixed; inset: 0; background: #020617;
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            z-index: 10000; transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        /* Glassmorphism */
-        .glass-card {
-            background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-        }
-        .dark .glass-card {
-            background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        /* Hover Effects for Services */
-        .service-card:hover .icon-box {
-            transform: scale(1.1) rotate(5deg);
-            box-shadow: 0 0 30px var(--glow-color);
-            background-color: var(--glow-color);
-            color: white;
-        }
-
-        /* View Transitions */
-        .view-section { display: none; opacity: 0; transition: opacity 0.4s ease-in-out; }
-        .view-section.active { display: block; opacity: 1; animation: fadeIn 0.5s forwards; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-        /* Loading Spinner */
-        .loader { border: 3px solid #f3f3f3; border-radius: 50%; border-top: 3px solid #0ea5e9; width: 20px; height: 20px; -webkit-animation: spin 1s linear infinite; animation: spin 1s linear infinite; }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-
-        /* Background Decor */
-        .glow-blob { position: fixed; width: 600px; height: 600px; filter: blur(100px); opacity: 0.15; z-index: -1; border-radius: 50%; pointer-events: none; }
-        
-        .input-field { width: 100%; background: transparent; border: 1px solid #cbd5e1; padding: 12px; border-radius: 12px; font-size: 14px; transition: all 0.3s; }
-        .input-field:focus { border-color: #0ea5e9; outline: none; box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.1); }
-        .dark .input-field { border-color: #334155; color: white; background: rgba(30, 41, 59, 0.5); }
-
-        /* Chat Styles - Modernized */
-        .chat-msg { animation: bounce-in 0.4s forwards; transform-origin: bottom right; }
-        .chat-msg.bot { transform-origin: bottom left; }
-        
-        .typing-dot { animation: typing 1.4s infinite ease-in-out both; }
-        .typing-dot:nth-child(1) { animation-delay: -0.32s; }
-        .typing-dot:nth-child(2) { animation-delay: -0.16s; }
-        @keyframes typing { 0%, 80%, 100% { transform: scale(0); } 40% { transform: scale(1); } }
-        
-        .phone-number { direction: ltr !important; unicode-bidi: bidi-override !important; display: inline-block; }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body class="bg-slate-50 dark:bg-dark-900 text-slate-900 dark:text-slate-100 antialiased transition-colors duration-300 overflow-x-hidden selection:bg-brand-500 selection:text-white">
 
-    <!-- Dynamic Background Decor -->
-    <div class="glow-blob bg-brand-500 top-[-20%] right-[-10%] animate-pulse-slow"></div>
-    <div class="glow-blob bg-accent-purple bottom-[-20%] left-[-10%] animate-pulse-slow" style="animation-delay: 2s;"></div>
-
-    <!-- Splash Screen -->
     <div id="splash-screen">
         <div class="relative">
             <div class="w-24 h-24 border-4 border-brand-500/20 border-t-brand-500 rounded-full animate-spin"></div>
@@ -146,11 +75,8 @@
         <p class="text-slate-500 mt-2 font-light tracking-wide text-sm uppercase">Loading Cloud Store...</p>
     </div>
 
-    <!-- Navigation -->
     <nav class="fixed w-full z-[100] transition-all duration-300 glass-card border-none shadow-sm" id="main-nav">
         <div class="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
-            
-            <!-- REVERTED LOGO TO OLD STYLE -->
             <div class="flex items-center gap-4 cursor-pointer" onclick="window.app.showView('home')">
                 <span class="w-10 h-10 bg-gradient-to-tr from-brand-600 to-brand-400 rounded-xl flex items-center justify-center text-white text-lg shadow-lg shadow-brand-500/30">
                     <i class="fas fa-laptop"></i>
@@ -162,26 +88,19 @@
                 <button onclick="window.app.openAdminLogin()" class="w-10 h-10 rounded-full border border-slate-200 dark:border-slate-700 flex items-center justify-center hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-400 hover:text-brand-500 transition-all" title="لوحة الإدارة">
                     <i class="fas fa-lock"></i>
                 </button>
-
                 <button onclick="window.app.toggleTheme()" class="w-10 h-10 rounded-full border border-slate-200 dark:border-slate-700 flex items-center justify-center hover:bg-slate-100 dark:hover:bg-slate-800 transition-all group">
                     <i class="fas fa-moon dark:hidden text-slate-600 group-hover:rotate-12 transition-transform"></i>
                     <i class="fas fa-sun hidden dark:block text-amber-400 group-hover:rotate-90 transition-transform"></i>
                 </button>
-                
                 <button onclick="window.app.showView('store')" class="hidden sm:flex relative overflow-hidden group bg-slate-900 dark:bg-white dark:text-slate-950 text-white px-6 py-2.5 rounded-full font-bold text-sm transition-all hover:shadow-[0_0_20px_rgba(14,165,233,0.4)]">
-                    <span class="relative z-10 flex items-center gap-2">
-                        <span>المتجر</span>
-                        <i class="fas fa-shopping-bag"></i>
-                    </span>
+                    <span class="relative z-10 flex items-center gap-2"><span>المتجر</span><i class="fas fa-shopping-bag"></i></span>
                     <div class="absolute inset-0 bg-brand-500 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
                 </button>
             </div>
         </div>
     </nav>
 
-    <!-- VIEW 1: HOME SECTION -->
     <main id="view-home" class="view-section active pt-24">
-        <!-- Hero -->
         <section class="relative pt-24 pb-20 px-6 overflow-hidden min-h-[85vh] flex flex-col justify-center">
             <div class="max-w-5xl mx-auto text-center relative z-10">
                 <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-500/10 border border-brand-500/20 text-brand-600 dark:text-brand-400 text-xs font-bold mb-8 animate-bounce-slow">
@@ -189,7 +108,6 @@
                     من قلب نينوى.. نبضٌ جديد اسمه <span class="text-accent-purple font-black mx-1">LAP MOSUL</span>
                 </div>
                 
-                <!-- Dynamic Title Container -->
                 <div class="min-h-[160px] md:min-h-[200px] flex items-center justify-center">
                     <h1 class="text-5xl md:text-7xl lg:text-8xl font-black mb-8 leading-tight tracking-tight transition-all duration-1000" id="hero-headline">
                         <span id="hero-title-l1">فخامة الأداء</span> <br> 
@@ -203,8 +121,7 @@
                 
                 <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
                     <button onclick="window.app.showView('store')" class="w-full sm:w-auto px-8 py-4 bg-brand-600 hover:bg-brand-500 text-white rounded-2xl font-bold shadow-lg shadow-brand-500/25 hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-2">
-                        المتجر
-                        <i class="fas fa-arrow-left group-hover:translate-x-[-5px] transition-transform"></i>
+                        المتجر <i class="fas fa-arrow-left"></i>
                     </button>
                     <a href="#services" class="w-full sm:w-auto px-8 py-4 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-2xl font-bold hover:bg-slate-50 dark:hover:bg-slate-700 transition-all duration-300">
                         الخدمات التقنية
@@ -213,1115 +130,211 @@
             </div>
         </section>
 
-        <!-- Features Grid -->
         <section class="py-10 px-6">
             <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
-                <!-- Performance -->
                 <div class="glass-card p-8 rounded-3xl text-center group hover:border-brand-500/30 transition-all duration-500">
-                    <div class="w-16 h-16 bg-brand-500/10 text-brand-500 rounded-2xl flex items-center justify-center mx-auto mb-6 text-2xl group-hover:scale-110 transition-transform duration-300">
-                        <i class="fas fa-microchip"></i>
-                    </div>
+                    <div class="w-16 h-16 bg-brand-500/10 text-brand-500 rounded-2xl flex items-center justify-center mx-auto mb-6 text-2xl group-hover:scale-110"><i class="fas fa-microchip"></i></div>
                     <h3 class="text-xl font-bold mb-3">أداء فائق</h3>
                     <p class="text-slate-500 dark:text-slate-400 text-sm">نركز على المعالجات القوية وكروت الشاشة الاحترافية من فئة Quadro و RTX.</p>
                 </div>
-                <!-- Warranty -->
                 <div class="glass-card p-8 rounded-3xl text-center group hover:border-accent-purple/30 transition-all duration-500">
-                    <div class="w-16 h-16 bg-accent-purple/10 text-accent-purple rounded-2xl flex items-center justify-center mx-auto mb-6 text-2xl group-hover:scale-110 transition-transform duration-300">
-                        <i class="fas fa-shield-halved"></i>
-                    </div>
+                    <div class="w-16 h-16 bg-accent-purple/10 text-accent-purple rounded-2xl flex items-center justify-center mx-auto mb-6 text-2xl group-hover:scale-110"><i class="fas fa-shield-halved"></i></div>
                     <h3 class="text-xl font-bold mb-3">ضمان حقيقي</h3>
                     <p class="text-slate-500 dark:text-slate-400 text-sm">كل قطعة تخرج من متجرنا مدعومة بضمان فحص وصيانة حقيقي لمدة شهر.</p>
                 </div>
-                <!-- Support -->
                 <div class="glass-card p-8 rounded-3xl text-center group hover:border-accent-pink/30 transition-all duration-500">
-                    <div class="w-16 h-16 bg-accent-pink/10 text-accent-pink rounded-2xl flex items-center justify-center mx-auto mb-6 text-2xl group-hover:scale-110 transition-transform duration-300">
-                        <i class="fas fa-headset"></i>
-                    </div>
+                    <div class="w-16 h-16 bg-accent-pink/10 text-accent-pink rounded-2xl flex items-center justify-center mx-auto mb-6 text-2xl group-hover:scale-110"><i class="fas fa-headset"></i></div>
                     <h3 class="text-xl font-bold mb-3">دعم فني</h3>
                     <p class="text-slate-500 dark:text-slate-400 text-sm">خبراؤنا معك دائماً لتنصيب البرامج الهندسية وحل المشاكل التقنية.</p>
                 </div>
             </div>
         </section>
 
-        <!-- Services Section -->
         <section id="services" class="py-24 px-6 relative">
             <div class="max-w-7xl mx-auto">
                 <div class="text-center mb-16">
                     <h2 class="text-3xl md:text-5xl font-black mb-4">خدماتنا المميزة</h2>
                     <p class="text-slate-400 font-bold tracking-widest uppercase text-xs md:text-sm">Expert Technical Solutions</p>
                 </div>
-                
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <!-- Hardware -->
-                    <div class="service-card group p-8 md:p-10 bg-white dark:bg-slate-800 rounded-[2.5rem] border border-slate-100 dark:border-slate-700 shadow-xl dark:shadow-none hover:shadow-2xl transition-all duration-300" style="--glow-color: #0ea5e9;">
-                        <div class="icon-box w-16 h-16 bg-slate-50 dark:bg-slate-700 text-brand-500 rounded-2xl flex items-center justify-center text-2xl mb-8 transition-all duration-300">
-                            <i class="fas fa-screwdriver-wrench"></i>
-                        </div>
+                    <div class="service-card group p-8 md:p-10 bg-white dark:bg-slate-800 rounded-[2.5rem] border border-slate-100 dark:border-slate-700 shadow-xl hover:shadow-2xl transition-all duration-300" style="--glow-color: #0ea5e9;">
+                        <div class="icon-box w-16 h-16 bg-slate-50 dark:bg-slate-700 text-brand-500 rounded-2xl flex items-center justify-center text-2xl mb-8"><i class="fas fa-screwdriver-wrench"></i></div>
                         <h3 class="text-2xl font-bold mb-4">الصيانة المتقدمة</h3>
                         <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed mb-6">إصلاح شامل للهاردوير، تنظيف التبريد، وتغيير المعجون الحراري بمواد احترافية.</p>
-                        <div class="h-1 w-12 group-hover:w-full bg-brand-500 transition-all duration-500 rounded-full"></div>
                     </div>
-
-                    <!-- Software -->
-                    <div class="service-card group p-8 md:p-10 bg-white dark:bg-slate-800 rounded-[2.5rem] border border-slate-100 dark:border-slate-700 shadow-xl dark:shadow-none hover:shadow-2xl transition-all duration-300" style="--glow-color: #8b5cf6;">
-                        <div class="icon-box w-16 h-16 bg-slate-50 dark:bg-slate-700 text-accent-purple rounded-2xl flex items-center justify-center text-2xl mb-8 transition-all duration-300">
-                            <i class="fas fa-code"></i>
-                        </div>
+                    <div class="service-card group p-8 md:p-10 bg-white dark:bg-slate-800 rounded-[2.5rem] border border-slate-100 dark:border-slate-700 shadow-xl hover:shadow-2xl transition-all duration-300" style="--glow-color: #8b5cf6;">
+                        <div class="icon-box w-16 h-16 bg-slate-50 dark:bg-slate-700 text-accent-purple rounded-2xl flex items-center justify-center text-2xl mb-8"><i class="fas fa-code"></i></div>
                         <h3 class="text-2xl font-bold mb-4">الحزم البرمجية</h3>
                         <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed mb-6">تنصيب وتفعيل حزم Adobe، Autodesk، Office وأنظمة Windows الأصلية.</p>
-                        <div class="h-1 w-12 group-hover:w-full bg-accent-purple transition-all duration-500 rounded-full"></div>
                     </div>
-
-                    <!-- Security -->
-                    <div class="service-card group p-8 md:p-10 bg-white dark:bg-slate-800 rounded-[2.5rem] border border-slate-100 dark:border-slate-700 shadow-xl dark:shadow-none hover:shadow-2xl transition-all duration-300" style="--glow-color: #f59e0b;">
-                        <div class="icon-box w-16 h-16 bg-slate-50 dark:bg-slate-700 text-accent-gold rounded-2xl flex items-center justify-center text-2xl mb-8 transition-all duration-300">
-                            <i class="fas fa-laptop-code"></i>
-                        </div>
+                    <div class="service-card group p-8 md:p-10 bg-white dark:bg-slate-800 rounded-[2.5rem] border border-slate-100 dark:border-slate-700 shadow-xl hover:shadow-2xl transition-all duration-300" style="--glow-color: #f59e0b;">
+                        <div class="icon-box w-16 h-16 bg-slate-50 dark:bg-slate-700 text-accent-gold rounded-2xl flex items-center justify-center text-2xl mb-8"><i class="fas fa-laptop-code"></i></div>
                         <h3 class="text-2xl font-bold mb-4">بيئات التطوير</h3>
                         <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed mb-6">إعداد بيئات Linux، Docker، وتجهيز الأجهزة للطلاب والمبرمجين.</p>
-                        <div class="h-1 w-12 group-hover:w-full bg-accent-gold transition-all duration-500 rounded-full"></div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- NEW COMPACT FOOTER -->
         <footer class="relative pt-16 pb-8 px-6 bg-slate-50 dark:bg-slate-950 border-t border-slate-200 dark:border-slate-800 overflow-hidden">
-            <!-- Background Blob -->
-            <div class="absolute bottom-0 left-0 w-full h-full overflow-hidden z-0 pointer-events-none">
-                <div class="absolute bottom-[-10%] left-[-10%] w-96 h-96 bg-brand-500/5 rounded-full blur-3xl"></div>
-                <div class="absolute top-[-10%] right-[-10%] w-96 h-96 bg-accent-purple/5 rounded-full blur-3xl"></div>
-            </div>
-
             <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 relative z-10">
-                
-                <!-- Brand & Socials (Right Side) -->
                 <div class="text-center md:text-right space-y-6">
                     <div>
                         <h2 class="text-2xl font-black mb-4">LAP <span class="text-brand-500">MOSUL</span></h2>
-                        <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed max-w-sm mx-auto md:mx-0">
-                            نحن هنا لنغير مفهوم شراء اللابتوبات في الموصل. جودة، فخامة، وأداء لا يضاهى. جميع أجهزتنا تخضع لفحص دقيق من قبل مهندسين مختصين.
-                        </p>
+                        <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed max-w-sm mx-auto md:mx-0">نحن هنا لنغير مفهوم شراء اللابتوبات في الموصل. جودة، فخامة، وأداء لا يضاهى. جميع أجهزتنا تخضع لفحص دقيق من قبل مهندسين مختصين.</p>
                     </div>
-                    
                     <div class="flex gap-3 justify-center md:justify-start">
-                        <a href="https://www.facebook.com/p/LAP-MOSUL-61576293412329/" target="_blank" class="w-10 h-10 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex items-center justify-center hover:bg-blue-600 hover:text-white transition-all shadow-sm group">
-                            <i class="fab fa-facebook-f group-hover:scale-110 transition-transform"></i>
-                        </a>
-                        <a href="https://www.instagram.com/lap_mosul_/" target="_blank" class="w-10 h-10 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex items-center justify-center hover:bg-pink-600 hover:text-white transition-all shadow-sm group">
-                            <i class="fab fa-instagram group-hover:scale-110 transition-transform"></i>
-                        </a>
-                        <a href="https://wa.me/9647777111558" target="_blank" class="w-10 h-10 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex items-center justify-center hover:bg-green-500 hover:text-white transition-all shadow-sm group">
-                            <i class="fab fa-whatsapp group-hover:scale-110 transition-transform"></i>
-                        </a>
+                        <a href="https://wa.me/9647777111558" target="_blank" class="w-10 h-10 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex items-center justify-center hover:bg-green-500 hover:text-white transition-all shadow-sm"><i class="fab fa-whatsapp"></i></a>
                     </div>
                 </div>
 
-                <!-- Location & Contact (Left Side - Compact Card) -->
                 <div class="bg-white/60 dark:bg-slate-900/60 p-6 rounded-2xl border border-slate-200 dark:border-slate-800 backdrop-blur-sm shadow-sm">
-                    <h4 class="font-bold text-lg mb-4 flex items-center gap-2 text-slate-800 dark:text-white">
-                        <span class="w-8 h-8 rounded-lg bg-brand-100 dark:bg-brand-900/30 text-brand-600 flex items-center justify-center text-sm"><i class="fas fa-map-marker-alt"></i></span>
-                        موقعنا في الموصل
-                    </h4>
-                    
+                    <h4 class="font-bold text-lg mb-4 flex items-center gap-2 text-slate-800 dark:text-white"><i class="fas fa-map-marker-alt text-brand-500"></i> موقعنا في الموصل</h4>
                     <div class="space-y-4 text-sm">
-                        <div class="flex items-start gap-3">
-                            <div class="mt-1 text-slate-400"><i class="fas fa-location-arrow"></i></div>
-                            <div>
-                                <p class="font-bold text-slate-800 dark:text-slate-200">المجموعة الثقافية</p>
-                                <p class="text-slate-500 text-xs mt-0.5">فرع مطعم طماطة - داخل شركة رؤية</p>
-                                <a href="https://maps.app.goo.gl/EZeEuzCKKsQn8hmW8" target="_blank" class="text-brand-500 text-xs font-bold hover:underline mt-1 inline-flex items-center gap-1 group">
-                                    <span>اضغط هنا لعرض الموقع</span>
-                                    <i class="fas fa-external-link-alt text-[10px] group-hover:translate-x-1 transition-transform"></i>
-                                </a>
-                            </div>
-                        </div>
-                        
+                        <p class="font-bold text-slate-800 dark:text-slate-200">المجموعة الثقافية - فرع مطعم طماطة</p>
                         <div class="flex items-center gap-3 pt-3 border-t border-slate-200/50 dark:border-slate-700/50">
                             <div class="text-slate-400"><i class="fas fa-phone-alt"></i></div>
                             <div>
                                 <p class="text-xs text-slate-500 mb-0.5">خدمة الزبائن</p>
-                                <a href="tel:07777111558" class="font-black text-lg text-slate-800 dark:text-white phone-number hover:text-brand-500 transition-colors">07777 111 558</a>
+                                <a href="tel:07777111558" class="font-black text-lg text-slate-800 dark:text-white phone-number hover:text-brand-500">07777 111 558</a>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            
-            <!-- Minimal Copyright -->
-            <div class="text-center mt-12 pt-6 border-t border-slate-200 dark:border-slate-800 relative z-10">
-                <div class="flex flex-col items-center gap-2">
-                    <p class="text-[10px] font-bold text-slate-400 dark:text-slate-600 tracking-[0.2em] uppercase">
-                        Built with <i class="fas fa-heart text-red-500 mx-1 animate-pulse"></i> by Lap Mosul
-                    </p>
-                    <button onclick="window.app.openAdminLogin()" class="text-[9px] text-slate-300 dark:text-slate-700 hover:text-brand-500 transition-colors bg-slate-200/50 dark:bg-slate-800/50 px-3 py-1 rounded-full opacity-60 hover:opacity-100">
-                        <i class="fas fa-lock text-[8px] mr-1"></i> Admin Access
-                    </button>
                 </div>
             </div>
         </footer>
     </main>
 
-    <!-- VIEW 2: STORE SECTION -->
     <main id="view-store" class="view-section pt-32 pb-20 min-h-screen">
         <div class="max-w-7xl mx-auto px-6">
             <div class="flex flex-col md:flex-row justify-between items-center mb-6 gap-6">
                 <div>
-                    <h2 class="text-3xl md:text-4xl font-black flex items-center gap-3">
-                        المعرض <span class="text-brand-500">الرقمي</span>
-                        <div id="live-indicator" class="w-2 h-2 bg-green-500 rounded-full animate-pulse shadow-[0_0_10px_#22c55e]" title="Live Connected"></div>
-                    </h2>
-                    <p class="text-slate-500 dark:text-slate-400 mt-2 font-medium">تحديث مباشر من السحابة ☁️</p>
+                    <h2 class="text-3xl md:text-4xl font-black flex items-center gap-3">المعرض <span class="text-brand-500">الرقمي</span> <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse shadow-[0_0_10px_#22c55e]"></div></h2>
                 </div>
             </div>
 
-            <!-- NEW IMPORTANT INFO BANNERS (Coordinated Colors) -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-                <!-- A+ Quality Badge -->
-                <div class="bg-gradient-to-r from-amber-500/10 to-amber-500/5 border border-amber-500/20 rounded-2xl p-4 flex items-center gap-4 transition-transform hover:-translate-y-1">
-                    <div class="w-12 h-12 rounded-full bg-amber-500 text-white flex items-center justify-center text-xl shadow-lg shadow-amber-500/30 shrink-0 animate-glow" style="animation-duration: 3s">
-                        <i class="fas fa-certificate"></i>
-                    </div>
-                    <div>
-                        <h4 class="font-bold text-slate-800 dark:text-white text-lg">نظافة A+ مضمونة</h4>
-                        <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">جميع الأجهزة استيراد أمريكي بحالة الوكالة (Open Box)</p>
-                    </div>
-                </div>
-
-                <!-- Free Delivery Badge -->
-                <div class="bg-gradient-to-r from-emerald-500/10 to-emerald-500/5 border border-emerald-500/20 rounded-2xl p-4 flex items-center gap-4 transition-transform hover:-translate-y-1">
-                    <div class="w-12 h-12 rounded-full bg-emerald-500 text-white flex items-center justify-center text-xl shadow-lg shadow-emerald-500/30 shrink-0 animate-glow" style="animation-duration: 3s; animation-delay: 1s;">
-                        <i class="fas fa-truck-fast"></i>
-                    </div>
-                    <div>
-                        <h4 class="font-bold text-slate-800 dark:text-white text-lg">توصيل مجاني</h4>
-                        <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">خدمة توصيل سريعة ومجانية لكل محافظات العراق 🇮🇶</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- TAB SWITCHER -->
             <div class="flex justify-center mb-10">
                 <div class="bg-white dark:bg-slate-800 p-1.5 rounded-2xl border border-slate-200 dark:border-slate-700 inline-flex shadow-sm gap-2">
-                    <button onclick="window.app.switchStoreTab('used')" id="tab-used" class="px-6 sm:px-10 py-3 rounded-xl text-sm font-bold transition-all duration-300 bg-brand-600 text-white shadow-lg shadow-brand-500/30">
-                        <i class="fas fa-box-open mr-2"></i> المستعمل (الأمريكي)
-                    </button>
-                    <button onclick="window.app.switchStoreTab('new')" id="tab-new" class="px-6 sm:px-10 py-3 rounded-xl text-sm font-bold transition-all duration-300 text-slate-500 hover:text-slate-800 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-700">
-                        <i class="fas fa-fire mr-2 text-red-500"></i> الجديد (Coming Soon)
-                    </button>
+                    <button onclick="window.app.switchStoreTab('used')" id="tab-used" class="px-6 sm:px-10 py-3 rounded-xl text-sm font-bold transition-all duration-300 bg-brand-600 text-white shadow-lg"><i class="fas fa-box-open mr-2"></i> المستعمل</button>
+                    <button onclick="window.app.switchStoreTab('new')" id="tab-new" class="px-6 sm:px-10 py-3 rounded-xl text-sm font-bold transition-all duration-300 text-slate-500"><i class="fas fa-fire mr-2 text-red-500"></i> الجديد (قريباً)</button>
                 </div>
             </div>
             
-            <!-- USED SECTION (DEFAULT) -->
             <div id="used-section" class="fade-in">
-                <!-- Search & Filters -->
                 <div class="mb-8">
                     <div class="w-full relative group mb-6">
-                        <input type="text" id="searchInput" onkeyup="window.app.filterProducts()" placeholder="ابحث عن لابتوب (مثلاً ThinkPad)..." class="w-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl px-5 py-4 pr-12 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent transition-all shadow-sm group-hover:shadow-md">
+                        <input type="text" id="searchInput" onkeyup="window.app.filterProducts()" placeholder="ابحث عن لابتوب (مثلاً ThinkPad)..." class="w-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl px-5 py-4 pr-12 focus:outline-none focus:ring-2 focus:ring-brand-500 transition-all">
                         <i class="fas fa-search absolute left-5 top-1/2 -translate-y-1/2 text-slate-400"></i>
                     </div>
-
-                    <!-- Categories -->
                     <div class="flex gap-3 overflow-x-auto pb-2 scrollbar-hide">
-                        <button onclick="window.app.filterCategory('all')" class="cat-btn active px-6 py-3 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 whitespace-nowrap text-sm font-bold hover:bg-brand-500 hover:text-white hover:border-brand-500 transition-all shadow-sm">الكل</button>
-                        <button onclick="window.app.filterCategory('engineering')" class="cat-btn px-6 py-3 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 whitespace-nowrap text-sm font-bold hover:bg-brand-500 hover:text-white hover:border-brand-500 transition-all shadow-sm">هندسة وتصميم</button>
-                        <button onclick="window.app.filterCategory('student')" class="cat-btn px-6 py-3 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 whitespace-nowrap text-sm font-bold hover:bg-brand-500 hover:text-white hover:border-brand-500 transition-all shadow-sm">طلاب وأعمال</button>
-                        <button onclick="window.app.filterCategory('gaming')" class="cat-btn px-6 py-3 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 whitespace-nowrap text-sm font-bold hover:bg-brand-500 hover:text-white hover:border-brand-500 transition-all shadow-sm">Gaming</button>
+                        <button onclick="window.app.filterCategory('all')" class="cat-btn active px-6 py-3 rounded-xl bg-brand-500 text-white font-bold transition-all">الكل</button>
+                        <button onclick="window.app.filterCategory('engineering')" class="cat-btn px-6 py-3 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 font-bold hover:bg-brand-500 hover:text-white transition-all">هندسة وتصميم</button>
+                        <button onclick="window.app.filterCategory('student')" class="cat-btn px-6 py-3 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 font-bold hover:bg-brand-500 hover:text-white transition-all">طلاب وأعمال</button>
+                        <button onclick="window.app.filterCategory('gaming')" class="cat-btn px-6 py-3 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 font-bold hover:bg-brand-500 hover:text-white transition-all">Gaming</button>
                     </div>
                 </div>
 
-                <!-- Loader -->
                 <div id="loading-spinner" class="flex flex-col items-center justify-center py-32">
                     <div class="loader mb-4"></div>
-                    <p class="text-slate-400 text-sm animate-pulse">جاري تحميل المنتجات...</p>
+                    <p class="text-slate-400 text-sm animate-pulse">جاري التحميل...</p>
                 </div>
 
-                <!-- Products Grid -->
-                <div id="products-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 hidden">
-                    <!-- Products Injected Here -->
-                </div>
-                
-                <!-- Empty State -->
-                <div id="no-results" class="hidden text-center py-32">
-                    <i class="fas fa-search text-6xl text-slate-200 dark:text-slate-800 mb-6"></i>
-                    <p class="text-slate-500 font-bold">لا توجد نتائج مطابقة</p>
-                    <button onclick="window.app.filterCategory('all')" class="mt-4 text-brand-500 hover:underline">عرض الكل</button>
-                </div>
+                <div id="products-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 hidden"></div>
+                <div id="no-results" class="hidden text-center py-32"><i class="fas fa-search text-6xl text-slate-200 dark:text-slate-800 mb-6"></i><p class="text-slate-500 font-bold">لا توجد نتائج</p></div>
             </div>
 
-            <!-- NEW SECTION (COMING SOON) -->
             <div id="new-section" class="hidden fade-in">
-                <div class="text-center mb-10">
-                    <h3 class="text-2xl font-black text-slate-800 dark:text-white mb-2">أحدث الموديلات العالمية 🔥</h3>
-                    <p class="text-slate-500">هذه الأجهزة ستتوفر قريباً في لاب الموصل. احجز نسختك الآن!</p>
-                </div>
-                <div id="new-products-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-                    <!-- New Products Injected Here -->
-                </div>
+                <div id="new-products-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"></div>
             </div>
-
         </div>
     </main>
 
-    <!-- NEW INTERNAL CHAT WIDGET -->
     <div id="chat-widget" class="fixed bottom-6 left-6 z-[150] flex flex-col items-start font-sans" dir="rtl">
-        <!-- Chat Window -->
         <div id="chat-window" class="hidden w-[90vw] sm:w-[24rem] h-[550px] max-h-[85vh] bg-white dark:bg-slate-900 rounded-[2rem] shadow-2xl border border-slate-200 dark:border-slate-700 flex flex-col overflow-hidden mb-4 transition-all duration-300 origin-bottom-left scale-95 opacity-0">
-            <!-- New Modern Header -->
-            <div class="bg-gradient-to-l from-slate-900 to-slate-800 p-5 flex justify-between items-center text-white shrink-0 shadow-lg relative overflow-hidden">
-                <!-- Header Decorative bg -->
-                <div class="absolute top-0 right-0 w-32 h-32 bg-brand-500/10 rounded-full blur-2xl pointer-events-none"></div>
-
-                <div class="flex items-center gap-4 relative z-10">
-                    <div class="relative">
-                        <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-lg border-2 border-brand-500 overflow-hidden">
-                            <i class="fas fa-headset text-brand-600 text-xl"></i>
-                        </div>
-                        <div class="absolute bottom-0 right-0 w-3.5 h-3.5 bg-green-500 border-2 border-slate-800 rounded-full animate-pulse"></div>
-                    </div>
-                    <div>
-                        <span class="font-black block text-lg tracking-tight">الدعم الذكي</span>
-                        <span class="text-xs text-slate-300 font-medium flex items-center gap-1"><i class="fas fa-wifi text-[10px]"></i> متصل الآن</span>
-                    </div>
+            <div class="bg-gradient-to-l from-slate-900 to-slate-800 p-5 flex justify-between items-center text-white shrink-0 shadow-lg">
+                <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center border-2 border-brand-500"><i class="fas fa-headset text-brand-600 text-xl"></i></div>
+                    <div><span class="font-black block text-lg">الدعم الذكي</span><span class="text-xs text-slate-300 flex items-center gap-1"><i class="fas fa-wifi text-[10px]"></i> متصل</span></div>
                 </div>
-                <button onclick="window.app.toggleChat()" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-all backdrop-blur-sm"><i class="fas fa-times"></i></button>
+                <button onclick="window.app.toggleChat()" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center"><i class="fas fa-times"></i></button>
             </div>
-
-            <!-- Messages Area -->
             <div id="chat-messages" class="flex-1 p-5 overflow-y-auto space-y-4 bg-slate-50 dark:bg-slate-950 scroll-smooth">
-                <!-- Welcome Message -->
                 <div class="flex justify-start chat-msg bot">
-                    <div class="bg-white dark:bg-slate-800 p-4 rounded-2xl rounded-tr-none shadow-sm text-sm max-w-[90%] border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200">
-                        <p class="font-bold text-brand-600 dark:text-brand-400 text-xs mb-2">لاب الموصل 💻</p>
-                        أهلاً بك في لاب الموصل! 🌹<br>
-                        آني المساعد الآلي، موجود لخدمتك 24 ساعة.<br><br>
-                        تكدر تسألني عن:
-                        <ul class="mt-2 space-y-1 list-disc list-inside text-slate-500 dark:text-slate-400 text-xs">
-                            <li>أسعار اللابتوبات</li>
-                            <li>عنوان المتجر</li>
-                            <li>نصائح (هندسة، جيمينج...)</li>
-                        </ul>
+                    <div class="bg-white dark:bg-slate-800 p-4 rounded-2xl rounded-tr-none shadow-sm text-sm border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200">
+                        <p class="font-bold text-brand-600 mb-2">لاب الموصل 💻</p> أهلاً بك! آني المساعد الآلي، تفضل اسألني؟
                     </div>
                 </div>
             </div>
-
-            <!-- Input Area -->
-            <div class="p-4 bg-white dark:bg-slate-900 border-t border-slate-100 dark:border-slate-800 flex gap-2 shrink-0">
-                <input type="text" id="chat-input" placeholder="اكتب سؤالك هنا..." class="flex-1 bg-slate-100 dark:bg-slate-800 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500/50 dark:text-white transition-all font-medium" onkeypress="if(event.key === 'Enter') window.app.handleChat()">
-                <button onclick="window.app.handleChat()" class="w-12 h-12 bg-gradient-to-tr from-brand-600 to-brand-400 text-white rounded-xl flex items-center justify-center hover:shadow-lg hover:scale-105 transition-all">
-                    <i class="fas fa-paper-plane text-sm transform -rotate-90"></i>
-                </button>
+            <div class="p-4 bg-white dark:bg-slate-900 border-t border-slate-100 dark:border-slate-800 flex gap-2">
+                <input type="text" id="chat-input" placeholder="اكتب سؤالك هنا..." class="flex-1 bg-slate-100 dark:bg-slate-800 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500/50 dark:text-white" onkeypress="if(event.key === 'Enter') window.app.handleChat()">
+                <button onclick="window.app.handleChat()" class="w-12 h-12 bg-gradient-to-tr from-brand-600 to-brand-400 text-white rounded-xl flex items-center justify-center hover:shadow-lg"><i class="fas fa-paper-plane transform -rotate-90"></i></button>
             </div>
         </div>
         
-        <!-- Floating Toggle Button -->
         <button onclick="window.app.toggleChat()" class="group relative w-16 h-16 z-50">
-            <span class="absolute -top-1 -right-1 flex h-4 w-4">
-              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-              <span class="relative inline-flex rounded-full h-4 w-4 bg-red-500"></span>
-            </span>
-            <div class="absolute inset-0 bg-brand-500 rounded-full animate-ping opacity-20 group-hover:opacity-40"></div>
-            <div class="relative w-full h-full bg-gradient-to-br from-brand-600 to-slate-900 text-white rounded-full shadow-2xl flex items-center justify-center text-2xl hover:scale-110 hover:-translate-y-1 transition-all duration-300 border-2 border-white dark:border-slate-800">
-                <i class="fas fa-comment-dots"></i>
-            </div>
+            <span class="absolute -top-1 -right-1 flex h-4 w-4"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span><span class="relative inline-flex rounded-full h-4 w-4 bg-red-500"></span></span>
+            <div class="relative w-full h-full bg-gradient-to-br from-brand-600 to-slate-900 text-white rounded-full shadow-2xl flex items-center justify-center text-2xl hover:scale-110 transition-all border-2 border-white"><i class="fas fa-comment-dots"></i></div>
         </button>
     </div>
 
-    <!-- ADMIN MODAL -->
     <div id="admin-modal" class="fixed inset-0 z-[200] bg-slate-900/80 hidden backdrop-blur-md flex items-center justify-center p-4">
-        <div class="bg-white dark:bg-slate-900 w-full max-w-2xl rounded-3xl p-8 max-h-[90vh] overflow-y-auto relative border border-slate-200 dark:border-slate-700 shadow-2xl animate-fade-in-up">
-            <button onclick="window.app.closeAdmin()" class="absolute top-4 left-4 w-10 h-10 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-red-100 hover:text-red-500 flex items-center justify-center transition-colors"><i class="fas fa-times"></i></button>
+        <div class="bg-white dark:bg-slate-900 w-full max-w-2xl rounded-3xl p-8 max-h-[90vh] overflow-y-auto relative border border-slate-200 dark:border-slate-700 shadow-2xl">
+            <button onclick="window.app.closeAdmin()" class="absolute top-4 left-4 w-10 h-10 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-red-100 hover:text-red-500 flex items-center justify-center"><i class="fas fa-times"></i></button>
+            <h2 class="text-2xl font-black mb-8 text-brand-500 flex items-center gap-3"><i class="fas fa-cloud-upload-alt"></i> لوحة التحكم</h2>
             
-            <h2 class="text-2xl font-black mb-8 text-brand-500 flex items-center gap-3">
-                <i class="fas fa-cloud-upload-alt"></i> لوحة التحكم السحابية
-            </h2>
-
             <div class="bg-slate-50 dark:bg-slate-800 p-6 rounded-2xl mb-8 border border-slate-100 dark:border-slate-700">
                 <div class="flex justify-between items-center mb-4">
                     <h3 class="font-bold flex items-center gap-2"><i class="fas fa-plus-circle text-green-500"></i> <span id="form-title">إضافة منتج جديد</span></h3>
-                    <button id="cancel-edit-btn" onclick="window.app.cancelEdit()" class="hidden text-xs text-red-500 hover:bg-red-500/10 px-3 py-1 rounded-lg transition-colors">إلغاء التعديل ✕</button>
+                    <button id="cancel-edit-btn" onclick="window.app.cancelEdit()" class="hidden text-xs text-red-500 hover:bg-red-500/10 px-3 py-1 rounded-lg">إلغاء التعديل ✕</button>
                 </div>
-                
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div class="md:col-span-2 flex gap-2">
-                        <input type="text" id="p-name" placeholder="اسم الجهاز (مثلاً HP ZBook G8)" class="input-field flex-1">
-                    </div>
-                    <!-- Type Selector (New/Used) -->
-                    <select id="p-type" class="input-field md:col-span-2 text-slate-800 font-bold bg-amber-50 dark:bg-amber-900/20 border-amber-200 dark:border-amber-800">
-                        <option value="used">💼 مستعمل (Available)</option>
-                        <option value="new">🔥 جديد (Coming Soon)</option>
+                    <input type="text" id="p-name" placeholder="اسم الجهاز" class="input-field md:col-span-2">
+                    <select id="p-type" class="input-field md:col-span-2 text-slate-800 bg-amber-50">
+                        <option value="used">💼 مستعمل</option>
+                        <option value="new">🔥 جديد (قريباً)</option>
                     </select>
-
-                    <input type="text" id="p-price" placeholder="السعر (مثلاً 450$)" class="input-field">
-                    <input type="text" id="p-specs" placeholder="المواصفات (ستكتب تلقائياً)" class="input-field">
-                    <input type="text" id="p-img" placeholder="رابط الصورة (URL)" class="input-field md:col-span-2">
+                    <input type="text" id="p-price" placeholder="السعر" class="input-field">
+                    <input type="text" id="p-specs" placeholder="المواصفات" class="input-field">
+                    <input type="text" id="p-img" placeholder="رابط الصورة" class="input-field md:col-span-2">
                     <select id="p-cat" class="input-field md:col-span-2 text-slate-500">
                         <option value="student">طلاب / أعمال</option>
                         <option value="engineering">هندسة / تصميم</option>
-                        <option value="gaming">ألعاب (Gaming)</option>
+                        <option value="gaming">ألعاب</option>
                     </select>
                 </div>
-                <button id="save-btn" onclick="window.app.saveProduct()" class="w-full mt-6 bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white font-bold py-4 rounded-xl transition-all shadow-lg hover:shadow-green-500/20 flex justify-center items-center gap-2">
-                    <span>رفع للسحابة فوراً</span> <i class="fas fa-paper-plane"></i>
-                </button>
+                <button id="save-btn" onclick="window.app.saveProduct()" class="w-full mt-6 bg-green-500 hover:bg-green-600 text-white font-bold py-4 rounded-xl flex justify-center items-center gap-2"><span>حفظ</span> <i class="fas fa-save"></i></button>
             </div>
 
-            <!-- Import Buttons -->
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
-                <button onclick="window.app.uploadDefaults()" class="bg-blue-500/10 hover:bg-blue-500/20 text-blue-600 dark:text-blue-400 border border-blue-500/30 font-bold py-3 rounded-xl transition-all flex justify-center items-center gap-2 text-sm">
-                    <i class="fas fa-database"></i> استيراد 'المستعمل' (Used)
-                </button>
-                <button onclick="window.app.uploadNewLaptops()" class="bg-purple-500/10 hover:bg-purple-500/20 text-purple-600 dark:text-purple-400 border border-purple-500/30 font-bold py-3 rounded-xl transition-all flex justify-center items-center gap-2 text-sm">
-                    <i class="fas fa-fire"></i> استيراد 'قريباً' (New)
-                </button>
+                <button onclick="window.app.uploadDefaults()" class="bg-blue-500/10 text-blue-600 border border-blue-500/30 font-bold py-3 rounded-xl"><i class="fas fa-database"></i> استيراد 'المستعمل'</button>
+                <button onclick="window.app.uploadNewLaptops()" class="bg-purple-500/10 text-purple-600 border border-purple-500/30 font-bold py-3 rounded-xl"><i class="fas fa-fire"></i> استيراد 'قريباً'</button>
             </div>
-
-            <h3 class="font-bold mb-4 border-b border-slate-200 dark:border-slate-700 pb-2">قائمة المنتجات الحالية</h3>
-            <div id="admin-list" class="space-y-3 max-h-80 overflow-y-auto pr-2 custom-scrollbar p-1">
-                <!-- List Items -->
-            </div>
+            <h3 class="font-bold mb-4 border-b border-slate-200 pb-2">قائمة المنتجات الحالية</h3>
+            <div id="admin-list" class="space-y-3 max-h-80 overflow-y-auto pr-2 custom-scrollbar p-1"></div>
         </div>
     </div>
 
-    <!-- Login Modal (Replacing PIN Modal) -->
     <div id="pin-modal" class="fixed inset-0 z-[210] bg-slate-900/90 hidden flex items-center justify-center backdrop-blur-sm">
-        <div class="bg-white dark:bg-slate-900 p-8 rounded-3xl text-center shadow-2xl border border-slate-700 w-full max-w-sm transform transition-all scale-100 relative overflow-hidden">
-            <!-- Decorative Blob -->
-            <div class="absolute -top-10 -right-10 w-32 h-32 bg-brand-500/20 rounded-full blur-2xl"></div>
-            
-            <div class="w-16 h-16 bg-brand-500/10 text-brand-500 rounded-2xl flex items-center justify-center mx-auto mb-6 text-2xl relative z-10">
-                <i class="fas fa-user-shield"></i>
-            </div>
-            
+        <div class="bg-white dark:bg-slate-900 p-8 rounded-3xl text-center shadow-2xl border border-slate-700 w-full max-w-sm">
             <h3 class="font-bold mb-1 text-xl">تسجيل دخول الإدارة</h3>
-            <p class="text-xs text-slate-500 mb-6">يرجى ادخال بيانات المسؤول للمتابعة</p>
-            
+            <p class="text-xs text-slate-500 mb-6">يرجى ادخال الايميل والباسورد للمتابعة</p>
             <div class="space-y-4 mb-6 relative z-10">
                 <div class="relative">
-                    <input type="text" id="login-user" placeholder="اسم المستخدم" class="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-10 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 transition-all">
-                    <i class="fas fa-user absolute right-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
+                    <input type="email" id="login-user" placeholder="البريد الإلكتروني للإدارة" class="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-10 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500">
+                    <i class="fas fa-envelope absolute right-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
                 </div>
                 <div class="relative">
-                    <input type="password" id="login-pass" placeholder="كلمة المرور" class="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-10 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 transition-all">
+                    <input type="password" id="login-pass" placeholder="كلمة المرور" class="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-10 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500">
                     <i class="fas fa-key absolute right-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
                 </div>
             </div>
-
-            <div class="flex flex-col gap-3 relative z-10">
-                <button onclick="window.app.checkLogin()" class="bg-gradient-to-r from-brand-600 to-brand-500 text-white w-full py-3 rounded-xl font-bold transition-all shadow-lg hover:shadow-brand-500/25 active:scale-95">دخول</button>
-                <button onclick="document.getElementById('pin-modal').classList.add('hidden')" class="text-slate-500 hover:text-slate-800 dark:hover:text-white text-sm font-medium py-2">إلغاء</button>
+            <div class="flex flex-col gap-3">
+                <button onclick="window.app.checkLogin()" class="bg-brand-600 text-white w-full py-3 rounded-xl font-bold">دخول</button>
+                <button onclick="document.getElementById('pin-modal').classList.add('hidden')" class="text-slate-500 hover:text-slate-800 text-sm font-medium py-2">إلغاء</button>
             </div>
         </div>
     </div>
 
-    <!-- FIREBASE MODULE & APP LOGIC -->
-    <script type="module">
-        // Import Firebase SDKs
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getFirestore, collection, addDoc, deleteDoc, updateDoc, doc, onSnapshot, query, orderBy } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
-        
-        // Import Google Generative AI
-        import { GoogleGenerativeAI } from "https://esm.run/@google/generative-ai";
-
-        // ==========================================
-        // 🔑 مكان مفتاح الذكاء الاصطناعي (ضع مفتاحك هنا)
-        // ==========================================
-        const GEMINI_API_KEY = "AIzaSyBWEZI-1Vmb25lBCzQoNMZUADUpJ8gCvJs"; // 🔴🔴 تم تصحيح المفتاح (AIza) 🔴🔴
-
-        // ==========================================
-        // ✅ مفاتيح الربط الحقيقية (تم الدمج)
-        // ==========================================
-        const firebaseConfig = {
-            apiKey: "AIzaSyCx8EM2HSnksOBxPUrvh5GI6f8LD42Ojns",
-            authDomain: "lap-mosul-db.firebaseapp.com",
-            projectId: "lap-mosul-db",
-            storageBucket: "lap-mosul-db.firebasestorage.app",
-            messagingSenderId: "698504973676",
-            appId: "1:698504973676:web:1e8f7473668d32a3023749",
-            measurementId: "G-SM4N5BK1Z1"
-        };
-
-        // Initialize Firebase
-        let app, db, productsRef;
-        try {
-            app = initializeApp(firebaseConfig);
-            db = getFirestore(app);
-            productsRef = collection(db, "products");
-            console.log("Firebase Connected ✅");
-        } catch (error) {
-            console.error("Firebase Error:", error);
-            alert("خطأ في الاتصال بقاعدة البيانات");
-        }
-
-        // State
-        let allProducts = [];
-        let currentCategory = 'all';
-        let editingId = null; // Track Editing
-        
-        // LOGIN CREDENTIALS
-        const ADMIN_USER = "admin";
-        const ADMIN_PASS = "2024";
-
-        // DATA: Old Laptops (Defaults)
-        const defaultLaptops = [
-             { 
-                name: "Lenovo L13 Yoga", 
-                price: "325,000 د.ع", 
-                specs: "i5-11th Gen | 16GB RAM | 512GB NVMe | x360 Touch", 
-                category: "student", 
-                type: "used",
-                img: "https://p1-ofp.static.pub/medias/bWFzdGVyfHJvb3R8MjEzNjQzfGltYWdlL3BuZ3xoYmIvaGFkLzE0MTEwNjI4MTUxMzI2LnBuZ3wyZDNiODQ1MjdiZTUyZDM5NjdkNGU1NDBkOGFjOTBjNDYxZDhkNDFjZjRmZjk1NzE0MWI3NWJkOGFmYmZjNDNm/lenovo-thinkpad-l13-yoga-hero.png?width=400&height=400" 
-            },
-            { 
-                name: "Lenovo ThinkPad T480", 
-                price: "290,000 د.ع", 
-                specs: "i5-8th Gen | 8GB RAM | 256GB SSD | Dual Battery", 
-                category: "student", 
-                type: "used",
-                img: "https://p1-ofp.static.pub/medias/bWFzdGVyfHJvb3R8NDk0OTN8aW1hZ2UvanBlZ3xoNDkvaDJiLzk2MTA3MDg3NzkwMzguanBnfDE5NzE4YzViY2MzMzYwMTExNmIwOTIxMjExYzYzMzViYjExNzlkMDk2N2ZhNGQ3ZjlkYjE1NzBlNTJhNzQyYmI/bWFzdGVyfH.jpg" 
-            },
-            { 
-                name: "Dell Latitude 5500", 
-                price: "350,000 د.ع", 
-                specs: "i5-8th Gen vPro | 16GB RAM | 256GB SSD | 15.6 FHD", 
-                category: "student", 
-                type: "used",
-                img: "https://i.dell.com/is/image/DellContent/content/dam/ss2/product-images/dell-client-products/notebooks/latitude-notebooks/latitude-15-5500/media-gallery/peripherals_laptop_latitude_5500_gallery_1.psd?fmt=pjpg&pscan=auto&scl=1&hei=402&wid=536&qlt=85,0&resMode=sharp2&op_usm=1.75,0.3,2,0&iccEmbed=0&printRes=72" 
-            },
-            { 
-                name: "Lenovo ThinkPad T460", 
-                price: "225,000 د.ع", 
-                specs: "i5-6th | 8GB RAM | 256GB SSD", 
-                category: "student", 
-                type: "used",
-                img: "https://www.lenovo.com/medias/lenovo-laptop-thinkpad-t460-hero.png?context=bWFzdGVyfHJvb3R8NTU1NDB8aW1hZ2UvcG5nfGgxMC9oZTEvOTIyOTY0ODExMDU1OC5wbmd8ZDI1MzMyZTYwN2Q2MTdhYmFiZDhhOGJlM2I5ZDY2YzI2YjZkMmI4ZWQ4ZTVlYzliYzE4MTQ0MDY5ZDM4MTNhNw" 
-            },
-            { 
-                name: "Dell Precision 5530", 
-                price: "650,000 د.ع", 
-                specs: "i7-8850H | 32GB RAM | 512GB SSD | Nvidia P1000", 
-                category: "engineering", 
-                type: "used",
-                img: "https://i.dell.com/is/image/DellContent/content/dam/ss2/product-images/dell-client-products/notebooks/precision-notebooks/precision-15-5530/global-spi/ng/notebook-precision-15-5530-campaign-hero-504x350-ng.psd?fmt=jpg" 
-            }
-        ];
-
-        // 🆕 New Products Data (Coming Soon)
-        const newLaptops = [
-            { name: "MacBook Pro 16 M3 Max", specs: "Apple M3 Max | 36GB RAM | 1TB SSD | Liquid Retina XDR", img: "https://m.media-amazon.com/images/I/618d5bS2lUL._AC_SL1500_.jpg", category: "engineering", type: "new" },
-            { name: "Dell XPS 16 9640", specs: "Ultra 7 155H | 32GB RAM | 1TB SSD | RTX 4070 | OLED Touch", img: "https://i.dell.com/is/image/DellContent/content/dam/ss2/product-images/dell-client-products/notebooks/xps-notebooks/xps-16-9640/media-gallery/touch-graphite/notebook-xps-16-9640-t-graphite-gallery-1.psd?fmt=png-alpha&wid=1280", category: "engineering", type: "new" },
-            { name: "HP Spectre x360 14", specs: "Core Ultra 7 | 32GB RAM | 2TB SSD | 2.8K OLED x360", img: "https://ssl-product-images.www8-hp.com/digmedialib/prodimg/lowres/c08493139.png", category: "student", type: "new" },
-            { name: "Lenovo Legion 9i", specs: "i9-14900HX | 64GB RAM | 2TB SSD | RTX 4090 | Liquid Cooling", img: "https://p4-ofp.static.pub/fes/cms/2023/08/25/1k21t0f1w5w5w5w5w5w5w5w5w5w5w5345678.png", category: "gaming", type: "new" },
-            { name: "ASUS ROG Zephyrus G14", specs: "Ryzen 9 8945HS | 32GB RAM | 1TB SSD | RTX 4070 | OLED 120Hz", img: "https://dlcdnwebimgs.asus.com/gain/9d57a3d8-2326-407a-97c7-055375493035/w800", category: "gaming", type: "new" },
-            { name: "MSI Titan 18 HX", specs: "i9-14900HX | 128GB RAM | 4TB SSD | RTX 4090 | 4K Mini-LED", img: "https://asset.msi.com/resize/image/global/product/notebook/Titan-18-HX-A14V-1.png62405b38c58fe0f07fcef2367d8a9ba1/1024.png", category: "gaming", type: "new" },
-            { name: "Razer Blade 16", specs: "i9-14900HX | 32GB RAM | 1TB SSD | RTX 4090 | Dual Mode Mini-LED", img: "https://assets2.razerzone.com/images/pnx.assets/381e915d58d2b9759725c30a9f2c397e/razer-blade-16-2023-black-hero-mobile.jpg", category: "gaming", type: "new" },
-            { name: "Alienware m16 R2", specs: "Ultra 9 185H | 32GB RAM | 1TB SSD | RTX 4070 | QHD+ 240Hz", img: "https://i.dell.com/is/image/DellContent/content/dam/ss2/product-images/dell-client-products/notebooks/alienware-notebooks/alienware-m16-r2/media-gallery/notebook-alienware-m16-r2-gallery-1.psd?fmt=png-alpha&wid=1280", category: "gaming", type: "new" },
-            { name: "Samsung Galaxy Book4 Ultra", specs: "Ultra 9 | 32GB RAM | 1TB SSD | RTX 4070 | 3K AMOLED", img: "https://images.samsung.com/is/image/samsung/p6pim/uk/np960xgl-xg1uk/gallery/uk-galaxy-book4-ultra-np960-np960xgl-xg1uk-539958742?$650_519_PNG$", category: "engineering", type: "new" },
-            { name: "Microsoft Surface Laptop Studio 2", specs: "i7-13800H | 64GB RAM | 1TB SSD | RTX 4060 | PixelSense Flow", img: "https://img-prod-cms-rt-microsoft-com.akamaized.net/cms/api/am/imageFileData/RW16TSo?ver=72e4&q=90&m=6&h=705&w=1253&b=%23FFFFFFFF&f=jpg&o=f&p=140&aim=true", category: "engineering", type: "new" }
-        ];
-
-        // Listen for Realtime Updates
-        if (productsRef) {
-            const q = query(productsRef, orderBy("createdAt", "desc"));
-            onSnapshot(q, (snapshot) => {
-                allProducts = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-                
-                // ⚠️ Fallback: Show default laptops locally if DB is empty
-                if(allProducts.length === 0) {
-                    console.log("DB Empty: Using Local Defaults");
-                    // Combine both for local display if DB is empty
-                    const used = defaultLaptops.map((p, i) => ({...p, id: 'local-u-'+i}));
-                    const brandNew = newLaptops.map((p, i) => ({...p, id: 'local-n-'+i}));
-                    allProducts = [...used, ...brandNew];
-                }
-
-                refreshData();
-            }, (error) => {
-                console.error("Firestore Error:", error);
-                document.getElementById('loading-spinner').innerHTML = `<p class="text-red-500">حدث خطأ في جلب البيانات</p>`;
-            });
-        }
-
-        function refreshData() {
-            updateUI();
-            updateAdminList();
-            renderNewProducts(); // Render the new products
-            const spinner = document.getElementById('loading-spinner');
-            if(spinner) spinner.style.display = 'none';
-            document.getElementById('products-container').classList.remove('hidden');
-        }
-
-        // Render New Products Function
-        function renderNewProducts() {
-            const container = document.getElementById('new-products-container');
-            container.innerHTML = '';
-            
-            // Filter products with type 'new' from ALL products (Live DB + Defaults)
-            const comingSoonProducts = allProducts.filter(p => p.type === 'new');
-            
-            comingSoonProducts.forEach((p, index) => {
-                const waMsg = `مرحباً لاب الموصل، مهتم بجهاز ${p.name} الجديد (Coming Soon). يرجى إعلامي عند توفره.`;
-                const waLink = `https://wa.me/9647777111558?text=${encodeURIComponent(waMsg)}`;
-                
-                const card = document.createElement('div');
-                card.className = "group bg-white dark:bg-slate-800 rounded-[2rem] p-4 border border-slate-100 dark:border-slate-700 shadow-sm hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 flex flex-col h-full relative overflow-hidden";
-                card.style.animation = `fadeIn 0.5s ease-out ${index * 0.1}s forwards`;
-                
-                card.innerHTML = `
-                    <div class="relative h-56 bg-slate-50 dark:bg-slate-900/50 rounded-3xl mb-4 p-6 flex items-center justify-center overflow-hidden">
-                        <!-- Coming Soon Overlay -->
-                        <div class="absolute inset-0 bg-black/40 z-10 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-3xl backdrop-blur-sm">
-                            <span class="text-white font-bold tracking-wider border border-white/50 px-4 py-2 rounded-full">قريباً</span>
-                        </div>
-                        <img src="${p.img}" class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-700 drop-shadow-xl" onerror="this.src='https://placehold.co/400x300?text=New+Laptop'">
-                        <div class="absolute top-3 right-3 bg-red-500 text-white text-[10px] font-bold px-3 py-1 rounded-full shadow-lg z-20 animate-pulse">
-                            COMING SOON
-                        </div>
-                    </div>
-                    
-                    <div class="flex-1 px-2">
-                        <h3 class="font-bold text-lg mb-2 leading-tight text-slate-800 dark:text-white group-hover:text-brand-500 transition-colors line-clamp-1">${p.name}</h3>
-                        <div class="text-xs text-slate-500 dark:text-slate-400 mb-4 bg-slate-50 dark:bg-slate-900/50 p-3 rounded-2xl border border-slate-100 dark:border-slate-700/50 leading-relaxed min-h-[60px]">
-                            ${p.specs}
-                        </div>
-                    </div>
-
-                    <div class="mt-auto px-2 pt-2 border-t border-slate-100 dark:border-slate-800/50">
-                        <a href="${waLink}" target="_blank" class="w-full py-3 rounded-xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-bold flex items-center justify-center gap-2 hover:bg-brand-600 dark:hover:bg-brand-500 hover:text-white dark:hover:text-white transition-all duration-300 shadow-lg">
-                            <i class="far fa-bell"></i> أعلمني عند التوفر
-                        </a>
-                    </div>
-                `;
-                container.appendChild(card);
-            });
-        }
-
-        // GLOBAL APP CONTROLLER
-        window.app = {
-            // Navigation
-            showView: (name) => {
-                document.querySelectorAll('.view-section').forEach(el => {
-                    el.classList.remove('active');
-                    setTimeout(() => { if(!el.classList.contains('active')) el.style.display = 'none'; }, 400);
-                });
-                const target = document.getElementById(`view-${name}`);
-                target.style.display = 'block';
-                setTimeout(() => target.classList.add('active'), 10);
-                window.scrollTo(0,0);
-            },
-
-            // 🔄 Switch Store Tab Logic
-            switchStoreTab: (tab) => {
-                const usedSection = document.getElementById('used-section');
-                const newSection = document.getElementById('new-section');
-                const btnUsed = document.getElementById('tab-used');
-                const btnNew = document.getElementById('tab-new');
-
-                if (tab === 'used') {
-                    usedSection.classList.remove('hidden');
-                    newSection.classList.add('hidden');
-                    
-                    // Style Active Button
-                    btnUsed.className = "px-6 sm:px-10 py-3 rounded-xl text-sm font-bold transition-all duration-300 bg-brand-600 text-white shadow-lg shadow-brand-500/30";
-                    // Style Inactive Button
-                    btnNew.className = "px-6 sm:px-10 py-3 rounded-xl text-sm font-bold transition-all duration-300 text-slate-500 hover:text-slate-800 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-700";
-                } else {
-                    usedSection.classList.add('hidden');
-                    newSection.classList.remove('hidden');
-                    
-                    // Style Active Button
-                    btnNew.className = "px-6 sm:px-10 py-3 rounded-xl text-sm font-bold transition-all duration-300 bg-slate-800 dark:bg-white text-white dark:text-slate-900 shadow-lg";
-                    // Style Inactive Button
-                    btnUsed.className = "px-6 sm:px-10 py-3 rounded-xl text-sm font-bold transition-all duration-300 text-slate-500 hover:text-slate-800 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-700";
-                }
-            },
-
-            toggleTheme: () => {
-                document.documentElement.classList.toggle('dark');
-                localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
-            },
-
-            // Store Logic
-            filterCategory: (cat) => {
-                currentCategory = cat;
-                document.querySelectorAll('.cat-btn').forEach(b => {
-                    b.classList.remove('bg-brand-500', 'text-white', 'hover:border-brand-500');
-                    b.classList.add('bg-white', 'dark:bg-slate-800');
-                });
-                event.target.classList.remove('bg-white', 'dark:bg-slate-800');
-                event.target.classList.add('bg-brand-500', 'text-white');
-                updateUI();
-            },
-
-            filterProducts: updateUI,
-
-            // Admin Logic
-            openAdminLogin: () => {
-                document.getElementById('pin-modal').classList.remove('hidden');
-                document.getElementById('login-user').value = '';
-                document.getElementById('login-pass').value = '';
-                setTimeout(() => document.getElementById('login-user').focus(), 100);
-            },
-
-            checkLogin: () => {
-                const user = document.getElementById('login-user').value;
-                const pass = document.getElementById('login-pass').value;
-
-                if(user === ADMIN_USER && pass === ADMIN_PASS) {
-                    document.getElementById('pin-modal').classList.add('hidden');
-                    document.getElementById('admin-modal').classList.remove('hidden');
-                } else {
-                    alert("بيانات الدخول غير صحيحة ❌");
-                }
-            },
-
-            closeAdmin: () => {
-                window.app.cancelEdit();
-                document.getElementById('admin-modal').classList.add('hidden');
-            },
-
-            editProduct: (id) => {
-                const product = allProducts.find(p => p.id === id);
-                if (!product) return;
-
-                // Fill form
-                document.getElementById('p-name').value = product.name;
-                document.getElementById('p-price').value = product.price || ''; // Price might be empty for new items
-                document.getElementById('p-specs').value = product.specs;
-                document.getElementById('p-img').value = product.img;
-                document.getElementById('p-cat').value = product.category;
-                document.getElementById('p-type').value = product.type || 'used'; // Default to used if undefined
-
-                // Set Edit Mode
-                editingId = id;
-                document.getElementById('form-title').innerText = "تعديل المنتج";
-                document.getElementById('cancel-edit-btn').classList.remove('hidden');
-                const btn = document.getElementById('save-btn');
-                btn.innerHTML = '<span>حفظ التعديلات</span> <i class="fas fa-save"></i>';
-                btn.className = "w-full mt-6 bg-brand-500 hover:bg-brand-600 text-white font-bold py-4 rounded-xl transition-all shadow-lg flex justify-center items-center gap-2";
-                
-                // Scroll to top of modal
-                document.querySelector('#admin-modal > div').scrollTop = 0;
-            },
-
-            cancelEdit: () => {
-                editingId = null;
-                document.getElementById('p-name').value = '';
-                document.getElementById('p-price').value = '';
-                document.getElementById('p-specs').value = '';
-                document.getElementById('p-img').value = '';
-                document.getElementById('p-type').value = 'used';
-                
-                document.getElementById('form-title').innerText = "إضافة منتج جديد";
-                document.getElementById('cancel-edit-btn').classList.add('hidden');
-                const btn = document.getElementById('save-btn');
-                btn.innerHTML = '<span>رفع للسحابة فوراً</span> <i class="fas fa-paper-plane"></i>';
-                btn.className = "w-full mt-6 bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white font-bold py-4 rounded-xl transition-all shadow-lg hover:shadow-green-500/20 flex justify-center items-center gap-2";
-            },
-
-            saveProduct: async () => {
-                const btn = document.getElementById('save-btn');
-                const name = document.getElementById('p-name').value;
-                const price = document.getElementById('p-price').value;
-                const specs = document.getElementById('p-specs').value;
-                const img = document.getElementById('p-img').value;
-                const category = document.getElementById('p-cat').value;
-                const type = document.getElementById('p-type').value;
-
-                if(!name) { alert('يرجى كتابة الاسم على الأقل!'); return; }
-
-                btn.innerHTML = '<div class="loader border-white border-t-transparent w-6 h-6"></div>';
-                
-                try {
-                    if (editingId) {
-                        // UPDATE Existing
-                        await updateDoc(doc(db, "products", editingId), {
-                            name, price, specs, img, category, type
-                        });
-                        alert("تم تحديث المنتج بنجاح! ✅");
-                        window.app.cancelEdit();
-                    } else {
-                        // CREATE New
-                        await addDoc(productsRef, {
-                            name, price, specs, img, category, type,
-                            createdAt: Date.now()
-                        });
-                        alert("تم الرفع بنجاح! ☁️");
-                        window.app.cancelEdit(); // Clears form
-                    }
-                } catch (e) {
-                    console.error(e);
-                    alert("فشل العملية: " + e.message);
-                    // Reset button text
-                    if(editingId) {
-                         btn.innerHTML = '<span>حفظ التعديلات</span> <i class="fas fa-save"></i>';
-                    } else {
-                         btn.innerHTML = '<span>رفع للسحابة فوراً</span> <i class="fas fa-paper-plane"></i>';
-                    }
-                }
-            },
-
-            // ⚡ Upload Default Products (Used)
-            uploadDefaults: async () => {
-                if(!confirm("هل أنت متأكد؟ سيتم رفع 5 لابتوبات مستعملة (Used) إلى قاعدة البيانات.")) return;
-                
-                const btn = event.currentTarget;
-                btn.innerHTML = '<div class="loader w-4 h-4 border-blue-600"></div> جاري الرفع...';
-                
-                try {
-                    for (const p of defaultLaptops) {
-                        await addDoc(productsRef, {
-                            ...p,
-                            type: 'used', // Ensure type is set
-                            createdAt: Date.now()
-                        });
-                    }
-                    alert("تم استيراد المنتجات المستعملة بنجاح! 🚀");
-                } catch(e) {
-                    console.error(e);
-                    alert("حدث خطأ أثناء الاستيراد");
-                }
-                btn.innerHTML = '<i class="fas fa-database"></i> استيراد \'المستعمل\' (Used)';
-            },
-
-            // 🔥 NEW: Upload New Laptops (Coming Soon) to DB so they appear in Admin
-            uploadNewLaptops: async () => {
-                if(!confirm("هل أنت متأكد؟ سيتم رفع 10 لابتوبات جديدة (Coming Soon) إلى قاعدة البيانات لتتمكن من إدارتها.")) return;
-                
-                const btn = event.currentTarget;
-                btn.innerHTML = '<div class="loader w-4 h-4 border-purple-600"></div> جاري الرفع...';
-                
-                try {
-                    for (const p of newLaptops) {
-                        await addDoc(productsRef, {
-                            ...p,
-                            price: "قريباً", // Placeholder price for new items
-                            type: 'new', // Critical: Mark as new type
-                            createdAt: Date.now()
-                        });
-                    }
-                    alert("تم استيراد قائمة 'قريباً' بنجاح! 🔥");
-                } catch(e) {
-                    console.error(e);
-                    alert("حدث خطأ أثناء الاستيراد");
-                }
-                btn.innerHTML = '<i class="fas fa-fire"></i> استيراد \'قريباً\' (New)';
-            },
-
-            deleteProduct: async (id) => {
-                if(id.startsWith('local-')) {
-                    alert("هذا منتج افتراضي (للعرض فقط). استخدم زر 'استيراد' لرفعه للسحابة أولاً ثم يمكنك حذفه.");
-                    return;
-                }
-                if(confirm('حذف هذا المنتج نهائياً من المتجر؟')) {
-                    try { await deleteDoc(doc(db, "products", id)); } catch (e) { alert("فشل الحذف"); }
-                }
-            },
-
-            // ✨ NEW: INTERNAL CHAT LOGIC (Offline Bot)
-            toggleChat: () => {
-                const win = document.getElementById('chat-window');
-                win.classList.toggle('hidden');
-                setTimeout(() => {
-                    win.classList.toggle('scale-95'); win.classList.toggle('opacity-0');
-                    win.classList.toggle('scale-100'); win.classList.toggle('opacity-100');
-                }, 10);
-            },
-            
-            handleChat: async () => {
-                const input = document.getElementById('chat-input');
-                const msg = input.value.trim();
-                if(!msg) return;
-
-                // 1. Add User Message
-                addChatMsg(msg, 'user');
-                input.value = '';
-
-                // 2. Show Typing Indicator
-                const loadingId = addChatMsg('<div class="flex gap-1"><div class="w-1.5 h-1.5 bg-slate-400 rounded-full typing-dot"></div><div class="w-1.5 h-1.5 bg-slate-400 rounded-full typing-dot"></div><div class="w-1.5 h-1.5 bg-slate-400 rounded-full typing-dot"></div></div>', 'bot');
-
-                // 3. Generate Response (AI or Local)
-                try {
-                    let responseHTML;
-                    
-                    if (GEMINI_API_KEY && GEMINI_API_KEY.length > 10) {
-                        // AI Mode 🧠
-                        responseHTML = await generateAIResponse(msg);
-                    } else {
-                        // Smart Local Mode (Fallback) 🤖
-                        // Simulate network delay for natural feel
-                        await new Promise(r => setTimeout(r, 800));
-                        responseHTML = generateLocalResponse(msg);
-                    }
-                    
-                    const msgDiv = document.getElementById(loadingId);
-                    msgDiv.innerHTML = responseHTML;
-                    
-                } catch (error) {
-                    console.error("Chat Error:", error);
-                    const msgDiv = document.getElementById(loadingId);
-                    msgDiv.innerHTML = "عذراً، حدث خطأ في الاتصال. يرجى المحاولة لاحقاً.";
-                }
-            }
-        };
-
-        // 🧠 AI BRAIN: Google Gemini Integration
-        async function generateAIResponse(userMsg) {
-            try {
-                const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
-                // 🔴 FIX: Updated Model Name to the currently supported version 🔴
-                const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash-preview-09-2025" });
-
-                // Construct Context from Actual Data
-                const prompt = `
-                أنت مساعد ذكي لمتجر "LAP MOSUL" لبيع اللابتوبات في الموصل، العراق.
-                دورك: الإجابة على أسئلة الزبائن بلهجة عراقية ودودة ومختصرة بناءً على البيانات التالية فقط.
-
-                معلومات المتجر:
-                - الموقع: الموصل، المجموعة الثقافية، داخل شركة رؤية (فرع مطعم طماطة).
-                - الهاتف: 07777111558
-                - السياسة: توصيل مجاني لكل المحافظات، الأجهزة المستعملة نظافة A+ (Open Box)، ضمان حقيقي لمدة شهر.
-
-                المنتجات المتوفرة حالياً (المستعمل الأمريكي):
-                ${JSON.stringify(allProducts.filter(p => p.type !== 'new').map(p => `${p.name} - ${p.price} - ${p.specs}`))}
-
-                المنتجات القادمة قريباً (الجديد):
-                ${JSON.stringify(allProducts.filter(p => p.type === 'new').map(p => `${p.name} - قريباً`))}
-
-                سؤال الزبون: ${userMsg}
-                
-                الإجابة (بالعربية/اللهجة العراقية، لا تستخدم Markdown كثيراً، فقط نص واضح):
-                `;
-
-                const result = await model.generateContent(prompt);
-                const response = await result.response;
-                const text = response.text();
-                
-                // Convert simple formatting to HTML if needed (basic)
-                return text.replace(/\n/g, "<br>");
-
-            } catch (error) {
-                console.error("Gemini Error:", error);
-                return generateLocalResponse(userMsg); // Fallback to local if AI fails
-            }
-        }
-
-        // 🤖 FALLBACK BRAIN: Local Logic
-        function generateLocalResponse(msg) {
-            const text = msg.toLowerCase();
-            
-            // Greetings
-            if (text.match(/هلا|مرحبا|سلام|شلونك|عيني|اغاتي|هلو/)) {
-                return "يا هلا بيك! 🌹<br>نورت متجر لاب الموصل.<br>آني المساعد الآلي، شلون أقدر أخدمك اليوم؟<br><br>تكدر تسألني عن:<br>- لابتوبات متوفرة 💻<br>- أسعار 💰<br>- مكان المتجر 📍";
-            }
-
-            // Location
-            if (text.match(/موقع|مكان|وين|عنوان/)) {
-                return "فرعنا بالمجموعة الثقافية، داخل شركة رؤية (فرع مطعم طماطة). 📍<br>نتشرف بزيارتك!";
-            }
-
-            // Phone/Contact
-            if (text.match(/رقم|اتصال|تلفون|موبايل/)) {
-                return "تتدلل، هذا رقمنا: <b>07777111558</b> 📞<br>موجودين واتساب همين!";
-            }
-            
-            // Warranty
-            if (text.match(/ضمان|كفالة/)) {
-                return "طبعاً! كل أجهزتنا بيها ضمان حقيقي لمدة شهر (فحص وصيانة). تشتري وأنت مطمن 🤝";
-            }
-
-            // Search Products Logic
-            const foundProducts = allProducts.filter(p => 
-                text.includes(p.name.toLowerCase()) || 
-                (p.specs && text.includes(p.specs.toLowerCase()))
-            );
-            
-            if (foundProducts.length > 0) {
-                let reply = `لقيت لك ${foundProducts.length} جهاز متوفر عندي: 🔥<br><br>`;
-                foundProducts.slice(0, 3).forEach(p => {
-                    reply += `
-                    <div class="mb-2 p-2 bg-slate-100 dark:bg-slate-700/50 rounded-lg border border-slate-200 dark:border-slate-600">
-                        <div class="font-bold text-brand-600 dark:text-brand-400 text-xs">${p.name}</div>
-                        <div class="text-[10px] text-slate-500 dark:text-slate-400">${p.specs}</div>
-                        <div class="font-bold text-slate-800 dark:text-white mt-1">${p.price}</div>
-                    </div>`;
-                });
-                if (foundProducts.length > 3) reply += `<br>...وغيرهم موجود بالمتجر! سوي بحث فوق 👆`;
-                return reply;
-            }
-
-            // Category Recommendations
-            if (text.match(/هندس|تصميم|autocad|3d|رندر/)) {
-                return "للأمور الهندسية أرشحلك أجهزة Workstation مثل <b>Dell Precision</b> أو <b>HP ZBook</b>. 🏗️<br>اكتب 'هندسة' بالبحث فوق وتطلعلك كل الخيارات!";
-            }
-            if (text.match(/العاب|ببجي|gaming|لعب/)) {
-                return "تريد شي قوي للألعاب؟ دور على أجهزة الـ <b>Legion</b> أو <b>Victus</b>. 🎮<br>شوف قسم الـ Gaming بالموقع.";
-            }
-            if (text.match(/طالب|دراسة|رخيص|مناسب/)) {
-                return "للطلاب والدراسة، أنصحك بأجهزة <b>ThinkPad</b> أو <b>Latitude</b>. أسعارها مناسبة وتتحمل شغل. 📚";
-            }
-
-            // Default Fallback
-            return "والله يا عيني ما فهمت عليك بالضبط 😅<br>بس تكدر تبحث عن اسم اللابتوب اللي تريده، أو تراسلنا واتساب اذا عندك طلب خاص 👇<br><br><a href='https://wa.me/9647777111558' target='_blank' class='text-brand-500 underline'>اضغط هنا للمراسلة واتساب</a>";
-        }
-
-        function addChatMsg(html, sender) {
-            const container = document.getElementById('chat-messages');
-            const div = document.createElement('div');
-            const id = 'msg-' + Date.now();
-            div.className = `flex ${sender === 'user' ? 'justify-end' : 'justify-start'} chat-msg ${sender === 'bot' ? 'bot' : ''}`;
-            
-            const color = sender === 'user' ? 'bg-brand-600 text-white rounded-tr-none shadow-md' : 'bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 rounded-tl-none shadow-sm';
-            
-            div.innerHTML = `<div id="${id}" class="${color} p-3 rounded-2xl text-sm max-w-[85%] leading-relaxed">${html}</div>`;
-            container.appendChild(div);
-            container.scrollTop = container.scrollHeight;
-            return id;
-        }
-
-        function updateUI() {
-            const query = document.getElementById('searchInput').value.toLowerCase();
-            const container = document.getElementById('products-container');
-            
-            // Only show USED products in the main Used tab (default filtering)
-            // Or filter based on current tab logic if implemented fully, 
-            // but here we stick to the existing logic which shows all unless filtered.
-            // Better: updateUI mainly handles the "Used" tab search.
-            
-            const filtered = allProducts.filter(p => {
-                // IMPORTANT: Filter by Type 'used' (undefined is considered used for legacy compatibility)
-                const isUsed = !p.type || p.type === 'used';
-                const matchCat = currentCategory === 'all' || p.category === currentCategory;
-                const matchSearch = p.name.toLowerCase().includes(query) || (p.specs && p.specs.toLowerCase().includes(query));
-                return isUsed && matchCat && matchSearch;
-            });
-
-            container.innerHTML = '';
-            if (filtered.length === 0) {
-                document.getElementById('no-results').classList.remove('hidden');
-            } else {
-                document.getElementById('no-results').classList.add('hidden');
-                filtered.forEach((p, index) => {
-                    const waMsg = `السلام عليكم لاب الموصل 🌹\nحابب أطلب هذا الجهاز:\n\n💻 *${p.name}*\n⚙️ المواصفات: ${p.specs}\n💰 السعر: ${p.price}\n\nهل الجهاز متوفر؟`;
-                    const waLink = `https://wa.me/9647777111558?text=${encodeURIComponent(waMsg)}`;
-                    
-                    const card = document.createElement('div');
-                    card.className = "group bg-white dark:bg-slate-800 rounded-[2rem] p-4 border border-slate-100 dark:border-slate-700 shadow-sm hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 flex flex-col h-full";
-                    card.style.animation = `fadeIn 0.5s ease-out ${index * 0.1}s forwards`;
-                    card.style.opacity = '0'; // For animation
-                    
-                    card.innerHTML = `
-                        <div class="relative h-56 bg-slate-50 dark:bg-slate-900/50 rounded-3xl mb-4 p-6 flex items-center justify-center overflow-hidden">
-                            <img src="${p.img}" class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-700 drop-shadow-xl" onerror="this.src='https://placehold.co/400x300?text=No+Image'">
-                            <div class="absolute top-3 right-3 bg-white/90 dark:bg-slate-800/90 backdrop-blur text-[10px] font-bold px-3 py-1 rounded-full shadow-sm border border-slate-200 dark:border-slate-700">
-                                <span class="text-emerald-500 flex items-center gap-1"><i class="fas fa-check-circle"></i> متوفر</span>
-                            </div>
-                        </div>
-                        
-                        <div class="flex-1 px-2">
-                            <h3 class="font-bold text-lg mb-2 leading-tight text-slate-800 dark:text-white group-hover:text-brand-500 transition-colors line-clamp-1">${p.name}</h3>
-                            <div class="text-xs text-slate-500 dark:text-slate-400 mb-4 bg-slate-50 dark:bg-slate-900/50 p-3 rounded-2xl border border-slate-100 dark:border-slate-700/50 leading-relaxed min-h-[60px]">
-                                ${p.specs || 'مواصفات قياسية'}
-                            </div>
-                        </div>
-
-                        <div class="mt-auto px-2 pt-2 border-t border-slate-100 dark:border-slate-800/50 flex items-center justify-between">
-                            <div>
-                                <span class="block text-[10px] text-slate-400 font-bold uppercase tracking-wider">السعر</span>
-                                <span class="font-black text-brand-600 dark:text-brand-400 text-lg">${p.price}</span>
-                            </div>
-                            <a href="${waLink}" target="_blank" class="w-12 h-12 rounded-2xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 flex items-center justify-center shadow-lg hover:scale-110 hover:bg-brand-500 dark:hover:bg-brand-500 hover:text-white dark:hover:text-white transition-all duration-300">
-                                <i class="fab fa-whatsapp text-xl"></i>
-                            </a>
-                        </div>
-                    `;
-                    container.appendChild(card);
-                });
-            }
-        }
-
-        function updateAdminList() {
-            const list = document.getElementById('admin-list');
-            list.innerHTML = '';
-            allProducts.forEach(p => {
-                const item = document.createElement('div');
-                item.className = "flex justify-between items-center bg-slate-50 dark:bg-slate-800 p-3 rounded-xl border border-slate-100 dark:border-slate-700 group hover:border-blue-200 dark:hover:border-blue-900 transition-colors";
-                
-                // Determine Type Badge
-                const isNew = p.type === 'new';
-                const badge = isNew 
-                    ? `<span class="bg-purple-100 text-purple-600 text-[9px] px-2 py-0.5 rounded-full font-bold ml-2 border border-purple-200">جديد</span>`
-                    : `<span class="bg-blue-100 text-blue-600 text-[9px] px-2 py-0.5 rounded-full font-bold ml-2 border border-blue-200">مستعمل</span>`;
-
-                item.innerHTML = `
-                    <div class="flex items-center gap-3">
-                        <img src="${p.img}" class="w-10 h-10 rounded-lg object-cover bg-white" onerror="this.src='https://placehold.co/50'">
-                        <div>
-                            <p class="font-bold text-sm text-slate-800 dark:text-slate-200 flex items-center">${p.name} ${badge}</p>
-                            <p class="text-[10px] text-slate-500">${p.price}</p>
-                        </div>
-                    </div>
-                    <div class="flex gap-2">
-                        <button onclick="window.app.editProduct('${p.id}')" class="w-8 h-8 rounded-full bg-blue-50 dark:bg-blue-900/30 text-blue-500 hover:bg-blue-500 hover:text-white flex items-center justify-center transition-all shadow-sm" title="تعديل">
-                            <i class="fas fa-pencil-alt text-xs"></i>
-                        </button>
-                        <button onclick="window.app.deleteProduct('${p.id}')" class="w-8 h-8 rounded-full bg-red-50 dark:bg-red-900/30 text-red-500 hover:bg-red-500 hover:text-white flex items-center justify-center transition-all shadow-sm" title="حذف">
-                            <i class="fas fa-trash-alt text-xs"></i>
-                        </button>
-                    </div>
-                `;
-                list.appendChild(item);
-            });
-        }
-
-        // Hide Splash Screen & Start Rotation
-        window.onload = () => {
-            setTimeout(() => {
-                const splash = document.getElementById('splash-screen');
-                splash.style.opacity = '0';
-                setTimeout(() => splash.style.display = 'none', 800);
-            }, 1500);
-
-            // ==========================================
-            // 🔄 TAGLINE ROTATOR LOGIC
-            // ==========================================
-            const taglines = [
-                { l1: "فخامة الأداء", l2: "بين يديك" },
-                { l1: "قوة التكنولوجيا..", l2: "بلمسة واحدة" },
-                { l1: "تجاوز حدود الهندسة..", l2: "بلا قيود" },
-                { l1: "أناقة التصميم..", l2: "ووحشية الأداء" },
-                { l1: "مستقبل الأعمال..", l2: "يبدأ من هنا" },
-                { l1: "عنوان التميز..", l2: "ومحطة المحترفين" },
-                { l1: "حقق المستحيل..", l2: "بأداء استثنائي" },
-                { l1: "إبداعك لا يتوقف..", l2: "مع أداء لا يرحم" },
-                { l1: "طموحك الهندسي..", l2: "يستحق الأفضل" },
-                { l1: "استثمارك الأمثل..", l2: "لنجاح لا يتوقف" },
-                { l1: "القوة المطلقة..", l2: "لتصميم يبهر العالم" }
-            ];
-
-            let currentTagline = 0;
-            const h1 = document.getElementById('hero-headline');
-            const l1 = document.getElementById('hero-title-l1');
-            const l2 = document.getElementById('hero-title-l2');
-
-            setInterval(() => {
-                // Fade Out
-                h1.style.opacity = '0';
-                h1.style.transform = 'translateY(10px)';
-                
-                setTimeout(() => {
-                    // Update Text
-                    currentTagline = (currentTagline + 1) % taglines.length;
-                    l1.innerText = taglines[currentTagline].l1;
-                    l2.innerText = taglines[currentTagline].l2;
-                    
-                    // Fade In
-                    h1.style.opacity = '1';
-                    h1.style.transform = 'translateY(0)';
-                }, 500); // Wait for fade out to finish (0.5s)
-                
-            }, 300000); // 300,000ms = 5 Minutes
-        };
-    </script>
+    <script type="module" src="app.js"></script>
 </body>
 </html>
