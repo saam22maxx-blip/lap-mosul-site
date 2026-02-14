@@ -18,10 +18,8 @@ try {
     db = getFirestore(app);
     auth = getAuth(app);
     productsRef = collection(db, "products");
-    console.log("Firebase Connected ✅");
 } catch (error) {
     console.error("Firebase Error:", error);
-    alert("خطأ في الاتصال بقاعدة البيانات");
 }
 
 let allProducts = [];
@@ -29,18 +27,12 @@ let currentCategory = 'all';
 let editingId = null;
 
 const defaultLaptops = [
-    { name: "Lenovo L13 Yoga", price: "325,000 د.ع", specs: "i5-11th Gen | 16GB RAM | 512GB NVMe | x360 Touch", category: "student", type: "used", img: "https://p1-ofp.static.pub/medias/bWFzdGVyfHJvb3R8MjEzNjQzfGltYWdlL3BuZ3xoYmIvaGFkLzE0MTEwNjI4MTUxMzI2LnBuZ3wyZDNiODQ1MjdiZTUyZDM5NjdkNGU1NDBkOGFjOTBjNDYxZDhkNDFjZjRmZjk1NzE0MWI3NWJkOGFmYmZjNDNm/lenovo-thinkpad-l13-yoga-hero.png?width=400&height=400" },
-    { name: "Lenovo ThinkPad T480", price: "290,000 د.ع", specs: "i5-8th Gen | 8GB RAM | 256GB SSD | Dual Battery", category: "student", type: "used", img: "https://p1-ofp.static.pub/medias/bWFzdGVyfHJvb3R8NDk0OTN8aW1hZ2UvanBlZ3xoNDkvaDJiLzk2MTA3MDg3NzkwMzguanBnfDE5NzE4YzViY2MzMzYwMTExNmIwOTIxMjExYzYzMzViYjExNzlkMDk2N2ZhNGQ3ZjlkYjE1NzBlNTJhNzQyYmI/bWFzdGVyfH.jpg" },
-    { name: "Dell Latitude 5500", price: "350,000 د.ع", specs: "i5-8th Gen vPro | 16GB RAM | 256GB SSD | 15.6 FHD", category: "student", type: "used", img: "https://i.dell.com/is/image/DellContent/content/dam/ss2/product-images/dell-client-products/notebooks/latitude-notebooks/latitude-15-5500/media-gallery/peripherals_laptop_latitude_5500_gallery_1.psd?fmt=pjpg&pscan=auto&scl=1&hei=402&wid=536&qlt=85,0&resMode=sharp2&op_usm=1.75,0.3,2,0&iccEmbed=0&printRes=72" },
-    { name: "Lenovo ThinkPad T460", price: "225,000 د.ع", specs: "i5-6th | 8GB RAM | 256GB SSD", category: "student", type: "used", img: "https://www.lenovo.com/medias/lenovo-laptop-thinkpad-t460-hero.png?context=bWFzdGVyfHJvb3R8NTU1NDB8aW1hZ2UvcG5nfGgxMC9oZTEvOTIyOTY0ODExMDU1OC5wbmd8ZDI1MzMyZTYwN2Q2MTdhYmFiZDhhOGJlM2I5ZDY2YzI2YjZkMmI4ZWQ4ZTVlYzliYzE4MTQ0MDY5ZDM4MTNhNw" },
-    { name: "Dell Precision 5530", price: "650,000 د.ع", specs: "i7-8850H | 32GB RAM | 512GB SSD | Nvidia P1000", category: "engineering", type: "used", img: "https://i.dell.com/is/image/DellContent/content/dam/ss2/product-images/dell-client-products/notebooks/precision-notebooks/precision-15-5530/global-spi/ng/notebook-precision-15-5530-campaign-hero-504x350-ng.psd?fmt=jpg" }
+    { name: "Lenovo L13 Yoga", price: "325,000 د.ع", specs: "i5-11th Gen | 16GB RAM | 512GB NVMe", category: "student", type: "used", img: "https://p1-ofp.static.pub/medias/bWFzdGVyfHJvb3R8MjEzNjQzfGltYWdlL3BuZ3xoYmIvaGFkLzE0MTEwNjI4MTUxMzI2LnBuZ3wyZDNiODQ1MjdiZTUyZDM5NjdkNGU1NDBkOGFjOTBjNDYxZDhkNDFjZjRmZjk1NzE0MWI3NWJkOGFmYmZjNDNm/lenovo-thinkpad-l13-yoga-hero.png?width=400&height=400" },
+    { name: "Dell Precision 5530", price: "650,000 د.ع", specs: "i7-8850H | 32GB RAM | 512GB SSD", category: "engineering", type: "used", img: "https://i.dell.com/is/image/DellContent/content/dam/ss2/product-images/dell-client-products/notebooks/precision-notebooks/precision-15-5530/global-spi/ng/notebook-precision-15-5530-campaign-hero-504x350-ng.psd?fmt=jpg" }
 ];
 
 const newLaptops = [
-    { name: "MacBook Pro 16 M3 Max", specs: "Apple M3 Max | 36GB RAM | 1TB SSD | Liquid Retina XDR", img: "https://m.media-amazon.com/images/I/618d5bS2lUL._AC_SL1500_.jpg", category: "engineering", type: "new" },
-    { name: "Dell XPS 16 9640", specs: "Ultra 7 155H | 32GB RAM | 1TB SSD | RTX 4070 | OLED Touch", img: "https://i.dell.com/is/image/DellContent/content/dam/ss2/product-images/dell-client-products/notebooks/xps-notebooks/xps-16-9640/media-gallery/touch-graphite/notebook-xps-16-9640-t-graphite-gallery-1.psd?fmt=png-alpha&wid=1280", category: "engineering", type: "new" },
-    { name: "HP Spectre x360 14", specs: "Core Ultra 7 | 32GB RAM | 2TB SSD | 2.8K OLED x360", img: "https://ssl-product-images.www8-hp.com/digmedialib/prodimg/lowres/c08493139.png", category: "student", type: "new" },
-    { name: "Lenovo Legion 9i", specs: "i9-14900HX | 64GB RAM | 2TB SSD | RTX 4090 | Liquid Cooling", img: "https://p4-ofp.static.pub/fes/cms/2023/08/25/1k21t0f1w5w5w5w5w5w5w5w5w5w5w5345678.png", category: "gaming", type: "new" }
+    { name: "MacBook Pro 16", specs: "Apple M3 Max | 36GB RAM", img: "https://m.media-amazon.com/images/I/618d5bS2lUL._AC_SL1500_.jpg", category: "engineering", type: "new" }
 ];
 
 if (productsRef) {
@@ -53,8 +45,6 @@ if (productsRef) {
             allProducts = [...used, ...brandNew];
         }
         refreshData();
-    }, (error) => {
-        console.error("Firestore Error:", error);
     });
 }
 
@@ -62,6 +52,7 @@ function refreshData() {
     updateUI();
     updateAdminList();
     renderNewProducts();
+    renderAccessories();
     const spinner = document.getElementById('loading-spinner');
     if(spinner) spinner.style.display = 'none';
     document.getElementById('products-container').classList.remove('hidden');
@@ -69,6 +60,7 @@ function refreshData() {
 
 function renderNewProducts() {
     const container = document.getElementById('new-products-container');
+    if(!container) return;
     container.innerHTML = '';
     const comingSoonProducts = allProducts.filter(p => p.type === 'new');
     
@@ -76,24 +68,62 @@ function renderNewProducts() {
         const waMsg = `مرحباً لاب الموصل، مهتم بجهاز ${p.name} الجديد. يرجى إعلامي عند توفره.`;
         const waLink = `https://wa.me/9647777111558?text=${encodeURIComponent(waMsg)}`;
         const card = document.createElement('div');
-        card.className = "group bg-white dark:bg-slate-800 rounded-[2rem] p-4 border border-slate-100 dark:border-slate-700 shadow-sm hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 flex flex-col h-full relative overflow-hidden";
-        card.style.animation = `fadeIn 0.5s ease-out ${index * 0.1}s forwards`;
+        card.className = "group bg-white dark:bg-slate-800 rounded-[2rem] p-4 border border-slate-100 dark:border-slate-700 shadow-sm hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 flex flex-col h-full";
         
         card.innerHTML = `
             <div class="relative h-56 bg-slate-50 dark:bg-slate-900/50 rounded-3xl mb-4 p-6 flex items-center justify-center overflow-hidden">
-                <div class="absolute inset-0 bg-black/40 z-10 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-3xl backdrop-blur-sm">
-                    <span class="text-white font-bold tracking-wider border border-white/50 px-4 py-2 rounded-full">قريباً</span>
-                </div>
-                <img src="${p.img}" class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-700 drop-shadow-xl" onerror="this.src='https://placehold.co/400x300?text=New+Laptop'">
+                <img src="${p.img}" class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-700" onerror="this.src='https://placehold.co/400x300?text=New'">
                 <div class="absolute top-3 right-3 bg-red-500 text-white text-[10px] font-bold px-3 py-1 rounded-full shadow-lg z-20 animate-pulse">COMING SOON</div>
             </div>
             <div class="flex-1 px-2">
-                <h3 class="font-bold text-lg mb-2 leading-tight text-slate-800 dark:text-white group-hover:text-brand-500 transition-colors line-clamp-1">${p.name}</h3>
+                <h3 class="font-bold text-lg mb-2 text-slate-800 dark:text-white line-clamp-1">${p.name}</h3>
                 <div class="text-xs text-slate-500 dark:text-slate-400 mb-4 bg-slate-50 dark:bg-slate-900/50 p-3 rounded-2xl border border-slate-100 dark:border-slate-700/50 leading-relaxed min-h-[60px]">${p.specs}</div>
             </div>
             <div class="mt-auto px-2 pt-2 border-t border-slate-100 dark:border-slate-800/50">
-                <a href="${waLink}" target="_blank" class="w-full py-3 rounded-xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-bold flex items-center justify-center gap-2 hover:bg-brand-600 dark:hover:bg-brand-500 hover:text-white transition-all duration-300 shadow-lg">
+                <a href="${waLink}" target="_blank" class="w-full py-3 rounded-xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-bold flex items-center justify-center gap-2 hover:bg-brand-600 transition-all duration-300">
                     <i class="far fa-bell"></i> أعلمني عند التوفر
+                </a>
+            </div>
+        `;
+        container.appendChild(card);
+    });
+}
+
+function renderAccessories() {
+    const container = document.getElementById('accessory-products-container');
+    if(!container) return;
+    container.innerHTML = '';
+    const accessories = allProducts.filter(p => p.type === 'accessory');
+    
+    if(accessories.length === 0) {
+        container.innerHTML = `<div class="col-span-full text-center py-20 text-slate-500 font-bold"><i class="fas fa-box-open text-4xl mb-4 block"></i>لا توجد إكسسوارات حالياً</div>`;
+        return;
+    }
+
+    accessories.forEach((p, index) => {
+        const waMsg = `السلام عليكم لاب الموصل 🌹\nحابب أطلب هذا الإكسسوار:\n\n🎧 *${p.name}*\n💰 السعر: ${p.price}`;
+        const waLink = `https://wa.me/9647777111558?text=${encodeURIComponent(waMsg)}`;
+        const card = document.createElement('div');
+        card.className = "group bg-white dark:bg-slate-800 rounded-[2rem] p-4 border border-slate-100 dark:border-slate-700 shadow-sm hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 flex flex-col h-full";
+        
+        card.innerHTML = `
+            <div class="relative h-56 bg-slate-50 dark:bg-slate-900/50 rounded-3xl mb-4 p-6 flex items-center justify-center overflow-hidden">
+                <img src="${p.img}" class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-700" onerror="this.src='https://placehold.co/400x300?text=Accessory'">
+                <div class="absolute top-3 right-3 bg-white/90 dark:bg-slate-800/90 backdrop-blur text-[10px] font-bold px-3 py-1 rounded-full shadow-sm border border-slate-200 dark:border-slate-700">
+                    <span class="text-purple-500 flex items-center gap-1"><i class="fas fa-headphones"></i> متوفر</span>
+                </div>
+            </div>
+            <div class="flex-1 px-2">
+                <h3 class="font-bold text-lg mb-2 text-slate-800 dark:text-white line-clamp-1">${p.name}</h3>
+                <div class="text-xs text-slate-500 dark:text-slate-400 mb-4 bg-slate-50 dark:bg-slate-900/50 p-3 rounded-2xl border border-slate-100 dark:border-slate-700/50 leading-relaxed min-h-[60px]">${p.specs}</div>
+            </div>
+            <div class="mt-auto px-2 pt-2 border-t border-slate-100 dark:border-slate-800/50 flex items-center justify-between">
+                <div>
+                    <span class="block text-[10px] text-slate-400 font-bold uppercase tracking-wider">السعر</span>
+                    <span class="font-black text-brand-600 dark:text-brand-400 text-lg">${p.price}</span>
+                </div>
+                <a href="${waLink}" target="_blank" class="w-12 h-12 rounded-2xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 flex items-center justify-center shadow-lg hover:scale-110 hover:bg-brand-500 transition-all duration-300">
+                    <i class="fab fa-whatsapp text-xl"></i>
                 </a>
             </div>
         `;
@@ -104,7 +134,7 @@ function renderNewProducts() {
 // 🌐 API Fetch for Chat
 async function generateAIResponse(userMsg) {
     try {
-        const response = await fetch('chat-api.php', {
+        const response = await fetch('https://lapmosul-chat-api.saam22maxx.workers.dev', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ message: userMsg })
@@ -131,9 +161,9 @@ function generateLocalResponse(msg) {
     if (text.match(/رقم|اتصال|تلفون|موبايل/)) return "تتدلل، هذا رقمنا: <b>07777111558</b> 📞";
     
     const found = allProducts.filter(p => p.name.toLowerCase().includes(text));
-    if (found.length > 0) return `لقيت لك جهاز متوفر: ${found[0].name} بسعر ${found[0].price} 🔥`;
+    if (found.length > 0) return `لقيت لك منتج متوفر: ${found[0].name} بسعر ${found[0].price} 🔥`;
     
-    return "والله يا عيني ما فهمت عليك بالضبط 😅 بس تكدر تبحث عن اسم اللابتوب اللي تريده، أو تراسلنا واتساب 07777111558";
+    return "والله يا عيني ما فهمت عليك بالضبط 😅 بس تكدر تبحث عن اللي تريده، أو تراسلنا واتساب 07777111558";
 }
 
 function addChatMsg(html, sender) {
@@ -168,8 +198,6 @@ function updateUI() {
             const waLink = `https://wa.me/9647777111558?text=${encodeURIComponent(waMsg)}`;
             const card = document.createElement('div');
             card.className = "group bg-white dark:bg-slate-800 rounded-[2rem] p-4 border border-slate-100 dark:border-slate-700 shadow-sm hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 flex flex-col h-full";
-            card.style.animation = `fadeIn 0.5s ease-out ${index * 0.1}s forwards`;
-            card.style.opacity = '0';
             
             card.innerHTML = `
                 <div class="relative h-56 bg-slate-50 dark:bg-slate-900/50 rounded-3xl mb-4 p-6 flex items-center justify-center overflow-hidden">
@@ -203,7 +231,12 @@ function updateAdminList() {
     allProducts.forEach(p => {
         const item = document.createElement('div');
         item.className = "flex justify-between items-center bg-slate-50 dark:bg-slate-800 p-3 rounded-xl border border-slate-100 dark:border-slate-700 group hover:border-blue-200 transition-colors";
-        const badge = p.type === 'new' ? `<span class="bg-purple-100 text-purple-600 text-[9px] px-2 py-0.5 rounded-full font-bold ml-2">جديد</span>` : `<span class="bg-blue-100 text-blue-600 text-[9px] px-2 py-0.5 rounded-full font-bold ml-2">مستعمل</span>`;
+        
+        let badge = '';
+        if(p.type === 'new') badge = `<span class="bg-red-100 text-red-600 text-[9px] px-2 py-0.5 rounded-full font-bold ml-2">جديد</span>`;
+        else if(p.type === 'accessory') badge = `<span class="bg-purple-100 text-purple-600 text-[9px] px-2 py-0.5 rounded-full font-bold ml-2">إكسسوار</span>`;
+        else badge = `<span class="bg-blue-100 text-blue-600 text-[9px] px-2 py-0.5 rounded-full font-bold ml-2">مستعمل</span>`;
+
         item.innerHTML = `
             <div class="flex items-center gap-3">
                 <img src="${p.img}" class="w-10 h-10 rounded-lg object-cover bg-white" onerror="this.src='https://placehold.co/50'">
@@ -235,16 +268,27 @@ window.app = {
     switchStoreTab: (tab) => {
         const usedSection = document.getElementById('used-section');
         const newSection = document.getElementById('new-section');
+        const accSection = document.getElementById('accessory-section');
         const btnUsed = document.getElementById('tab-used');
         const btnNew = document.getElementById('tab-new');
+        const btnAcc = document.getElementById('tab-accessory');
+
+        [usedSection, newSection, accSection].forEach(el => el.classList.add('hidden'));
+        
+        const defaultClass = "px-6 sm:px-10 py-3 rounded-xl text-sm font-bold transition-all duration-300 text-slate-500 hover:text-slate-800 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-700 whitespace-nowrap";
+        btnUsed.className = defaultClass;
+        btnNew.className = defaultClass;
+        btnAcc.className = defaultClass;
+
         if (tab === 'used') {
-            usedSection.classList.remove('hidden'); newSection.classList.add('hidden');
-            btnUsed.className = "px-6 sm:px-10 py-3 rounded-xl text-sm font-bold transition-all duration-300 bg-brand-600 text-white shadow-lg shadow-brand-500/30";
-            btnNew.className = "px-6 sm:px-10 py-3 rounded-xl text-sm font-bold transition-all duration-300 text-slate-500 hover:text-slate-800 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-700";
-        } else {
-            usedSection.classList.add('hidden'); newSection.classList.remove('hidden');
-            btnNew.className = "px-6 sm:px-10 py-3 rounded-xl text-sm font-bold transition-all duration-300 bg-slate-800 dark:bg-white text-white dark:text-slate-900 shadow-lg";
-            btnUsed.className = "px-6 sm:px-10 py-3 rounded-xl text-sm font-bold transition-all duration-300 text-slate-500 hover:text-slate-800 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-700";
+            usedSection.classList.remove('hidden');
+            btnUsed.className = "px-6 sm:px-10 py-3 rounded-xl text-sm font-bold transition-all duration-300 bg-brand-600 text-white shadow-lg whitespace-nowrap";
+        } else if (tab === 'new') {
+            newSection.classList.remove('hidden');
+            btnNew.className = "px-6 sm:px-10 py-3 rounded-xl text-sm font-bold transition-all duration-300 bg-slate-800 dark:bg-white text-white dark:text-slate-900 shadow-lg whitespace-nowrap";
+        } else if (tab === 'accessory') {
+            accSection.classList.remove('hidden');
+            btnAcc.className = "px-6 sm:px-10 py-3 rounded-xl text-sm font-bold transition-all duration-300 bg-purple-600 text-white shadow-lg whitespace-nowrap";
         }
     },
     toggleTheme: () => {
@@ -290,7 +334,7 @@ window.app = {
         document.getElementById('p-price').value = product.price || '';
         document.getElementById('p-specs').value = product.specs;
         document.getElementById('p-img').value = product.img;
-        document.getElementById('p-cat').value = product.category;
+        document.getElementById('p-cat').value = product.category || 'other';
         document.getElementById('p-type').value = product.type || 'used';
         editingId = id;
         document.getElementById('form-title').innerText = "تعديل المنتج";
@@ -306,11 +350,12 @@ window.app = {
         document.getElementById('p-specs').value = '';
         document.getElementById('p-img').value = '';
         document.getElementById('p-type').value = 'used';
+        document.getElementById('p-cat').value = 'student';
         document.getElementById('form-title').innerText = "إضافة منتج جديد";
         document.getElementById('cancel-edit-btn').classList.add('hidden');
         const btn = document.getElementById('save-btn');
-        btn.innerHTML = '<span>رفع للسحابة فوراً</span> <i class="fas fa-paper-plane"></i>';
-        btn.className = "w-full mt-6 bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white font-bold py-4 rounded-xl transition-all shadow-lg flex justify-center items-center gap-2";
+        btn.innerHTML = '<span>حفظ</span> <i class="fas fa-save"></i>';
+        btn.className = "w-full mt-6 bg-green-500 hover:bg-green-600 text-white font-bold py-4 rounded-xl transition-all flex justify-center items-center gap-2";
     },
     saveProduct: async () => {
         const btn = document.getElementById('save-btn');
@@ -337,7 +382,7 @@ window.app = {
         } catch (e) {
             console.error(e);
             alert("فشل العملية: " + e.message);
-            btn.innerHTML = editingId ? '<span>حفظ التعديلات</span> <i class="fas fa-save"></i>' : '<span>رفع للسحابة فوراً</span> <i class="fas fa-paper-plane"></i>';
+            btn.innerHTML = editingId ? '<span>حفظ التعديلات</span> <i class="fas fa-save"></i>' : '<span>حفظ</span> <i class="fas fa-save"></i>';
         }
     },
     uploadDefaults: async () => {
