@@ -27,26 +27,6 @@
                     animation: { 
                         'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
                         'float': 'float 3s ease-in-out infinite',
-                        'glow': 'glow 2s ease-in-out infinite alternate',
-                        'bounce-in': 'bounceIn 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55)',
-                        'fade-in-text': 'fadeInText 1s ease-in-out forwards',
-                    },
-                    keyframes: {
-                        float: { '0%, 100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-10px)' } },
-                        glow: {
-                            'from': { boxShadow: '0 0 5px rgba(14, 165, 233, 0.2), 0 0 10px rgba(14, 165, 233, 0.1)' },
-                            'to': { boxShadow: '0 0 20px rgba(14, 165, 233, 0.6), 0 0 30px rgba(14, 165, 233, 0.4)' }
-                        },
-                        bounceIn: {
-                            '0%': { transform: 'scale(0.3)', opacity: '0' },
-                            '50%': { transform: 'scale(1.05)', opacity: '1' },
-                            '70%': { transform: 'scale(0.9)' },
-                            '100%': { transform: 'scale(1)' },
-                        },
-                        fadeInText: {
-                            '0%': { opacity: '0', transform: 'translateY(10px)' },
-                            '100%': { opacity: '1', transform: 'translateY(0)' }
-                        }
                     }
                 }
             }
@@ -58,7 +38,6 @@
             document.documentElement.classList.remove('dark')
         }
     </script>
-
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -130,26 +109,6 @@
             </div>
         </section>
 
-        <section class="py-10 px-6">
-            <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="glass-card p-8 rounded-3xl text-center group hover:border-brand-500/30 transition-all duration-500">
-                    <div class="w-16 h-16 bg-brand-500/10 text-brand-500 rounded-2xl flex items-center justify-center mx-auto mb-6 text-2xl group-hover:scale-110"><i class="fas fa-microchip"></i></div>
-                    <h3 class="text-xl font-bold mb-3">أداء فائق</h3>
-                    <p class="text-slate-500 dark:text-slate-400 text-sm">نركز على المعالجات القوية وكروت الشاشة الاحترافية من فئة Quadro و RTX.</p>
-                </div>
-                <div class="glass-card p-8 rounded-3xl text-center group hover:border-accent-purple/30 transition-all duration-500">
-                    <div class="w-16 h-16 bg-accent-purple/10 text-accent-purple rounded-2xl flex items-center justify-center mx-auto mb-6 text-2xl group-hover:scale-110"><i class="fas fa-shield-halved"></i></div>
-                    <h3 class="text-xl font-bold mb-3">ضمان حقيقي</h3>
-                    <p class="text-slate-500 dark:text-slate-400 text-sm">كل قطعة تخرج من متجرنا مدعومة بضمان فحص وصيانة حقيقي لمدة شهر.</p>
-                </div>
-                <div class="glass-card p-8 rounded-3xl text-center group hover:border-accent-pink/30 transition-all duration-500">
-                    <div class="w-16 h-16 bg-accent-pink/10 text-accent-pink rounded-2xl flex items-center justify-center mx-auto mb-6 text-2xl group-hover:scale-110"><i class="fas fa-headset"></i></div>
-                    <h3 class="text-xl font-bold mb-3">دعم فني</h3>
-                    <p class="text-slate-500 dark:text-slate-400 text-sm">خبراؤنا معك دائماً لتنصيب البرامج الهندسية وحل المشاكل التقنية.</p>
-                </div>
-            </div>
-        </section>
-
         <section id="services" class="py-24 px-6 relative">
             <div class="max-w-7xl mx-auto">
                 <div class="text-center mb-16">
@@ -182,9 +141,6 @@
                     <div>
                         <h2 class="text-2xl font-black mb-4">LAP <span class="text-brand-500">MOSUL</span></h2>
                         <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed max-w-sm mx-auto md:mx-0">نحن هنا لنغير مفهوم شراء اللابتوبات في الموصل. جودة، فخامة، وأداء لا يضاهى. جميع أجهزتنا تخضع لفحص دقيق من قبل مهندسين مختصين.</p>
-                    </div>
-                    <div class="flex gap-3 justify-center md:justify-start">
-                        <a href="https://wa.me/9647777111558" target="_blank" class="w-10 h-10 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex items-center justify-center hover:bg-green-500 hover:text-white transition-all shadow-sm"><i class="fab fa-whatsapp"></i></a>
                     </div>
                 </div>
 
@@ -315,10 +271,6 @@
                 <button id="save-btn" onclick="window.app.saveProduct()" class="w-full mt-6 bg-green-500 hover:bg-green-600 text-white font-bold py-4 rounded-xl flex justify-center items-center gap-2"><span>حفظ</span> <i class="fas fa-save"></i></button>
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
-                <button onclick="window.app.uploadDefaults()" class="bg-blue-500/10 text-blue-600 border border-blue-500/30 font-bold py-3 rounded-xl"><i class="fas fa-database"></i> استيراد 'المستعمل'</button>
-                <button onclick="window.app.uploadNewLaptops()" class="bg-purple-500/10 text-purple-600 border border-purple-500/30 font-bold py-3 rounded-xl"><i class="fas fa-fire"></i> استيراد 'قريباً'</button>
-            </div>
             <h3 class="font-bold mb-4 border-b border-slate-200 pb-2">قائمة المنتجات الحالية</h3>
             <div id="admin-list" class="space-y-3 max-h-80 overflow-y-auto pr-2 custom-scrollbar p-1"></div>
         </div>
@@ -327,10 +279,10 @@
     <div id="pin-modal" class="fixed inset-0 z-[210] bg-slate-900/90 hidden flex items-center justify-center backdrop-blur-sm">
         <div class="bg-white dark:bg-slate-900 p-8 rounded-3xl text-center shadow-2xl border border-slate-700 w-full max-w-sm">
             <h3 class="font-bold mb-1 text-xl">تسجيل دخول الإدارة</h3>
-            <p class="text-xs text-slate-500 mb-6">يرجى ادخال الايميل والباسورد للمتابعة</p>
+            <p class="text-xs text-slate-500 mb-6">يرجى تسجيل الدخول بحساب المدير</p>
             <div class="space-y-4 mb-6 relative z-10">
                 <div class="relative">
-                    <input type="email" id="login-user" placeholder="البريد الإلكتروني للإدارة" class="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-10 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500">
+                    <input type="email" id="login-user" placeholder="البريد الإلكتروني" class="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-10 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500">
                     <i class="fas fa-envelope absolute right-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
                 </div>
                 <div class="relative">
@@ -339,7 +291,7 @@
                 </div>
             </div>
             <div class="flex flex-col gap-3">
-                <button onclick="window.app.checkLogin()" class="bg-brand-600 text-white w-full py-3 rounded-xl font-bold">دخول</button>
+                <button onclick="window.app.checkLogin()" class="bg-brand-600 text-white w-full py-3 rounded-xl font-bold hover:bg-brand-500 transition-all">دخول آمن</button>
                 <button onclick="document.getElementById('pin-modal').classList.add('hidden')" class="text-slate-500 hover:text-slate-800 text-sm font-medium py-2">إلغاء</button>
             </div>
         </div>
