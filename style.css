@@ -1,169 +1,57 @@
-/* 1. إعدادات الوضع الفاتح (الافتراضي) - ألوان مريحة وفخمة */
-:root {
-    --bg-main: #F4F7F6; /* خلفية رمادية فاتحة جداً تريح العين */
-    --bg-card: #FFFFFF; /* لون البطاقات والنافبار */
-    --text-main: #061A2B; /* لون كحلي الشعار للنصوص ليظل مقروءاً بقوة */
-    --text-muted: #5A6A78; /* لون رمادي للنصوص الثانوية */
-    --primary: #19A792; /* لون الشعار التركوازي (للعناوين واللمسات) */
-    --accent: #E86A1A; /* برتقالي الشعار (للأزرار المهمة) */
-    --shadow: 0 10px 30px rgba(6, 26, 43, 0.08); /* ظل خفيف وناعم */
-    --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); /* انتقال سلس جداً */
+/* Custom Scrollbar */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+.dark ::-webkit-scrollbar-thumb { background: #1e293b; }
+::-webkit-scrollbar-thumb:hover { background: #0ea5e9; }
+
+/* Splash Screen */
+#splash-screen {
+    position: fixed; inset: 0; background: #020617;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    z-index: 10000; transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* 2. إعدادات الوضع الداكن (الفخامة القصوى) */
-[data-theme="dark"] {
-    --bg-main: #061A2B; /* كحلي الشعار العميق */
-    --bg-card: #0A243A; /* كحلي أفتح قليلاً للبطاقات */
-    --text-main: #F8F9FA; /* نصوص بيضاء */
-    --text-muted: #8E9EA9; /* نصوص ثانوية رمادية */
-    --shadow: 0 10px 30px rgba(0, 0, 0, 0.4); /* ظل أقوى للوضع الداكن */
+/* Glassmorphism */
+.glass-card {
+    background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+.dark .glass-card {
+    background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-/* إعدادات عامة */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Tajawal', sans-serif;
-    /* تطبيق الانتقال السلس للألوان عند تبديل الثيم */
-    transition: background-color var(--transition), color var(--transition), border-color var(--transition);
+/* Hover Effects for Services */
+.service-card:hover .icon-box {
+    transform: scale(1.1) rotate(5deg);
+    box-shadow: 0 0 30px var(--glow-color);
+    background-color: var(--glow-color);
+    color: white;
 }
 
-body {
-    background-color: var(--bg-main);
-    color: var(--text-main);
-    line-height: 1.6;
-}
+/* View Transitions */
+.view-section { display: none; opacity: 0; transition: opacity 0.4s ease-in-out; }
+.view-section.active { display: block; opacity: 1; animation: fadeIn 0.5s forwards; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-/* تصميم شريط التنقل (Navbar) */
-.navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 8%;
-    background-color: var(--bg-card);
-    box-shadow: var(--shadow);
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-}
+/* Loading Spinner */
+.loader { border: 3px solid #f3f3f3; border-radius: 50%; border-top: 3px solid #0ea5e9; width: 20px; height: 20px; -webkit-animation: spin 1s linear infinite; animation: spin 1s linear infinite; }
+@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
-.logo {
-    font-size: 2rem;
-    font-weight: 800;
-    letter-spacing: 1px;
-}
+/* Background Decor */
+.glow-blob { position: fixed; width: 600px; height: 600px; filter: blur(100px); opacity: 0.15; z-index: -1; border-radius: 50%; pointer-events: none; }
 
-.logo-lap { color: var(--primary); }
-.logo-mosul { color: var(--text-main); }
+.input-field { width: 100%; background: transparent; border: 1px solid #cbd5e1; padding: 12px; border-radius: 12px; font-size: 14px; transition: all 0.3s; }
+.input-field:focus { border-color: #0ea5e9; outline: none; box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.1); }
+.dark .input-field { border-color: #334155; color: white; background: rgba(30, 41, 59, 0.5); }
 
-.nav-links a {
-    color: var(--text-muted);
-    text-decoration: none;
-    margin: 0 20px;
-    font-weight: 700;
-    font-size: 1.1rem;
-    position: relative;
-}
+/* Chat Styles - Modernized */
+.chat-msg { animation: bounce-in 0.4s forwards; transform-origin: bottom right; }
+.chat-msg.bot { transform-origin: bottom left; }
 
-.nav-links a:hover, .nav-links a.active {
-    color: var(--primary);
-}
+.typing-dot { animation: typing 1.4s infinite ease-in-out both; }
+.typing-dot:nth-child(1) { animation-delay: -0.32s; }
+.typing-dot:nth-child(2) { animation-delay: -0.16s; }
+@keyframes typing { 0%, 80%, 100% { transform: scale(0); } 40% { transform: scale(1); } }
 
-/* زر تغيير الثيم */
-.theme-btn {
-    background: var(--bg-main);
-    border: 1px solid var(--text-muted);
-    cursor: pointer;
-    color: var(--text-main);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 10px;
-    border-radius: 50%;
-    transition: var(--transition);
-}
-
-.theme-btn:hover {
-    transform: rotate(30deg);
-    border-color: var(--primary);
-    color: var(--primary);
-}
-
-.theme-btn svg {
-    width: 22px;
-    height: 22px;
-    fill: currentColor;
-}
-
-/* إخفاء وإظهار الأيقونات حسب الثيم */
-[data-theme="dark"] #moon-icon { display: none; }
-:root:not([data-theme="dark"]) #sun-icon { display: none; }
-
-/* تصميم الواجهة الرئيسية (Hero Section) */
-.hero {
-    min-height: 85vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 0 20px;
-    background: linear-gradient(135deg, var(--bg-main) 0%, var(--bg-card) 100%);
-}
-
-.hero-content { max-width: 800px; }
-
-.hero h1 {
-    font-size: 3.5rem;
-    font-weight: 800;
-    margin-bottom: 20px;
-    line-height: 1.3;
-}
-
-.highlight { color: var(--primary); }
-
-.hero p {
-    font-size: 1.3rem;
-    color: var(--text-muted);
-    margin-bottom: 40px;
-    font-weight: 500;
-}
-
-/* تصميم الأزرار */
-.hero-buttons {
-    display: flex;
-    gap: 20px;
-    justify-content: center;
-}
-
-.btn-primary, .btn-secondary {
-    padding: 15px 40px;
-    font-size: 1.2rem;
-    border-radius: 12px;
-    cursor: pointer;
-    font-weight: 700;
-    border: none;
-    transition: var(--transition);
-}
-
-.btn-primary {
-    background-color: var(--accent); /* الزر البرتقالي للفت الانتباه */
-    color: white;
-    box-shadow: 0 8px 25px rgba(232, 106, 26, 0.3);
-}
-
-.btn-primary:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 12px 30px rgba(232, 106, 26, 0.5);
-}
-
-.btn-secondary {
-    background-color: transparent;
-    color: var(--text-main);
-    border: 2px solid var(--text-main);
-}
-
-.btn-secondary:hover {
-    background-color: var(--text-main);
-    color: var(--bg-main);
-}
+.phone-number { direction: ltr !important; unicode-bidi: bidi-override !important; display: inline-block; }
