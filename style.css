@@ -1,26 +1,169 @@
-const themeToggleBtn = document.getElementById('theme-toggle');
-const rootElement = document.documentElement; // يستهدف وسم <html>
-
-// 1. التحقق من التفضيل المحفوظ مسبقاً في الـ LocalStorage
-const savedTheme = localStorage.getItem('lapmosul_theme');
-
-// إذا كان هناك تفضيل محفوظ بأنه "داكن"، قم بتطبيقه فوراً
-if (savedTheme === 'dark') {
-    rootElement.setAttribute('data-theme', 'dark');
+/* 1. إعدادات الوضع الفاتح (الافتراضي) - ألوان مريحة وفخمة */
+:root {
+    --bg-main: #F4F7F6; /* خلفية رمادية فاتحة جداً تريح العين */
+    --bg-card: #FFFFFF; /* لون البطاقات والنافبار */
+    --text-main: #061A2B; /* لون كحلي الشعار للنصوص ليظل مقروءاً بقوة */
+    --text-muted: #5A6A78; /* لون رمادي للنصوص الثانوية */
+    --primary: #19A792; /* لون الشعار التركوازي (للعناوين واللمسات) */
+    --accent: #E86A1A; /* برتقالي الشعار (للأزرار المهمة) */
+    --shadow: 0 10px 30px rgba(6, 26, 43, 0.08); /* ظل خفيف وناعم */
+    --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); /* انتقال سلس جداً */
 }
 
-// 2. وظيفة التبديل عند النقر على الزر
-themeToggleBtn.addEventListener('click', () => {
-    // التحقق من الثيم الحالي
-    const currentTheme = rootElement.getAttribute('data-theme');
-    
-    if (currentTheme === 'dark') {
-        // العودة للوضع الفاتح
-        rootElement.removeAttribute('data-theme');
-        localStorage.setItem('lapmosul_theme', 'light');
-    } else {
-        // الانتقال للوضع الداكن الفخم
-        rootElement.setAttribute('data-theme', 'dark');
-        localStorage.setItem('lapmosul_theme', 'dark');
-    }
-});
+/* 2. إعدادات الوضع الداكن (الفخامة القصوى) */
+[data-theme="dark"] {
+    --bg-main: #061A2B; /* كحلي الشعار العميق */
+    --bg-card: #0A243A; /* كحلي أفتح قليلاً للبطاقات */
+    --text-main: #F8F9FA; /* نصوص بيضاء */
+    --text-muted: #8E9EA9; /* نصوص ثانوية رمادية */
+    --shadow: 0 10px 30px rgba(0, 0, 0, 0.4); /* ظل أقوى للوضع الداكن */
+}
+
+/* إعدادات عامة */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Tajawal', sans-serif;
+    /* تطبيق الانتقال السلس للألوان عند تبديل الثيم */
+    transition: background-color var(--transition), color var(--transition), border-color var(--transition);
+}
+
+body {
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    line-height: 1.6;
+}
+
+/* تصميم شريط التنقل (Navbar) */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 8%;
+    background-color: var(--bg-card);
+    box-shadow: var(--shadow);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo {
+    font-size: 2rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.logo-lap { color: var(--primary); }
+.logo-mosul { color: var(--text-main); }
+
+.nav-links a {
+    color: var(--text-muted);
+    text-decoration: none;
+    margin: 0 20px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    position: relative;
+}
+
+.nav-links a:hover, .nav-links a.active {
+    color: var(--primary);
+}
+
+/* زر تغيير الثيم */
+.theme-btn {
+    background: var(--bg-main);
+    border: 1px solid var(--text-muted);
+    cursor: pointer;
+    color: var(--text-main);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    border-radius: 50%;
+    transition: var(--transition);
+}
+
+.theme-btn:hover {
+    transform: rotate(30deg);
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+.theme-btn svg {
+    width: 22px;
+    height: 22px;
+    fill: currentColor;
+}
+
+/* إخفاء وإظهار الأيقونات حسب الثيم */
+[data-theme="dark"] #moon-icon { display: none; }
+:root:not([data-theme="dark"]) #sun-icon { display: none; }
+
+/* تصميم الواجهة الرئيسية (Hero Section) */
+.hero {
+    min-height: 85vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0 20px;
+    background: linear-gradient(135deg, var(--bg-main) 0%, var(--bg-card) 100%);
+}
+
+.hero-content { max-width: 800px; }
+
+.hero h1 {
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin-bottom: 20px;
+    line-height: 1.3;
+}
+
+.highlight { color: var(--primary); }
+
+.hero p {
+    font-size: 1.3rem;
+    color: var(--text-muted);
+    margin-bottom: 40px;
+    font-weight: 500;
+}
+
+/* تصميم الأزرار */
+.hero-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+.btn-primary, .btn-secondary {
+    padding: 15px 40px;
+    font-size: 1.2rem;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: 700;
+    border: none;
+    transition: var(--transition);
+}
+
+.btn-primary {
+    background-color: var(--accent); /* الزر البرتقالي للفت الانتباه */
+    color: white;
+    box-shadow: 0 8px 25px rgba(232, 106, 26, 0.3);
+}
+
+.btn-primary:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(232, 106, 26, 0.5);
+}
+
+.btn-secondary {
+    background-color: transparent;
+    color: var(--text-main);
+    border: 2px solid var(--text-main);
+}
+
+.btn-secondary:hover {
+    background-color: var(--text-main);
+    color: var(--bg-main);
+}
