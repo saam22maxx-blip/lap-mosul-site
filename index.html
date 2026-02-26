@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl" class="scroll-smooth">
 <head>
@@ -6,12 +8,12 @@
     <meta name="description" content="LAP MOSUL - الوجهة الأولى للحواسيب المحمولة ومحطات العمل في الموصل.">
     <title>LAP MOSUL | لاب الموصل - المتجر السحابي</title>
     
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="[https://fonts.googleapis.com](https://fonts.googleapis.com)">
+    <link rel="preconnect" href="[https://fonts.gstatic.com](https://fonts.gstatic.com)" crossorigin>
+    <link href="[https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&display=swap](https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&display=swap)" rel="stylesheet">
+    <link rel="stylesheet" href="[https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css](https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css)">
     
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="[https://cdn.tailwindcss.com](https://cdn.tailwindcss.com)"></script>
 
     <script>
         tailwind.config = {
@@ -38,6 +40,8 @@
             document.documentElement.classList.remove('dark')
         }
     </script>
+    
+    <!-- ربط ملف التنسيقات الخارجي -->
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -64,6 +68,10 @@
             </div>
 
             <div class="flex items-center gap-3 md:gap-4">
+                <button onclick="window.app.toggleCart()" class="relative w-10 h-10 rounded-full border border-slate-200 dark:border-slate-700 flex items-center justify-center hover:bg-slate-100 dark:hover:bg-slate-800 transition-all shadow-sm">
+                    <i class="fas fa-shopping-cart text-slate-600 dark:text-slate-300 hover:text-brand-500 transition-colors"></i>
+                    <span id="cart-badge" class="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center hidden">0</span>
+                </button>
                 <button onclick="window.app.openAdminLogin()" class="w-10 h-10 rounded-full border border-slate-200 dark:border-slate-700 flex items-center justify-center hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-400 hover:text-brand-500 transition-all" title="لوحة الإدارة">
                     <i class="fas fa-lock"></i>
                 </button>
@@ -79,7 +87,7 @@
         </div>
     </nav>
 
-    <main id="view-home" class="view-section active pt-24">
+    <main id="view-home" class="view-section active pt-24 pb-24 md:pb-0">
         <section class="relative pt-24 pb-20 px-6 overflow-hidden min-h-[85vh] flex flex-col justify-center">
             <div class="max-w-5xl mx-auto text-center relative z-10">
                 <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-500/10 border border-brand-500/20 text-brand-600 dark:text-brand-400 text-xs font-bold mb-8 animate-bounce-slow">
@@ -145,13 +153,13 @@
                     </div>
                     
                     <div class="flex items-center justify-center md:justify-start gap-4 pt-2">
-                        <a href="https://www.facebook.com/p/LAP-MOSUL-61576293412329/" target="_blank" class="w-11 h-11 rounded-full bg-[#1877F2] text-white flex items-center justify-center hover:scale-110 hover:shadow-lg hover:shadow-blue-500/30 transition-all duration-300">
+                        <a href="[https://www.facebook.com/p/LAP-MOSUL-61576293412329/](https://www.facebook.com/p/LAP-MOSUL-61576293412329/)" target="_blank" class="w-11 h-11 rounded-full bg-[#1877F2] text-white flex items-center justify-center hover:scale-110 hover:shadow-lg hover:shadow-blue-500/30 transition-all duration-300">
                             <i class="fab fa-facebook-f text-xl"></i>
                         </a>
-                        <a href="https://www.instagram.com/lap_mosul_/" target="_blank" class="w-11 h-11 rounded-full bg-gradient-to-tr from-[#f09433] via-[#e6683c] to-[#bc1888] text-white flex items-center justify-center hover:scale-110 hover:shadow-lg hover:shadow-pink-500/30 transition-all duration-300">
+                        <a href="[https://www.instagram.com/lap_mosul_/](https://www.instagram.com/lap_mosul_/)" target="_blank" class="w-11 h-11 rounded-full bg-gradient-to-tr from-[#f09433] via-[#e6683c] to-[#bc1888] text-white flex items-center justify-center hover:scale-110 hover:shadow-lg hover:shadow-pink-500/30 transition-all duration-300">
                             <i class="fab fa-instagram text-xl"></i>
                         </a>
-                        <a href="https://wa.me/9647777111558" target="_blank" class="w-11 h-11 rounded-full bg-[#25D366] text-white flex items-center justify-center hover:scale-110 hover:shadow-lg hover:shadow-green-500/30 transition-all duration-300">
+                        <a href="[https://wa.me/9647777111558](https://wa.me/9647777111558)" target="_blank" class="w-11 h-11 rounded-full bg-[#25D366] text-white flex items-center justify-center hover:scale-110 hover:shadow-lg hover:shadow-green-500/30 transition-all duration-300">
                             <i class="fab fa-whatsapp text-xl"></i>
                         </a>
                     </div>
@@ -160,7 +168,7 @@
                 <div class="bg-white/60 dark:bg-slate-900/60 p-6 rounded-2xl border border-slate-200 dark:border-slate-800 backdrop-blur-sm shadow-sm">
                     <h4 class="font-bold text-lg mb-4 flex items-center gap-2 text-slate-800 dark:text-white"><i class="fas fa-map-marker-alt text-brand-500"></i> موقعنا في الموصل</h4>
                     <div class="space-y-4 text-sm">
-                        <a href="https://maps.app.goo.gl/9npgBzbDhjPGmcfL6" target="_blank" class="block group">
+                        <a href="[https://maps.app.goo.gl/9npgBzbDhjPGmcfL6](https://maps.app.goo.gl/9npgBzbDhjPGmcfL6)" target="_blank" class="block group">
                             <p class="font-bold text-slate-800 dark:text-slate-200 group-hover:text-brand-500 transition-colors">
                                 المجموعة الثقافية - فرع كرزات بعلبك (داخل شركة رؤية)
                                 <i class="fas fa-external-link-alt text-[10px] mr-1 opacity-50 group-hover:opacity-100 transition-opacity"></i>
@@ -185,7 +193,7 @@
         </footer>
     </main>
 
-    <main id="view-store" class="view-section pt-32 pb-20 min-h-screen">
+    <main id="view-store" class="view-section pt-32 pb-28 md:pb-20 min-h-screen">
         <div class="max-w-7xl mx-auto px-6">
             <div class="flex flex-col md:flex-row justify-between items-center mb-6 gap-6">
                 <div>
@@ -267,19 +275,19 @@
         </div>
     </main>
 
-    <div id="chat-widget" class="fixed bottom-6 left-6 z-[150] flex flex-col items-start font-sans" dir="rtl">
-        <div id="chat-window" class="hidden w-[90vw] sm:w-[24rem] h-[550px] max-h-[85vh] bg-white dark:bg-slate-900 rounded-[2rem] shadow-2xl border border-slate-200 dark:border-slate-700 flex flex-col overflow-hidden mb-4 transition-all duration-300 origin-bottom-left scale-95 opacity-0">
+    <div id="chat-widget" class="fixed bottom-24 md:bottom-6 left-4 md:left-6 z-[150] flex flex-col items-start font-sans" dir="rtl">
+        <div id="chat-window" class="hidden w-[90vw] sm:w-[24rem] h-[550px] max-h-[80vh] md:max-h-[85vh] bg-white dark:bg-slate-900 rounded-[2rem] shadow-2xl border border-slate-200 dark:border-slate-700 flex flex-col overflow-hidden mb-4 transition-all duration-300 origin-bottom-left scale-95 opacity-0">
             <div class="bg-gradient-to-l from-slate-900 to-slate-800 p-5 flex justify-between items-center text-white shrink-0 shadow-lg">
                 <div class="flex items-center gap-4">
                     <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center border-2 border-brand-500"><i class="fas fa-headset text-brand-600 text-xl"></i></div>
-                    <div><span class="font-black block text-lg">الدعم الذكي</span><span class="text-xs text-slate-300 flex items-center gap-1"><i class="fas fa-wifi text-[10px]"></i> متصل</span></div>
+                    <div><span class="font-black block text-lg">الدعم الذكي ✨</span><span class="text-xs text-slate-300 flex items-center gap-1"><i class="fas fa-wifi text-[10px]"></i> متصل بـ Gemini</span></div>
                 </div>
                 <button onclick="window.app.toggleChat()" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center"><i class="fas fa-times"></i></button>
             </div>
             <div id="chat-messages" class="flex-1 p-5 overflow-y-auto space-y-4 bg-slate-50 dark:bg-slate-950 scroll-smooth">
                 <div class="flex justify-start chat-msg bot">
                     <div class="bg-white dark:bg-slate-800 p-4 rounded-2xl rounded-tr-none shadow-sm text-sm border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200">
-                        <p class="font-bold text-brand-600 mb-2">لاب الموصل 💻</p> أهلاً بك! آني المساعد الآلي، تفضل اسألني؟
+                        <p class="font-bold text-brand-600 mb-2">لاب الموصل 💻</p> أهلاً بك! آني المساعد الآلي المدعوم بالذكاء الاصطناعي، تفضل اسألني عن اللابتوبات المتوفرة عندنا؟ ✨
                     </div>
                 </div>
             </div>
@@ -289,12 +297,94 @@
             </div>
         </div>
         
-        <button onclick="window.app.toggleChat()" class="group relative w-16 h-16 z-50">
-            <span class="absolute -top-1 -right-1 flex h-4 w-4"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span><span class="relative inline-flex rounded-full h-4 w-4 bg-red-500"></span></span>
-            <div class="relative w-full h-full bg-gradient-to-br from-brand-600 to-slate-900 text-white rounded-full shadow-2xl flex items-center justify-center text-2xl hover:scale-110 transition-all border-2 border-white"><i class="fas fa-comment-dots"></i></div>
-        </button>
+        <div class="relative">
+            <!-- تمت إزالة الـ Tooltip من هنا بناءً على طلبك -->
+            <button onclick="window.app.toggleChat()" class="group relative w-16 h-16 z-50">
+                <span class="absolute -top-1 -right-1 flex h-4 w-4"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span><span class="relative inline-flex rounded-full h-4 w-4 bg-red-500"></span></span>
+                <div class="relative w-full h-full bg-gradient-to-br from-brand-600 to-slate-900 text-white rounded-full shadow-2xl flex items-center justify-center text-2xl hover:scale-110 transition-all border-2 border-white"><i class="fas fa-comment-dots"></i></div>
+            </button>
+        </div>
     </div>
 
+    <!-- 1. سلة المشتريات الجانبية -->
+    <div id="cart-overlay" class="fixed inset-0 bg-slate-900/50 z-[250] hidden backdrop-blur-sm transition-opacity opacity-0" onclick="window.app.toggleCart()"></div>
+    <div id="cart-sidebar" class="fixed top-0 left-0 h-full w-full sm:w-[400px] bg-white dark:bg-slate-900 z-[260] transform -translate-x-full transition-transform duration-300 shadow-2xl flex flex-col border-r border-slate-200 dark:border-slate-800">
+        <div class="p-6 border-b border-slate-100 dark:border-slate-800 flex justify-between items-center bg-slate-50 dark:bg-slate-900">
+            <button onclick="window.app.toggleCart()" class="w-8 h-8 rounded-full bg-slate-200 dark:bg-slate-700 flex items-center justify-center hover:text-red-500 transition-colors"><i class="fas fa-times"></i></button>
+            <h2 class="text-xl font-black flex items-center gap-2">سلة المشتريات <i class="fas fa-shopping-cart text-brand-500"></i></h2>
+        </div>
+        <div id="cart-items" class="flex-1 overflow-y-auto p-4 space-y-3 custom-scrollbar">
+            <!-- سيتم إضافة المنتجات هنا -->
+            <div class="text-center text-slate-400 mt-20"><i class="fas fa-box-open text-6xl mb-4 opacity-50"></i><p class="font-bold">السلة فارغة حالياً</p></div>
+        </div>
+        <div class="p-6 border-t border-slate-100 dark:border-slate-800 bg-white dark:bg-slate-900">
+            <div class="flex justify-between items-center mb-4">
+                <span id="cart-total" class="text-2xl font-black text-brand-600 dark:text-brand-400 direction-ltr">0</span>
+                <span class="text-slate-500 font-bold">المجموع التقريبي:</span>
+            </div>
+            <button onclick="window.app.checkoutCart()" class="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-4 rounded-xl flex justify-center items-center gap-2 transition-all shadow-lg hover:shadow-green-500/30 hover:-translate-y-1">
+                <span>إتمام الطلب عبر واتساب</span> <i class="fab fa-whatsapp text-xl"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- 2. نافذة تفاصيل المنتج الاحترافية (محسّنة للموبايل) -->
+    <div id="product-modal" class="fixed inset-0 z-[220] bg-slate-900/80 hidden backdrop-blur-md flex items-center justify-center p-4 opacity-0 transition-opacity duration-300">
+        <div class="bg-white dark:bg-slate-900 w-full max-w-4xl rounded-[2rem] overflow-hidden flex flex-col md:flex-row shadow-2xl relative transform scale-95 transition-transform duration-300 max-h-[95vh] overflow-y-auto custom-scrollbar" id="product-modal-content">
+            <button onclick="window.app.closeProductModal()" class="absolute top-4 left-4 z-10 w-10 h-10 rounded-full bg-white/80 dark:bg-black/80 hover:bg-red-500 hover:text-white flex items-center justify-center backdrop-blur-md transition-all shadow-lg"><i class="fas fa-times"></i></button>
+            
+            <!-- صورة المنتج -->
+            <div class="w-full md:w-1/2 bg-slate-50 dark:bg-slate-800/50 p-4 md:p-8 flex items-center justify-center min-h-[200px] md:min-h-[300px] relative">
+                <img id="modal-img" src="" class="max-w-full h-48 md:h-auto max-h-[350px] object-contain drop-shadow-2xl hover:scale-110 transition-transform duration-500">
+            </div>
+            
+            <!-- تفاصيل المنتج -->
+            <div class="w-full md:w-1/2 p-6 md:p-10 flex flex-col justify-center bg-white dark:bg-slate-900">
+                <div class="inline-block px-4 py-1.5 rounded-full text-xs font-bold mb-4 w-max" id="modal-badge">متوفر</div>
+                <h2 id="modal-title" class="text-2xl md:text-3xl font-black mb-2 text-slate-800 dark:text-white leading-tight"></h2>
+                <p id="modal-cat" class="text-sm text-slate-500 mb-6 font-bold"></p>
+                
+                <div class="bg-slate-50 dark:bg-slate-800/80 rounded-2xl p-4 md:p-5 mb-6 md:mb-8 border border-slate-100 dark:border-slate-700/50">
+                    <h4 class="font-bold mb-3 text-sm flex items-center gap-2"><div class="w-2 h-2 rounded-full bg-brand-500"></div> المواصفات والتفاصيل:</h4>
+                    <p id="modal-specs" class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed"></p>
+                </div>
+                
+                <div class="mt-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+                    <button id="modal-add-btn" class="w-full sm:flex-1 bg-brand-600 hover:bg-brand-500 text-white px-6 py-4 rounded-xl font-bold flex items-center justify-center gap-2 transition-all shadow-lg hover:shadow-brand-500/30 hover:-translate-y-1">
+                        أضف للسلة <i class="fas fa-cart-plus"></i>
+                    </button>
+                    <span id="modal-price" class="text-2xl font-black text-slate-800 dark:text-white direction-ltr bg-slate-100 dark:bg-slate-800 px-6 py-4 rounded-xl w-full sm:w-auto text-center"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- شريط التنقل السفلي الخاص بالموبايل (App-like UX) -->
+    <div class="md:hidden fixed bottom-0 left-0 right-0 bg-white/95 dark:bg-slate-900/95 backdrop-blur-lg border-t border-slate-200 dark:border-slate-800 z-[120] pb-safe shadow-[0_-5px_20px_rgba(0,0,0,0.05)] dark:shadow-[0_-5px_20px_rgba(0,0,0,0.2)] transition-colors">
+        <div class="flex justify-around items-center h-16 px-2">
+            <button onclick="window.app.showView('home')" class="flex flex-col items-center justify-center w-full h-full text-slate-500 hover:text-brand-500 dark:text-slate-400 dark:hover:text-brand-400 transition-colors">
+                <i class="fas fa-home text-xl mb-1"></i>
+                <span class="text-[10px] font-bold">الرئيسية</span>
+            </button>
+            <button onclick="window.app.showView('store')" class="flex flex-col items-center justify-center w-full h-full text-slate-500 hover:text-brand-500 dark:text-slate-400 dark:hover:text-brand-400 transition-colors">
+                <i class="fas fa-store text-xl mb-1"></i>
+                <span class="text-[10px] font-bold">المتجر</span>
+            </button>
+            <button onclick="window.app.toggleCart()" class="relative flex flex-col items-center justify-center w-full h-full text-slate-500 hover:text-brand-500 dark:text-slate-400 dark:hover:text-brand-400 transition-colors">
+                <div class="relative">
+                    <i class="fas fa-shopping-cart text-xl mb-1"></i>
+                    <span id="mobile-cart-badge" class="absolute -top-2 -right-2 bg-red-500 text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center hidden shadow-sm">0</span>
+                </div>
+                <span class="text-[10px] font-bold">السلة</span>
+            </button>
+            <a href="[https://wa.me/9647777111558](https://wa.me/9647777111558)" target="_blank" class="flex flex-col items-center justify-center w-full h-full text-emerald-500 hover:text-emerald-600 dark:text-emerald-400 transition-colors">
+                <i class="fab fa-whatsapp text-xl mb-1"></i>
+                <span class="text-[10px] font-bold">تواصل</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- لوحة التحكم الإدارية -->
     <div id="admin-modal" class="fixed inset-0 z-[200] bg-slate-900/80 hidden backdrop-blur-md flex items-center justify-center p-4">
         <div class="bg-white dark:bg-slate-900 w-full max-w-2xl rounded-3xl p-8 max-h-[90vh] overflow-y-auto relative border border-slate-200 dark:border-slate-700 shadow-2xl">
             <button onclick="window.app.closeAdmin()" class="absolute top-4 left-4 w-10 h-10 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-red-100 hover:text-red-500 flex items-center justify-center"><i class="fas fa-times"></i></button>
@@ -315,7 +405,13 @@
                     </select>
                     
                     <input type="text" id="p-price" placeholder="السعر" class="input-field">
-                    <input type="text" id="p-specs" placeholder="المواصفات / التفاصيل" class="input-field">
+                    
+                    <!-- حقل المواصفات مع زر الذكاء الاصطناعي المدمج ✨ -->
+                    <div class="md:col-span-2 relative">
+                        <input type="text" id="p-specs" placeholder="المواصفات / التفاصيل" class="input-field w-full pl-32">
+                        <button onclick="window.app.generateSpecsAI()" class="absolute left-2 top-1/2 -translate-y-1/2 bg-gradient-to-r from-brand-500 to-accent-purple text-white text-xs px-3 py-1.5 rounded-lg font-bold hover:shadow-lg transition-all flex items-center gap-1">✨ توليد ذكي</button>
+                    </div>
+
                     <input type="text" id="p-img" placeholder="رابط الصورة" class="input-field md:col-span-2">
                     <select id="p-cat" class="input-field md:col-span-2 text-slate-500">
                         <option value="student">طلاب / أعمال</option>
@@ -332,6 +428,7 @@
         </div>
     </div>
 
+    <!-- نافذة تسجيل دخول الإدارة -->
     <div id="pin-modal" class="fixed inset-0 z-[210] bg-slate-900/90 hidden flex items-center justify-center backdrop-blur-sm">
         <div class="bg-white dark:bg-slate-900 p-8 rounded-3xl text-center shadow-2xl border border-slate-700 w-full max-w-sm">
             <h3 class="font-bold mb-1 text-xl">تسجيل دخول الإدارة</h3>
@@ -353,6 +450,7 @@
         </div>
     </div>
 
+    <!-- ربط ملف JavaScript الخارجي -->
     <script type="module" src="app.js"></script>
 </body>
 </html>
