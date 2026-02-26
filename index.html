@@ -362,7 +362,6 @@
         </div>
         
         <div class="relative">
-            <!-- تمت إزالة رسالة "اسأل الذكاء الاصطناعي" المزعجة نهائياً من هنا -->
             <button onclick="window.app.toggleChat()" class="group relative w-16 h-16 z-50">
                 <span class="absolute -top-1 -right-1 flex h-4 w-4"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span><span class="relative inline-flex rounded-full h-4 w-4 bg-red-500"></span></span>
                 <div class="relative w-full h-full bg-gradient-to-br from-brand-600 to-slate-900 text-white rounded-full shadow-2xl flex items-center justify-center text-2xl hover:scale-110 transition-all border-2 border-white"><i class="fas fa-comment-dots"></i></div>
@@ -392,17 +391,15 @@
         </div>
     </div>
 
-    <!-- 2. نافذة تفاصيل المنتج الاحترافية (محسّنة للموبايل) -->
+    <!-- 2. نافذة تفاصيل المنتج الاحترافية -->
     <div id="product-modal" class="fixed inset-0 z-[220] bg-slate-900/80 hidden backdrop-blur-md flex items-center justify-center p-4 opacity-0 transition-opacity duration-300">
         <div class="bg-white dark:bg-slate-900 w-full max-w-4xl rounded-[2rem] overflow-hidden flex flex-col md:flex-row shadow-2xl relative transform scale-95 transition-transform duration-300 max-h-[95vh] overflow-y-auto custom-scrollbar" id="product-modal-content">
             <button onclick="window.app.closeProductModal()" class="absolute top-4 left-4 z-10 w-10 h-10 rounded-full bg-white/80 dark:bg-black/80 hover:bg-red-500 hover:text-white flex items-center justify-center backdrop-blur-md transition-all shadow-lg"><i class="fas fa-times"></i></button>
             
-            <!-- صورة المنتج -->
             <div class="w-full md:w-1/2 bg-slate-50 dark:bg-slate-800/50 p-4 md:p-8 flex items-center justify-center min-h-[200px] md:min-h-[300px] relative">
                 <img id="modal-img" src="" class="max-w-full h-48 md:h-auto max-h-[350px] object-contain drop-shadow-2xl hover:scale-110 transition-transform duration-500">
             </div>
             
-            <!-- تفاصيل المنتج -->
             <div class="w-full md:w-1/2 p-6 md:p-10 flex flex-col justify-center bg-white dark:bg-slate-900">
                 <div class="inline-block px-4 py-1.5 rounded-full text-xs font-bold mb-4 w-max" id="modal-badge">متوفر</div>
                 <h2 id="modal-title" class="text-2xl md:text-3xl font-black mb-2 text-slate-800 dark:text-white leading-tight"></h2>
@@ -423,7 +420,7 @@
         </div>
     </div>
 
-    <!-- شريط التنقل السفلي الخاص بالموبايل (App-like UX) -->
+    <!-- شريط التنقل السفلي الخاص بالموبايل -->
     <div class="md:hidden fixed bottom-0 left-0 right-0 bg-white/95 dark:bg-slate-900/95 backdrop-blur-lg border-t border-slate-200 dark:border-slate-800 z-[120] pb-safe shadow-[0_-5px_20px_rgba(0,0,0,0.05)] dark:shadow-[0_-5px_20px_rgba(0,0,0,0.2)] transition-colors">
         <div class="flex justify-around items-center h-16 px-2">
             <button onclick="window.app.showView('home')" class="flex flex-col items-center justify-center w-full h-full text-slate-500 hover:text-brand-500 dark:text-slate-400 dark:hover:text-brand-400 transition-colors">
@@ -448,9 +445,9 @@
         </div>
     </div>
 
-    <!-- لوحة التحكم الإدارية -->
+    <!-- لوحة التحكم الإدارية المحدثة -->
     <div id="admin-modal" class="fixed inset-0 z-[200] bg-slate-900/80 hidden backdrop-blur-md flex items-center justify-center p-4">
-        <div class="bg-white dark:bg-slate-900 w-full max-w-2xl rounded-3xl p-8 max-h-[90vh] overflow-y-auto relative border border-slate-200 dark:border-slate-700 shadow-2xl">
+        <div class="bg-white dark:bg-slate-900 w-full max-w-2xl rounded-3xl p-8 max-h-[90vh] overflow-y-auto relative border border-slate-200 dark:border-slate-700 shadow-2xl custom-scrollbar">
             <button onclick="window.app.closeAdmin()" class="absolute top-4 left-4 w-10 h-10 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-red-100 hover:text-red-500 flex items-center justify-center"><i class="fas fa-times"></i></button>
             <h2 class="text-2xl font-black mb-8 text-brand-500 flex items-center gap-3"><i class="fas fa-cloud-upload-alt"></i> لوحة التحكم</h2>
             
@@ -459,6 +456,7 @@
                     <h3 class="font-bold flex items-center gap-2"><i class="fas fa-plus-circle text-green-500"></i> <span id="form-title">إضافة منتج جديد</span></h3>
                     <button id="cancel-edit-btn" onclick="window.app.cancelEdit()" class="hidden text-xs text-red-500 hover:bg-red-500/10 px-3 py-1 rounded-lg">إلغاء التعديل ✕</button>
                 </div>
+                
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <input type="text" id="p-name" placeholder="الاسم (لابتوب أو إكسسوار)" class="input-field md:col-span-2">
                     
@@ -475,10 +473,15 @@
                         <option value="gaming">ألعاب</option>
                         <option value="other">أخرى / إكسسوار</option>
                     </select>
-                    
-                    <!-- حقول المواصفات المقسمة والجديدة -->
-                    <div class="md:col-span-2 bg-slate-100 dark:bg-slate-700/50 p-4 rounded-xl border border-slate-200 dark:border-slate-600 mt-2">
-                        <h4 class="font-bold text-sm mb-3 flex items-center gap-2"><i class="fas fa-microchip text-brand-500"></i> تفاصيل المواصفات</h4>
+
+                    <!-- حقول المواصفات المقسمة والتعبئة التلقائية -->
+                    <div class="md:col-span-2 bg-slate-100 dark:bg-slate-700/50 p-4 rounded-xl border border-slate-200 dark:border-slate-600 mt-2 relative">
+                        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 gap-3">
+                            <h4 class="font-bold text-sm flex items-center gap-2"><i class="fas fa-microchip text-brand-500"></i> تفاصيل المواصفات</h4>
+                            <button onclick="window.app.generateSpecsAI()" id="ai-generate-btn" class="w-full sm:w-auto bg-gradient-to-r from-brand-500 to-accent-purple text-white text-xs px-4 py-2 rounded-lg font-bold hover:shadow-lg transition-all flex justify-center items-center gap-2">
+                                ✨ تعبئة تلقائية
+                            </button>
+                        </div>
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                             <input type="text" id="p-cpu" placeholder="المعالج (مثال: Core i7 12th)" class="input-field bg-white dark:bg-slate-800">
                             <input type="text" id="p-ram" placeholder="الرام (مثال: 16GB DDR5)" class="input-field bg-white dark:bg-slate-800">
@@ -488,10 +491,8 @@
                         </div>
                     </div>
 
-                    <!-- حقل الوصف التسويقي (مكان عمل الذكاء الاصطناعي) -->
-                    <div class="md:col-span-2 relative mt-2">
-                        <input type="text" id="p-desc" placeholder="وصف تسويقي أو ملاحظات إضافية" class="input-field w-full pl-32">
-                        <button onclick="window.app.generateSpecsAI()" class="absolute left-2 top-1/2 -translate-y-1/2 bg-gradient-to-r from-brand-500 to-accent-purple text-white text-xs px-3 py-1.5 rounded-lg font-bold hover:shadow-lg transition-all flex items-center gap-1">✨ تأليف ذكي</button>
+                    <div class="md:col-span-2 mt-2">
+                        <input type="text" id="p-desc" placeholder="وصف تسويقي أو ملاحظات إضافية" class="input-field w-full">
                     </div>
 
                     <input type="text" id="p-img" placeholder="رابط الصورة" class="input-field md:col-span-2 mt-2">
@@ -548,7 +549,6 @@
             db = getFirestore(app);
             auth = getAuth(app);
             productsRef = collection(db, "products");
-            console.log("Firebase Connected ✅");
         } catch (error) {
             console.error("Firebase Error:", error);
         }
@@ -556,7 +556,6 @@
         let allProducts = [];
         let currentCategory = 'all';
         let editingId = null;
-
         let cart = JSON.parse(localStorage.getItem('lapmosul_cart')) || [];
 
         function saveCart() {
@@ -662,7 +661,6 @@
             if(!container) return;
             container.innerHTML = '';
             const comingSoonProducts = allProducts.filter(p => p.type === 'new');
-            
             comingSoonProducts.forEach(p => {
                 container.innerHTML += generateProductCardHTML(p, 'COMING SOON', 'bg-red-500 animate-pulse');
             });
@@ -673,7 +671,6 @@
             if(!container) return;
             container.innerHTML = '';
             const accessories = allProducts.filter(p => p.type === 'accessory');
-            
             accessories.forEach(p => {
                 container.innerHTML += generateProductCardHTML(p, 'ACCESSORY', 'bg-purple-500');
             });
@@ -701,17 +698,21 @@
             }
         }
 
-        // 🛑 حماية المفتاح: تم تشفير مفتاحك بصيغة مبهمة حتى لا يسرق بسهولة 🛑
+        // 🛑 حماية المفتاح
         const encodedKey = "QUl6YVN5RGlmSExLUlVxMG1KZmdxRGU0TVdNeWp2SzZ6VmdZZGNB"; 
-        const geminiApiKey = atob(encodedKey); // يفك التشفير وقت الاستخدام فقط
+        const geminiApiKey = atob(encodedKey);
         const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${geminiApiKey}`;
 
-        async function fetchGemini(promptText, systemInstructionText = null) {
+        // دالة الاتصال بالذكاء الاصطناعي مع دعم توليد ملفات JSON
+        async function fetchGemini(promptText, systemInstructionText = null, isJson = false) {
             const payload = {
                 contents: [{ parts: [{ text: promptText }] }]
             };
             if (systemInstructionText) {
                 payload.systemInstruction = { parts: [{ text: systemInstructionText }] };
+            }
+            if (isJson) {
+                payload.generationConfig = { responseMimeType: "application/json" };
             }
 
             const retries = 5;
@@ -747,12 +748,16 @@
 ${availableProducts || 'لا توجد منتجات حالياً.'}
 
 التعليمات:
-1. أجب على العميل بناءً على هذه المنتجات فقط.
-2. كن ودياً وجذاباً ومختصراً جداً. استخدم الإيموجي المناسبة.
-3. تحدث باللهجة العراقية المبسطة.`;
+1. أجب على العميل بناءً على هذه المنتجات فقط. إذا طلب منتج غير متوفر، اقترح بديلاً من القائمة.
+2. كن ودياً ومختصراً. استخدم الإيموجي المناسبة.
+3. تحدث باللهجة العراقية.
+4. هام جداً: لا تستخدم التنسيقات إطلاقاً مثل النجوم (**) أو القوائم المعقدة، اكتب نصاً عادياً ومباشراً فقط.`;
 
             const reply = await fetchGemini(userMsg, systemInstruction);
-            return reply || "عذراً، أواجه مشكلة في الاتصال حالياً. يرجى التواصل عبر الواتساب.";
+            if (!reply) return "عذراً، أواجه مشكلة في الاتصال حالياً. يرجى التواصل عبر الواتساب.";
+            
+            // تنظيف النص من أي علامات تنسيق قد تسبب مشاكل في العرض
+            return reply.replace(/\*\*/g, '').replace(/\*/g, '');
         }
 
         function addChatMsg(text, sender) {
@@ -915,25 +920,48 @@ ${availableProducts || 'لا توجد منتجات حالياً.'}
                 setTimeout(() => modal.classList.add('hidden'), 300);
             },
 
+            // ✨ دالة الذكاء الاصطناعي المحدثة (تعبئة تلقائية لجميع الحقول) ✨
             generateSpecsAI: async () => {
                 const nameInput = document.getElementById('p-name').value;
                 if (!nameInput) {
-                    alert('يرجى كتابة اسم المنتج أولاً ✨.');
+                    alert('يرجى كتابة اسم المنتج أو اللابتوب أولاً في حقل "الاسم" ✨.');
                     return;
                 }
                 
-                const descField = document.getElementById('p-desc');
-                const oldDesc = descField.value;
-                descField.value = "جاري التوليد بواسطة Gemini ✨...";
+                const btn = document.getElementById('ai-generate-btn');
+                const originalHTML = btn.innerHTML;
+                btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري التعبئة...';
+                btn.disabled = true;
                 
-                const prompt = `اكتب وصفاً تسويقياً جذاباً وقصيراً جداً (سطر واحد) للابتوب أو منتج تقني اسمه: "${nameInput}". فقط الوصف مباشرة باللغة العربية.`;
+                const prompt = `استخرج المواصفات التقنية الشائعة للابتوب: "${nameInput}". 
+قم بإرجاع النتيجة كـ JSON فقط وبدون أي نصوص إضافية، ويجب أن يحتوي على المفاتيح التالية حصراً:
+"cpu" (مثال: Core i7 12th Gen)
+"ram" (مثال: 16GB DDR5)
+"storage" (مثال: 512GB SSD)
+"gpu" (مثال: RTX 3060 6GB)
+"screen" (مثال: 15.6 FHD 144Hz)
+"desc" (وصف تسويقي جذاب ومختصر باللغة العربية)`;
                 
-                const result = await fetchGemini(prompt);
-                if (result) {
-                    descField.value = result.replace(/\n/g, ' ').trim();
-                } else {
-                    descField.value = oldDesc;
-                    alert("عذراً، تأكد من وضع مفتاح API الخاص بـ Gemini في الكود لكي تعمل هذه الميزة.");
+                try {
+                    // طلب النتيجة بصيغة JSON لضمان دقة تعبئة الحقول
+                    const result = await fetchGemini(prompt, null, true);
+                    if (result) {
+                        const specs = JSON.parse(result);
+                        if(specs.cpu) document.getElementById('p-cpu').value = specs.cpu;
+                        if(specs.ram) document.getElementById('p-ram').value = specs.ram;
+                        if(specs.storage) document.getElementById('p-storage').value = specs.storage;
+                        if(specs.gpu) document.getElementById('p-gpu').value = specs.gpu;
+                        if(specs.screen) document.getElementById('p-screen').value = specs.screen;
+                        if(specs.desc) document.getElementById('p-desc').value = specs.desc;
+                    } else {
+                        alert("عذراً، لم أتمكن من جلب المواصفات. تأكد من جودة الاتصال بالإنترنت.");
+                    }
+                } catch (e) {
+                    console.error("AI Parse Error:", e);
+                    alert("حدث خطأ في تعبئة المواصفات، يرجى المحاولة مرة أخرى.");
+                } finally {
+                    btn.innerHTML = originalHTML;
+                    btn.disabled = false;
                 }
             },
 
@@ -967,7 +995,7 @@ ${availableProducts || 'لا توجد منتجات حالياً.'}
                 const type = document.getElementById('p-type').value;
                 const category = document.getElementById('p-cat').value;
 
-                // قراءة الحقول الجديدة
+                // الحقول الجديدة المقسمة
                 const cpu = document.getElementById('p-cpu').value;
                 const ram = document.getElementById('p-ram').value;
                 const storage = document.getElementById('p-storage').value;
@@ -975,7 +1003,7 @@ ${availableProducts || 'لا توجد منتجات حالياً.'}
                 const screen = document.getElementById('p-screen').value;
                 const desc = document.getElementById('p-desc').value;
 
-                // تجميع المواصفات في نص واحد جميل للعرض للزبائن
+                // تجميع المواصفات للعرض في كارت المنتج
                 let specsArr = [];
                 if(cpu) specsArr.push(`💻 ${cpu}`);
                 if(ram) specsArr.push(`🚀 ${ram}`);
@@ -984,9 +1012,9 @@ ${availableProducts || 'لا توجد منتجات حالياً.'}
                 if(screen) specsArr.push(`📺 ${screen}`);
                 
                 let specs = specsArr.join(' | ');
-                if(desc) specs += (specsArr.length > 0 ? `\n📝 ${desc}` : desc);
+                if(desc) specs += (specsArr.length > 0 ? ` | 📝 ${desc}` : desc);
 
-                // حل للإكسسوارات إذا لم تكن هناك مواصفات
+                // حل للإكسسوارات إذا لم يكن لها مواصفات معقدة
                 if(type === 'accessory' && specsArr.length === 0) {
                     specs = desc || 'بدون تفاصيل إضافية';
                 }
@@ -995,7 +1023,6 @@ ${availableProducts || 'لا توجد منتجات حالياً.'}
                 if (!auth.currentUser) return alert("يجب تسجيل الدخول أولاً");
 
                 try {
-                    // حفظ البيانات مجمعة ومفصلة في قاعدة البيانات
                     const productData = { name, price, specs, img, type, category, cpu, ram, storage, gpu, screen, desc };
                     
                     if(editingId) {
@@ -1028,7 +1055,7 @@ ${availableProducts || 'لا توجد منتجات حالياً.'}
                 document.getElementById('p-screen').value = p.screen || '';
                 document.getElementById('p-desc').value = p.desc || '';
 
-                // إذا كان المنتج قديماً جداً وكان يحتوي على حقل مواصفات قديم فقط، نضعه في الوصف
+                // دعم توافقية البيانات القديمة
                 if(p.specs && !p.cpu && !p.ram && !p.desc) {
                     document.getElementById('p-desc').value = p.specs;
                 }
@@ -1098,17 +1125,14 @@ ${availableProducts || 'لا توجد منتجات حالياً.'}
             }, 1500);
         };
 
-        // 🛑 أكواد حماية إضافية لمنع سرقة الأكواد والمفتاح من الصفحة 🛑
-        // 1. منع النقر بزر الماوس الأيمن
+        // 🛑 حماية إضافية
         document.addEventListener('contextmenu', event => event.preventDefault());
-        
-        // 2. منع اختصارات لوحة المفاتيح الخاصة بالمطورين (F12, Ctrl+U, Ctrl+Shift+I)
         document.onkeydown = function(e) {
-            if(e.keyCode == 123) { return false; } // منع F12
-            if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) { return false; } // منع Ctrl+Shift+I
-            if(e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) { return false; } // منع Ctrl+Shift+C
-            if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) { return false; } // منع Ctrl+Shift+J
-            if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) { return false; } // منع Ctrl+U (View Source)
+            if(e.keyCode == 123) { return false; }
+            if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) { return false; }
+            if(e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) { return false; }
+            if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) { return false; }
+            if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) { return false; }
         };
     </script>
 </body>
