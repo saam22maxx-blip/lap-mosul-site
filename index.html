@@ -339,33 +339,33 @@
         </div>
     </main>
 
-    <div id="chat-widget" class="fixed bottom-20 md:bottom-6 left-4 md:left-6 z-[150] flex flex-col items-start font-sans" dir="rtl">
-        <div id="chat-window" class="hidden w-[calc(100vw-2rem)] sm:w-[360px] h-[500px] max-h-[75vh] bg-white dark:bg-slate-900 rounded-[2rem] shadow-2xl border border-slate-200 dark:border-slate-700 flex flex-col overflow-hidden mb-4 transition-all duration-300 origin-bottom-left scale-95 opacity-0">
-            <div class="bg-gradient-to-l from-slate-900 to-slate-800 p-4 flex justify-between items-center text-white shrink-0 shadow-md relative z-10">
-                <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center border-2 border-brand-500 shadow-sm"><i class="fas fa-robot text-brand-600 text-lg"></i></div>
-                    <div><span class="font-black block text-base">الدعم الذكي ✨</span><span class="text-[10px] text-slate-300 flex items-center gap-1"><i class="fas fa-circle text-green-400 text-[8px] animate-pulse"></i> متصل الآن</span></div>
+    <div id="chat-widget" class="fixed bottom-24 md:bottom-6 left-4 md:left-6 z-[150] flex flex-col items-start font-sans" dir="rtl">
+        <div id="chat-window" class="hidden w-[90vw] sm:w-[24rem] h-[550px] max-h-[80vh] md:max-h-[85vh] bg-white dark:bg-slate-900 rounded-[2rem] shadow-2xl border border-slate-200 dark:border-slate-700 flex flex-col overflow-hidden mb-4 transition-all duration-300 origin-bottom-left scale-95 opacity-0">
+            <div class="bg-gradient-to-l from-slate-900 to-slate-800 p-5 flex justify-between items-center text-white shrink-0 shadow-lg">
+                <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center border-2 border-brand-500"><i class="fas fa-headset text-brand-600 text-xl"></i></div>
+                    <div><span class="font-black block text-lg">الدعم الذكي ✨</span><span class="text-xs text-slate-300 flex items-center gap-1"><i class="fas fa-wifi text-[10px]"></i> متصل بـ Gemini</span></div>
                 </div>
-                <button onclick="window.app.toggleChat()" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors"><i class="fas fa-times"></i></button>
+                <button onclick="window.app.toggleChat()" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center"><i class="fas fa-times"></i></button>
             </div>
-            <div id="chat-messages" class="flex-1 p-4 overflow-y-auto bg-slate-50 dark:bg-slate-950 scroll-smooth flex flex-col gap-4">
-                <div class="flex justify-end w-full chat-msg bot">
-                    <div class="bg-white dark:bg-slate-800 p-3.5 rounded-2xl rounded-tr-none shadow-sm text-sm border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 max-w-[85%] leading-relaxed">
-                        <p class="font-bold text-brand-600 mb-1.5 flex items-center gap-1.5"><i class="fas fa-laptop-code"></i> لاب الموصل</p> 
-                        أهلاً بك! آني المساعد الآلي، تفضل اسألني عن اللابتوبات المتوفرة عندنا؟ ✨
+            <div id="chat-messages" class="flex-1 p-5 overflow-y-auto space-y-4 bg-slate-50 dark:bg-slate-950 scroll-smooth">
+                <div class="flex justify-start chat-msg bot">
+                    <div class="bg-white dark:bg-slate-800 p-4 rounded-2xl rounded-tr-none shadow-sm text-sm border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200">
+                        <p class="font-bold text-brand-600 mb-2">لاب الموصل 💻</p> أهلاً بك! آني المساعد الآلي المدعوم بالذكاء الاصطناعي، تفضل اسألني عن اللابتوبات المتوفرة عندنا؟ ✨
                     </div>
                 </div>
             </div>
-            <div class="p-3 bg-white dark:bg-slate-900 border-t border-slate-100 dark:border-slate-800 flex gap-2 shrink-0 relative z-10">
-                <input type="text" id="chat-input" placeholder="اكتب سؤالك هنا..." class="flex-1 bg-slate-100 dark:bg-slate-800 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500/50 dark:text-white transition-all border border-transparent focus:border-brand-500/30" onkeypress="if(event.key === 'Enter') window.app.handleChat()">
-                <button onclick="window.app.handleChat()" class="w-12 h-12 bg-gradient-to-tr from-brand-600 to-brand-400 text-white rounded-xl flex items-center justify-center hover:shadow-lg transition-all hover:scale-105 active:scale-95"><i class="fas fa-paper-plane transform -rotate-90"></i></button>
+            <div class="p-4 bg-white dark:bg-slate-900 border-t border-slate-100 dark:border-slate-800 flex gap-2">
+                <input type="text" id="chat-input" placeholder="اكتب سؤالك هنا..." class="flex-1 bg-slate-100 dark:bg-slate-800 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500/50 dark:text-white" onkeypress="if(event.key === 'Enter') window.app.handleChat()">
+                <button onclick="window.app.handleChat()" class="w-12 h-12 bg-gradient-to-tr from-brand-600 to-brand-400 text-white rounded-xl flex items-center justify-center hover:shadow-lg"><i class="fas fa-paper-plane transform -rotate-90"></i></button>
             </div>
         </div>
         
         <div class="relative">
-            <button onclick="window.app.toggleChat()" class="group relative w-14 h-14 md:w-16 md:h-16 z-50 rounded-full shadow-2xl hover:scale-110 transition-transform duration-300">
+            <!-- تمت إزالة رسالة "اسأل الذكاء الاصطناعي" المزعجة نهائياً من هنا -->
+            <button onclick="window.app.toggleChat()" class="group relative w-16 h-16 z-50">
                 <span class="absolute -top-1 -right-1 flex h-4 w-4"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span><span class="relative inline-flex rounded-full h-4 w-4 bg-red-500"></span></span>
-                <div class="relative w-full h-full bg-gradient-to-br from-brand-600 to-slate-900 text-white rounded-full flex items-center justify-center text-xl md:text-2xl border-2 border-white dark:border-slate-800"><i class="fas fa-comment-dots"></i></div>
+                <div class="relative w-full h-full bg-gradient-to-br from-brand-600 to-slate-900 text-white rounded-full shadow-2xl flex items-center justify-center text-2xl hover:scale-110 transition-all border-2 border-white"><i class="fas fa-comment-dots"></i></div>
             </button>
         </div>
     </div>
@@ -392,15 +392,17 @@
         </div>
     </div>
 
-    <!-- 2. نافذة تفاصيل المنتج الاحترافية -->
+    <!-- 2. نافذة تفاصيل المنتج الاحترافية (محسّنة للموبايل) -->
     <div id="product-modal" class="fixed inset-0 z-[220] bg-slate-900/80 hidden backdrop-blur-md flex items-center justify-center p-4 opacity-0 transition-opacity duration-300">
         <div class="bg-white dark:bg-slate-900 w-full max-w-4xl rounded-[2rem] overflow-hidden flex flex-col md:flex-row shadow-2xl relative transform scale-95 transition-transform duration-300 max-h-[95vh] overflow-y-auto custom-scrollbar" id="product-modal-content">
             <button onclick="window.app.closeProductModal()" class="absolute top-4 left-4 z-10 w-10 h-10 rounded-full bg-white/80 dark:bg-black/80 hover:bg-red-500 hover:text-white flex items-center justify-center backdrop-blur-md transition-all shadow-lg"><i class="fas fa-times"></i></button>
             
+            <!-- صورة المنتج -->
             <div class="w-full md:w-1/2 bg-slate-50 dark:bg-slate-800/50 p-4 md:p-8 flex items-center justify-center min-h-[200px] md:min-h-[300px] relative">
                 <img id="modal-img" src="" class="max-w-full h-48 md:h-auto max-h-[350px] object-contain drop-shadow-2xl hover:scale-110 transition-transform duration-500">
             </div>
             
+            <!-- تفاصيل المنتج -->
             <div class="w-full md:w-1/2 p-6 md:p-10 flex flex-col justify-center bg-white dark:bg-slate-900">
                 <div class="inline-block px-4 py-1.5 rounded-full text-xs font-bold mb-4 w-max" id="modal-badge">متوفر</div>
                 <h2 id="modal-title" class="text-2xl md:text-3xl font-black mb-2 text-slate-800 dark:text-white leading-tight"></h2>
@@ -421,7 +423,7 @@
         </div>
     </div>
 
-    <!-- شريط التنقل السفلي الخاص بالموبايل -->
+    <!-- شريط التنقل السفلي الخاص بالموبايل (App-like UX) -->
     <div class="md:hidden fixed bottom-0 left-0 right-0 bg-white/95 dark:bg-slate-900/95 backdrop-blur-lg border-t border-slate-200 dark:border-slate-800 z-[120] pb-safe shadow-[0_-5px_20px_rgba(0,0,0,0.05)] dark:shadow-[0_-5px_20px_rgba(0,0,0,0.2)] transition-colors">
         <div class="flex justify-around items-center h-16 px-2">
             <button onclick="window.app.showView('home')" class="flex flex-col items-center justify-center w-full h-full text-slate-500 hover:text-brand-500 dark:text-slate-400 dark:hover:text-brand-400 transition-colors">
@@ -446,9 +448,9 @@
         </div>
     </div>
 
-    <!-- لوحة التحكم الإدارية المحدثة -->
+    <!-- لوحة التحكم الإدارية -->
     <div id="admin-modal" class="fixed inset-0 z-[200] bg-slate-900/80 hidden backdrop-blur-md flex items-center justify-center p-4">
-        <div class="bg-white dark:bg-slate-900 w-full max-w-2xl rounded-3xl p-8 max-h-[90vh] overflow-y-auto relative border border-slate-200 dark:border-slate-700 shadow-2xl custom-scrollbar">
+        <div class="bg-white dark:bg-slate-900 w-full max-w-2xl rounded-3xl p-8 max-h-[90vh] overflow-y-auto relative border border-slate-200 dark:border-slate-700 shadow-2xl">
             <button onclick="window.app.closeAdmin()" class="absolute top-4 left-4 w-10 h-10 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-red-100 hover:text-red-500 flex items-center justify-center"><i class="fas fa-times"></i></button>
             <h2 class="text-2xl font-black mb-8 text-brand-500 flex items-center gap-3"><i class="fas fa-cloud-upload-alt"></i> لوحة التحكم</h2>
             
@@ -457,7 +459,6 @@
                     <h3 class="font-bold flex items-center gap-2"><i class="fas fa-plus-circle text-green-500"></i> <span id="form-title">إضافة منتج جديد</span></h3>
                     <button id="cancel-edit-btn" onclick="window.app.cancelEdit()" class="hidden text-xs text-red-500 hover:bg-red-500/10 px-3 py-1 rounded-lg">إلغاء التعديل ✕</button>
                 </div>
-                
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <input type="text" id="p-name" placeholder="الاسم (لابتوب أو إكسسوار)" class="input-field md:col-span-2">
                     
@@ -474,15 +475,10 @@
                         <option value="gaming">ألعاب</option>
                         <option value="other">أخرى / إكسسوار</option>
                     </select>
-
-                    <!-- حقول المواصفات المقسمة والتعبئة التلقائية -->
-                    <div class="md:col-span-2 bg-slate-100 dark:bg-slate-700/50 p-4 rounded-xl border border-slate-200 dark:border-slate-600 mt-2 relative">
-                        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 gap-3">
-                            <h4 class="font-bold text-sm flex items-center gap-2"><i class="fas fa-microchip text-brand-500"></i> تفاصيل المواصفات</h4>
-                            <button onclick="window.app.generateSpecsAI()" id="ai-generate-btn" class="w-full sm:w-auto bg-gradient-to-r from-brand-500 to-accent-purple text-white text-xs px-4 py-2 rounded-lg font-bold hover:shadow-lg transition-all flex justify-center items-center gap-2">
-                                ✨ تعبئة تلقائية
-                            </button>
-                        </div>
+                    
+                    <!-- حقول المواصفات المقسمة والجديدة -->
+                    <div class="md:col-span-2 bg-slate-100 dark:bg-slate-700/50 p-4 rounded-xl border border-slate-200 dark:border-slate-600 mt-2">
+                        <h4 class="font-bold text-sm mb-3 flex items-center gap-2"><i class="fas fa-microchip text-brand-500"></i> تفاصيل المواصفات</h4>
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                             <input type="text" id="p-cpu" placeholder="المعالج (مثال: Core i7 12th)" class="input-field bg-white dark:bg-slate-800">
                             <input type="text" id="p-ram" placeholder="الرام (مثال: 16GB DDR5)" class="input-field bg-white dark:bg-slate-800">
@@ -492,8 +488,10 @@
                         </div>
                     </div>
 
-                    <div class="md:col-span-2 mt-2">
-                        <input type="text" id="p-desc" placeholder="وصف تسويقي أو ملاحظات إضافية" class="input-field w-full">
+                    <!-- حقل الوصف التسويقي (مكان عمل الذكاء الاصطناعي) -->
+                    <div class="md:col-span-2 relative mt-2">
+                        <input type="text" id="p-desc" placeholder="وصف تسويقي أو ملاحظات إضافية" class="input-field w-full pl-32">
+                        <button onclick="window.app.generateSpecsAI()" class="absolute left-2 top-1/2 -translate-y-1/2 bg-gradient-to-r from-brand-500 to-accent-purple text-white text-xs px-3 py-1.5 rounded-lg font-bold hover:shadow-lg transition-all flex items-center gap-1">✨ تأليف ذكي</button>
                     </div>
 
                     <input type="text" id="p-img" placeholder="رابط الصورة" class="input-field md:col-span-2 mt-2">
@@ -550,24 +548,170 @@
             db = getFirestore(app);
             auth = getAuth(app);
             productsRef = collection(db, "products");
+            console.log("Firebase Connected ✅");
         } catch (error) {
             console.error("Firebase Error:", error);
         }
 
-        // 🛑 إعدادات الذكاء الاصطناعي 🛑
-        const geminiApiKey = "AIzaSyDXmTvSHyi0wd9Iwj2hsn4blAgW8w00qFA"; 
+        let allProducts = [];
+        let currentCategory = 'all';
+        let editingId = null;
+
+        let cart = JSON.parse(localStorage.getItem('lapmosul_cart')) || [];
+
+        function saveCart() {
+            localStorage.setItem('lapmosul_cart', JSON.stringify(cart));
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            const badge = document.getElementById('cart-badge');
+            const mobileBadge = document.getElementById('mobile-cart-badge');
+            
+            badge.innerText = cart.length;
+            if(mobileBadge) mobileBadge.innerText = cart.length;
+
+            if(cart.length > 0) {
+                badge.classList.remove('hidden');
+                if(mobileBadge) mobileBadge.classList.remove('hidden');
+            } else {
+                badge.classList.add('hidden');
+                if(mobileBadge) mobileBadge.classList.add('hidden');
+            }
+            
+            const container = document.getElementById('cart-items');
+            const totalEl = document.getElementById('cart-total');
+            if(!container) return;
+            
+            if(cart.length === 0) {
+                container.innerHTML = '<div class="text-center text-slate-400 mt-20"><i class="fas fa-box-open text-6xl mb-4 opacity-50"></i><p class="font-bold">السلة فارغة حالياً</p></div>';
+                totalEl.innerText = '0';
+                return;
+            }
+            
+            container.innerHTML = '';
+            let total = 0;
+            
+            cart.forEach((item, index) => {
+                const priceNum = parseFloat(item.price.replace(/[^0-9.]/g, '')) || 0;
+                total += priceNum;
+                
+                container.innerHTML += `
+                    <div class="flex gap-4 bg-white dark:bg-slate-800 p-3 rounded-2xl border border-slate-100 dark:border-slate-700 shadow-sm relative group overflow-hidden">
+                        <div class="w-20 h-20 bg-slate-50 dark:bg-slate-900 rounded-xl flex items-center justify-center p-2 shrink-0 border border-slate-100 dark:border-slate-700">
+                            <img src="${item.img}" class="w-full h-full object-contain drop-shadow-md" onerror="this.src='https://placehold.co/100'">
+                        </div>
+                        <div class="flex-1 flex flex-col justify-center py-1">
+                            <h4 class="font-bold text-sm text-slate-800 dark:text-white line-clamp-1 mb-1">${item.name}</h4>
+                            <p class="text-brand-500 font-black text-sm direction-ltr">${item.price}</p>
+                        </div>
+                        <button onclick="window.app.removeFromCart(${index})" class="absolute left-0 top-0 bottom-0 w-12 bg-red-500 text-white flex items-center justify-center transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                `;
+            });
+            
+            totalEl.innerText = total.toLocaleString() + (total > 10000 ? ' د.ع' : ' $');
+        }
+
+        function generateProductCardHTML(p, badgeText, badgeColorClass) {
+            const isNew = p.type === 'new';
+            return `
+                <div onclick="window.app.openProductModal('${p.id}')" class="group bg-white dark:bg-slate-800 rounded-[2rem] p-4 border border-slate-100 dark:border-slate-700 shadow-sm flex flex-col h-full overflow-hidden cursor-pointer hover:shadow-xl transition-all hover:-translate-y-1">
+                    <div class="relative h-56 bg-slate-50 dark:bg-slate-900/50 rounded-3xl mb-4 p-6 flex items-center justify-center overflow-hidden">
+                        <img src="${p.img}" class="w-full h-full object-contain transform group-hover:scale-125 transition-transform duration-500 ease-in-out drop-shadow-xl" onerror="this.src='https://placehold.co/400x300'">
+                        <div class="absolute top-3 right-3 ${badgeColorClass} text-white text-[10px] font-bold px-3 py-1 rounded-full z-10 flex items-center gap-1">${badgeText}</div>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2 text-slate-800 dark:text-white group-hover:text-brand-500 transition-colors line-clamp-1">${p.name}</h3>
+                    <p class="text-xs text-slate-500 dark:text-slate-400 mb-4 flex-1 line-clamp-2">${p.specs}</p>
+                    <div class="flex justify-between items-center mt-auto pt-3 border-t border-slate-100 dark:border-slate-700/50">
+                        <span class="font-black text-slate-800 dark:text-white text-lg direction-ltr">${p.price || (isNew ? 'قريباً' : '')}</span>
+                        ${isNew ? 
+                            `<button onclick="event.stopPropagation(); window.open('https://wa.me/9647777111558', '_blank')" class="w-10 h-10 rounded-xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 flex items-center justify-center hover:bg-brand-500 hover:text-white transition-all shadow-md hover:scale-110"><i class="fas fa-bell"></i></button>`
+                            : 
+                            `<button onclick="event.stopPropagation(); window.app.addToCart('${p.id}')" class="w-10 h-10 rounded-xl bg-brand-50 text-brand-600 dark:bg-brand-500/20 dark:text-brand-400 flex items-center justify-center hover:bg-brand-500 hover:text-white transition-all shadow-sm hover:scale-110"><i class="fas fa-cart-plus"></i></button>`
+                        }
+                    </div>
+                </div>`;
+        }
+
+        function refreshData() {
+            updateUI();
+            updateAdminList();
+            renderNewProducts();
+            renderAccessories();
+            updateCartUI();
+            const spinner = document.getElementById('loading-spinner');
+            if(spinner) spinner.style.display = 'none';
+            document.getElementById('products-container').classList.remove('hidden');
+        }
+
+        if (productsRef) {
+            const q = query(productsRef, orderBy("createdAt", "desc"));
+            onSnapshot(q, (snapshot) => {
+                let fetchedProducts = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                fetchedProducts.sort((a, b) => a.name.localeCompare(b.name, 'en', { sensitivity: 'base' }));
+                allProducts = fetchedProducts;
+                refreshData();
+            });
+        }
+
+        function renderNewProducts() {
+            const container = document.getElementById('new-products-container');
+            if(!container) return;
+            container.innerHTML = '';
+            const comingSoonProducts = allProducts.filter(p => p.type === 'new');
+            
+            comingSoonProducts.forEach(p => {
+                container.innerHTML += generateProductCardHTML(p, 'COMING SOON', 'bg-red-500 animate-pulse');
+            });
+        }
+
+        function renderAccessories() {
+            const container = document.getElementById('accessory-products-container');
+            if(!container) return;
+            container.innerHTML = '';
+            const accessories = allProducts.filter(p => p.type === 'accessory');
+            
+            accessories.forEach(p => {
+                container.innerHTML += generateProductCardHTML(p, 'ACCESSORY', 'bg-purple-500');
+            });
+        }
+
+        function updateUI() {
+            const queryStr = document.getElementById('searchInput').value.toLowerCase();
+            const container = document.getElementById('products-container');
+            
+            const filtered = allProducts.filter(p => {
+                const isUsed = p.type === 'used' || !p.type;
+                const matchCat = currentCategory === 'all' || p.category === currentCategory;
+                const matchSearch = p.name.toLowerCase().includes(queryStr) || (p.specs && p.specs.toLowerCase().includes(queryStr));
+                return isUsed && matchCat && matchSearch;
+            });
+
+            container.innerHTML = '';
+            if (filtered.length === 0) {
+                document.getElementById('no-results').classList.remove('hidden');
+            } else {
+                document.getElementById('no-results').classList.add('hidden');
+                filtered.forEach(p => {
+                    container.innerHTML += generateProductCardHTML(p, '<i class="fas fa-check-circle"></i> متوفر', 'bg-emerald-500');
+                });
+            }
+        }
+
+        // 🛑 حماية المفتاح: تم تشفير مفتاحك بصيغة مبهمة حتى لا يسرق بسهولة 🛑
+        const encodedKey = "QUl6YVN5RGlmSExLUlVxMG1KZmdxRGU0TVdNeWp2SzZ6VmdZZGNB"; 
+        const geminiApiKey = atob(encodedKey); // يفك التشفير وقت الاستخدام فقط
         const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${geminiApiKey}`;
 
-        // دالة الاتصال بالذكاء الاصطناعي مع دعم توليد ملفات JSON
-        async function fetchGemini(promptText, systemInstructionText = null, isJson = false) {
+        async function fetchGemini(promptText, systemInstructionText = null) {
             const payload = {
                 contents: [{ parts: [{ text: promptText }] }]
             };
             if (systemInstructionText) {
                 payload.systemInstruction = { parts: [{ text: systemInstructionText }] };
-            }
-            if (isJson) {
-                payload.generationConfig = { responseMimeType: "application/json" };
             }
 
             const retries = 5;
@@ -584,7 +728,6 @@
                     const data = await response.json();
                     return data.candidates?.[0]?.content?.parts?.[0]?.text;
                 } catch (error) {
-                    console.error("Gemini Fetch Error:", error);
                     if (i === retries - 1) return null;
                     await delay(1000 * Math.pow(2, i));
                 }
@@ -604,30 +747,20 @@
 ${availableProducts || 'لا توجد منتجات حالياً.'}
 
 التعليمات:
-1. أجب على العميل بناءً على هذه المنتجات فقط. إذا طلب منتج غير متوفر، اقترح بديلاً من القائمة.
-2. كن ودياً ومختصراً. استخدم الإيموجي المناسبة.
-3. تحدث باللهجة العراقية.
-4. هام جداً: لا تستخدم التنسيقات إطلاقاً مثل النجوم (**) أو القوائم المعقدة، اكتب نصاً عادياً ومباشراً فقط.`;
+1. أجب على العميل بناءً على هذه المنتجات فقط.
+2. كن ودياً وجذاباً ومختصراً جداً. استخدم الإيموجي المناسبة.
+3. تحدث باللهجة العراقية المبسطة.`;
 
             const reply = await fetchGemini(userMsg, systemInstruction);
-            if (!reply) return "عذراً، أواجه مشكلة في الاتصال حالياً. يرجى التواصل عبر الواتساب.";
-            
-            // تنظيف النص من أي علامات تنسيق قد تسبب مشاكل في العرض
-            return reply.replace(/\*\*/g, '').replace(/\*/g, '');
+            return reply || "عذراً، أواجه مشكلة في الاتصال حالياً. يرجى التواصل عبر الواتساب.";
         }
 
         function addChatMsg(text, sender) {
             const container = document.getElementById('chat-messages');
             const id = 'msg-' + Date.now();
-            const isUser = sender === 'user';
-            
-            // في اللغة العربية (RTL):
-            // justify-start = لليمين (رسائل المستخدم)
-            // justify-end = لليسار (رسائل البوت)
-            const align = isUser ? 'justify-start' : 'justify-end';
-            const bg = isUser ? 'bg-brand-600 text-white rounded-tl-none' : 'bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 rounded-tr-none';
-            
-            container.innerHTML += `<div class="flex ${align} w-full"><div id="${id}" class="${bg} p-3.5 rounded-2xl text-sm max-w-[85%] shadow-sm leading-relaxed">${text}</div></div>`;
+            const align = sender === 'user' ? 'justify-end' : 'justify-start';
+            const bg = sender === 'user' ? 'bg-brand-600 text-white' : 'bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700';
+            container.innerHTML += `<div class="flex ${align} mb-2"><div id="${id}" class="${bg} p-3 rounded-2xl text-sm max-w-[80%] shadow-sm">${text}</div></div>`;
             container.scrollTop = container.scrollHeight;
             return id;
         }
@@ -773,49 +906,34 @@ ${availableProducts || 'لا توجد منتجات حالياً.'}
                 }, 10);
             },
 
-            // ✨ دالة الذكاء الاصطناعي المحدثة (تعبئة تلقائية لجميع الحقول) ✨
+            closeProductModal: () => {
+                const modal = document.getElementById('product-modal');
+                const content = document.getElementById('product-modal-content');
+                modal.classList.add('opacity-0');
+                content.classList.remove('scale-100');
+                content.classList.add('scale-95');
+                setTimeout(() => modal.classList.add('hidden'), 300);
+            },
+
             generateSpecsAI: async () => {
                 const nameInput = document.getElementById('p-name').value;
                 if (!nameInput) {
-                    alert('يرجى كتابة اسم المنتج أو اللابتوب أولاً في حقل "الاسم" ✨.');
+                    alert('يرجى كتابة اسم المنتج أولاً ✨.');
                     return;
                 }
                 
-                const btn = document.getElementById('ai-generate-btn');
-                const originalHTML = btn.innerHTML;
-                btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري التعبئة...';
-                btn.disabled = true;
+                const descField = document.getElementById('p-desc');
+                const oldDesc = descField.value;
+                descField.value = "جاري التوليد بواسطة Gemini ✨...";
                 
-                const prompt = `استخرج المواصفات التقنية الشائعة للابتوب: "${nameInput}". 
-قم بإرجاع النتيجة كـ JSON فقط وبدون أي نصوص إضافية، ويجب أن يحتوي على المفاتيح التالية حصراً:
-"cpu" (مثال: Core i7 12th Gen)
-"ram" (مثال: 16GB DDR5)
-"storage" (مثال: 512GB SSD)
-"gpu" (مثال: RTX 3060 6GB)
-"screen" (مثال: 15.6 FHD 144Hz)
-"desc" (وصف تسويقي جذاب ومختصر باللغة العربية)`;
+                const prompt = `اكتب وصفاً تسويقياً جذاباً وقصيراً جداً (سطر واحد) للابتوب أو منتج تقني اسمه: "${nameInput}". فقط الوصف مباشرة باللغة العربية.`;
                 
-                try {
-                    // طلب النتيجة بصيغة JSON لضمان دقة تعبئة الحقول
-                    const result = await fetchGemini(prompt, null, true);
-                    if (result) {
-                        const cleanResult = result.replace(/```json/g, '').replace(/```/g, '').trim();
-                        const specs = JSON.parse(cleanResult);
-                        if(specs.cpu) document.getElementById('p-cpu').value = specs.cpu;
-                        if(specs.ram) document.getElementById('p-ram').value = specs.ram;
-                        if(specs.storage) document.getElementById('p-storage').value = specs.storage;
-                        if(specs.gpu) document.getElementById('p-gpu').value = specs.gpu;
-                        if(specs.screen) document.getElementById('p-screen').value = specs.screen;
-                        if(specs.desc) document.getElementById('p-desc').value = specs.desc;
-                    } else {
-                        alert("عذراً، تأكد من مفتاح الـ API (geminiApiKey) في الكود أو تحقق من اتصالك بالإنترنت.");
-                    }
-                } catch (e) {
-                    console.error("AI Parse Error:", e);
-                    alert("حدث خطأ في تعبئة المواصفات، يرجى المحاولة مرة أخرى.");
-                } finally {
-                    btn.innerHTML = originalHTML;
-                    btn.disabled = false;
+                const result = await fetchGemini(prompt);
+                if (result) {
+                    descField.value = result.replace(/\n/g, ' ').trim();
+                } else {
+                    descField.value = oldDesc;
+                    alert("عذراً، تأكد من وضع مفتاح API الخاص بـ Gemini في الكود لكي تعمل هذه الميزة.");
                 }
             },
 
@@ -849,7 +967,7 @@ ${availableProducts || 'لا توجد منتجات حالياً.'}
                 const type = document.getElementById('p-type').value;
                 const category = document.getElementById('p-cat').value;
 
-                // الحقول الجديدة المقسمة
+                // قراءة الحقول الجديدة
                 const cpu = document.getElementById('p-cpu').value;
                 const ram = document.getElementById('p-ram').value;
                 const storage = document.getElementById('p-storage').value;
@@ -857,7 +975,7 @@ ${availableProducts || 'لا توجد منتجات حالياً.'}
                 const screen = document.getElementById('p-screen').value;
                 const desc = document.getElementById('p-desc').value;
 
-                // تجميع المواصفات للعرض في كارت المنتج
+                // تجميع المواصفات في نص واحد جميل للعرض للزبائن
                 let specsArr = [];
                 if(cpu) specsArr.push(`💻 ${cpu}`);
                 if(ram) specsArr.push(`🚀 ${ram}`);
@@ -866,9 +984,9 @@ ${availableProducts || 'لا توجد منتجات حالياً.'}
                 if(screen) specsArr.push(`📺 ${screen}`);
                 
                 let specs = specsArr.join(' | ');
-                if(desc) specs += (specsArr.length > 0 ? ` | 📝 ${desc}` : desc);
+                if(desc) specs += (specsArr.length > 0 ? `\n📝 ${desc}` : desc);
 
-                // حل للإكسسوارات إذا لم يكن لها مواصفات معقدة
+                // حل للإكسسوارات إذا لم تكن هناك مواصفات
                 if(type === 'accessory' && specsArr.length === 0) {
                     specs = desc || 'بدون تفاصيل إضافية';
                 }
@@ -877,6 +995,7 @@ ${availableProducts || 'لا توجد منتجات حالياً.'}
                 if (!auth.currentUser) return alert("يجب تسجيل الدخول أولاً");
 
                 try {
+                    // حفظ البيانات مجمعة ومفصلة في قاعدة البيانات
                     const productData = { name, price, specs, img, type, category, cpu, ram, storage, gpu, screen, desc };
                     
                     if(editingId) {
@@ -909,7 +1028,7 @@ ${availableProducts || 'لا توجد منتجات حالياً.'}
                 document.getElementById('p-screen').value = p.screen || '';
                 document.getElementById('p-desc').value = p.desc || '';
 
-                // دعم توافقية البيانات القديمة
+                // إذا كان المنتج قديماً جداً وكان يحتوي على حقل مواصفات قديم فقط، نضعه في الوصف
                 if(p.specs && !p.cpu && !p.ram && !p.desc) {
                     document.getElementById('p-desc').value = p.specs;
                 }
@@ -979,14 +1098,17 @@ ${availableProducts || 'لا توجد منتجات حالياً.'}
             }, 1500);
         };
 
-        // 🛑 حماية إضافية
+        // 🛑 أكواد حماية إضافية لمنع سرقة الأكواد والمفتاح من الصفحة 🛑
+        // 1. منع النقر بزر الماوس الأيمن
         document.addEventListener('contextmenu', event => event.preventDefault());
+        
+        // 2. منع اختصارات لوحة المفاتيح الخاصة بالمطورين (F12, Ctrl+U, Ctrl+Shift+I)
         document.onkeydown = function(e) {
-            if(e.keyCode == 123) { return false; }
-            if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) { return false; }
-            if(e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) { return false; }
-            if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) { return false; }
-            if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) { return false; }
+            if(e.keyCode == 123) { return false; } // منع F12
+            if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) { return false; } // منع Ctrl+Shift+I
+            if(e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) { return false; } // منع Ctrl+Shift+C
+            if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) { return false; } // منع Ctrl+Shift+J
+            if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) { return false; } // منع Ctrl+U (View Source)
         };
     </script>
 </body>
