@@ -402,7 +402,7 @@
                 <h2 id="modal-title" class="text-2xl md:text-3xl font-black mb-2 text-slate-800 dark:text-white leading-tight"></h2>
                 <p id="modal-cat" class="text-sm text-slate-500 mb-6 font-bold"></p>
                 
-                <div class="mb-6 md:mb-8">
+                <div class="mb-6 md:mb-8 flex-1">
                     <h4 class="font-bold mb-4 text-sm flex items-center gap-2 text-slate-800 dark:text-slate-200"><div class="w-2 h-2 rounded-full bg-brand-500"></div> المواصفات التقنية:</h4>
                     <div id="modal-specs-container" class="w-full"></div>
                 </div>
@@ -748,16 +748,16 @@ ${availableProducts || 'لا توجد منتجات حالياً.'}
             return id;
         }
 
-        // دالة إنشاء كارت المواصفات الفخم
+        // دالة إنشاء كارت المواصفات (الآن بشكل قائمة طولية مريحة جداً)
         function createSpecCard(title, value, icon, iconColor, bgColor) {
             return `
-                <div class="flex items-center gap-3 bg-slate-50 dark:bg-slate-800/50 p-3 rounded-xl border border-slate-100 dark:border-slate-700/50 hover:border-brand-300 dark:hover:border-brand-700 transition-colors shadow-sm">
-                    <div class="w-10 h-10 rounded-lg ${bgColor} flex items-center justify-center ${iconColor} shrink-0">
-                        <i class="fas ${icon} text-lg"></i>
+                <div class="flex items-center gap-4 p-3 hover:bg-white dark:hover:bg-slate-800 rounded-xl transition-colors border-b border-slate-100 dark:border-slate-700/50 last:border-0">
+                    <div class="w-12 h-12 rounded-xl ${bgColor} flex items-center justify-center ${iconColor} shrink-0 shadow-sm">
+                        <i class="fas ${icon} text-xl"></i>
                     </div>
-                    <div class="flex-1 min-w-0">
-                        <p class="text-[10px] text-slate-500 dark:text-slate-400 font-bold mb-0.5">${title}</p>
-                        <p class="text-xs sm:text-sm font-bold text-slate-800 dark:text-slate-200 truncate" title="${value}">${value}</p>
+                    <div class="flex-1">
+                        <p class="text-xs text-slate-500 dark:text-slate-400 font-bold mb-1">${title}</p>
+                        <p class="text-sm sm:text-base font-bold text-slate-800 dark:text-slate-200 leading-relaxed break-words">${value}</p>
                     </div>
                 </div>
             `;
@@ -892,18 +892,18 @@ ${availableProducts || 'لا توجد منتجات حالياً.'}
 
                 addBtn.onclick = () => { window.app.addToCart(p.id); window.app.closeProductModal(); };
 
-                // --- التوزيع الجديد للمواصفات في النافذة ---
+                // --- التوزيع الجديد للمواصفات في النافذة (القائمة الطولية) ---
                 const specsContainer = document.getElementById('modal-specs-container');
                 let specsHTML = '';
 
                 // إذا كان المنتج يحتوي على تفاصيل مقسمة
                 if (p.cpu || p.ram || p.storage || p.gpu || p.screen) {
-                    specsHTML += `<div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">`;
-                    if (p.cpu) specsHTML += createSpecCard('المعالج', p.cpu, 'fa-microchip', 'text-blue-500', 'bg-blue-50 dark:bg-blue-500/10');
-                    if (p.ram) specsHTML += createSpecCard('الذاكرة (RAM)', p.ram, 'fa-memory', 'text-purple-500', 'bg-purple-50 dark:bg-purple-500/10');
-                    if (p.storage) specsHTML += createSpecCard('سعة التخزين', p.storage, 'fa-hdd', 'text-emerald-500', 'bg-emerald-50 dark:bg-emerald-500/10');
-                    if (p.gpu) specsHTML += createSpecCard('كرت الشاشة', p.gpu, 'fa-gamepad', 'text-red-500', 'bg-red-50 dark:bg-red-500/10');
-                    if (p.screen) specsHTML += createSpecCard('حجم الشاشة', p.screen, 'fa-desktop', 'text-amber-500', 'bg-amber-50 dark:bg-amber-500/10');
+                    specsHTML += `<div class="flex flex-col bg-slate-50 dark:bg-slate-800/30 rounded-2xl border border-slate-100 dark:border-slate-700/50 p-2 mb-4">`;
+                    if (p.cpu) specsHTML += createSpecCard('المعالج', p.cpu, 'fa-microchip', 'text-blue-600 dark:text-blue-400', 'bg-blue-100 dark:bg-blue-500/20');
+                    if (p.ram) specsHTML += createSpecCard('الذاكرة (RAM)', p.ram, 'fa-memory', 'text-purple-600 dark:text-purple-400', 'bg-purple-100 dark:bg-purple-500/20');
+                    if (p.storage) specsHTML += createSpecCard('سعة التخزين', p.storage, 'fa-hdd', 'text-emerald-600 dark:text-emerald-400', 'bg-emerald-100 dark:bg-emerald-500/20');
+                    if (p.gpu) specsHTML += createSpecCard('كرت الشاشة', p.gpu, 'fa-gamepad', 'text-red-600 dark:text-red-400', 'bg-red-100 dark:bg-red-500/20');
+                    if (p.screen) specsHTML += createSpecCard('حجم الشاشة', p.screen, 'fa-desktop', 'text-amber-600 dark:text-amber-400', 'bg-amber-100 dark:bg-amber-500/20');
                     specsHTML += `</div>`;
 
                     if (p.desc) {
