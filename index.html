@@ -297,7 +297,7 @@
                 </div>
             </div>
 
-            <div class="flex justify-center mb-10 overflow-x-auto pb-2 scrollbar-hide">
+            <div class="flex justify-center mb-8 overflow-x-auto pb-2 scrollbar-hide">
                 <div class="bg-white dark:bg-slate-800 p-1.5 rounded-2xl border border-slate-200 dark:border-slate-700 inline-flex shadow-sm gap-2 whitespace-nowrap">
                     <button onclick="window.app.switchStoreTab('used')" id="tab-used" class="px-6 sm:px-10 py-3 rounded-xl text-sm font-bold transition-all duration-300 bg-brand-600 text-white shadow-lg"><i class="fas fa-box-open mr-2"></i> المستعمل</button>
                     <button onclick="window.app.switchStoreTab('new')" id="tab-new" class="px-6 sm:px-10 py-3 rounded-xl text-sm font-bold transition-all duration-300 text-slate-500 hover:text-slate-800 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-700"><i class="fas fa-fire mr-2 text-red-500"></i> الجديد</button>
@@ -305,35 +305,30 @@
                 </div>
             </div>
             
-            <div id="used-section" class="fade-in">
-                <div class="mb-8">
-                    <div class="w-full relative group mb-6">
-                        <input type="text" id="searchInput" onkeyup="window.app.filterProducts()" placeholder="ابحث عن لابتوب (مثلاً ThinkPad)..." class="w-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl px-5 py-4 pr-12 focus:outline-none focus:ring-2 focus:ring-brand-500 transition-all">
-                        <i class="fas fa-search absolute left-5 top-1/2 -translate-y-1/2 text-slate-400"></i>
-                    </div>
-                    <div class="flex gap-3 overflow-x-auto pb-2 scrollbar-hide">
-                        <button onclick="window.app.filterCategory('all')" class="cat-btn active px-6 py-3 rounded-xl bg-brand-500 text-white font-bold transition-all">الكل</button>
-                        <button onclick="window.app.filterCategory('engineering')" class="cat-btn px-6 py-3 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 font-bold hover:bg-brand-500 hover:text-white transition-all">هندسة وتصميم</button>
-                        <button onclick="window.app.filterCategory('student')" class="cat-btn px-6 py-3 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 font-bold hover:bg-brand-500 hover:text-white transition-all">طلاب وأعمال</button>
-                        <button onclick="window.app.filterCategory('gaming')" class="cat-btn px-6 py-3 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 font-bold hover:bg-brand-500 hover:text-white transition-all">Gaming</button>
-                    </div>
+            <div class="mb-8 fade-in">
+                <div class="w-full relative group mb-6">
+                    <input type="text" id="searchInput" onkeyup="window.app.filterProducts()" placeholder="ابحث عن منتج (لابتوب، ماوس، حقيبة...)" class="w-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl px-5 py-4 pr-12 focus:outline-none focus:ring-2 focus:ring-brand-500 transition-all shadow-sm hover:shadow-md">
+                    <i class="fas fa-search absolute left-5 top-1/2 -translate-y-1/2 text-slate-400"></i>
                 </div>
-
-                <div id="loading-spinner" class="flex flex-col items-center justify-center py-32">
-                    <div class="loader mb-4"></div>
-                    <p class="text-slate-400 text-sm animate-pulse">جاري التحميل...</p>
+                <div class="flex gap-3 overflow-x-auto pb-2 scrollbar-hide">
+                    <button id="cat-all" onclick="window.app.filterCategory('all')" class="cat-btn active px-6 py-3 rounded-xl bg-brand-500 text-white font-bold transition-all shadow-sm">الكل</button>
+                    <button id="cat-engineering" onclick="window.app.filterCategory('engineering')" class="cat-btn px-6 py-3 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 font-bold hover:bg-brand-500 hover:text-white transition-all shadow-sm">هندسة وتصميم</button>
+                    <button id="cat-student" onclick="window.app.filterCategory('student')" class="cat-btn px-6 py-3 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 font-bold hover:bg-brand-500 hover:text-white transition-all shadow-sm">طلاب وأعمال</button>
+                    <button id="cat-gaming" onclick="window.app.filterCategory('gaming')" class="cat-btn px-6 py-3 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 font-bold hover:bg-brand-500 hover:text-white transition-all shadow-sm">Gaming</button>
                 </div>
-
-                <div id="products-container" class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-8 hidden"></div>
-                <div id="no-results" class="hidden text-center py-32"><i class="fas fa-search text-6xl text-slate-200 dark:text-slate-800 mb-6"></i><p class="text-slate-500 font-bold">لا توجد نتائج</p></div>
             </div>
 
-            <div id="new-section" class="hidden fade-in">
-                <div id="new-products-container" class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-8"></div>
+            <div id="loading-spinner" class="flex flex-col items-center justify-center py-20">
+                <div class="loader mb-4"></div>
+                <p class="text-slate-400 text-sm animate-pulse">جاري التحميل...</p>
             </div>
 
-            <div id="accessory-section" class="hidden fade-in">
-                <div id="accessory-products-container" class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-8"></div>
+            <div id="products-container" class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-8 hidden fade-in"></div>
+            
+            <div id="no-results" class="hidden text-center py-20 bg-white/50 dark:bg-slate-800/50 rounded-3xl border border-slate-100 dark:border-slate-700">
+                <i class="fas fa-search text-6xl text-slate-200 dark:text-slate-700 mb-6"></i>
+                <p class="text-slate-500 font-bold text-lg">لا توجد نتائج مطابقة لبحثك</p>
+                <p class="text-slate-400 text-sm mt-2">جرب البحث بكلمات مختلفة أو تغيير التصنيف</p>
             </div>
 
         </div>
@@ -542,7 +537,8 @@
         }
 
         let allProducts = [];
-        let currentCategory = 'all';
+        let currentTab = 'used'; // تتبع التبويب الحالي (مستعمل، جديد، إكسسوار)
+        let currentCategory = 'all'; // تتبع الصنف الحالي (هندسة، طلاب...)
         let editingId = null;
 
         let cart = JSON.parse(localStorage.getItem('lapmosul_cart')) || [];
@@ -573,7 +569,7 @@
             
             if(cart.length === 0) {
                 container.innerHTML = '<div class="text-center text-slate-400 mt-20"><i class="fas fa-box-open text-6xl mb-4 opacity-50"></i><p class="font-bold">السلة فارغة حالياً</p></div>';
-                totalEl.innerText = '0';
+                totalEl.innerText = '0 د.ع';
                 return;
             }
             
@@ -581,7 +577,8 @@
             let total = 0;
             
             cart.forEach((item, index) => {
-                const priceNum = parseFloat(item.price.replace(/[^0-9.]/g, '')) || 0;
+                // نستخرج بس الأرقام حتى نعالج مشكلة النقطة أو الفارزة بالدينار العراقي
+                const priceNum = parseInt(item.price.replace(/[^0-9]/g, '')) || 0;
                 total += priceNum;
                 
                 container.innerHTML += `
@@ -600,7 +597,7 @@
                 `;
             });
             
-            totalEl.innerText = total.toLocaleString() + (total > 10000 ? ' د.ع' : ' $');
+            totalEl.innerText = total.toLocaleString('en-US') + ' د.ع';
         }
 
         function generateProductCardHTML(p, badgeText, badgeColorClass) {
@@ -622,8 +619,6 @@
         function refreshData() {
             updateUI();
             updateAdminList();
-            renderNewProducts();
-            renderAccessories();
             updateCartUI();
             const spinner = document.getElementById('loading-spinner');
             if(spinner) spinner.style.display = 'none';
@@ -640,37 +635,18 @@
             });
         }
 
-        function renderNewProducts() {
-            const container = document.getElementById('new-products-container');
-            if(!container) return;
-            container.innerHTML = '';
-            const newProducts = allProducts.filter(p => p.type === 'new');
-            
-            newProducts.forEach(p => {
-                container.innerHTML += generateProductCardHTML(p, '<i class="fas fa-shield-alt"></i> ضمان سنة', 'bg-blue-500');
-            });
-        }
-
-        function renderAccessories() {
-            const container = document.getElementById('accessory-products-container');
-            if(!container) return;
-            container.innerHTML = '';
-            const accessories = allProducts.filter(p => p.type === 'accessory');
-            
-            accessories.forEach(p => {
-                container.innerHTML += generateProductCardHTML(p, 'ACCESSORY', 'bg-purple-500');
-            });
-        }
-
+        // دالة تحديث الواجهة الموحدة الشاملة
         function updateUI() {
             const queryStr = document.getElementById('searchInput').value.toLowerCase();
             const container = document.getElementById('products-container');
             
             const filtered = allProducts.filter(p => {
-                const isUsed = p.type === 'used' || !p.type;
+                const pType = p.type || 'used'; // الافتراضي مستعمل للقديم
+                const matchTab = (currentTab === 'used' && pType === 'used') || pType === currentTab;
                 const matchCat = currentCategory === 'all' || p.category === currentCategory;
                 const matchSearch = p.name.toLowerCase().includes(queryStr) || (p.specs && p.specs.toLowerCase().includes(queryStr));
-                return isUsed && matchCat && matchSearch;
+                
+                return matchTab && matchCat && matchSearch;
             });
 
             container.innerHTML = '';
@@ -679,7 +655,21 @@
             } else {
                 document.getElementById('no-results').classList.add('hidden');
                 filtered.forEach(p => {
-                    container.innerHTML += generateProductCardHTML(p, '<i class="fas fa-shield-alt"></i> ضمان 10 أيام', 'bg-emerald-500');
+                    let badgeText = '';
+                    let badgeColor = '';
+                    
+                    if(p.type === 'new') {
+                        badgeText = '<i class="fas fa-shield-alt"></i> ضمان سنة';
+                        badgeColor = 'bg-blue-500';
+                    } else if(p.type === 'accessory') {
+                        badgeText = 'متوفر';
+                        badgeColor = 'bg-purple-500';
+                    } else {
+                        badgeText = '<i class="fas fa-shield-alt"></i> ضمان 10 أيام';
+                        badgeColor = 'bg-emerald-500';
+                    }
+                    
+                    container.innerHTML += generateProductCardHTML(p, badgeText, badgeColor);
                 });
             }
         }
@@ -770,30 +760,43 @@ ${availableProducts || 'لا توجد منتجات حالياً.'}
                 target.classList.add('active');
                 window.scrollTo(0,0);
             },
+            
+            // الدالة المسؤولة عن تبديل الأقسام وتصفير الفلاتر
             switchStoreTab: (tab) => {
-                document.getElementById('used-section').classList.add('hidden');
-                document.getElementById('new-section').classList.add('hidden');
-                document.getElementById('accessory-section').classList.add('hidden');
-                document.getElementById(`${tab}-section`).classList.remove('hidden');
+                currentTab = tab;
                 
+                // تحديث شكل أزرار التبويبات
                 document.querySelectorAll('[id^="tab-"]').forEach(btn => btn.className = "px-6 sm:px-10 py-3 rounded-xl text-sm font-bold text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-700 transition-all duration-300");
                 document.getElementById(`tab-${tab}`).className = "px-6 sm:px-10 py-3 rounded-xl text-sm font-bold bg-brand-600 text-white shadow-lg transition-all duration-300";
+                
+                // تصفير البحث
+                document.getElementById('searchInput').value = '';
+                
+                // تصفير الفئات (تلقائياً يرجع لـ "الكل")
+                window.app.filterCategory('all');
             },
+            
             toggleTheme: () => {
                 document.documentElement.classList.toggle('dark');
                 localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
             },
+            
             filterCategory: (cat) => {
                 currentCategory = cat;
+                
+                // تحديث ألوان الأزرار
                 document.querySelectorAll('.cat-btn').forEach(b => {
                     b.classList.remove('bg-brand-500', 'text-white');
                     b.classList.add('bg-white', 'dark:bg-slate-800');
                 });
-                event.target.classList.remove('bg-white', 'dark:bg-slate-800');
-                event.target.classList.add('bg-brand-500', 'text-white');
+                document.getElementById(`cat-${cat}`).classList.remove('bg-white', 'dark:bg-slate-800');
+                document.getElementById(`cat-${cat}`).classList.add('bg-brand-500', 'text-white');
+                
                 updateUI();
             },
+            
             filterProducts: () => updateUI(),
+            
             openAdminLogin: () => document.getElementById('pin-modal').classList.remove('hidden'),
             
             toggleCart: () => {
