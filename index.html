@@ -271,8 +271,8 @@
                         <i class="fas fa-shield-alt"></i>
                     </div>
                     <div>
-                        <h4 class="font-bold text-slate-800 dark:text-white text-sm mb-1">ضمان 10 ايام </h4>
-                        <p class="text-xs text-slate-500 dark:text-slate-400">على جميع الأجهزة لتسوق آمن</p>
+                        <h4 class="font-bold text-slate-800 dark:text-white text-sm mb-1">ضمان 10 أيام للمستعمل</h4>
+                        <p class="text-xs text-slate-500 dark:text-slate-400">وضمان سنة كاملة للأجهزة الجديدة</p>
                     </div>
                 </div>
                 
@@ -679,7 +679,7 @@
             } else {
                 document.getElementById('no-results').classList.add('hidden');
                 filtered.forEach(p => {
-                    container.innerHTML += generateProductCardHTML(p, '<i class="fas fa-check-circle"></i> متوفر', 'bg-emerald-500');
+                    container.innerHTML += generateProductCardHTML(p, '<i class="fas fa-shield-alt"></i> ضمان 10 أيام', 'bg-emerald-500');
                 });
             }
         }
@@ -871,8 +871,14 @@ ${availableProducts || 'لا توجد منتجات حالياً.'}
                     addBtn.onclick = () => { window.app.addToCart(p.id); window.app.closeProductModal(); };
                     addBtn.innerHTML = 'أضف إلى السلة <i class="fas fa-cart-plus"></i>';
                     addBtn.className = 'flex-1 bg-brand-600 hover:bg-brand-500 text-white px-6 py-4 rounded-xl font-bold flex items-center justify-center gap-2 transition-all shadow-lg hover:shadow-brand-500/30 hover:-translate-y-1';
-                } else {
+                } else if(p.type === 'accessory') {
                     badge.innerText = 'متوفر للتسليم الفوري'; 
+                    badge.className = 'inline-block px-4 py-1.5 rounded-full bg-purple-500/10 text-purple-500 text-xs font-bold mb-4 w-max border border-purple-500/20';
+                    addBtn.onclick = () => { window.app.addToCart(p.id); window.app.closeProductModal(); };
+                    addBtn.innerHTML = 'أضف إلى السلة <i class="fas fa-cart-plus"></i>';
+                    addBtn.className = 'flex-1 bg-brand-600 hover:bg-brand-500 text-white px-6 py-4 rounded-xl font-bold flex items-center justify-center gap-2 transition-all shadow-lg hover:shadow-brand-500/30 hover:-translate-y-1';
+                } else {
+                    badge.innerText = 'ضمان 10 أيام'; 
                     badge.className = 'inline-block px-4 py-1.5 rounded-full bg-emerald-500/10 text-emerald-500 text-xs font-bold mb-4 w-max border border-emerald-500/20';
                     addBtn.onclick = () => { window.app.addToCart(p.id); window.app.closeProductModal(); };
                     addBtn.innerHTML = 'أضف إلى السلة <i class="fas fa-cart-plus"></i>';
