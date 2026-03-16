@@ -208,7 +208,7 @@
                 <div class="hidden lg:flex justify-center items-center relative h-full">
                     <div class="absolute w-96 h-96 bg-brand-500/20 rounded-full blur-[100px] z-0"></div>
                     <div id="hero-laptop" class="hero-image-container z-10 w-full flex justify-center">
-                        <img src="https://cdn.discordapp.com/attachments/1244793540679503923/1244794218865037342/asus_rog.png?ex=66566d5e&is=66551bde&hm=5573752e008ceebef1e8ab4c34a9e102f43ce9c381c855848bb4ee6b67f13b19&" alt="Premium Laptop" class="w-full max-w-lg object-contain drop-shadow-2xl animate-float" onerror="this.src='https://placehold.co/600x400/transparent/0ea5e9?text=LAP+MOSUL+Laptop'">
+                        <img id="daily-laptop" src="" alt="Premium Laptop" class="w-full max-w-lg object-contain drop-shadow-2xl animate-float transition-opacity duration-1000 opacity-0" onload="this.classList.remove('opacity-0')">
                     </div>
                 </div>
             </div>
@@ -614,7 +614,7 @@
             totalEl.innerText = total.toLocaleString('en-US') + ' د.ع';
         }
 
-        // 🌟 التعديل الوحيد في الدالة: إضافة البطاقات المضيئة (Magic Card) هنا 🌟
+        // 🌟 البطاقات المضيئة (Magic Card) 🌟
         function generateProductCardHTML(p, badgeText, badgeColorClass) {
             let glowColor = p.type === 'new' ? '#3b82f6' : (p.type === 'accessory' ? '#8b5cf6' : '#10b981');
             
@@ -1117,19 +1117,40 @@ ${availableProducts || 'لا توجد منتجات حالياً.'}
             });
         }
 
+        // 🌟 نظام الصورة اليومية التلقائية للواجهة 🌟
+        function setDailyLaptopImage() {
+            const premiumLaptops = [
+                "https://dlcdnwebimgs.asus.com/gain/B5ACD804-A9EA-4CA2-8E33-0F906EB66A9C/w1000/h732", // ASUS ROG
+                "https://p1-ofp.static.pub/ShareResource/we/Products/laptops/legion/legion-7-series/legion-7-gen-7-16-amd/lenovo-legion-7-gen-7-16-amd-hero.png", // Lenovo Legion
+                "https://i.dell.com/is/image/DellContent/content/dam/ss2/product-images/dell-client-products/notebooks/alienware-notebooks/alienware-x16-mlk/media-gallery/gray/laptop-alienware-x16-r2-gray-gallery-1.png?fmt=png-alpha&wid=1000&hei=762", // Dell Alienware
+                "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/mbp16-spacegray-select-202310?wid=904&hei=840&fmt=png-alpha&.v=1697311054290", // MacBook Pro M3
+                "https://dlcdnwebimgs.asus.com/gain/9F32BCBD-11DB-4C1F-9A5F-C1E93CF3FBEB/w1000/h732", // ASUS Zephyrus
+                "https://p2-ofp.static.pub/ShareResource/na/products/thinkpad/400x300/lenovo-thinkpad-x1-carbon-gen-10-14-inch-intel-06.png" // ThinkPad
+            ];
+            
+            const today = new Date();
+            const dayOfYear = Math.floor((today - new Date(today.getFullYear(), 0, 0)) / 1000 / 60 / 60 / 24);
+            const imageIndex = dayOfYear % premiumLaptops.length;
+            
+            const laptopImg = document.getElementById('daily-laptop');
+            if (laptopImg) {
+                laptopImg.src = premiumLaptops[imageIndex];
+            }
+        }
+
         window.onload = () => {
+            setDailyLaptopImage(); // تشغيل تغيير الصورة هنا
             setTimeout(() => {
                 document.getElementById('splash-screen').style.opacity = '0';
                 setTimeout(() => document.getElementById('splash-screen').style.display = 'none', 800);
             }, 1500);
         };
 
-        // 🌟 دالة التأثير الحركي للتمرير (Scroll Animation) لصورة اللابتوب 🌟
+        // دالة التأثير الحركي للتمرير (Scroll Animation) لصورة اللابتوب
         window.addEventListener('scroll', () => {
             const laptop = document.getElementById('hero-laptop');
             if(laptop) {
                 const scrollY = window.scrollY;
-                // الصورة تصغر وتتجه لأسفل قليلاً لتعطي عمق 3D عند التمرير
                 laptop.style.transform = `translateY(${scrollY * 0.3}px) scale(${1 - scrollY * 0.0005}) rotateX(${scrollY * 0.02}deg)`;
             }
         });
