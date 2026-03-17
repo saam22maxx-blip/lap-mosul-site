@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="description" content="LAP MOSUL - الوجهة الأولى للحواسيب المحمولة ومحطات العمل في الموصل.">
-    <title>LAP MOSUL | لاب الموصل - المتجر السحابي</title>
+    <meta name="description" content="LAP MOSUL - الوجهة الأولى للحواسيب والابتوبات في الموصل.">
+    <title>LAP MOSUL | لابتوب الموصل - المتجر السحابي</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -76,9 +76,6 @@
         .input-field:focus { border-color: #0ea5e9; outline: none; box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.1); }
         .dark .input-field { border-color: #334155; color: white; background: rgba(30, 41, 59, 0.5); }
 
-        /* Chat Styles */
-        .chat-msg { animation: bounce-in 0.4s forwards; transform-origin: bottom right; }
-        .chat-msg.bot { transform-origin: bottom left; }
         .phone-number, .direction-ltr { direction: ltr !important; unicode-bidi: bidi-override !important; display: inline-block; }
 
         @keyframes bounce-in { 0% { transform: scale(0.5) translate(-50%, 0); opacity: 0; } 100% { transform: scale(1) translate(-50%, 0); opacity: 1; } }
@@ -338,7 +335,7 @@
     </main>
 
     <main id="view-store" class="view-section pt-32 pb-28 md:pb-20 min-h-screen">
-        <div class="max-w-7xl mx-auto px-6">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
             <div class="flex flex-col md:flex-row justify-between items-center mb-6 gap-6">
                 <div>
                     <h2 class="text-3xl md:text-4xl font-black flex items-center gap-3">المعرض <span class="text-brand-500">الرقمي</span> <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse shadow-[0_0_10px_#22c55e]"></div></h2>
@@ -372,49 +369,19 @@
                     <p class="text-slate-400 text-sm animate-pulse">جاري التحميل...</p>
                 </div>
 
-                <div id="products-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 hidden"></div>
+                <div id="products-container" class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-6 hidden"></div>
                 <div id="no-results" class="hidden text-center py-32"><i class="fas fa-search text-6xl text-slate-200 dark:text-slate-800 mb-6"></i><p class="text-slate-500 font-bold">لا توجد نتائج</p></div>
             </div>
 
             <div id="new-section" class="hidden fade-in">
-                <div id="new-products-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"></div>
+                <div id="new-products-container" class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-6"></div>
             </div>
 
             <div id="accessory-section" class="hidden fade-in">
-                <div id="accessory-products-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"></div>
+                <div id="accessory-products-container" class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-6"></div>
             </div>
         </div>
     </main>
-
-    <div id="chat-widget" class="fixed bottom-24 md:bottom-6 left-4 md:left-6 z-[150] flex flex-col items-start font-sans" dir="rtl">
-        <div id="chat-window" class="hidden w-[90vw] sm:w-[24rem] h-[550px] max-h-[80vh] bg-white dark:bg-slate-900 rounded-[2rem] shadow-2xl border border-slate-200 dark:border-slate-700 flex flex-col overflow-hidden mb-4 transition-all duration-300 origin-bottom-left scale-95 opacity-0">
-            <div class="bg-gradient-to-l from-slate-900 to-slate-800 p-5 flex justify-between items-center text-white shrink-0 shadow-lg">
-                <div class="flex items-center gap-4">
-                    <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center border-2 border-brand-500"><i class="fas fa-headset text-brand-600 text-xl"></i></div>
-                    <div><span class="font-black block text-lg">الدعم الذكي ✨</span><span class="text-xs text-slate-300 flex items-center gap-1"><i class="fas fa-wifi text-[10px]"></i> متصل بـ Gemini</span></div>
-                </div>
-                <button onclick="window.app.toggleChat()" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center"><i class="fas fa-times"></i></button>
-            </div>
-            <div id="chat-messages" class="flex-1 p-5 overflow-y-auto space-y-4 bg-slate-50 dark:bg-slate-950 scroll-smooth">
-                <div class="flex justify-start chat-msg bot">
-                    <div class="bg-white dark:bg-slate-800 p-4 rounded-2xl rounded-tr-none shadow-sm text-sm border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200">
-                        <p class="font-bold text-brand-600 mb-2">لاب الموصل 💻</p> أهلاً بك! آني المساعد الآلي المدعوم بالذكاء الاصطناعي، تفضل اسألني عن اللابتوبات المتوفرة عندنا؟ ✨
-                    </div>
-                </div>
-            </div>
-            <div class="p-4 bg-white dark:bg-slate-900 border-t border-slate-100 dark:border-slate-800 flex gap-2">
-                <input type="text" id="chat-input" placeholder="اكتب سؤالك هنا..." class="flex-1 bg-slate-100 dark:bg-slate-800 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500/50 dark:text-white" onkeypress="if(event.key === 'Enter') window.app.handleChat()">
-                <button onclick="window.app.handleChat()" class="w-12 h-12 bg-gradient-to-tr from-brand-600 to-brand-400 text-white rounded-xl flex items-center justify-center hover:shadow-lg"><i class="fas fa-paper-plane transform -rotate-90"></i></button>
-            </div>
-        </div>
-        
-        <div class="relative">
-            <button onclick="window.app.toggleChat()" class="group relative w-16 h-16 z-50">
-                <span class="absolute -top-1 -right-1 flex h-4 w-4"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span><span class="relative inline-flex rounded-full h-4 w-4 bg-red-500"></span></span>
-                <div class="relative w-full h-full bg-gradient-to-br from-brand-600 to-slate-900 text-white rounded-full shadow-2xl flex items-center justify-center text-2xl hover:scale-110 transition-all border-2 border-white"><i class="fas fa-comment-dots"></i></div>
-            </button>
-        </div>
-    </div>
 
     <div id="cart-overlay" class="fixed inset-0 bg-slate-900/50 z-[250] hidden backdrop-blur-sm transition-opacity opacity-0" onclick="window.app.toggleCart()"></div>
     <div id="cart-sidebar" class="fixed top-0 left-0 h-full w-full sm:w-[400px] bg-white dark:bg-slate-900 z-[260] transform -translate-x-full transition-transform duration-300 shadow-2xl flex flex-col border-r border-slate-200 dark:border-slate-800">
@@ -565,10 +532,7 @@
                             </div>
                         </div>
 
-                        <div class="md:col-span-2 relative mt-2">
-                            <input type="text" id="p-desc" placeholder="وصف تسويقي أو ملاحظات إضافية" class="input-field w-full pl-32">
-                            <button onclick="window.app.generateSpecsAI()" class="absolute left-2 top-1/2 -translate-y-1/2 bg-gradient-to-r from-brand-500 to-accent-purple text-white text-xs px-3 py-1.5 rounded-lg font-bold hover:shadow-lg transition-all flex items-center gap-1">✨ تأليف ذكي</button>
-                        </div>
+                        <input type="text" id="p-desc" placeholder="وصف تسويقي أو ملاحظات إضافية" class="input-field md:col-span-2 mt-2">
 
                         <div class="md:col-span-2 mt-2 flex gap-2">
                             <input type="text" id="p-img" placeholder="رابط الصورة سيظهر هنا..." class="input-field flex-1 text-left direction-ltr">
@@ -610,7 +574,6 @@
     </div>
 
     <script type="module">
-        // Firebase Imports (Including Storage)
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getFirestore, collection, addDoc, deleteDoc, updateDoc, doc, onSnapshot, query, orderBy, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
         import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
@@ -664,17 +627,12 @@
             container.innerHTML = ''; let total = 0; let isDollar = false;
             
             cart.forEach((item, index) => {
-                // Number processing for Iraqi Dinars Format
                 let rawPrice = item.price.toString().replace(/،/g, ','); 
                 let cleanStr = rawPrice.replace(/[^\d.,]/g, '').replace(/,/g, '');
                 let parts = cleanStr.split('.');
                 if (parts.length > 1) {
-                    if (parts[parts.length - 1].length === 3) {
-                        cleanStr = cleanStr.replace(/\./g, ''); 
-                    } else {
-                        let dec = parts.pop();
-                        cleanStr = parts.join('') + '.' + dec; 
-                    }
+                    if (parts[parts.length - 1].length === 3) cleanStr = cleanStr.replace(/\./g, ''); 
+                    else cleanStr = parts.join('') + '.' + parts.pop();
                 }
                 const priceNum = parseFloat(cleanStr) || 0;
                 total += priceNum; if(item.price.includes('$')) isDollar = true;
@@ -694,18 +652,19 @@
             totalEl.innerText = total.toLocaleString('en-US') + (isDollar ? ' $' : ' د.ع');
         }
 
+        // تم تعديل الكارد ليتناسب بشكل ممتاز مع العرض الثنائي (2 بالسطر) على الموبايل
         function generateProductCardHTML(p, badgeText, badgeColorClass) {
             return `
-                <div onclick="window.app.openProductModal('${p.id}')" class="group bg-white dark:bg-slate-800 rounded-[2rem] p-4 border border-slate-100 dark:border-slate-700 shadow-sm flex flex-col h-full overflow-hidden cursor-pointer hover:shadow-xl transition-all hover:-translate-y-1">
-                    <div class="relative h-56 bg-slate-50 dark:bg-slate-900/50 rounded-3xl mb-4 p-6 flex items-center justify-center overflow-hidden">
+                <div onclick="window.app.openProductModal('${p.id}')" class="group bg-white dark:bg-slate-800 rounded-2xl md:rounded-[2rem] p-3 md:p-4 border border-slate-100 dark:border-slate-700 shadow-sm flex flex-col h-full overflow-hidden cursor-pointer hover:shadow-xl transition-all hover:-translate-y-1">
+                    <div class="relative h-32 md:h-56 bg-slate-50 dark:bg-slate-900/50 rounded-xl md:rounded-3xl mb-3 md:mb-4 p-2 md:p-6 flex items-center justify-center overflow-hidden">
                         <img src="${p.img}" class="w-full h-full object-contain transform group-hover:scale-125 transition-transform duration-500 ease-in-out drop-shadow-xl" onerror="this.src='https://placehold.co/400x300'">
-                        <div class="absolute top-3 right-3 ${badgeColorClass} text-white text-[10px] font-bold px-3 py-1 rounded-full z-10 flex items-center gap-1">${badgeText}</div>
+                        <div class="absolute top-2 right-2 ${badgeColorClass} text-white text-[9px] md:text-[10px] font-bold px-2 py-1 rounded-full z-10 flex items-center gap-1">${badgeText}</div>
                     </div>
-                    <h3 class="font-bold text-lg mb-2 text-slate-800 dark:text-white group-hover:text-brand-500 transition-colors line-clamp-1">${p.name}</h3>
-                    <p class="text-xs text-slate-500 dark:text-slate-400 mb-4 flex-1 line-clamp-2">${p.specs}</p>
-                    <div class="flex justify-between items-center mt-auto pt-3 border-t border-slate-100 dark:border-slate-700/50">
-                        <span class="font-black text-slate-800 dark:text-white text-lg direction-ltr">${p.price || ''}</span>
-                        <button onclick="event.stopPropagation(); window.app.openProductModal('${p.id}')" class="w-10 h-10 rounded-xl bg-brand-50 text-brand-600 dark:bg-brand-500/20 dark:text-brand-400 flex items-center justify-center hover:bg-brand-500 hover:text-white transition-all shadow-sm hover:scale-110"><i class="fas fa-eye"></i></button>
+                    <h3 class="font-bold text-sm md:text-lg mb-1 md:mb-2 text-slate-800 dark:text-white group-hover:text-brand-500 transition-colors line-clamp-2 md:line-clamp-1">${p.name}</h3>
+                    <p class="text-[10px] md:text-xs text-slate-500 dark:text-slate-400 mb-2 md:mb-4 flex-1 line-clamp-2">${p.specs}</p>
+                    <div class="flex justify-between items-center mt-auto pt-2 md:pt-3 border-t border-slate-100 dark:border-slate-700/50">
+                        <span class="font-black text-slate-800 dark:text-white text-sm md:text-lg direction-ltr">${p.price || ''}</span>
+                        <button onclick="event.stopPropagation(); window.app.openProductModal('${p.id}')" class="w-8 h-8 md:w-10 md:h-10 rounded-lg md:rounded-xl bg-brand-50 text-brand-600 dark:bg-brand-500/20 dark:text-brand-400 flex items-center justify-center hover:bg-brand-500 hover:text-white transition-all shadow-sm hover:scale-110"><i class="fas fa-eye text-xs md:text-base"></i></button>
                     </div>
                 </div>`;
         }
@@ -737,7 +696,7 @@
             const container = document.getElementById('new-products-container');
             if(!container) return; container.innerHTML = '';
             allProducts.filter(p => p.type === 'new').forEach(p => {
-                container.innerHTML += generateProductCardHTML(p, '<i class="fas fa-shield-alt"></i> ضمان سنة', 'bg-blue-500');
+                container.innerHTML += generateProductCardHTML(p, '<i class="fas fa-shield-alt"></i> ضمان', 'bg-blue-500');
             });
         }
 
@@ -765,41 +724,6 @@
                 document.getElementById('no-results').classList.add('hidden');
                 filtered.forEach(p => container.innerHTML += generateProductCardHTML(p, '<i class="fas fa-check-circle"></i> متوفر', 'bg-emerald-500'));
             }
-        }
-
-        // Gemini API Setup
-        const encodedKey = "QUl6YVN5RGlmSExLUlVxMG1KZmdxRGU0TVdNeWp2SzZ6VmdZZGNB"; 
-        const geminiApiKey = atob(encodedKey); 
-        const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${geminiApiKey}`;
-
-        async function fetchGemini(promptText, systemInstructionText = null) {
-            const payload = { contents: [{ parts: [{ text: promptText }] }] };
-            if (systemInstructionText) payload.systemInstruction = { parts: [{ text: systemInstructionText }] };
-            try {
-                const response = await fetch(geminiUrl, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
-                if (!response.ok) throw new Error('API Request Failed');
-                const data = await response.json();
-                return data.candidates?.[0]?.content?.parts?.[0]?.text;
-            } catch (error) { return null; }
-        }
-
-        async function generateAIResponse(userMsg) {
-            const availableProducts = allProducts.filter(p => p.type === 'used' || !p.type)
-                .map(p => `- ${p.name} بسعر ${p.price} (مواصفات: ${p.specs})`).join('\n');
-            const systemInstruction = `أنت مساعد مبيعات ذكي ومحترف في متجر "لاب الموصل" للحواسيب في العراق.
-المنتجات المتوفرة: ${availableProducts || 'لا توجد منتجات حالياً.'}
-التعليمات: أجب على العميل بناءً على هذه المنتجات فقط. كن ودياً وجذاباً ومختصراً جداً. تحدث باللهجة العراقية المبسطة.`;
-            const reply = await fetchGemini(userMsg, systemInstruction);
-            return reply || "عذراً، أواجه مشكلة في الاتصال حالياً. يرجى التواصل عبر الواتساب.";
-        }
-
-        function addChatMsg(text, sender) {
-            const container = document.getElementById('chat-messages');
-            const id = 'msg-' + Date.now();
-            const align = sender === 'user' ? 'justify-end' : 'justify-start';
-            const bg = sender === 'user' ? 'bg-brand-600 text-white' : 'bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200';
-            container.innerHTML += `<div class="flex ${align} mb-2"><div id="${id}" class="${bg} p-3 rounded-2xl text-sm max-w-[80%] shadow-sm">${text}</div></div>`;
-            container.scrollTop = container.scrollHeight; return id;
         }
 
         // Global App Context
@@ -885,7 +809,6 @@
                 const baseNum = parseFloat(cleanStr) || 0;
                 const isDollar = basePriceStr.includes('$');
                 
-                // نفترض أن الترقيات في الكستومايزر مكتوبة بالدولار، إذا كان المجموع بالدينار، فيجب حسابها (كمثال سنضيف الأرقام كما هي الآن)
                 const ramUpgrade = parseFloat(document.getElementById('upgrade-ram')?.value) || 0;
                 const ssdUpgrade = parseFloat(document.getElementById('upgrade-ssd')?.value) || 0;
                 
@@ -962,14 +885,6 @@
             },
 
             // Products
-            generateSpecsAI: async () => {
-                const nameInput = document.getElementById('p-name').value;
-                if (!nameInput) return alert('يرجى كتابة اسم المنتج أولاً ✨.');
-                const descField = document.getElementById('p-desc'); const oldDesc = descField.value;
-                descField.value = "جاري التوليد بواسطة Gemini ✨...";
-                const result = await fetchGemini(`اكتب وصفاً تسويقياً جذاباً (سطر واحد) لمنتج تقني اسمه: "${nameInput}". الوصف باللغة العربية.`);
-                descField.value = result ? result.replace(/\n/g, ' ').trim() : oldDesc;
-            },
             saveProduct: async () => {
                 const name = document.getElementById('p-name').value; const price = document.getElementById('p-price').value;
                 const img = document.getElementById('p-img').value; const type = document.getElementById('p-type').value;
@@ -1077,20 +992,6 @@
                         resultDiv.innerHTML = `<i class="fas fa-exclamation-circle text-lg"></i> رقم الوصل غير صحيح.`;
                     }
                 } catch(e) { resultDiv.innerHTML = "حدث خطأ في الاتصال بالبيانات."; }
-            },
-
-            // Chat Widget
-            toggleChat: () => {
-                const win = document.getElementById('chat-window');
-                win.classList.toggle('hidden'); win.classList.toggle('opacity-100');
-            },
-            handleChat: async () => {
-                const input = document.getElementById('chat-input'); const msg = input.value.trim();
-                if(!msg) return; addChatMsg(msg, 'user'); input.value = '';
-                const loadingId = addChatMsg('...', 'bot');
-                const reply = await generateAIResponse(msg);
-                const loadingElement = document.getElementById(loadingId);
-                if(loadingElement) loadingElement.innerHTML = reply.replace(/\n/g, '<br>');
             }
         };
 
