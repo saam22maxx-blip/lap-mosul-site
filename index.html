@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="description" content="LAP MOSUL - الوجهة الأولى للحواسيب والابتوبات في الموصل.">
-    <title>LAP MOSUL | لابتوب الموصل - المتجر السحابي</title>
+    <meta name="description" content="لاب الموصل (LAP MOSUL) - الوجهة الرائدة لفخامة التقنية. نقدم أحدث اللابتوبات والإكسسوارات، مع خدمات صيانة هندسية، وتصميم مواقع، وبرمجة أنظمة الكاشير المتقدمة لإدارة أعمالك.">
+    <title>LAP MOSUL | لاب الموصل - المتجر السحابي</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -403,47 +403,28 @@
     </div>
 
     <div id="product-modal" class="fixed inset-0 z-[220] bg-slate-900/80 hidden backdrop-blur-md flex items-center justify-center p-4 opacity-0 transition-opacity duration-300">
-        <div class="bg-white dark:bg-slate-900 w-full max-w-5xl rounded-[2rem] overflow-hidden flex flex-col md:flex-row shadow-2xl relative transform scale-95 transition-transform duration-300 max-h-[95vh] overflow-y-auto custom-scrollbar" id="product-modal-content">
+        <div class="bg-white dark:bg-slate-900 w-full max-w-4xl rounded-[2rem] overflow-hidden flex flex-col md:flex-row shadow-2xl relative transform scale-95 transition-transform duration-300 max-h-[95vh] overflow-y-auto custom-scrollbar" id="product-modal-content">
             <button onclick="window.app.closeProductModal()" class="absolute top-4 left-4 z-10 w-10 h-10 rounded-full bg-white/80 dark:bg-black/80 hover:bg-red-500 hover:text-white flex items-center justify-center backdrop-blur-md transition-all shadow-lg"><i class="fas fa-times"></i></button>
             
-            <div class="w-full md:w-5/12 bg-slate-50 dark:bg-slate-800/50 p-4 md:p-8 flex items-center justify-center min-h-[250px] relative">
+            <div class="w-full md:w-1/2 bg-slate-50 dark:bg-slate-800/50 p-4 md:p-8 flex items-center justify-center min-h-[200px] md:min-h-[300px] relative">
                 <img id="modal-img" src="" class="max-w-full h-48 md:h-auto max-h-[350px] object-contain drop-shadow-2xl hover:scale-110 transition-transform duration-500">
             </div>
             
-            <div class="w-full md:w-7/12 p-6 md:p-8 flex flex-col justify-start bg-white dark:bg-slate-900 overflow-y-auto">
+            <div class="w-full md:w-1/2 p-6 md:p-10 flex flex-col justify-center bg-white dark:bg-slate-900">
                 <div class="inline-block px-4 py-1.5 rounded-full text-xs font-bold mb-4 w-max" id="modal-badge">متوفر</div>
                 <h2 id="modal-title" class="text-2xl md:text-3xl font-black mb-2 text-slate-800 dark:text-white leading-tight"></h2>
                 <p id="modal-cat" class="text-sm text-slate-500 mb-6 font-bold"></p>
                 
-                <div class="bg-slate-50 dark:bg-slate-800/80 rounded-2xl p-4 mb-4 border border-slate-100 dark:border-slate-700/50">
-                    <h4 class="font-bold mb-3 text-sm flex items-center gap-2"><div class="w-2 h-2 rounded-full bg-brand-500"></div> المواصفات الأساسية:</h4>
+                <div class="bg-slate-50 dark:bg-slate-800/80 rounded-2xl p-4 md:p-5 mb-6 md:mb-8 border border-slate-100 dark:border-slate-700/50">
+                    <h4 class="font-bold mb-3 text-sm flex items-center gap-2"><div class="w-2 h-2 rounded-full bg-brand-500"></div> المواصفات والتفاصيل:</h4>
                     <p id="modal-specs" class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed whitespace-pre-line"></p>
                 </div>
-
-                <div id="modal-customizer" class="mb-6 hidden">
-                    <h4 class="font-bold text-sm mb-3 flex items-center gap-2"><i class="fas fa-cogs text-accent-purple"></i> تخصيص وتطوير الجهاز (اختياري)</h4>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                        <select id="upgrade-ram" onchange="window.app.updateModalPrice()" class="input-field text-sm bg-white dark:bg-slate-800 cursor-pointer">
-                            <option value="0">الرام: كما هو في المواصفات</option>
-                            <option value="25">ترقية الرام إلى 16GB (+25$)</option>
-                            <option value="50">ترقية الرام إلى 32GB (+50$)</option>
-                        </select>
-                        <select id="upgrade-ssd" onchange="window.app.updateModalPrice()" class="input-field text-sm bg-white dark:bg-slate-800 cursor-pointer">
-                            <option value="0">التخزين: كما هو في المواصفات</option>
-                            <option value="35">ترقية التخزين إلى 512GB SSD (+35$)</option>
-                            <option value="60">ترقية التخزين إلى 1TB SSD (+60$)</option>
-                        </select>
-                    </div>
-                </div>
                 
-                <div class="mt-auto pt-4 border-t border-slate-100 dark:border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div class="mt-auto flex flex-col sm:flex-row items-center justify-between gap-4">
                     <button id="modal-add-btn" class="w-full sm:flex-1 bg-brand-600 hover:bg-brand-500 text-white px-6 py-4 rounded-xl font-bold flex items-center justify-center gap-2 transition-all shadow-lg hover:shadow-brand-500/30 hover:-translate-y-1">
                         أضف للسلة <i class="fas fa-cart-plus"></i>
                     </button>
-                    <div class="flex flex-col items-center sm:items-end w-full sm:w-auto">
-                        <span class="text-xs text-slate-500 mb-1">السعر الإجمالي</span>
-                        <span id="modal-price" class="text-2xl font-black text-brand-600 dark:text-brand-400 direction-ltr bg-slate-50 dark:bg-slate-800 px-6 py-3 rounded-xl w-full text-center border border-slate-200 dark:border-slate-700"></span>
-                    </div>
+                    <span id="modal-price" class="text-2xl font-black text-slate-800 dark:text-white direction-ltr bg-slate-100 dark:bg-slate-800 px-6 py-4 rounded-xl w-full sm:w-auto text-center"></span>
                 </div>
             </div>
         </div>
@@ -601,7 +582,6 @@
         let allProducts = [];
         let allRepairs = [];
         let currentCategory = 'all';
-        let currentModalProduct = null;
         let editingId = null;
         let cart = JSON.parse(localStorage.getItem('lapmosul_cart')) || [];
 
@@ -652,7 +632,6 @@
             totalEl.innerText = total.toLocaleString('en-US') + (isDollar ? ' $' : ' د.ع');
         }
 
-        // تم تعديل الكارد ليتناسب بشكل ممتاز مع العرض الثنائي (2 بالسطر) على الموبايل
         function generateProductCardHTML(p, badgeText, badgeColorClass) {
             return `
                 <div onclick="window.app.openProductModal('${p.id}')" class="group bg-white dark:bg-slate-800 rounded-2xl md:rounded-[2rem] p-3 md:p-4 border border-slate-100 dark:border-slate-700 shadow-sm flex flex-col h-full overflow-hidden cursor-pointer hover:shadow-xl transition-all hover:-translate-y-1">
@@ -759,6 +738,18 @@
                 }
             },
             
+            addToCart: (id) => {
+                const product = allProducts.find(p => p.id === id);
+                if(product) {
+                    cart.push(product); saveCart();
+                    const toast = document.createElement('div');
+                    toast.className = 'fixed top-24 left-1/2 -translate-x-1/2 bg-slate-900 dark:bg-white text-white dark:text-slate-900 px-6 py-3 rounded-full shadow-2xl z-[500] flex items-center gap-3 font-bold text-sm animate-bounce-toast';
+                    toast.innerHTML = `<i class="fas fa-check-circle text-emerald-400"></i> تم إضافة ${product.name} للسلة`;
+                    document.body.appendChild(toast);
+                    setTimeout(() => { toast.style.opacity = '0'; setTimeout(() => toast.remove(), 500); }, 2500);
+                }
+            },
+            
             removeFromCart: (index) => { cart.splice(index, 1); saveCart(); },
             checkoutCart: () => {
                 if(cart.length === 0) return alert('السلة فارغة!');
@@ -769,76 +760,26 @@
                 cart = []; saveCart(); window.app.toggleCart();
             },
 
-            // Modal and Customizer logic
+            // Modal logic (Simple, No Customizer)
             openProductModal: (id) => {
                 const p = allProducts.find(item => item.id === id); if(!p) return;
-                currentModalProduct = p;
                 
                 document.getElementById('modal-img').src = p.img;
                 document.getElementById('modal-title').innerText = p.name;
                 document.getElementById('modal-cat').innerText = p.type === 'accessory' ? 'إكسسوارات' : (p.type === 'new' ? 'أجهزة جديدة' : 'أجهزة مستعملة');
                 document.getElementById('modal-specs').innerText = p.specs || 'لا توجد تفاصيل إضافية.';
+                document.getElementById('modal-price').innerText = p.price || '';
                 
-                const customizer = document.getElementById('modal-customizer');
-                if(p.type !== 'accessory') {
-                    customizer.classList.remove('hidden');
-                    document.getElementById('upgrade-ram').value = "0";
-                    document.getElementById('upgrade-ssd').value = "0";
-                } else {
-                    customizer.classList.add('hidden');
-                }
-                
-                window.app.updateModalPrice();
                 const addBtn = document.getElementById('modal-add-btn');
-                addBtn.onclick = () => { window.app.addCustomizedToCart(); };
+                addBtn.onclick = () => { 
+                    window.app.addToCart(p.id); 
+                    window.app.closeProductModal(); 
+                };
                 
                 const modal = document.getElementById('product-modal'); const content = document.getElementById('product-modal-content');
                 modal.classList.remove('hidden'); setTimeout(() => { modal.classList.remove('opacity-0'); content.classList.remove('scale-95'); content.classList.add('scale-100'); }, 10);
             },
             
-            updateModalPrice: () => {
-                if(!currentModalProduct) return;
-                const basePriceStr = currentModalProduct.price || '0';
-                let rawPrice = basePriceStr.replace(/،/g, ','); 
-                let cleanStr = rawPrice.replace(/[^\d.,]/g, '').replace(/,/g, '');
-                let parts = cleanStr.split('.');
-                if (parts.length > 1) {
-                    if (parts[parts.length - 1].length === 3) cleanStr = cleanStr.replace(/\./g, ''); 
-                    else cleanStr = parts.join('').substring(0, parts.join('').length - parts[parts.length-1].length) + '.' + parts.pop();
-                }
-                const baseNum = parseFloat(cleanStr) || 0;
-                const isDollar = basePriceStr.includes('$');
-                
-                const ramUpgrade = parseFloat(document.getElementById('upgrade-ram')?.value) || 0;
-                const ssdUpgrade = parseFloat(document.getElementById('upgrade-ssd')?.value) || 0;
-                
-                const total = baseNum + ramUpgrade + ssdUpgrade;
-                document.getElementById('modal-price').innerText = total.toLocaleString('en-US') + (isDollar ? ' $' : ' د.ع');
-            },
-
-            addCustomizedToCart: () => {
-                if(!currentModalProduct) return;
-                let finalName = currentModalProduct.name;
-                const ramUpgradeText = document.getElementById('upgrade-ram')?.options[document.getElementById('upgrade-ram').selectedIndex].text;
-                const ssdUpgradeText = document.getElementById('upgrade-ssd')?.options[document.getElementById('upgrade-ssd').selectedIndex].text;
-                const finalPrice = document.getElementById('modal-price').innerText;
-
-                let upgrades = [];
-                if(document.getElementById('upgrade-ram')?.value !== "0") upgrades.push(ramUpgradeText.split('(+')[0].trim());
-                if(document.getElementById('upgrade-ssd')?.value !== "0") upgrades.push(ssdUpgradeText.split('(+')[0].trim());
-                
-                if(upgrades.length > 0) finalName += ` (تطوير: ${upgrades.join(' + ')})`;
-
-                const cartItem = { ...currentModalProduct, name: finalName, price: finalPrice };
-                cart.push(cartItem); saveCart(); window.app.closeProductModal();
-                
-                const toast = document.createElement('div');
-                toast.className = 'fixed top-24 left-1/2 -translate-x-1/2 bg-slate-900 dark:bg-white text-white dark:text-slate-900 px-6 py-3 rounded-full shadow-2xl z-[500] flex items-center gap-3 font-bold text-sm animate-bounce-toast';
-                toast.innerHTML = `<i class="fas fa-check-circle text-emerald-400"></i> تم إضافة المنتج للسلة`;
-                document.body.appendChild(toast);
-                setTimeout(() => { toast.style.opacity = '0'; setTimeout(() => toast.remove(), 500); }, 2500);
-            },
-
             closeProductModal: () => {
                 const modal = document.getElementById('product-modal'); const content = document.getElementById('product-modal-content');
                 modal.classList.add('opacity-0'); content.classList.remove('scale-100'); content.classList.add('scale-95');
