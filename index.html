@@ -403,32 +403,31 @@
     </div>
 
     <div id="product-modal" class="fixed inset-0 z-[220] bg-slate-900/80 hidden backdrop-blur-md flex items-center justify-center p-4 opacity-0 transition-opacity duration-300">
-        <div class="bg-white dark:bg-slate-900 w-full max-w-4xl rounded-[2rem] overflow-hidden flex flex-col md:flex-row shadow-2xl relative transform scale-95 transition-transform duration-300 max-h-[95vh] overflow-y-auto custom-scrollbar" id="product-modal-content">
-            <button onclick="window.app.closeProductModal()" class="absolute top-4 left-4 z-10 w-10 h-10 rounded-full bg-white/80 dark:bg-black/80 hover:bg-red-500 hover:text-white flex items-center justify-center backdrop-blur-md transition-all shadow-lg"><i class="fas fa-times"></i></button>
+        <div class="bg-slate-50 dark:bg-slate-900 w-full max-w-md md:max-w-4xl rounded-[2rem] overflow-hidden flex flex-col md:flex-row shadow-2xl relative transform scale-95 transition-transform duration-300 max-h-[90vh] overflow-y-auto custom-scrollbar" id="product-modal-content">
             
-            <div class="w-full md:w-5/12 bg-slate-50 dark:bg-slate-800/50 p-4 md:p-8 flex items-center justify-center min-h-[200px] md:min-h-[300px] relative">
-                <img id="modal-img" src="" class="max-w-full h-48 md:h-auto max-h-[350px] object-contain drop-shadow-2xl hover:scale-110 transition-transform duration-500">
+            <button onclick="window.app.closeProductModal()" class="absolute top-4 left-4 z-20 w-10 h-10 rounded-full bg-slate-200/50 dark:bg-black/50 hover:bg-red-500 hover:text-white flex items-center justify-center backdrop-blur-md transition-all"><i class="fas fa-times"></i></button>
+            
+            <div class="w-full md:w-1/2 bg-white dark:bg-slate-800 pt-10 pb-6 px-6 flex flex-col items-center justify-center relative rounded-b-[2rem] md:rounded-none md:rounded-l-[2rem] shadow-sm z-10">
+                <img id="modal-img" src="" class="max-w-full h-48 md:h-64 object-contain drop-shadow-xl hover:scale-105 transition-transform duration-500 mb-6">
+                
+                <div class="text-center w-full mt-2">
+                    <p id="modal-badge" class="text-[11px] font-bold mb-2 text-slate-800 dark:text-white">متوفر</p>
+                    <h2 id="modal-title" class="text-3xl font-black mb-1 text-slate-800 dark:text-white"></h2>
+                    <p id="modal-cat" class="text-sm text-slate-500 font-bold mb-2"></p>
+                </div>
             </div>
             
-            <div class="w-full md:w-7/12 p-6 md:p-8 flex flex-col justify-start bg-white dark:bg-slate-900 overflow-y-auto">
-                <div class="inline-block px-4 py-1.5 rounded-full text-xs font-bold mb-4 w-max" id="modal-badge">متوفر</div>
-                <h2 id="modal-title" class="text-2xl md:text-3xl font-black mb-2 text-slate-800 dark:text-white leading-tight"></h2>
-                <p id="modal-cat" class="text-sm text-slate-500 mb-6 font-bold"></p>
+            <div class="w-full md:w-1/2 p-6 flex flex-col justify-start bg-slate-50 dark:bg-slate-900">
+                <h4 class="font-bold mb-4 text-sm flex items-center gap-2 text-slate-800 dark:text-white"><div class="w-2 h-2 rounded-full bg-brand-500"></div> المواصفات التقنية:</h4>
                 
-                <div class="bg-slate-50 dark:bg-slate-800/80 rounded-2xl p-4 md:p-5 mb-6 border border-slate-100 dark:border-slate-700/50">
-                    <h4 class="font-bold mb-3 text-sm flex items-center gap-2"><div class="w-2 h-2 rounded-full bg-brand-500"></div> المواصفات الأساسية:</h4>
-                    
-                    <div id="modal-specs" class="w-full"></div>
-                    
-                </div>
+                <div id="modal-specs" class="w-full mb-6 flex flex-col gap-0"></div>
                 
-                <div class="mt-auto pt-4 border-t border-slate-100 dark:border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4">
-                    <button id="modal-add-btn" class="w-full sm:flex-1 bg-brand-600 hover:bg-brand-500 text-white px-6 py-4 rounded-xl font-bold flex items-center justify-center gap-2 transition-all shadow-lg hover:shadow-brand-500/30 hover:-translate-y-1">
+                <div class="mt-auto pt-2">
+                    <button id="modal-add-btn" class="w-full bg-brand-600 hover:bg-brand-500 text-white py-4 rounded-2xl font-bold flex items-center justify-center gap-3 transition-all shadow-md mb-3">
                         أضف للسلة <i class="fas fa-cart-plus"></i>
                     </button>
-                    <div class="flex flex-col items-center sm:items-end w-full sm:w-auto">
-                        <span class="text-[10px] text-slate-500 mb-1 font-bold">السعر الإجمالي</span>
-                        <span id="modal-price" class="text-2xl font-black text-brand-600 dark:text-brand-400 direction-ltr bg-slate-100 dark:bg-slate-800 px-6 py-3 rounded-xl w-full text-center border border-slate-200 dark:border-slate-700"></span>
+                    <div class="w-full bg-white dark:bg-slate-800 py-4 rounded-2xl text-center border border-slate-100 dark:border-slate-700 shadow-sm">
+                        <span id="modal-price" class="text-2xl font-black text-brand-600 dark:text-brand-400 direction-ltr"></span>
                     </div>
                 </div>
             </div>
@@ -637,7 +636,7 @@
             totalEl.innerText = total.toLocaleString('en-US') + (isDollar ? ' $' : ' د.ع');
         }
 
-        // ملاحظة: الكارد بالصفحة الرئيسية تم إبقاؤه يعرض المواصفات كـ سطر متصل حتى لا يخرب التصميم
+        // الكارد الخارجي يبقى نفسه مرتب بدون ما ياخذ مساحة
         function generateProductCardHTML(p, badgeText, badgeColorClass) {
             return `
                 <div onclick="window.app.openProductModal('${p.id}')" class="group bg-white dark:bg-slate-800 rounded-2xl md:rounded-[2rem] p-3 md:p-4 border border-slate-100 dark:border-slate-700 shadow-sm flex flex-col h-full overflow-hidden cursor-pointer hover:shadow-xl transition-all hover:-translate-y-1">
@@ -649,7 +648,7 @@
                     <p class="text-[10px] md:text-xs text-slate-500 dark:text-slate-400 mb-2 md:mb-4 flex-1 line-clamp-2">${p.specs}</p>
                     <div class="flex justify-between items-center mt-auto pt-2 md:pt-3 border-t border-slate-100 dark:border-slate-700/50">
                         <span class="font-black text-slate-800 dark:text-white text-sm md:text-lg direction-ltr">${p.price || ''}</span>
-                        <button onclick="event.stopPropagation(); window.app.openProductModal('${p.id}')" class="w-8 h-8 md:w-10 md:h-10 rounded-lg md:rounded-xl bg-brand-50 text-brand-600 dark:bg-brand-500/20 dark:text-brand-400 flex items-center justify-center hover:bg-brand-50 hover:text-white transition-all shadow-sm hover:scale-110"><i class="fas fa-eye text-xs md:text-base"></i></button>
+                        <button onclick="event.stopPropagation(); window.app.openProductModal('${p.id}')" class="w-8 h-8 md:w-10 md:h-10 rounded-lg md:rounded-xl bg-brand-50 text-brand-600 dark:bg-brand-500/20 dark:text-brand-400 flex items-center justify-center hover:bg-brand-500 hover:text-white transition-all shadow-sm hover:scale-110"><i class="fas fa-eye text-xs md:text-base"></i></button>
                     </div>
                 </div>`;
         }
@@ -661,7 +660,6 @@
             document.getElementById('products-container').classList.remove('hidden');
         }
 
-        // Firebase Listeners
         if (productsRef) {
             onSnapshot(query(productsRef, orderBy("createdAt", "desc")), (snapshot) => {
                 allProducts = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
@@ -711,7 +709,6 @@
             }
         }
 
-        // Global App Context
         window.app = {
             showView: (name) => {
                 document.querySelectorAll('.view-section').forEach(el => el.classList.remove('active'));
@@ -766,38 +763,54 @@
                 cart = []; saveCart(); window.app.toggleCart();
             },
 
-            // هنا يكمن السحر: تحويل النص إلى مربعات (Grid) جميلة!
+            // دالة فتح النافذة وبناء بوكسات المواصفات حسب طلبك بالضبط
             openProductModal: (id) => {
                 const p = allProducts.find(item => item.id === id); if(!p) return;
                 
                 document.getElementById('modal-img').src = p.img;
                 document.getElementById('modal-title').innerText = p.name;
-                document.getElementById('modal-cat').innerText = p.type === 'accessory' ? 'إكسسوارات' : (p.type === 'new' ? 'أجهزة جديدة' : 'أجهزة مستعملة');
+                document.getElementById('modal-cat').innerText = p.type === 'accessory' ? 'إكسسوارات' : (p.type === 'new' ? 'أجهزة جديدة' : 'أجهزة مستعملة (نظافة عالية)');
                 
                 const specsContainer = document.getElementById('modal-specs');
-                if(p.specs) {
-                    let lines = p.specs.split('\n');
-                    let html = '';
-                    lines.forEach(line => {
-                        if(line.includes('|')) {
-                            // تحويل السطر الذي يحتوي على | إلى مربعات شبكية
-                            let items = line.split('|').map(s => s.trim()).filter(s => s);
-                            html += `<div class="grid grid-cols-2 gap-2 mb-3">`;
-                            items.forEach(item => {
-                                html += `<div class="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-700 rounded-xl p-3 text-[11px] sm:text-xs font-bold flex items-center gap-2 shadow-sm text-slate-700 dark:text-slate-300 hover:border-brand-500 transition-colors">${item}</div>`;
-                            });
-                            html += `</div>`;
-                        } else if(line.trim() !== '') {
-                            // وضع الملاحظات الإضافية في مربع ملون بشكل جميل
-                            let text = line.startsWith('📝') ? line.substring(2).trim() : line.trim();
-                            html += `<p class="text-sm text-slate-600 dark:text-slate-300 mt-3 leading-relaxed bg-brand-50 dark:bg-brand-900/10 p-4 rounded-xl border border-brand-100 dark:border-brand-900/30 whitespace-pre-line"><i class="fas fa-info-circle text-brand-500 ml-2"></i>${text}</p>`;
-                        }
+                let html = '';
+
+                // قالب البوكس الفخم مثل الصورة
+                const buildCard = (title, value, icon, colorClass) => `
+                    <div class="flex items-center bg-white dark:bg-slate-800 p-2.5 rounded-[1.25rem] mb-3 shadow-[0_2px_8px_rgba(0,0,0,0.02)] border border-slate-100 dark:border-slate-700">
+                        <div class="w-12 shrink-0"></div> <div class="flex-1 text-center px-2">
+                            <p class="text-[11px] text-slate-500 dark:text-slate-400 font-bold mb-1">${title}</p>
+                            <p class="font-bold text-slate-800 dark:text-white text-sm">${value.replace(/[💻🚀💾🎮📺]/g, '').trim()}</p>
+                        </div>
+                        <div class="w-11 h-11 rounded-xl flex items-center justify-center text-lg shrink-0 ${colorClass}">
+                            <i class="fas ${icon}"></i>
+                        </div>
+                    </div>
+                `;
+
+                if (p.cpu || p.ram || p.storage || p.gpu || p.screen) {
+                    // إذا كان المنتج يحتوي على مواصفات منفصلة
+                    if(p.cpu) html += buildCard('المعالج', p.cpu, 'fa-microchip', 'bg-blue-50 text-blue-500 dark:bg-blue-500/20 dark:text-blue-400');
+                    if(p.ram) html += buildCard('الذاكرة (RAM)', p.ram, 'fa-memory', 'bg-purple-50 text-purple-500 dark:bg-purple-500/20 dark:text-purple-400');
+                    if(p.storage) html += buildCard('سعة التخزين', p.storage, 'fa-hdd', 'bg-emerald-50 text-emerald-500 dark:bg-emerald-500/20 dark:text-emerald-400');
+                    if(p.screen) html += buildCard('حجم الشاشة', p.screen, 'fa-desktop', 'bg-amber-50 text-amber-500 dark:bg-amber-500/20 dark:text-amber-400');
+                    if(p.gpu) html += buildCard('كرت الشاشة', p.gpu, 'fa-video', 'bg-red-50 text-red-500 dark:bg-red-500/20 dark:text-red-400');
+                    if(p.desc) html += `<div class="mt-2 p-4 bg-white dark:bg-slate-800 rounded-[1.25rem] border border-slate-100 dark:border-slate-700 shadow-[0_2px_8px_rgba(0,0,0,0.02)]"><p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed text-center">${p.desc}</p></div>`;
+                } else if (p.specs) {
+                    // للمنتجات القديمة، يحاول يفسر النص ويرسمه ببوكسات
+                    let parts = p.specs.split('|').map(s=>s.trim());
+                    parts.forEach(part => {
+                        if(part.includes('💻') || part.toLowerCase().includes('core') || part.toLowerCase().includes('ryzen')) html += buildCard('المعالج', part, 'fa-microchip', 'bg-blue-50 text-blue-500 dark:bg-blue-500/20 dark:text-blue-400');
+                        else if(part.includes('🚀') || part.toLowerCase().includes('ram') || part.toLowerCase().includes('gb')) html += buildCard('الذاكرة (RAM)', part, 'fa-memory', 'bg-purple-50 text-purple-500 dark:bg-purple-500/20 dark:text-purple-400');
+                        else if(part.includes('💾') || part.toLowerCase().includes('ssd') || part.toLowerCase().includes('hdd') || part.toLowerCase().includes('tb')) html += buildCard('سعة التخزين', part, 'fa-hdd', 'bg-emerald-50 text-emerald-500 dark:bg-emerald-500/20 dark:text-emerald-400');
+                        else if(part.includes('🎮') || part.toLowerCase().includes('rtx') || part.toLowerCase().includes('gtx') || part.toLowerCase().includes('radeon')) html += buildCard('كرت الشاشة', part, 'fa-video', 'bg-red-50 text-red-500 dark:bg-red-500/20 dark:text-red-400');
+                        else if(part.includes('📺') || part.toLowerCase().includes('fhd') || part.toLowerCase().includes('hz') || part.includes('"')) html += buildCard('حجم الشاشة', part, 'fa-desktop', 'bg-amber-50 text-amber-500 dark:bg-amber-500/20 dark:text-amber-400');
+                        else if(part !== '') html += `<div class="mt-2 p-3 bg-white dark:bg-slate-800 rounded-[1.25rem] text-center text-sm text-slate-600 shadow-[0_2px_8px_rgba(0,0,0,0.02)] border border-slate-100">${part}</div>`;
                     });
-                    specsContainer.innerHTML = html;
                 } else {
-                    specsContainer.innerHTML = '<p class="text-slate-500 text-sm">لا توجد تفاصيل إضافية.</p>';
+                    html = '<p class="text-center text-slate-500 text-sm py-4">لا توجد تفاصيل إضافية.</p>';
                 }
-                
+
+                specsContainer.innerHTML = html;
                 document.getElementById('modal-price').innerText = p.price || '';
                 
                 const addBtn = document.getElementById('modal-add-btn');
