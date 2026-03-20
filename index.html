@@ -83,6 +83,26 @@
 
         .scrollbar-hide::-webkit-scrollbar { display: none; }
         .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+
+        /* حركات ولادة الاتصال والفخامة للوكو */
+        @keyframes techReveal {
+            0% { clip-path: inset(100% 0 0 0); filter: brightness(0) drop-shadow(0 0 0px var(--brand-500)); transform: translateY(20px); }
+            40% { clip-path: inset(50% 0 0 0); filter: brightness(1.5) drop-shadow(0 0 20px #0ea5e9); transform: translateY(10px); } /* ظهور اللابتوب التركوازي */
+            80% { clip-path: inset(0 0 0 0); filter: drop-shadow(0 0 30px #f59e0b); transform: translateY(0); } /* صعود الخطوط البرتقالية وتوهجها */
+            100% { clip-path: inset(0 0 0 0); filter: brightness(1) drop-shadow(0 10px 20px rgba(14,165,233,0.3)); transform: translateY(0); }
+        }
+        .animate-tech-reveal {
+            animation: techReveal 2.5s cubic-bezier(0.85, 0, 0.15, 1) forwards;
+        }
+
+        /* خلفية الكترونية فخمة */
+        .cyber-grid {
+            background-image: 
+                linear-gradient(rgba(14, 165, 233, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(14, 165, 233, 0.05) 1px, transparent 1px);
+            background-size: 30px 30px;
+            background-position: center center;
+        }
     </style>
 </head>
 
@@ -94,11 +114,13 @@
         </div>
     </div>
 
-    <div id="splash-screen">
-        <div class="relative w-48 md:w-64 h-auto drop-shadow-[0_0_30px_rgba(14,165,233,0.3)] animate-pulse-slow">
-            <img src="logo.png" alt="LAP MOSUL Loading" class="w-full h-full object-contain">
+    <div id="splash-screen" class="cyber-grid bg-slate-950">
+        <div class="relative w-56 md:w-72 h-auto flex flex-col items-center justify-center">
+            <img src="logo.png" alt="LAP MOSUL Loading" class="w-full h-full object-contain animate-tech-reveal relative z-10">
+            
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-brand-500/20 blur-[50px] rounded-full animate-pulse-slow z-0"></div>
         </div>
-        <p class="text-brand-500 mt-6 font-bold tracking-[0.3em] text-sm uppercase">Loading Cloud Store...</p>
+        <p class="text-brand-500 mt-8 font-black tracking-[0.4em] text-sm uppercase animate-pulse">System Booting...</p>
     </div>
 
     <nav class="fixed w-full z-[100] transition-all duration-300 glass-card border-none shadow-sm top-8" id="main-nav">
@@ -131,23 +153,17 @@
     </nav>
 
     <main id="view-home" class="view-section active pt-24 pb-24 md:pb-0">
-        <section class="relative pt-16 pb-20 px-6 overflow-hidden min-h-[75vh] flex flex-col justify-center">
-            
-            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] md:w-[800px] h-[600px] md:h-[800px] opacity-5 dark:opacity-10 pointer-events-none blur-[2px] z-0 transition-all duration-1000 select-none">
-                <img src="logo.png" class="w-full h-full object-contain grayscale">
-            </div>
-
-            <div class="max-w-5xl mx-auto text-center relative z-10">
+        <section class="relative pt-16 pb-20 px-6 overflow-hidden min-h-[85vh] flex flex-col justify-center cyber-grid">
+            <div class="max-w-5xl mx-auto text-center relative z-10 flex flex-col items-center">
+                
                 <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-500/10 border border-brand-500/20 text-brand-600 dark:text-brand-400 text-xs font-bold mb-8 animate-bounce-slow backdrop-blur-sm">
                     <span class="flex h-2 w-2 rounded-full bg-brand-500 animate-pulse"></span>
                     من قلب نينوى.. نبضٌ جديد اسمه <span class="text-accent-purple font-black mx-1">LAP MOSUL</span>
                 </div>
                 
-                <div class="min-h-[160px] md:min-h-[200px] flex items-center justify-center">
-                    <h1 class="text-5xl md:text-7xl lg:text-8xl font-black mb-8 leading-tight tracking-tight transition-all duration-1000" id="hero-headline">
-                        <span id="hero-title-l1">فخامة الأداء</span> <br> 
-                        <span id="hero-title-l2" class="bg-clip-text text-transparent bg-gradient-to-r from-brand-500 to-accent-purple italic pb-2">بين يديك</span>
-                    </h1>
+                <div class="w-64 md:w-[400px] h-auto mb-10 relative group cursor-pointer mt-4">
+                    <div class="absolute inset-0 bg-gradient-to-t from-brand-500/20 to-accent-gold/20 blur-[60px] rounded-full group-hover:blur-[80px] transition-all duration-700"></div>
+                    <img src="logo.png" alt="LAP MOSUL" class="w-full h-full object-contain relative z-10 drop-shadow-[0_15px_35px_rgba(14,165,233,0.3)] group-hover:scale-105 group-hover:-translate-y-2 transition-transform duration-700 ease-out">
                 </div>
                 
                 <p class="text-slate-600 dark:text-slate-400 text-lg md:text-xl mb-12 mx-auto max-w-2xl font-medium leading-relaxed">
@@ -155,8 +171,8 @@
                 </p>
                 
                 <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
-                    <button onclick="window.app.showView('store')" class="w-full sm:w-auto px-8 py-4 bg-brand-600 hover:bg-brand-500 text-white rounded-2xl font-bold shadow-lg shadow-brand-500/25 hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-2">
-                        تسوق الآن <i class="fas fa-arrow-left"></i>
+                    <button onclick="window.app.showView('store')" class="w-full sm:w-auto px-10 py-4 bg-brand-600 hover:bg-brand-500 text-white rounded-2xl font-black shadow-[0_0_20px_rgba(14,165,233,0.4)] hover:shadow-[0_0_30px_rgba(14,165,233,0.6)] hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-3">
+                        الدخول للمتجر <i class="fas fa-arrow-left"></i>
                     </button>
                 </div>
             </div>
@@ -1005,7 +1021,7 @@
             });
         }
 
-        window.onload = () => { setTimeout(() => { document.getElementById('splash-screen').style.opacity = '0'; setTimeout(() => document.getElementById('splash-screen').style.display = 'none', 800); }, 1500); };
+        window.onload = () => { setTimeout(() => { document.getElementById('splash-screen').style.opacity = '0'; setTimeout(() => document.getElementById('splash-screen').style.display = 'none', 800); }, 2800); };
     </script>
 </body>
 </html>
