@@ -126,7 +126,7 @@
         <div class="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
             
             <div class="flex items-center cursor-pointer group" onclick="window.app.showView('home')">
-                <div class="h-12 md:h-14 w-auto transition-transform duration-300 group-hover:scale-105 drop-shadow-md">
+                <div class="h-16 md:h-20 w-auto transition-transform duration-300 group-hover:scale-105 drop-shadow-md">
                     <img src="logo.png" alt="LAP MOSUL" class="h-full w-auto object-contain">
                 </div>
             </div>
@@ -162,7 +162,7 @@
                     من قلب نينوى.. نبضٌ جديد اسمه <span class="text-accent-gold font-black mx-1">LAP MOSUL</span>
                 </div>
                 
-                <div class="w-64 md:w-[450px] h-auto mb-12 relative cursor-pointer animate-premium-float">
+                <div class="w-80 md:w-[550px] h-auto mb-12 relative cursor-pointer animate-premium-float">
                     <img src="logo.png" alt="LAP MOSUL" class="w-full h-full object-contain relative z-10">
                 </div>
                 
@@ -315,7 +315,7 @@
             <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 relative z-10">
                 <div class="text-center md:text-right space-y-6">
                     <div>
-                        <img src="logo.png" alt="LAP MOSUL" class="h-16 w-auto object-contain mb-4 mx-auto md:mx-0 drop-shadow-md">
+                        <img src="logo.png" alt="LAP MOSUL" class="h-20 md:h-24 w-auto object-contain mb-4 mx-auto md:mx-0 drop-shadow-md">
                         <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed max-w-sm mx-auto md:mx-0">نحن هنا لنغير مفهوم شراء اللابتوبات والحلول التقنية في الموصل. جودة، فخامة، وأداء لا يضاهى.</p>
                     </div>
                     
@@ -580,7 +580,7 @@
         import { getFirestore, collection, addDoc, deleteDoc, updateDoc, doc, onSnapshot, query, orderBy, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
         import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
         import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-storage.js";
-
+        
         const firebaseConfig = {
             apiKey: "AIzaSyCx8EM2HSnksOBxPUrvh5GI6f8LD42Ojns",
             authDomain: "lap-mosul-db.firebaseapp.com",
@@ -589,7 +589,7 @@
             messagingSenderId: "698504973676",
             appId: "1:698504973676:web:1e8f7473668d32a3023749",
         };
-
+        
         let app, db, auth, storage, productsRef, repairsRef;
         try {
             app = initializeApp(firebaseConfig);
@@ -605,7 +605,7 @@
         let currentCategory = 'all';
         let editingId = null;
         let cart = JSON.parse(localStorage.getItem('lapmosul_cart')) || [];
-
+        
         function saveCart() { localStorage.setItem('lapmosul_cart', JSON.stringify(cart)); updateCartUI(); }
 
         function updateCartUI() {
@@ -625,7 +625,8 @@
                 totalEl.innerText = '0'; return;
             }
             
-            container.innerHTML = ''; let total = 0; let isDollar = false;
+            container.innerHTML = '';
+            let total = 0; let isDollar = false;
             
             cart.forEach((item, index) => {
                 let rawPrice = item.price.toString().replace(/،/g, ','); 
@@ -670,7 +671,8 @@
         }
 
         function refreshData() {
-            updateUI(); updateAdminList(); renderNewProducts(); renderAccessories(); updateCartUI();
+            updateUI();
+            updateAdminList(); renderNewProducts(); renderAccessories(); updateCartUI();
             const spinner = document.getElementById('loading-spinner');
             if(spinner) spinner.style.display = 'none';
             document.getElementById('products-container').classList.remove('hidden');
@@ -749,18 +751,22 @@
             openAdminLogin: () => document.getElementById('pin-modal').classList.remove('hidden'),
             
             toggleCart: () => {
-                const sidebar = document.getElementById('cart-sidebar'); const overlay = document.getElementById('cart-overlay');
+                const sidebar = document.getElementById('cart-sidebar');
+                const overlay = document.getElementById('cart-overlay');
                 if(sidebar.classList.contains('-translate-x-full')) {
-                    sidebar.classList.remove('-translate-x-full'); overlay.classList.remove('hidden'); setTimeout(() => overlay.classList.remove('opacity-0'), 10);
+                    sidebar.classList.remove('-translate-x-full');
+                    overlay.classList.remove('hidden'); setTimeout(() => overlay.classList.remove('opacity-0'), 10);
                 } else {
-                    sidebar.classList.add('-translate-x-full'); overlay.classList.add('opacity-0'); setTimeout(() => overlay.classList.add('hidden'), 300);
+                    sidebar.classList.add('-translate-x-full');
+                    overlay.classList.add('opacity-0'); setTimeout(() => overlay.classList.add('hidden'), 300);
                 }
             },
             
             addToCart: (id) => {
                 const product = allProducts.find(p => p.id === id);
                 if(product) {
-                    cart.push(product); saveCart();
+                    cart.push(product);
+                    saveCart();
                     const toast = document.createElement('div');
                     toast.className = 'fixed top-24 left-1/2 -translate-x-1/2 bg-slate-900 dark:bg-white text-white dark:text-slate-900 px-6 py-3 rounded-full shadow-2xl z-[500] flex items-center gap-3 font-bold text-sm animate-bounce-toast';
                     toast.innerHTML = `<i class="fas fa-check-circle text-emerald-400"></i> تم إضافة ${product.name} للسلة`;
@@ -780,7 +786,8 @@
             },
 
             openProductModal: (id) => {
-                const p = allProducts.find(item => item.id === id); if(!p) return;
+                const p = allProducts.find(item => item.id === id);
+                if(!p) return;
                 
                 document.getElementById('modal-img').src = p.img;
                 document.getElementById('modal-title').innerText = p.name;
@@ -800,7 +807,6 @@
                         </div>
                     </div>
                 `;
-
                 if (p.cpu || p.ram || p.storage || p.gpu || p.screen) {
                     if(p.cpu) html += buildCard('المعالج', p.cpu, 'fa-microchip', 'bg-blue-50 text-blue-500 dark:bg-blue-500/20 dark:text-blue-400');
                     if(p.ram) html += buildCard('الذاكرة (RAM)', p.ram, 'fa-memory', 'bg-purple-50 text-purple-500 dark:bg-purple-500/20 dark:text-purple-400');
@@ -828,7 +834,7 @@
                 const addBtn = document.getElementById('modal-add-btn');
                 addBtn.onclick = () => { 
                     window.app.addToCart(p.id); 
-                    window.app.closeProductModal(); 
+                    window.app.closeProductModal();
                 };
                 
                 const modal = document.getElementById('product-modal'); const content = document.getElementById('product-modal-content');
@@ -836,13 +842,15 @@
             },
             
             closeProductModal: () => {
-                const modal = document.getElementById('product-modal'); const content = document.getElementById('product-modal-content');
+                const modal = document.getElementById('product-modal');
+                const content = document.getElementById('product-modal-content');
                 modal.classList.add('opacity-0'); content.classList.remove('scale-100'); content.classList.add('scale-95');
                 setTimeout(() => modal.classList.add('hidden'), 300);
             },
 
             checkLogin: async () => {
-                const email = document.getElementById('login-user').value; const pass = document.getElementById('login-pass').value;
+                const email = document.getElementById('login-user').value;
+                const pass = document.getElementById('login-pass').value;
                 if (!email || !pass) return alert("يرجى ملء جميع الحقول");
                 try {
                     await signInWithEmailAndPassword(auth, email, pass);
@@ -852,7 +860,8 @@
             },
             closeAdmin: () => { window.app.cancelEdit(); document.getElementById('admin-modal').classList.add('hidden'); },
             switchAdminTab: (tab) => {
-                document.getElementById('admin-view-products').classList.add('hidden'); document.getElementById('admin-view-repairs').classList.add('hidden');
+                document.getElementById('admin-view-products').classList.add('hidden');
+                document.getElementById('admin-view-repairs').classList.add('hidden');
                 document.getElementById(`admin-view-${tab}`).classList.remove('hidden');
                 document.getElementById('admin-tab-products').className = "font-bold text-slate-500 px-2 pb-2 transition-all";
                 document.getElementById('admin-tab-repairs').className = "font-bold text-slate-500 px-2 pb-2 transition-all";
@@ -864,7 +873,6 @@
                 if (!file) return;
                 const urlInput = document.getElementById('p-img');
                 urlInput.value = "جاري رفع الصورة... ⏳"; urlInput.disabled = true;
-
                 try {
                     const storageRef = ref(storage, 'products/' + Date.now() + '_' + file.name);
                     await uploadBytes(storageRef, file);
@@ -879,18 +887,18 @@
             },
 
             saveProduct: async () => {
-                const name = document.getElementById('p-name').value; const price = document.getElementById('p-price').value;
+                const name = document.getElementById('p-name').value;
+                const price = document.getElementById('p-price').value;
                 const img = document.getElementById('p-img').value; const type = document.getElementById('p-type').value;
                 const category = document.getElementById('p-cat').value;
-                const cpu = document.getElementById('p-cpu').value; const ram = document.getElementById('p-ram').value;
+                const cpu = document.getElementById('p-cpu').value;
+                const ram = document.getElementById('p-ram').value;
                 const storage = document.getElementById('p-storage').value; const gpu = document.getElementById('p-gpu').value;
                 const screen = document.getElementById('p-screen').value; const desc = document.getElementById('p-desc').value;
-
                 let specsArr = [];
                 if(cpu) specsArr.push(`💻 ${cpu}`); if(ram) specsArr.push(`🚀 ${ram}`);
                 if(storage) specsArr.push(`💾 ${storage}`); if(gpu) specsArr.push(`🎮 ${gpu}`);
                 if(screen) specsArr.push(`📺 ${screen}`);
-                
                 let specs = specsArr.join(' | ');
                 if(desc) specs += (specsArr.length > 0 ? `\n📝 ${desc}` : desc);
                 if(type === 'accessory' && specsArr.length === 0) specs = desc || 'بدون تفاصيل إضافية';
@@ -902,7 +910,8 @@
                     const productData = { name, price, specs, img, type, category, cpu, ram, storage, gpu, screen, desc };
                     if(editingId) { await updateDoc(doc(db, "products", editingId), productData); } 
                     else { productData.createdAt = Date.now(); await addDoc(productsRef, productData); }
-                    alert("تم الحفظ بنجاح ✅"); window.app.cancelEdit();
+                    alert("تم الحفظ بنجاح ✅");
+                    window.app.cancelEdit();
                 } catch(e) { alert("خطأ في الحفظ"); }
             },
             editProduct: (id) => {
@@ -911,7 +920,8 @@
                 document.getElementById('p-img').value = p.img || ''; document.getElementById('p-type').value = p.type || 'used';
                 document.getElementById('p-cat').value = p.category || 'student';
                 document.getElementById('p-cpu').value = p.cpu || ''; document.getElementById('p-ram').value = p.ram || '';
-                document.getElementById('p-storage').value = p.storage || ''; document.getElementById('p-gpu').value = p.gpu || '';
+                document.getElementById('p-storage').value = p.storage || '';
+                document.getElementById('p-gpu').value = p.gpu || '';
                 document.getElementById('p-screen').value = p.screen || ''; document.getElementById('p-desc').value = p.desc || '';
                 if(p.specs && !p.cpu && !p.ram && !p.desc) document.getElementById('p-desc').value = p.specs;
 
@@ -919,7 +929,8 @@
                 document.getElementById('cancel-edit-btn').classList.remove('hidden');
             },
             cancelEdit: () => {
-                editingId = null; document.querySelectorAll('#admin-view-products .input-field').forEach(i => i.value = '');
+                editingId = null;
+                document.querySelectorAll('#admin-view-products .input-field').forEach(i => i.value = '');
                 document.getElementById('form-title').innerText = "إضافة منتج جديد"; document.getElementById('cancel-edit-btn').classList.add('hidden');
             },
             deleteProduct: async (id) => { if(confirm("حذف المنتج؟")) await deleteDoc(doc(db, "products", id)); },
@@ -948,7 +959,7 @@
                 }
             },
             clearRepairForm: () => {
-                document.getElementById('r-receipt').value = ''; 
+                document.getElementById('r-receipt').value = '';
                 document.getElementById('r-receipt').removeAttribute('readonly');
                 document.getElementById('r-receipt').classList.remove('opacity-50', 'cursor-not-allowed', 'bg-slate-200');
                 document.getElementById('r-name').value = ''; document.getElementById('r-status').value = 'checking';
@@ -987,7 +998,8 @@
         };
 
         function updateAdminList() {
-            const list = document.getElementById('admin-list'); if(!list) return; list.innerHTML = '';
+            const list = document.getElementById('admin-list'); if(!list) return;
+            list.innerHTML = '';
             allProducts.forEach(p => {
                 list.innerHTML += `
                     <div class="flex justify-between items-center bg-slate-50 dark:bg-slate-800 p-3 rounded-xl border border-slate-100 dark:border-slate-700 mb-2">
@@ -1004,7 +1016,8 @@
         }
 
         function updateAdminRepairsList() {
-            const list = document.getElementById('admin-repairs-list'); if(!list) return; list.innerHTML = '';
+            const list = document.getElementById('admin-repairs-list');
+            if(!list) return; list.innerHTML = '';
             allRepairs.forEach(r => {
                 let statusText = r.status === 'ready' ? '✅ جاهز' : (r.status === 'waiting_parts' ? '⏳ بانتظار قطع' : '🔍 قيد الصيانة');
                 list.innerHTML += `
