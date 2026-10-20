@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="description" content="لاب الموصل (LAP MOSUL) - الوجهة الرائدة لفخامة التقنية. نقدم أحدث اللابتوبات والإكسسوارات، مع خدمات صيانة هندسية، وتصميم مواقع، وبرمجة أنظمة الكاشير المتقدمة لإدارة أعمالك.">
+    <meta name="description" content="لاب الموصل (LAP MOSUL) - الوجهة الرائدة لفخامة التقنية في الموصل والعراق. أحدث اللابتوبات، محطات العمل الهندسية، الإكسسوارات، وخدمات الصيانة والبرمجة.">
     <title>LAP MOSUL | لاب الموصل - المتجر السحابي</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,19 +19,19 @@
             theme: {
                 extend: {
                     colors: {
-                        brand: { 50: '#f0f9ff', 100: '#e0f2fe', 500: '#0ea5e9', 600: '#0284c7', 900: '#0c4a6e' },
+                        brand: { 50: '#f0f9ff', 100: '#e0f2fe', 400: '#38bdf8', 500: '#0ea5e9', 600: '#0284c7', 900: '#0c4a6e' },
                         accent: { purple: '#8b5cf6', pink: '#ec4899', gold: '#f59e0b', teal: '#0d9488' },
-                        dark: { 900: '#020617', 800: '#0f172a' }
+                        dark: { 950: '#020617', 900: '#090d16', 800: '#111827', 700: '#1e293b' }
                     },
                     fontFamily: { sans: ['Tajawal', 'sans-serif'] },
                     animation: { 
                         'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-                        'marquee': 'marquee 25s linear infinite',
+                        'marquee-rtl': 'marqueeRtl 30s linear infinite',
                     },
                     keyframes: {
-                        marquee: {
+                        marqueeRtl: {
                             '0%': { transform: 'translateX(0%)' },
-                            '100%': { transform: 'translateX(100%)' }
+                            '100%': { transform: 'translateX(50%)' }
                         }
                     }
                 }
@@ -39,542 +39,712 @@
         }
         
         if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            document.documentElement.classList.add('dark')
+            document.documentElement.classList.add('dark');
         } else {
-            document.documentElement.classList.remove('dark')
+            document.documentElement.classList.remove('dark');
         }
     </script>
     <style>
         /* Custom Scrollbar */
-        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
         ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
         .dark ::-webkit-scrollbar-thumb { background: #1e293b; }
         ::-webkit-scrollbar-thumb:hover { background: #0ea5e9; }
 
         /* Splash Screen */
-        #splash-screen { position: fixed; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 10000; transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1); background-color: #020617; }
+        #splash-screen { position: fixed; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 10000; transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1); background-color: #020617; }
 
         /* Glassmorphism */
-        .glass-card { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.3); }
-        .dark .glass-card { background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255, 255, 255, 0.05); }
+        .glass-card { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 1px solid rgba(226, 232, 240, 0.8); }
+        .dark .glass-card { background: rgba(9, 13, 22, 0.82); border-bottom: 1px solid rgba(255, 255, 255, 0.06); }
+
+        /* Hero Mesh Background */
+        .hero-bg {
+            background-image: radial-gradient(rgba(14, 165, 233, 0.12) 1px, transparent 1px);
+            background-size: 32px 32px;
+        }
+        .dark .hero-bg {
+            background-image: radial-gradient(rgba(14, 165, 233, 0.08) 1px, transparent 1px);
+        }
 
         /* View Transitions */
-        .view-section { display: none; opacity: 0; transition: opacity 0.4s ease-in-out; }
-        .view-section.active { display: block; opacity: 1; animation: fadeIn 0.5s forwards; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .view-section { display: none; opacity: 0; transition: opacity 0.35s ease-in-out; }
+        .view-section.active { display: block; opacity: 1; animation: fadeIn 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Service Card Glow */
+        .service-card { position: relative; overflow: hidden; transition: all 0.35s ease; }
+        .service-card::before {
+            content: ''; position: absolute; top: 0; right: 0; width: 4px; height: 100%;
+            background: var(--glow-color, #0ea5e9); transition: all 0.35s ease;
+        }
+        .service-card:hover { transform: translateY(-4px); box-shadow: 0 15px 35px -10px rgba(14, 165, 233, 0.18); }
 
         /* Loading Spinner */
-        .loader { border: 3px solid #f3f3f3; border-radius: 50%; border-top: 3px solid #0ea5e9; width: 20px; height: 20px; -webkit-animation: spin 1s linear infinite; animation: spin 1s linear infinite; }
+        .loader { border: 3px solid rgba(14, 165, 233, 0.15); border-radius: 50%; border-top: 3px solid #0ea5e9; width: 36px; height: 36px; animation: spin 0.9s linear infinite; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
-        .input-field { width: 100%; background: transparent; border: 1px solid #cbd5e1; padding: 12px; border-radius: 12px; font-size: 14px; transition: all 0.3s; }
-        .input-field:focus { border-color: #0ea5e9; outline: none; box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.1); }
-        .dark .input-field { border-color: #334155; color: white; background: rgba(30, 41, 59, 0.5); }
+        /* Form Inputs */
+        .input-field { width: 100%; background: #ffffff; border: 1px solid #cbd5e1; padding: 12px 14px; border-radius: 12px; font-size: 14px; transition: all 0.25s; }
+        .input-field:focus { border-color: #0ea5e9; outline: none; box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.15); }
+        .dark .input-field { border-color: #334155; color: white; background: rgba(30, 41, 59, 0.65); }
 
         .phone-number, .direction-ltr { direction: ltr !important; unicode-bidi: bidi-override !important; display: inline-block; }
 
-        @keyframes bounce-in { 0% { transform: scale(0.5) translate(-50%, 0); opacity: 0; } 100% { transform: scale(1) translate(-50%, 0); opacity: 1; } }
-        .animate-bounce-toast { animation: bounce-in 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
+        @keyframes bounce-in { 0% { transform: scale(0.8) translate(-50%, -20px); opacity: 0; } 100% { transform: scale(1) translate(-50%, 0); opacity: 1; } }
+        .animate-bounce-toast { animation: bounce-in 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
 
         .scrollbar-hide::-webkit-scrollbar { display: none; }
         .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
 
-        /* الفخامة الحقيقية: تأثير التركيز السينمائي للـ PNG */
+        /* Cinematic Animations */
         @keyframes cinematicFocus {
-            0% { transform: scale(1.3); filter: blur(20px) brightness(0); opacity: 0; }
-            40% { transform: scale(1.05); filter: blur(5px) brightness(2) drop-shadow(0 0 50px rgba(14, 165, 233, 0.8)); opacity: 0.8; }
-            100% { transform: scale(1); filter: blur(0px) brightness(1) drop-shadow(0 0 25px rgba(245, 158, 11, 0.5)); opacity: 1; }
+            0% { transform: scale(1.2); filter: blur(15px) brightness(0); opacity: 0; }
+            50% { transform: scale(1.03); filter: blur(2px) brightness(1.5) drop-shadow(0 0 40px rgba(14, 165, 233, 0.7)); opacity: 0.9; }
+            100% { transform: scale(1); filter: blur(0px) brightness(1) drop-shadow(0 0 25px rgba(245, 158, 11, 0.45)); opacity: 1; }
         }
-        .animate-premium-reveal {
-            animation: cinematicFocus 2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
-        }
+        .animate-premium-reveal { animation: cinematicFocus 1.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
 
-        /* الفخامة الحقيقية: الطفو المضيء المتغير الألوان للواجهة */
         @keyframes premiumFloat {
-            0%, 100% { transform: translateY(0); filter: drop-shadow(0 15px 25px rgba(14, 165, 233, 0.5)); }
-            50% { transform: translateY(-15px); filter: drop-shadow(0 25px 40px rgba(245, 158, 11, 0.5)); }
+            0%, 100% { transform: translateY(0); filter: drop-shadow(0 15px 25px rgba(14, 165, 233, 0.35)); }
+            50% { transform: translateY(-12px); filter: drop-shadow(0 25px 35px rgba(245, 158, 11, 0.35)); }
         }
-        .animate-premium-float {
-            animation: premiumFloat 6s ease-in-out infinite;
-        }
+        .animate-premium-float { animation: premiumFloat 6s ease-in-out infinite; }
 
-        /* توهج خفيف للكلمات */
-        .text-glow {
-            text-shadow: 0 0 20px rgba(14, 165, 233, 0.5);
-        }
+        .text-glow { text-shadow: 0 0 20px rgba(14, 165, 233, 0.45); }
     </style>
 </head>
 
-<body class="bg-slate-50 dark:bg-dark-900 text-slate-900 dark:text-slate-100 antialiased transition-colors duration-300 overflow-x-hidden selection:bg-brand-500 selection:text-white pt-8">
+<body class="bg-slate-50 dark:bg-dark-950 text-slate-900 dark:text-slate-100 antialiased transition-colors duration-300 overflow-x-hidden selection:bg-brand-500 selection:text-white pt-9">
 
-    <div class="fixed top-0 left-0 right-0 h-8 bg-gradient-to-r from-brand-600 via-accent-purple to-brand-600 text-white text-xs font-bold flex items-center justify-center z-[110] shadow-md overflow-hidden">
-        <div class="animate-pulse flex items-center gap-2">
-            <i class="fas fa-shipping-fast"></i> توصيل مجاني لكل العراق | ضمان 10 أيام <i class="fas fa-shield-alt"></i>
+    <!-- Top Announcement Bar -->
+    <div class="fixed top-0 left-0 right-0 h-9 bg-gradient-to-r from-slate-900 via-brand-600 to-slate-900 text-white text-xs font-bold flex items-center justify-center z-[110] shadow-md px-4">
+        <div class="flex items-center gap-2 sm:gap-4 text-center">
+            <span class="flex items-center gap-1.5"><i class="fas fa-truck-fast text-accent-gold"></i> توصيل مجاني لكل محافظات العراق</span>
+            <span class="opacity-40">|</span>
+            <span class="flex items-center gap-1.5"><i class="fas fa-shield-halved text-emerald-400"></i> ضمان فحص واستبدال حقيقـي 10 أيام</span>
         </div>
     </div>
 
+    <!-- Splash Screen -->
     <div id="splash-screen">
         <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-slate-900 via-[#020617] to-[#020617] z-0"></div>
-        <div class="relative w-64 md:w-80 h-auto flex flex-col items-center justify-center z-10">
-            <img src="logo.png" alt="LAP MOSUL Loading" class="w-full h-full object-contain animate-premium-reveal">
+        <div class="relative w-64 md:w-80 h-auto flex flex-col items-center justify-center z-10 animate-premium-reveal">
+            <img src="logo.png" alt="LAP MOSUL" class="w-full h-full object-contain" onerror="this.style.display='none'; document.getElementById('splash-fallback').classList.remove('hidden');">
+            <div id="splash-fallback" class="hidden text-center">
+                <div class="w-20 h-20 mx-auto mb-4 rounded-3xl bg-gradient-to-br from-brand-500 to-brand-900 flex items-center justify-center shadow-[0_0_40px_rgba(14,165,233,0.5)] border border-white/10">
+                    <i class="fas fa-laptop-code text-4xl text-white"></i>
+                </div>
+                <h1 class="text-4xl font-black tracking-wider text-white">LAP <span class="text-brand-500">MOSUL</span></h1>
+            </div>
         </div>
-        <p class="text-brand-500 mt-10 font-black tracking-[0.5em] text-xs uppercase animate-pulse text-glow z-10">System Initializing</p>
+        <p class="text-brand-400 mt-8 font-bold tracking-[0.35em] text-xs uppercase animate-pulse text-glow z-10 direction-ltr">System Initializing...</p>
     </div>
 
-    <nav class="fixed w-full z-[100] transition-all duration-300 glass-card border-none shadow-sm top-8" id="main-nav">
-        <div class="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
+    <!-- Main Navigation -->
+    <nav class="fixed w-full z-[100] transition-all duration-300 glass-card top-9" id="main-nav">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 h-20 flex justify-between items-center">
             
-            <div class="flex items-center cursor-pointer group" onclick="window.app.showView('home')">
-                <div class="h-16 md:h-20 w-auto transition-transform duration-300 group-hover:scale-105 drop-shadow-md">
-                    <img src="logo.png" alt="LAP MOSUL" class="h-full w-auto object-contain">
+            <!-- Brand Logo -->
+            <div class="flex items-center gap-3 cursor-pointer group" onclick="window.app.showView('home')">
+                <div class="h-12 md:h-14 w-auto transition-transform duration-300 group-hover:scale-105 flex items-center">
+                    <img src="logo.png" alt="LAP MOSUL" class="h-full w-auto object-contain" onerror="this.style.display='none'; document.getElementById('nav-logo-fallback').classList.remove('hidden');">
+                    <div id="nav-logo-fallback" class="hidden flex items-center gap-2.5">
+                        <div class="w-10 h-10 rounded-xl bg-brand-600 text-white flex items-center justify-center shadow-md shadow-brand-500/20">
+                            <i class="fas fa-laptop text-lg"></i>
+                        </div>
+                        <div class="flex flex-col">
+                            <span class="font-black text-lg tracking-tight leading-none text-slate-900 dark:text-white">LAP <span class="text-brand-500">MOSUL</span></span>
+                            <span class="text-[10px] font-bold text-slate-400">لاب الموصل للتقنية</span>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <div class="flex items-center gap-3 md:gap-4">
-                <button onclick="window.app.toggleCart()" class="relative w-10 h-10 rounded-full border border-slate-200 dark:border-slate-700 flex items-center justify-center hover:bg-slate-100 dark:hover:bg-slate-800 transition-all shadow-sm">
-                    <i class="fas fa-shopping-cart text-slate-600 dark:text-slate-300 hover:text-brand-500 transition-colors"></i>
-                    <span id="cart-badge" class="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center hidden">0</span>
+            <!-- Desktop Navigation Links -->
+            <div class="hidden md:flex items-center gap-8 text-sm font-bold text-slate-600 dark:text-slate-300">
+                <button onclick="window.app.showView('home')" id="nav-link-home" class="hover:text-brand-500 text-brand-500 transition-colors">الرئيسية</button>
+                <button onclick="window.app.showView('store')" id="nav-link-store" class="hover:text-brand-500 transition-colors">المعرض الرقمي</button>
+                <button onclick="window.app.scrollToSection('services')" class="hover:text-brand-500 transition-colors">الخدمات والصيانة</button>
+                <button onclick="window.app.scrollToSection('footer-contact')" class="hover:text-brand-500 transition-colors">موقعنا وتواصل</button>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="flex items-center gap-2.5 sm:gap-3">
+                <button onclick="window.app.toggleCart()" aria-label="سلة المشتريات" class="relative w-10 h-10 rounded-xl border border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-slate-800/50 flex items-center justify-center hover:border-brand-500 transition-all shadow-sm">
+                    <i class="fas fa-shopping-cart text-slate-700 dark:text-slate-200"></i>
+                    <span id="cart-badge" class="absolute -top-1.5 -right-1.5 bg-red-500 text-white text-[10px] font-black w-5 h-5 rounded-full flex items-center justify-center hidden shadow-sm">0</span>
                 </button>
-                <button onclick="window.app.openAdminLogin()" class="w-10 h-10 rounded-full border border-slate-200 dark:border-slate-700 flex items-center justify-center hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-400 hover:text-brand-500 transition-all" title="لوحة الإدارة">
-                    <i class="fas fa-lock"></i>
-                </button>
-                <button onclick="window.app.toggleTheme()" class="w-10 h-10 rounded-full border border-slate-200 dark:border-slate-700 flex items-center justify-center hover:bg-slate-100 dark:hover:bg-slate-800 transition-all group">
-                    <i class="fas fa-moon dark:hidden text-slate-600 group-hover:rotate-12 transition-transform"></i>
+                
+                <button onclick="window.app.toggleTheme()" aria-label="تغيير المظهر" class="w-10 h-10 rounded-xl border border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-slate-800/50 flex items-center justify-center hover:border-brand-500 transition-all group">
+                    <i class="fas fa-moon dark:hidden text-slate-700 group-hover:rotate-12 transition-transform"></i>
                     <i class="fas fa-sun hidden dark:block text-amber-400 group-hover:rotate-90 transition-transform"></i>
                 </button>
-                <button onclick="window.app.showView('store')" class="hidden sm:flex relative overflow-hidden group bg-slate-900 dark:bg-white dark:text-slate-950 text-white px-6 py-2.5 rounded-full font-bold text-sm transition-all hover:shadow-[0_0_20px_rgba(14,165,233,0.4)]">
-                    <span class="relative z-10 flex items-center gap-2"><span>المتجر</span><i class="fas fa-shopping-bag"></i></span>
-                    <div class="absolute inset-0 bg-brand-500 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+
+                <button onclick="window.app.openAdminLogin()" aria-label="لوحة الإدارة" class="w-10 h-10 rounded-xl border border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-slate-800/50 flex items-center justify-center text-slate-400 hover:text-brand-500 hover:border-brand-500 transition-all" title="لوحة الإدارة">
+                    <i class="fas fa-lock text-xs"></i>
+                </button>
+
+                <button onclick="window.app.showView('store')" class="hidden sm:flex items-center gap-2 bg-brand-600 hover:bg-brand-500 text-white px-5 py-2.5 rounded-xl font-bold text-sm transition-all shadow-md shadow-brand-500/20 hover:shadow-brand-500/40">
+                    <span>تصفح الأجهزة</span>
+                    <i class="fas fa-arrow-left text-xs"></i>
                 </button>
             </div>
         </div>
     </nav>
 
-    <main id="view-home" class="view-section active pt-24 pb-24 md:pb-0">
-        <section class="relative pt-16 pb-20 px-6 overflow-hidden min-h-[85vh] flex flex-col justify-center">
-            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-brand-500/5 dark:bg-brand-500/10 rounded-full blur-[100px] pointer-events-none z-0"></div>
+    <!-- ==================== HOME VIEW ==================== -->
+    <main id="view-home" class="view-section active pt-20 pb-20 md:pb-0">
+        
+        <!-- Hero Section -->
+        <section class="relative pt-12 pb-20 px-6 overflow-hidden min-h-[82vh] flex flex-col justify-center hero-bg">
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-brand-500/10 dark:bg-brand-500/15 rounded-full blur-[120px] pointer-events-none z-0"></div>
 
             <div class="max-w-5xl mx-auto text-center relative z-10 flex flex-col items-center">
                 
-                <div class="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-white/50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 text-xs font-bold mb-10 shadow-sm backdrop-blur-md">
-                    <span class="flex h-2 w-2 rounded-full bg-brand-500 animate-pulse"></span>
-                    من قلب نينوى.. نبضٌ جديد اسمه <span class="text-accent-gold font-black mx-1">LAP MOSUL</span>
+                <div class="inline-flex items-center gap-2.5 px-5 py-2 rounded-full bg-white/80 dark:bg-slate-800/80 border border-slate-200/80 dark:border-slate-700 text-slate-700 dark:text-slate-300 text-xs font-bold mb-8 shadow-sm backdrop-blur-md">
+                    <span class="flex h-2.5 w-2.5 rounded-full bg-brand-500 animate-ping"></span>
+                    من قلب نينوى.. معيار جديد للفخامة التقنية <span class="text-accent-gold font-black">LAP MOSUL</span>
                 </div>
                 
-                <div class="w-80 md:w-[550px] h-auto mb-12 relative cursor-pointer animate-premium-float">
-                    <img src="logo.png" alt="LAP MOSUL" class="w-full h-full object-contain relative z-10">
+                <!-- Hero Logo / Visual -->
+                <div class="w-64 md:w-[420px] h-auto mb-8 relative cursor-pointer animate-premium-float" onclick="window.app.showView('store')">
+                    <img src="logo.png" alt="LAP MOSUL" class="w-full h-full object-contain relative z-10" onerror="this.style.display='none'; document.getElementById('hero-logo-fallback').classList.remove('hidden');">
+                    <div id="hero-logo-fallback" class="hidden py-6">
+                        <h1 class="text-5xl md:text-7xl font-black tracking-tight text-slate-900 dark:text-white">
+                            LAP <span class="text-transparent bg-clip-text bg-gradient-to-l from-brand-400 to-brand-600">MOSUL</span>
+                        </h1>
+                        <p class="text-sm font-bold text-accent-gold mt-2 tracking-widest uppercase">Workstations & Gaming Laptops</p>
+                    </div>
                 </div>
                 
-                <p class="text-slate-600 dark:text-slate-400 text-lg md:text-xl mb-12 mx-auto max-w-2xl font-medium leading-relaxed">
-                    نجمع لك بين قوة الـ Workstation وجمالية التصميم. أجهزة وحلول تقنية مختارة بعناية لتناسب طموحاتك الهندسية والبرمجية.
+                <h2 class="text-2xl md:text-4xl font-black text-slate-900 dark:text-white mb-4 leading-tight">
+                    قوة الـ Workstation، أناقة الـ Business، وأداء الـ Gaming
+                </h2>
+
+                <p class="text-slate-600 dark:text-slate-400 text-base md:text-lg mb-10 mx-auto max-w-2xl font-medium leading-relaxed">
+                    نختار لك نخبة الأجهزة الأوروبية والأمريكية المفحوصة بأعلى المعايير الهندسية، لتلبي طموحاتك في التصميم، البرمجة، والأعمال الثقيلة.
                 </p>
                 
-                <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
-                    <button onclick="window.app.showView('store')" class="w-full sm:w-auto px-10 py-4 bg-brand-600 hover:bg-brand-500 text-white rounded-2xl font-black shadow-[0_0_20px_rgba(14,165,233,0.4)] hover:shadow-[0_0_30px_rgba(14,165,233,0.6)] hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-3">
-                        الدخول للمتجر الرقمي <i class="fas fa-arrow-left"></i>
+                <div class="flex flex-col sm:flex-row justify-center items-center gap-4 w-full sm:w-auto">
+                    <button onclick="window.app.showView('store')" class="w-full sm:w-auto px-9 py-4 bg-brand-600 hover:bg-brand-500 text-white rounded-2xl font-black shadow-[0_10px_25px_-5px_rgba(14,165,233,0.5)] hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-3 text-base">
+                        <span>الدخول للمتجر الرقمي</span>
+                        <i class="fas fa-shopping-bag"></i>
+                    </button>
+                    <button onclick="window.app.scrollToSection('services')" class="w-full sm:w-auto px-8 py-4 bg-white dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-800 dark:text-white border border-slate-200 dark:border-slate-700 rounded-2xl font-bold transition-all duration-300 flex items-center justify-center gap-2 text-base shadow-sm">
+                        <i class="fas fa-tools text-accent-gold"></i>
+                        <span>تتبع حالة الصيانة</span>
                     </button>
                 </div>
-            </div>
-        </section>
 
-        <section class="py-10 border-y border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-slate-900/50 overflow-hidden relative z-10">
-            <div class="max-w-7xl mx-auto px-6 mb-6 text-center">
-                <p class="text-xs font-bold text-slate-400 uppercase tracking-widest">العلامات التجارية المعتمدة</p>
-            </div>
-            <div class="flex whitespace-nowrap overflow-hidden opacity-60 hover:opacity-100 transition-opacity">
-                <div class="animate-marquee flex items-center gap-16 px-8 text-3xl text-slate-500 dark:text-slate-400">
-                    <i class="fab fa-windows"></i><span class="font-black text-xl font-sans">Lenovo</span>
-                    <i class="fab fa-apple"></i><span class="font-black text-xl font-sans">ASUS</span>
-                    <span class="font-black text-xl font-sans">HP</span><span class="font-black text-xl font-sans">DELL</span>
-                    <span class="font-black text-xl font-sans">acer</span><i class="fab fa-ubuntu"></i>
-                    <i class="fab fa-windows"></i><span class="font-black text-xl font-sans">Lenovo</span>
-                    <i class="fab fa-apple"></i><span class="font-black text-xl font-sans">ASUS</span>
-                    <span class="font-black text-xl font-sans">HP</span><span class="font-black text-xl font-sans">DELL</span>
-                    <span class="font-black text-xl font-sans">acer</span><i class="fab fa-ubuntu"></i>
+                <!-- Quick Trust Badges -->
+                <div class="grid grid-cols-3 gap-4 md:gap-12 mt-14 pt-8 border-t border-slate-200/70 dark:border-slate-800/80 w-full max-w-2xl">
+                    <div class="text-center">
+                        <p class="text-xl md:text-2xl font-black text-brand-500">100%</p>
+                        <p class="text-xs font-bold text-slate-500 dark:text-slate-400 mt-0.5">فحص هندسي شامل</p>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-xl md:text-2xl font-black text-accent-gold">10 أيام</p>
+                        <p class="text-xs font-bold text-slate-500 dark:text-slate-400 mt-0.5">ضمان حقيقي للاستبدال</p>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-xl md:text-2xl font-black text-emerald-500">مجاني</p>
+                        <p class="text-xs font-bold text-slate-500 dark:text-slate-400 mt-0.5">توصيل لكل العراق</p>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section id="services" class="py-24 px-6 relative">
+        <!-- Trusted Brands Marquee (Fixed for RTL) -->
+        <section class="py-8 border-y border-slate-200 dark:border-slate-800/80 bg-white dark:bg-dark-900 overflow-hidden relative z-10">
+            <div class="max-w-7xl mx-auto px-6 mb-4 text-center">
+                <p class="text-[11px] font-bold text-slate-400 uppercase tracking-widest">نخبة العلامات التجارية المتوفرة لدينا</p>
+            </div>
+            <div class="relative flex overflow-x-hidden opacity-75 hover:opacity-100 transition-opacity" dir="ltr">
+                <div class="animate-marquee-rtl flex items-center gap-14 px-8 text-2xl text-slate-500 dark:text-slate-400 whitespace-nowrap">
+                    <span class="font-black tracking-wider">DELL Precision</span>
+                    <span class="font-black tracking-wider">Lenovo ThinkPad</span>
+                    <span class="font-black tracking-wider text-red-500/80">MSI Gaming</span>
+                    <span class="font-black tracking-wider">HP EliteBook</span>
+                    <span class="font-black tracking-wider">Microsoft Surface</span>
+                    <span class="font-black tracking-wider">ASUS ROG</span>
+                    <span class="font-black tracking-wider"><i class="fab fa-apple mr-1"></i>MacBook</span>
+                    <!-- Duplicate for seamless loop -->
+                    <span class="font-black tracking-wider">DELL Precision</span>
+                    <span class="font-black tracking-wider">Lenovo ThinkPad</span>
+                    <span class="font-black tracking-wider text-red-500/80">MSI Gaming</span>
+                    <span class="font-black tracking-wider">HP EliteBook</span>
+                    <span class="font-black tracking-wider">Microsoft Surface</span>
+                    <span class="font-black tracking-wider">ASUS ROG</span>
+                    <span class="font-black tracking-wider"><i class="fab fa-apple mr-1"></i>MacBook</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services & Repair Tracking Section -->
+        <section id="services" class="py-20 px-6 relative">
             <div class="max-w-7xl mx-auto">
-                <div class="text-center mb-16">
-                    <h2 class="text-3xl md:text-5xl font-black mb-4">حلول تقنية متكاملة</h2>
-                    <p class="text-slate-400 font-bold tracking-widest uppercase text-xs md:text-sm">Hardware & Software Solutions</p>
+                <div class="text-center mb-14">
+                    <h2 class="text-3xl md:text-4xl font-black mb-3">حلول تقنية وهندسية متكاملة</h2>
+                    <p class="text-slate-400 font-bold tracking-widest uppercase text-xs">Hardware & Software Engineering</p>
                 </div>
                 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
-                    <div class="group p-8 md:p-10 bg-gradient-to-br from-slate-900 to-brand-900 rounded-[2.5rem] text-white shadow-2xl relative overflow-hidden">
-                        <div class="absolute top-0 right-0 w-64 h-64 bg-brand-500/20 rounded-full blur-3xl -mr-10 -mt-10"></div>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                    <!-- Software Solutions Card -->
+                    <div class="p-8 md:p-10 bg-gradient-to-br from-slate-900 via-slate-900 to-brand-900 rounded-[2rem] text-white shadow-xl relative overflow-hidden border border-white/10">
+                        <div class="absolute top-0 right-0 w-64 h-64 bg-brand-500/20 rounded-full blur-3xl -mr-10 -mt-10 pointer-events-none"></div>
                         <div class="relative z-10">
-                            <div class="w-16 h-16 bg-white/10 backdrop-blur-md rounded-2xl flex items-center justify-center text-3xl mb-8 border border-white/20"><i class="fas fa-code-branch text-brand-400"></i></div>
-                            <h3 class="text-2xl font-bold mb-4">الأنظمة والحلول البرمجية للشركات</h3>
-                            <p class="text-slate-300 text-sm leading-relaxed mb-6">نقدم خدمات تصميم وتطوير الأنظمة البرمجية المتكاملة لتسهيل إدارة أعمالك (Offline/Online)، مع دعم فني مستمر.</p>
-                            <ul class="space-y-3 text-sm text-slate-200">
-                                <li class="flex items-center gap-2"><i class="fas fa-check-circle text-brand-400"></i> أنظمة إدارة المبيعات والجرد للمحلات التجارية</li>
-                                <li class="flex items-center gap-2"><i class="fas fa-check-circle text-brand-400"></i> أنظمة متخصصة لإدارة العيادات الطبية</li>
-                                <li class="flex items-center gap-2"><i class="fas fa-check-circle text-brand-400"></i> تطوير واجهات ويب (Web Development)</li>
+                            <div class="w-14 h-14 bg-white/10 backdrop-blur-md rounded-2xl flex items-center justify-center text-2xl mb-6 border border-white/15">
+                                <i class="fas fa-code-branch text-brand-400"></i>
+                            </div>
+                            <h3 class="text-2xl font-black mb-3">الأنظمة والحلول البرمجية للشركات</h3>
+                            <p class="text-slate-300 text-sm leading-relaxed mb-6">نصمم ونطور الأنظمة البرمجية المتكاملة لإدارة أعمالك بكفاءة عالية (Offline / Online) مع دعم فني مستمر.</p>
+                            <ul class="space-y-3 text-sm text-slate-200 font-medium">
+                                <li class="flex items-center gap-2.5"><i class="fas fa-check-circle text-brand-400"></i> أنظمة الكاشير وإدارة المبيعات والمخازن للمحلات</li>
+                                <li class="flex items-center gap-2.5"><i class="fas fa-check-circle text-brand-400"></i> أنظمة متخصصة لإدارة العيادات والمراكز الطبية</li>
+                                <li class="flex items-center gap-2.5"><i class="fas fa-check-circle text-brand-400"></i> تصميم وتطوير المواقع والمتاجر السحابية الحديثة</li>
                             </ul>
                         </div>
                     </div>
 
-                    <div class="group p-8 md:p-10 bg-white dark:bg-slate-800 rounded-[2.5rem] border border-slate-100 dark:border-slate-700 shadow-xl relative">
-                        <div class="w-16 h-16 bg-slate-50 dark:bg-slate-700 text-accent-gold rounded-2xl flex items-center justify-center text-2xl mb-8"><i class="fas fa-tools"></i></div>
-                        <h3 class="text-2xl font-bold mb-2">تتبع حالة الصيانة</h3>
-                        <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed mb-6">هل لديك جهاز قيد الصيانة لدينا؟ أدخل رقم وصل الاستلام لمعرفة الحالة فوراً.</p>
-                        
-                        <div class="flex gap-2 mt-auto">
-                            <input type="number" id="repair-receipt-input" placeholder="رقم الوصل (مثال: 1045)" class="flex-1 bg-slate-100 dark:bg-slate-900 border-none rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-accent-gold/50 dark:text-white direction-ltr text-right">
-                            <button onclick="window.app.checkRepairStatus()" class="bg-accent-gold text-white px-6 py-3 rounded-xl font-bold hover:bg-yellow-600 transition-all shadow-md flex items-center gap-2">
-                                فحص <i class="fas fa-search"></i>
-                            </button>
+                    <!-- Repair Status Tracker -->
+                    <div class="p-8 md:p-10 bg-white dark:bg-dark-800 rounded-[2rem] border border-slate-200/80 dark:border-slate-800 shadow-lg flex flex-col justify-between">
+                        <div>
+                            <div class="w-14 h-14 bg-amber-50 dark:bg-amber-500/10 text-accent-gold rounded-2xl flex items-center justify-center text-2xl mb-6 border border-amber-200/50 dark:border-amber-500/20">
+                                <i class="fas fa-screwdriver-wrench"></i>
+                            </div>
+                            <h3 class="text-2xl font-black mb-2">تتبع حالة جهازك في الصيانة</h3>
+                            <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed mb-6">أدخل رقم وصل الاستلام الخاص بك لمعرفة مرحلة الفحص أو جاهزية الجهاز للاستلام فوراً.</p>
                         </div>
-                        <div id="repair-status-result" class="mt-4 text-sm font-bold hidden p-4 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700"></div>
+                        
+                        <div>
+                            <div class="flex gap-2.5">
+                                <input type="number" id="repair-receipt-input" onkeydown="if(event.key==='Enter') window.app.checkRepairStatus()" placeholder="أدخل رقم الوصل (مثال: 1045)" class="flex-1 bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3.5 text-sm font-bold focus:outline-none focus:ring-2 focus:ring-accent-gold dark:text-white direction-ltr text-right">
+                                <button onclick="window.app.checkRepairStatus()" class="bg-accent-gold hover:bg-amber-600 text-white px-6 py-3.5 rounded-xl font-black transition-all shadow-md flex items-center gap-2 shrink-0">
+                                    <span>فحص</span> <i class="fas fa-search text-xs"></i>
+                                </button>
+                            </div>
+                            <div id="repair-status-result" class="mt-4 text-sm font-bold hidden p-4 rounded-xl"></div>
+                        </div>
                     </div>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div class="service-card group p-8 bg-white dark:bg-slate-800 rounded-[2rem] border border-slate-100 dark:border-slate-700 shadow-md hover:shadow-xl transition-all" style="--glow-color: #0ea5e9;">
-                        <h3 class="text-xl font-bold mb-3 flex items-center gap-3"><i class="fas fa-screwdriver-wrench text-brand-500"></i> الصيانة المتقدمة</h3>
-                        <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">إصلاح شامل للهاردوير، تنظيف التبريد، وتغيير المعجون الحراري بمواد احترافية.</p>
+                <!-- Sub Services -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="service-card p-7 bg-white dark:bg-dark-800 rounded-3xl border border-slate-200/80 dark:border-slate-800 shadow-sm" style="--glow-color: #0ea5e9;">
+                        <h3 class="text-lg font-black mb-2 flex items-center gap-3">
+                            <i class="fas fa-temperature-arrow-down text-brand-500 text-xl"></i> صيانة الهاردوير والتبريد الاحترافي
+                        </h3>
+                        <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">تنظيف منظومة التبريد، تبديل المعجون الحراري بأجود المواد القياسية، ترقية الرامات وهاردات الـ NVMe، واختبار استقرار الأداء تحت الضغط.</p>
                     </div>
-                    <div class="service-card group p-8 bg-white dark:bg-slate-800 rounded-[2rem] border border-slate-100 dark:border-slate-700 shadow-md hover:shadow-xl transition-all" style="--glow-color: #8b5cf6;">
-                        <h3 class="text-xl font-bold mb-3 flex items-center gap-3"><i class="fas fa-laptop-code text-accent-purple"></i> بيئات التطوير والبرامج</h3>
-                        <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">تنصيب حزم التصميم والهندسة الأصلية، وإعداد بيئات المبرمجين (Linux/Docker).</p>
+                    <div class="service-card p-7 bg-white dark:bg-dark-800 rounded-3xl border border-slate-200/80 dark:border-slate-800 shadow-sm" style="--glow-color: #8b5cf6;">
+                        <h3 class="text-lg font-black mb-2 flex items-center gap-3">
+                            <i class="fas fa-cubes text-accent-purple text-xl"></i> البرامج الهندسية وبيئات العمل
+                        </h3>
+                        <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">تنصيب وتفعيل حزم البرامج الهندسية والإحصائية والتصميمية (AutoCAD, Revit, Lumion, 3ds Max, Adobe, ArcGIS, SPSS) مع ضبط تعريفات كرت الشاشة.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="py-20 px-6 relative bg-slate-100/50 dark:bg-slate-900/50 border-y border-slate-200/50 dark:border-slate-800/50 overflow-hidden">
+        <!-- Customer Reviews Section -->
+        <section class="py-20 px-6 relative bg-slate-100/70 dark:bg-dark-900/60 border-y border-slate-200/60 dark:border-slate-800/60 overflow-hidden">
             <div class="max-w-7xl mx-auto">
-                <div class="text-center mb-12 relative z-10">
-                    <h2 class="text-3xl md:text-5xl font-black mb-4 flex justify-center items-center gap-3">
-                        ثقة عملائنا <i class="fas fa-heart text-red-500 animate-pulse"></i>
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-black mb-3 flex justify-center items-center gap-2.5">
+                        <span>ثقة عملائنا</span> <i class="fas fa-heart text-red-500 text-2xl"></i>
                     </h2>
-                    <p class="text-slate-500 dark:text-slate-400 font-bold text-sm">أكثر من مجرد متجر، نحن عائلة. شكراً لثقتكم بـ LAP MOSUL.</p>
+                    <p class="text-slate-500 dark:text-slate-400 font-bold text-sm">نفخر بخدمة المهندسين، الطلاب، والشركات في الموصل وكافة المحافظات.</p>
                 </div>
 
-                <div class="flex overflow-x-auto gap-6 pb-8 snap-x snap-mandatory scrollbar-hide px-2 relative z-10">
-                    <div class="snap-center shrink-0 w-72 md:w-80 bg-white dark:bg-slate-800 rounded-3xl p-3 shadow-xl border border-slate-100 dark:border-slate-700 hover:-translate-y-2 transition-transform duration-300">
-                        <div class="flex items-center gap-3 mb-3 px-2 pt-2">
+                <div class="flex overflow-x-auto gap-6 pb-4 snap-x snap-mandatory scrollbar-hide px-2">
+                    <div class="snap-center shrink-0 w-72 md:w-80 bg-white dark:bg-dark-800 rounded-3xl p-4 shadow-md border border-slate-200/70 dark:border-slate-800 hover:-translate-y-1 transition-transform duration-300">
+                        <div class="flex items-center gap-3 mb-3">
                             <div class="w-10 h-10 rounded-xl bg-green-50 dark:bg-green-900/30 text-green-500 flex items-center justify-center text-xl"><i class="fab fa-whatsapp"></i></div>
                             <div>
-                                <p class="font-bold text-sm text-slate-800 dark:text-white">عميل عبر واتساب</p>
-                                <div class="flex text-amber-400 text-[10px] mt-1"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                                <p class="font-bold text-sm text-slate-800 dark:text-white">طلب توصيل للمحافظات</p>
+                                <div class="flex text-amber-400 text-[10px] mt-0.5"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
                             </div>
                         </div>
-                        <div class="w-full h-56 bg-slate-100 dark:bg-slate-900 rounded-2xl overflow-hidden relative">
-                            <img src="https://placehold.co/300x400/25D366/white?text=WhatsApp+Screenshot" alt="رأي زبون واتساب" class="w-full h-full object-cover hover:scale-110 transition-transform duration-500">
+                        <div class="w-full h-52 bg-slate-100 dark:bg-slate-900 rounded-2xl overflow-hidden">
+                            <img src="https://placehold.co/300x400/10b981/ffffff?text=WhatsApp+Feedback" alt="رأي زبون واتساب" class="w-full h-full object-cover">
                         </div>
                     </div>
 
-                    <div class="snap-center shrink-0 w-72 md:w-80 bg-white dark:bg-slate-800 rounded-3xl p-3 shadow-xl border border-slate-100 dark:border-slate-700 hover:-translate-y-2 transition-transform duration-300">
-                        <div class="flex items-center gap-3 mb-3 px-2 pt-2">
+                    <div class="snap-center shrink-0 w-72 md:w-80 bg-white dark:bg-dark-800 rounded-3xl p-4 shadow-md border border-slate-200/70 dark:border-slate-800 hover:-translate-y-1 transition-transform duration-300">
+                        <div class="flex items-center gap-3 mb-3">
                             <div class="w-10 h-10 rounded-xl bg-blue-50 dark:bg-blue-900/30 text-blue-600 flex items-center justify-center text-xl"><i class="fab fa-facebook-messenger"></i></div>
                             <div>
-                                <p class="font-bold text-sm text-slate-800 dark:text-white">عميل عبر الصفحة</p>
-                                <div class="flex text-amber-400 text-[10px] mt-1"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                                <p class="font-bold text-sm text-slate-800 dark:text-white">تقييم عبر فيسبوك</p>
+                                <div class="flex text-amber-400 text-[10px] mt-0.5"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
                             </div>
                         </div>
-                        <div class="w-full h-56 bg-slate-100 dark:bg-slate-900 rounded-2xl overflow-hidden relative">
-                            <img src="https://placehold.co/300x400/1877F2/white?text=Facebook+Comment" alt="رأي زبون فيسبوك" class="w-full h-full object-cover hover:scale-110 transition-transform duration-500">
+                        <div class="w-full h-52 bg-slate-100 dark:bg-slate-900 rounded-2xl overflow-hidden">
+                            <img src="https://placehold.co/300x400/0284c7/ffffff?text=Facebook+Review" alt="رأي زبون فيسبوك" class="w-full h-full object-cover">
                         </div>
                     </div>
 
-                    <div class="snap-center shrink-0 w-72 md:w-80 bg-white dark:bg-slate-800 rounded-3xl p-3 shadow-xl border border-slate-100 dark:border-slate-700 hover:-translate-y-2 transition-transform duration-300">
-                        <div class="flex items-center gap-3 mb-3 px-2 pt-2">
+                    <div class="snap-center shrink-0 w-72 md:w-80 bg-white dark:bg-dark-800 rounded-3xl p-4 shadow-md border border-slate-200/70 dark:border-slate-800 hover:-translate-y-1 transition-transform duration-300">
+                        <div class="flex items-center gap-3 mb-3">
                             <div class="w-10 h-10 rounded-xl bg-pink-50 dark:bg-pink-900/30 text-pink-600 flex items-center justify-center text-xl"><i class="fab fa-instagram"></i></div>
                             <div>
                                 <p class="font-bold text-sm text-slate-800 dark:text-white">عميل عبر انستغرام</p>
-                                <div class="flex text-amber-400 text-[10px] mt-1"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                                <div class="flex text-amber-400 text-[10px] mt-0.5"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
                             </div>
                         </div>
-                        <div class="w-full h-56 bg-slate-100 dark:bg-slate-900 rounded-2xl overflow-hidden relative">
-                            <img src="https://placehold.co/300x400/E1306C/white?text=Insta+Direct" alt="رأي زبون انستغرام" class="w-full h-full object-cover hover:scale-110 transition-transform duration-500">
+                        <div class="w-full h-52 bg-slate-100 dark:bg-slate-900 rounded-2xl overflow-hidden">
+                            <img src="https://placehold.co/300x400/db2777/ffffff?text=Instagram+Client" alt="رأي زبون انستغرام" class="w-full h-full object-cover">
                         </div>
                     </div>
 
-                    <div class="snap-center shrink-0 w-72 md:w-80 bg-white dark:bg-slate-800 rounded-3xl p-3 shadow-xl border border-slate-100 dark:border-slate-700 hover:-translate-y-2 transition-transform duration-300">
-                        <div class="flex items-center gap-3 mb-3 px-2 pt-2">
+                    <div class="snap-center shrink-0 w-72 md:w-80 bg-white dark:bg-dark-800 rounded-3xl p-4 shadow-md border border-slate-200/70 dark:border-slate-800 hover:-translate-y-1 transition-transform duration-300">
+                        <div class="flex items-center gap-3 mb-3">
                             <div class="w-10 h-10 rounded-xl bg-brand-50 dark:bg-brand-900/30 text-brand-500 flex items-center justify-center text-xl"><i class="fas fa-store"></i></div>
                             <div>
-                                <p class="font-bold text-sm text-slate-800 dark:text-white">زيارة للمعرض</p>
-                                <div class="flex text-amber-400 text-[10px] mt-1"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                                <p class="font-bold text-sm text-slate-800 dark:text-white">استلام من المعرض</p>
+                                <div class="flex text-amber-400 text-[10px] mt-0.5"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
                             </div>
                         </div>
-                        <div class="w-full h-56 bg-slate-100 dark:bg-slate-900 rounded-2xl overflow-hidden relative">
-                            <img src="https://placehold.co/300x400/0ea5e9/white?text=Store+Happy+Client" alt="تسليم جهاز بالمعرض" class="w-full h-full object-cover hover:scale-110 transition-transform duration-500">
+                        <div class="w-full h-52 bg-slate-100 dark:bg-slate-900 rounded-2xl overflow-hidden">
+                            <img src="https://placehold.co/300x400/0f172a/38bdf8?text=LAP+MOSUL+Store" alt="تسليم جهاز بالمعرض" class="w-full h-full object-cover">
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <footer class="relative pt-16 pb-6 px-6 bg-slate-50 dark:bg-slate-950 border-t border-slate-200 dark:border-slate-800 overflow-hidden">
-            <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 relative z-10">
-                <div class="text-center md:text-right space-y-6">
+        <!-- Footer -->
+        <footer id="footer-contact" class="relative pt-16 pb-8 px-6 bg-white dark:bg-dark-950 border-t border-slate-200 dark:border-slate-800">
+            <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 relative z-10">
+                <div class="text-center md:text-right space-y-5">
                     <div>
-                        <img src="logo.png" alt="LAP MOSUL" class="h-20 md:h-24 w-auto object-contain mb-4 mx-auto md:mx-0 drop-shadow-md">
-                        <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed max-w-sm mx-auto md:mx-0">نحن هنا لنغير مفهوم شراء اللابتوبات والحلول التقنية في الموصل. جودة، فخامة، وأداء لا يضاهى.</p>
+                        <img src="logo.png" alt="LAP MOSUL" class="h-16 md:h-20 w-auto object-contain mb-3 mx-auto md:mx-0" onerror="this.style.display='none'">
+                        <h3 class="text-xl font-black text-slate-900 dark:text-white">لاب الموصل | LAP MOSUL</h3>
+                        <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed max-w-sm mx-auto md:mx-0 mt-2">
+                            الوجهة الموثوقة لشراء اللابتوبات الاحترافية والحلول التقنية في الموصل. فحص دقيق، مواصفات حقيقية، وضمان فعلي.
+                        </p>
                     </div>
                     
-                    <div class="flex items-center justify-center md:justify-start gap-4 pt-2">
-                        <a href="https://www.facebook.com/p/LAP-MOSUL-61576293412329/" target="_blank" class="w-11 h-11 rounded-full bg-[#1877F2] text-white flex items-center justify-center hover:scale-110 hover:shadow-lg hover:shadow-blue-500/30 transition-all duration-300"><i class="fab fa-facebook-f text-xl"></i></a>
-                        <a href="https://www.instagram.com/lap_mosul_/" target="_blank" class="w-11 h-11 rounded-full bg-gradient-to-tr from-[#f09433] via-[#e6683c] to-[#bc1888] text-white flex items-center justify-center hover:scale-110 hover:shadow-lg hover:shadow-pink-500/30 transition-all duration-300"><i class="fab fa-instagram text-xl"></i></a>
-                        <a href="https://wa.me/9647777111558" target="_blank" class="w-11 h-11 rounded-full bg-[#25D366] text-white flex items-center justify-center hover:scale-110 hover:shadow-lg hover:shadow-green-500/30 transition-all duration-300"><i class="fab fa-whatsapp text-xl"></i></a>
+                    <div class="flex items-center justify-center md:justify-start gap-3 pt-1">
+                        <a href="https://www.facebook.com/p/LAP-MOSUL-61576293412329/" target="_blank" rel="noopener" class="w-11 h-11 rounded-xl bg-[#1877F2] text-white flex items-center justify-center hover:scale-110 transition-all shadow-md"><i class="fab fa-facebook-f text-lg"></i></a>
+                        <a href="https://www.instagram.com/lap_mosul_/" target="_blank" rel="noopener" class="w-11 h-11 rounded-xl bg-gradient-to-tr from-[#f09433] via-[#e6683c] to-[#bc1888] text-white flex items-center justify-center hover:scale-110 transition-all shadow-md"><i class="fab fa-instagram text-lg"></i></a>
+                        <a href="https://wa.me/9647777111558" target="_blank" rel="noopener" class="w-11 h-11 rounded-xl bg-[#25D366] text-white flex items-center justify-center hover:scale-110 transition-all shadow-md"><i class="fab fa-whatsapp text-lg"></i></a>
                     </div>
                 </div>
 
-                <div class="bg-white/60 dark:bg-slate-900/60 p-6 rounded-2xl border border-slate-200 dark:border-slate-800 backdrop-blur-sm shadow-sm">
-                    <h4 class="font-bold text-lg mb-4 flex items-center gap-2 text-slate-800 dark:text-white"><i class="fas fa-map-marker-alt text-brand-500"></i> موقعنا في الموصل</h4>
+                <div class="bg-slate-50 dark:bg-dark-800 p-6 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm">
+                    <h4 class="font-black text-base mb-4 flex items-center gap-2 text-slate-800 dark:text-white">
+                        <i class="fas fa-map-marker-alt text-brand-500"></i> عنوان المعرض في الموصل
+                    </h4>
                     <div class="space-y-4 text-sm">
-                        <a href="https://maps.app.goo.gl/9npgBzbDhjPGmcfL6" target="_blank" class="block group">
-                            <p class="font-bold text-slate-800 dark:text-slate-200 group-hover:text-brand-500 transition-colors">
-                                المجموعة الثقافية - فرع كرزات بعلبك (داخل شركة رؤية)
-                                <i class="fas fa-external-link-alt text-[10px] mr-1 opacity-50 group-hover:opacity-100 transition-opacity"></i>
+                        <a href="https://maps.app.goo.gl/9npgBzbDhjPGmcfL6" target="_blank" rel="noopener" class="block group p-3 rounded-xl bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-700/60 hover:border-brand-500 transition-colors">
+                            <p class="font-bold text-slate-800 dark:text-slate-200 group-hover:text-brand-500 transition-colors flex items-center justify-between">
+                                <span>المجموعة الثقافية - فرع كرزات بعلبك (داخل شركة رؤيا فون)</span>
+                                <i class="fas fa-location-arrow text-brand-500"></i>
                             </p>
                         </a>
-                        <div class="flex items-center gap-3 pt-3 border-t border-slate-200/50 dark:border-slate-700/50">
-                            <div class="text-slate-400"><i class="fas fa-phone-alt"></i></div>
-                            <div>
-                                <p class="text-xs text-slate-500 mb-0.5">خدمة الزبائن</p>
-                                <a href="tel:07777111558" class="font-black text-lg text-slate-800 dark:text-white phone-number hover:text-brand-500 transition-colors">07777 111 558</a>
+                        <div class="flex items-center justify-between pt-2 px-1">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-xl bg-brand-50 dark:bg-brand-500/10 text-brand-500 flex items-center justify-center"><i class="fas fa-phone-alt"></i></div>
+                                <div>
+                                    <p class="text-xs text-slate-500 font-bold">الاستفسار والحجز المباشر</p>
+                                    <a href="tel:07777111558" class="font-black text-lg text-slate-800 dark:text-white phone-number hover:text-brand-500 transition-colors">07777 111 558</a>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="max-w-6xl mx-auto mt-12 pt-6 border-t border-slate-200/50 dark:border-slate-800/50 text-center relative z-10">
-                <p class="text-slate-500 dark:text-slate-400 text-sm font-medium tracking-wide">Built with <i class="fas fa-heart text-red-500 animate-pulse mx-1"></i> by LAP MOSUL</p>
+            <div class="max-w-6xl mx-auto mt-10 pt-6 border-t border-slate-200/60 dark:border-slate-800/60 text-center">
+                <p class="text-slate-500 dark:text-slate-400 text-xs font-bold">جميع الحقوق محفوظة © LAP MOSUL</p>
             </div>
         </footer>
     </main>
 
-    <main id="view-store" class="view-section pt-32 pb-28 md:pb-20 min-h-screen">
+    <!-- ==================== STORE VIEW ==================== -->
+    <main id="view-store" class="view-section pt-28 pb-28 md:pb-20 min-h-screen">
         <div class="max-w-7xl mx-auto px-4 sm:px-6">
-            <div class="flex flex-col md:flex-row justify-between items-center mb-6 gap-6">
-                <div>
-                    <h2 class="text-3xl md:text-4xl font-black flex items-center gap-3">المعرض <span class="text-brand-500">الرقمي</span> <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse shadow-[0_0_10px_#22c55e]"></div></h2>
-                </div>
-            </div>
-
-            <div class="flex justify-center mb-10 overflow-x-auto pb-2 scrollbar-hide">
-                <div class="bg-white dark:bg-slate-800 p-1.5 rounded-2xl border border-slate-200 dark:border-slate-700 inline-flex shadow-sm gap-2 whitespace-nowrap">
-                    <button onclick="window.app.switchStoreTab('used')" id="tab-used" class="px-6 sm:px-10 py-3 rounded-xl text-sm font-bold transition-all duration-300 bg-brand-600 text-white shadow-lg"><i class="fas fa-box-open mr-2"></i> المستعمل</button>
-                    <button onclick="window.app.switchStoreTab('new')" id="tab-new" class="px-6 sm:px-10 py-3 rounded-xl text-sm font-bold transition-all duration-300 text-slate-500 hover:text-slate-800 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-700"><i class="fas fa-fire mr-2 text-red-500"></i> الجديد</button>
-                    <button onclick="window.app.switchStoreTab('accessory')" id="tab-accessory" class="px-6 sm:px-10 py-3 rounded-xl text-sm font-bold transition-all duration-300 text-slate-500 hover:text-slate-800 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-700"><i class="fas fa-headphones mr-2 text-purple-500"></i> إكسسوارات</button>
-                </div>
-            </div>
             
-            <div id="used-section" class="fade-in">
-                <div class="mb-8">
-                    <div class="w-full relative group mb-6">
-                        <input type="text" id="searchInput" onkeyup="window.app.filterProducts()" placeholder="ابحث عن لابتوب (مثلاً ThinkPad)..." class="w-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl px-5 py-4 pr-12 focus:outline-none focus:ring-2 focus:ring-brand-500 transition-all">
-                        <i class="fas fa-search absolute left-5 top-1/2 -translate-y-1/2 text-slate-400"></i>
-                    </div>
-                    <div class="flex gap-3 overflow-x-auto pb-2 scrollbar-hide">
-                        <button onclick="window.app.filterCategory('all')" class="cat-btn active px-6 py-3 rounded-xl bg-brand-500 text-white font-bold transition-all">الكل</button>
-                        <button onclick="window.app.filterCategory('engineering')" class="cat-btn px-6 py-3 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 font-bold hover:bg-brand-500 hover:text-white transition-all">هندسة وتصميم</button>
-                        <button onclick="window.app.filterCategory('student')" class="cat-btn px-6 py-3 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 font-bold hover:bg-brand-500 hover:text-white transition-all">طلاب وأعمال</button>
-                        <button onclick="window.app.filterCategory('gaming')" class="cat-btn px-6 py-3 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 font-bold hover:bg-brand-500 hover:text-white transition-all">Gaming</button>
-                    </div>
+            <!-- Store Header & Back Button -->
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
+                <div>
+                    <h2 class="text-2xl md:text-4xl font-black flex items-center gap-3">
+                        <span>المعرض <span class="text-brand-500">الرقمي</span></span>
+                        <span class="w-2.5 h-2.5 bg-emerald-500 rounded-full animate-pulse shadow-[0_0_10px_#10b981]"></span>
+                    </h2>
+                    <p class="text-xs text-slate-500 dark:text-slate-400 font-bold mt-1">تحديث مباشر للمخزون المتوفر في المعرض</p>
                 </div>
-
-                <div id="loading-spinner" class="flex flex-col items-center justify-center py-32">
-                    <div class="loader mb-4"></div>
-                    <p class="text-slate-400 text-sm animate-pulse">جاري التحميل...</p>
-                </div>
-
-                <div id="products-container" class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-6 hidden"></div>
-                <div id="no-results" class="hidden text-center py-32"><i class="fas fa-search text-6xl text-slate-200 dark:text-slate-800 mb-6"></i><p class="text-slate-500 font-bold">لا توجد نتائج</p></div>
+                <button onclick="window.app.showView('home')" class="text-xs font-bold text-slate-500 hover:text-brand-500 flex items-center gap-2 bg-white dark:bg-dark-800 px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+                    <i class="fas fa-arrow-right"></i> العودة للرئيسية
+                </button>
             </div>
 
-            <div id="new-section" class="hidden fade-in">
-                <div id="new-products-container" class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-6"></div>
+            <!-- Main Store Type Tabs (Used / New / Accessory) -->
+            <div class="flex justify-center mb-6 overflow-x-auto pb-2 scrollbar-hide">
+                <div class="bg-white dark:bg-dark-800 p-1.5 rounded-2xl border border-slate-200 dark:border-slate-800 inline-flex shadow-sm gap-1.5 whitespace-nowrap">
+                    <button onclick="window.app.switchStoreTab('used')" id="tab-used" class="px-5 sm:px-8 py-3 rounded-xl text-xs sm:text-sm font-black transition-all duration-300 bg-brand-600 text-white shadow-md">
+                        <i class="fas fa-laptop ml-1.5"></i> اللابتوبات المستعملة
+                    </button>
+                    <button onclick="window.app.switchStoreTab('new')" id="tab-new" class="px-5 sm:px-8 py-3 rounded-xl text-xs sm:text-sm font-bold transition-all duration-300 text-slate-500 hover:text-slate-800 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-700/50">
+                        <i class="fas fa-box-open ml-1.5 text-amber-500"></i> الجديد (ضمان سنة)
+                    </button>
+                    <button onclick="window.app.switchStoreTab('accessory')" id="tab-accessory" class="px-5 sm:px-8 py-3 rounded-xl text-xs sm:text-sm font-bold transition-all duration-300 text-slate-500 hover:text-slate-800 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-700/50">
+                        <i class="fas fa-headphones ml-1.5 text-purple-500"></i> الإكسسوارات والملحقات
+                    </button>
+                </div>
             </div>
 
-            <div id="accessory-section" class="hidden fade-in">
-                <div id="accessory-products-container" class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-6"></div>
+            <!-- Unified Search & Category Filter Bar -->
+            <div class="mb-8 space-y-4">
+                <div class="w-full relative">
+                    <input type="text" id="searchInput" oninput="window.app.filterProducts()" placeholder="ابحث باسم الجهاز أو المواصفات (مثال: Dell, ThinkPad, i7, RTX)..." class="w-full bg-white dark:bg-dark-800 border border-slate-200 dark:border-slate-700 rounded-2xl px-5 py-4 pr-12 text-sm font-bold focus:outline-none focus:ring-2 focus:ring-brand-500 transition-all shadow-sm">
+                    <i class="fas fa-search absolute right-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
+                </div>
+
+                <!-- Sub-category buttons (Shown for laptops) -->
+                <div id="category-filters-bar" class="flex gap-2.5 overflow-x-auto pb-2 scrollbar-hide">
+                    <button id="cat-btn-all" onclick="window.app.filterCategory('all')" class="cat-btn px-5 py-2.5 rounded-xl bg-brand-600 text-white text-xs sm:text-sm font-bold transition-all shrink-0 shadow-sm">الكل</button>
+                    <button id="cat-btn-engineering" onclick="window.app.filterCategory('engineering')" class="cat-btn px-5 py-2.5 rounded-xl bg-white dark:bg-dark-800 border border-slate-200 dark:border-slate-700 text-xs sm:text-sm font-bold hover:border-brand-500 transition-all shrink-0">هندسة وتصميم ثقيل</button>
+                    <button id="cat-btn-student" onclick="window.app.filterCategory('student')" class="cat-btn px-5 py-2.5 rounded-xl bg-white dark:bg-dark-800 border border-slate-200 dark:border-slate-700 text-xs sm:text-sm font-bold hover:border-brand-500 transition-all shrink-0">طلاب وأعمال مكتبية</button>
+                    <button id="cat-btn-gaming" onclick="window.app.filterCategory('gaming')" class="cat-btn px-5 py-2.5 rounded-xl bg-white dark:bg-dark-800 border border-slate-200 dark:border-slate-700 text-xs sm:text-sm font-bold hover:border-brand-500 transition-all shrink-0">Gaming & RTX</button>
+                </div>
+            </div>
+
+            <!-- Loading State -->
+            <div id="loading-spinner" class="flex flex-col items-center justify-center py-28">
+                <div class="loader mb-4"></div>
+                <p class="text-slate-400 text-sm font-bold animate-pulse">جاري جلب الأجهزة من قاعدة البيانات...</p>
+            </div>
+
+            <!-- Products Grid -->
+            <div id="products-container" class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-3.5 sm:gap-6 hidden"></div>
+            
+            <!-- Empty State -->
+            <div id="no-results" class="hidden text-center py-24 bg-white dark:bg-dark-800 rounded-3xl border border-slate-200/60 dark:border-slate-800">
+                <i class="fas fa-laptop-medical text-5xl text-slate-300 dark:text-slate-700 mb-4"></i>
+                <p class="text-slate-600 dark:text-slate-300 font-black text-base mb-1">لا توجد منتجات مطابقة حالياً</p>
+                <p class="text-slate-400 text-xs">جرب البحث بكلمة أخرى أو تواصل معنا عبر واتساب لتوفير طلبك</p>
             </div>
         </div>
     </main>
 
-    <div id="cart-overlay" class="fixed inset-0 bg-slate-900/50 z-[250] hidden backdrop-blur-sm transition-opacity opacity-0" onclick="window.app.toggleCart()"></div>
-    <div id="cart-sidebar" class="fixed top-0 left-0 h-full w-full sm:w-[400px] bg-white dark:bg-slate-900 z-[260] transform -translate-x-full transition-transform duration-300 shadow-2xl flex flex-col border-r border-slate-200 dark:border-slate-800">
-        <div class="p-6 border-b border-slate-100 dark:border-slate-800 flex justify-between items-center bg-slate-50 dark:bg-slate-900">
-            <button onclick="window.app.toggleCart()" class="w-8 h-8 rounded-full bg-slate-200 dark:bg-slate-700 flex items-center justify-center hover:text-red-500 transition-colors"><i class="fas fa-times"></i></button>
-            <h2 class="text-xl font-black flex items-center gap-2">سلة المشتريات <i class="fas fa-shopping-cart text-brand-500"></i></h2>
-        </div>
-        <div id="cart-items" class="flex-1 overflow-y-auto p-4 space-y-3 custom-scrollbar"></div>
-        <div class="p-6 border-t border-slate-100 dark:border-slate-800 bg-white dark:bg-slate-900">
-            <div class="flex justify-between items-center mb-4">
-                <span id="cart-total" class="text-2xl font-black text-brand-600 dark:text-brand-400 direction-ltr">0</span>
-                <span class="text-slate-500 font-bold">المجموع التقريبي:</span>
-            </div>
-            <button onclick="window.app.checkoutCart()" class="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-4 rounded-xl flex justify-center items-center gap-2 transition-all shadow-lg hover:shadow-green-500/30 hover:-translate-y-1">
-                <span>تأكيد الحجز عبر واتساب</span> <i class="fab fa-whatsapp text-xl"></i>
+    <!-- ==================== SHOPPING CART SIDEBAR ==================== -->
+    <div id="cart-overlay" class="fixed inset-0 bg-slate-950/60 z-[250] hidden backdrop-blur-sm transition-opacity opacity-0" onclick="window.app.toggleCart()"></div>
+    <div id="cart-sidebar" class="fixed top-0 left-0 h-full w-full sm:w-[420px] bg-white dark:bg-dark-900 z-[260] transform -translate-x-full transition-transform duration-300 shadow-2xl flex flex-col border-r border-slate-200 dark:border-slate-800">
+        <div class="p-5 border-b border-slate-200 dark:border-slate-800 flex justify-between items-center bg-slate-50 dark:bg-dark-800">
+            <h2 class="text-lg font-black flex items-center gap-2">
+                <i class="fas fa-shopping-cart text-brand-500"></i> سلة الحجز والطلب
+            </h2>
+            <button onclick="window.app.toggleCart()" class="w-8 h-8 rounded-xl bg-slate-200 dark:bg-slate-700 flex items-center justify-center hover:bg-red-500 hover:text-white transition-colors">
+                <i class="fas fa-times"></i>
             </button>
-            <p class="text-center text-xs text-slate-400 mt-3">يمكنك اختيار الدفع والاستلام من مقر الشركة أو التوصيل.</p>
+        </div>
+
+        <div id="cart-items" class="flex-1 overflow-y-auto p-4 space-y-3"></div>
+
+        <!-- Quick Customer Info & Checkout -->
+        <div class="p-5 border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-dark-800 space-y-3">
+            <div class="grid grid-cols-1 gap-2.5">
+                <input type="text" id="cust-name" placeholder="الاسم الكريم (اختياري)" class="input-field py-2.5 text-xs font-bold">
+                <input type="text" id="cust-address" placeholder="المحافظة والمنطقة (أو استلام من المعرض)" class="input-field py-2.5 text-xs font-bold">
+            </div>
+
+            <div class="flex justify-between items-center pt-2 border-t border-slate-200/70 dark:border-slate-700/70">
+                <span class="text-slate-500 dark:text-slate-400 text-xs font-bold">المجموع الكلي:</span>
+                <span id="cart-total" class="text-lg font-black text-brand-600 dark:text-brand-400 direction-ltr">0</span>
+            </div>
+
+            <button onclick="window.app.checkoutCart()" class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-black py-3.5 rounded-xl flex justify-center items-center gap-2 transition-all shadow-lg shadow-emerald-500/25">
+                <span>إرسال الطلب عبر واتساب</span> <i class="fab fa-whatsapp text-lg"></i>
+            </button>
         </div>
     </div>
 
-    <div id="product-modal" class="fixed inset-0 z-[220] bg-slate-900/80 hidden backdrop-blur-md flex items-center justify-center p-4 opacity-0 transition-opacity duration-300">
-        <div class="bg-slate-50 dark:bg-slate-900 w-full max-w-md md:max-w-4xl rounded-[2rem] overflow-hidden flex flex-col md:flex-row shadow-2xl relative transform scale-95 transition-transform duration-300 max-h-[90vh] overflow-y-auto custom-scrollbar" id="product-modal-content">
+    <!-- ==================== PRODUCT DETAILS MODAL ==================== -->
+    <div id="product-modal" class="fixed inset-0 z-[220] bg-slate-950/80 hidden backdrop-blur-md flex items-center justify-center p-4 opacity-0 transition-opacity duration-300" onclick="if(event.target === this) window.app.closeProductModal()">
+        <div class="bg-slate-50 dark:bg-dark-900 w-full max-w-md md:max-w-4xl rounded-[2rem] overflow-hidden flex flex-col md:flex-row shadow-2xl relative transform scale-95 transition-transform duration-300 max-h-[90vh] overflow-y-auto border border-slate-200/50 dark:border-slate-800" id="product-modal-content">
             
-            <button onclick="window.app.closeProductModal()" class="absolute top-4 left-4 z-20 w-10 h-10 rounded-full bg-slate-200/50 dark:bg-black/50 hover:bg-red-500 hover:text-white flex items-center justify-center backdrop-blur-md transition-all"><i class="fas fa-times"></i></button>
+            <button onclick="window.app.closeProductModal()" class="absolute top-4 left-4 z-20 w-10 h-10 rounded-full bg-slate-200/80 dark:bg-slate-800/80 hover:bg-red-500 hover:text-white flex items-center justify-center backdrop-blur-md transition-all">
+                <i class="fas fa-times"></i>
+            </button>
             
-            <div class="w-full md:w-1/2 bg-white dark:bg-slate-800 pt-10 pb-6 px-6 flex flex-col items-center justify-center relative rounded-b-[2rem] md:rounded-none md:rounded-l-[2rem] shadow-sm z-10">
-                <img id="modal-img" src="" class="max-w-full h-48 md:h-64 object-contain drop-shadow-xl hover:scale-105 transition-transform duration-500 mb-6">
+            <!-- Product Visual Side -->
+            <div class="w-full md:w-1/2 bg-white dark:bg-dark-800 pt-10 pb-6 px-6 flex flex-col items-center justify-center relative border-b md:border-b-0 md:border-l border-slate-200/70 dark:border-slate-800">
+                <img id="modal-img" src="" alt="صورة المنتج" class="max-w-full h-48 md:h-64 object-contain drop-shadow-xl hover:scale-105 transition-transform duration-500 mb-5">
                 
-                <div class="text-center w-full mt-2">
-                    <p id="modal-badge" class="text-[11px] font-bold mb-2 text-slate-800 dark:text-white">متوفر</p>
-                    <h2 id="modal-title" class="text-3xl font-black mb-1 text-slate-800 dark:text-white"></h2>
-                    <p id="modal-cat" class="text-sm text-slate-500 font-bold mb-2"></p>
+                <div class="text-center w-full">
+                    <span id="modal-badge" class="inline-block text-[11px] font-black px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-500 mb-2">متوفر للفحص والاستلام</span>
+                    <h2 id="modal-title" class="text-2xl md:text-3xl font-black mb-1 text-slate-900 dark:text-white"></h2>
+                    <p id="modal-cat" class="text-xs text-slate-500 font-bold"></p>
                 </div>
             </div>
             
-            <div class="w-full md:w-1/2 p-6 flex flex-col justify-start bg-slate-50 dark:bg-slate-900">
-                <h4 class="font-bold mb-4 text-sm flex items-center gap-2 text-slate-800 dark:text-white"><div class="w-2 h-2 rounded-full bg-brand-500"></div> المواصفات التقنية:</h4>
+            <!-- Technical Specs Side -->
+            <div class="w-full md:w-1/2 p-6 flex flex-col justify-between bg-slate-50 dark:bg-dark-900">
+                <div>
+                    <h4 class="font-black mb-4 text-sm flex items-center gap-2 text-slate-800 dark:text-white">
+                        <span class="w-2.5 h-2.5 rounded-full bg-brand-500"></span> المواصفات التقنية الفعلية:
+                    </h4>
+                    <div id="modal-specs" class="w-full mb-6 space-y-2.5"></div>
+                </div>
                 
-                <div id="modal-specs" class="w-full mb-6 flex flex-col gap-0"></div>
-                
-                <div class="mt-auto pt-2">
-                    <button id="modal-add-btn" class="w-full bg-brand-600 hover:bg-brand-500 text-white py-4 rounded-2xl font-bold flex items-center justify-center gap-3 transition-all shadow-md mb-3">
-                        أضف للسلة <i class="fas fa-cart-plus"></i>
-                    </button>
-                    <div class="w-full bg-white dark:bg-slate-800 py-4 rounded-2xl text-center border border-slate-100 dark:border-slate-700 shadow-sm">
-                        <span id="modal-price" class="text-2xl font-black text-brand-600 dark:text-brand-400 direction-ltr"></span>
+                <div class="pt-3 border-t border-slate-200 dark:border-slate-800 space-y-2.5">
+                    <div class="flex items-center justify-between bg-white dark:bg-dark-800 px-4 py-3 rounded-xl border border-slate-200/70 dark:border-slate-800">
+                        <span class="text-xs font-bold text-slate-500">السعر النهائي:</span>
+                        <span id="modal-price" class="text-xl font-black text-brand-600 dark:text-brand-400 direction-ltr"></span>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-2.5">
+                        <button id="modal-add-btn" class="bg-brand-600 hover:bg-brand-500 text-white py-3.5 rounded-xl font-black text-sm flex items-center justify-center gap-2 transition-all shadow-md">
+                            <span>أضف للسلة</span> <i class="fas fa-cart-plus"></i>
+                        </button>
+                        <button id="modal-whatsapp-btn" class="bg-emerald-500 hover:bg-emerald-600 text-white py-3.5 rounded-xl font-black text-sm flex items-center justify-center gap-2 transition-all shadow-md">
+                            <span>حجز مباشر</span> <i class="fab fa-whatsapp text-base"></i>
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="md:hidden fixed bottom-0 left-0 right-0 bg-white/95 dark:bg-slate-900/95 backdrop-blur-lg border-t border-slate-200 dark:border-slate-800 z-[120] pb-safe shadow-[0_-5px_20px_rgba(0,0,0,0.05)]">
+    <!-- ==================== MOBILE BOTTOM NAV ==================== -->
+    <div class="md:hidden fixed bottom-0 left-0 right-0 bg-white/95 dark:bg-dark-900/95 backdrop-blur-lg border-t border-slate-200 dark:border-slate-800 z-[120] shadow-[0_-5px_20px_rgba(0,0,0,0.05)]">
         <div class="flex justify-around items-center h-16 px-2">
-            <button onclick="window.app.showView('home')" class="flex flex-col items-center justify-center w-full h-full text-slate-500 hover:text-brand-500 dark:text-slate-400 dark:hover:text-brand-400 transition-colors">
-                <i class="fas fa-home text-xl mb-1"></i><span class="text-[10px] font-bold">الرئيسية</span>
+            <button onclick="window.app.showView('home')" class="flex flex-col items-center justify-center w-full h-full text-slate-500 hover:text-brand-500 dark:text-slate-400">
+                <i class="fas fa-home text-lg mb-1"></i><span class="text-[10px] font-bold">الرئيسية</span>
             </button>
-            <button onclick="window.app.showView('store')" class="flex flex-col items-center justify-center w-full h-full text-slate-500 hover:text-brand-500 dark:text-slate-400 dark:hover:text-brand-400 transition-colors">
-                <i class="fas fa-store text-xl mb-1"></i><span class="text-[10px] font-bold">المتجر</span>
+            <button onclick="window.app.showView('store')" class="flex flex-col items-center justify-center w-full h-full text-slate-500 hover:text-brand-500 dark:text-slate-400">
+                <i class="fas fa-store text-lg mb-1"></i><span class="text-[10px] font-bold">المعرض</span>
             </button>
-            <button onclick="window.app.toggleCart()" class="relative flex flex-col items-center justify-center w-full h-full text-slate-500 hover:text-brand-500 dark:text-slate-400 dark:hover:text-brand-400 transition-colors">
-                <div class="relative"><i class="fas fa-shopping-cart text-xl mb-1"></i><span id="mobile-cart-badge" class="absolute -top-2 -right-2 bg-red-500 text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center hidden shadow-sm">0</span></div>
+            <button onclick="window.app.toggleCart()" class="relative flex flex-col items-center justify-center w-full h-full text-slate-500 hover:text-brand-500 dark:text-slate-400">
+                <div class="relative">
+                    <i class="fas fa-shopping-cart text-lg mb-1"></i>
+                    <span id="mobile-cart-badge" class="absolute -top-1.5 -right-2 bg-red-500 text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center hidden">0</span>
+                </div>
                 <span class="text-[10px] font-bold">السلة</span>
             </button>
-            <a href="https://wa.me/9647777111558" target="_blank" class="flex flex-col items-center justify-center w-full h-full text-emerald-500 hover:text-emerald-600 dark:text-emerald-400 transition-colors">
-                <i class="fab fa-whatsapp text-xl mb-1"></i><span class="text-[10px] font-bold">تواصل</span>
+            <a href="https://wa.me/9647777111558" target="_blank" rel="noopener" class="flex flex-col items-center justify-center w-full h-full text-emerald-500">
+                <i class="fab fa-whatsapp text-lg mb-1"></i><span class="text-[10px] font-bold">واتساب</span>
             </a>
         </div>
     </div>
 
-    <div id="pin-modal" class="fixed inset-0 z-[210] bg-slate-900/90 hidden flex items-center justify-center backdrop-blur-sm">
-        <div class="bg-white dark:bg-slate-900 p-8 rounded-3xl text-center shadow-2xl border border-slate-700 w-full max-w-sm">
-            <h3 class="font-bold mb-1 text-xl">تسجيل دخول الإدارة</h3>
-            <p class="text-xs text-slate-500 mb-6">يرجى تسجيل الدخول بحساب المدير</p>
-            <div class="space-y-4 mb-6 relative z-10">
+    <!-- ==================== ADMIN LOGIN MODAL ==================== -->
+    <div id="pin-modal" class="fixed inset-0 z-[210] bg-slate-950/85 hidden flex items-center justify-center backdrop-blur-sm p-4">
+        <div class="bg-white dark:bg-dark-900 p-7 rounded-3xl text-center shadow-2xl border border-slate-200 dark:border-slate-800 w-full max-w-sm">
+            <h3 class="font-black mb-1 text-xl">تسجيل دخول الإدارة</h3>
+            <p class="text-xs text-slate-500 mb-6">خاص بإدارة متجر لاب الموصل</p>
+            <div class="space-y-3.5 mb-6">
                 <div class="relative">
-                    <input type="email" id="login-user" placeholder="البريد الإلكتروني" class="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-10 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500">
-                    <i class="fas fa-envelope absolute right-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
+                    <input type="email" id="login-user" placeholder="البريد الإلكتروني" class="input-field pr-10 direction-ltr text-right">
+                    <i class="fas fa-envelope absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400"></i>
                 </div>
                 <div class="relative">
-                    <input type="password" id="login-pass" placeholder="كلمة المرور" class="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-10 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500">
-                    <i class="fas fa-key absolute right-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
+                    <input type="password" id="login-pass" onkeydown="if(event.key==='Enter') window.app.checkLogin()" placeholder="كلمة المرور" class="input-field pr-10 direction-ltr text-right">
+                    <i class="fas fa-key absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400"></i>
                 </div>
             </div>
-            <div class="flex flex-col gap-3">
+            <div class="flex flex-col gap-2.5">
                 <button onclick="window.app.checkLogin()" class="bg-brand-600 text-white w-full py-3 rounded-xl font-bold hover:bg-brand-500 transition-all">دخول آمن</button>
-                <button onclick="document.getElementById('pin-modal').classList.add('hidden')" class="text-slate-500 hover:text-slate-800 text-sm font-medium py-2">إلغاء</button>
+                <button onclick="document.getElementById('pin-modal').classList.add('hidden')" class="text-slate-500 hover:text-slate-800 dark:hover:text-white text-sm font-bold py-2">إلغاء</button>
             </div>
         </div>
     </div>
 
-    <div id="admin-modal" class="fixed inset-0 z-[200] bg-slate-900/80 hidden backdrop-blur-md flex items-center justify-center p-4">
-        <div class="bg-white dark:bg-slate-900 w-full max-w-2xl rounded-3xl p-6 md:p-8 max-h-[95vh] overflow-y-auto relative border border-slate-200 dark:border-slate-700 shadow-2xl custom-scrollbar">
-            <button onclick="window.app.closeAdmin()" class="absolute top-4 left-4 w-10 h-10 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-red-100 hover:text-red-500 flex items-center justify-center"><i class="fas fa-times"></i></button>
-            <h2 class="text-2xl font-black mb-6 text-brand-500 flex items-center gap-3"><i class="fas fa-cloud-upload-alt"></i> لوحة التحكم</h2>
+    <!-- ==================== ADMIN DASHBOARD MODAL ==================== -->
+    <div id="admin-modal" class="fixed inset-0 z-[200] bg-slate-950/80 hidden backdrop-blur-md flex items-center justify-center p-4">
+        <div class="bg-white dark:bg-dark-900 w-full max-w-2xl rounded-3xl p-6 md:p-8 max-h-[92vh] overflow-y-auto relative border border-slate-200 dark:border-slate-800 shadow-2xl">
+            <button onclick="window.app.closeAdmin()" class="absolute top-5 left-5 w-10 h-10 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-red-500 hover:text-white flex items-center justify-center transition-colors"><i class="fas fa-times"></i></button>
+            <h2 class="text-2xl font-black mb-6 text-brand-500 flex items-center gap-3"><i class="fas fa-sliders"></i> لوحة التحكم السحابية</h2>
             
-            <div class="flex gap-4 mb-6 border-b border-slate-200 dark:border-slate-700 pb-2">
-                <button onclick="window.app.switchAdminTab('products')" id="admin-tab-products" class="font-bold text-brand-500 border-b-2 border-brand-500 px-2 pb-2 transition-all">المنتجات</button>
-                <button onclick="window.app.switchAdminTab('repairs')" id="admin-tab-repairs" class="font-bold text-slate-500 px-2 pb-2 transition-all">إدارة الصيانة</button>
+            <div class="flex gap-4 mb-6 border-b border-slate-200 dark:border-slate-800 pb-2">
+                <button onclick="window.app.switchAdminTab('products')" id="admin-tab-products" class="font-black text-brand-500 border-b-2 border-brand-500 px-3 pb-2 transition-all">إدارة المنتجات</button>
+                <button onclick="window.app.switchAdminTab('repairs')" id="admin-tab-repairs" class="font-bold text-slate-500 px-3 pb-2 transition-all">وصولات الصيانة</button>
             </div>
 
+            <!-- Admin Products View -->
             <div id="admin-view-products" class="block">
-                <div class="bg-slate-50 dark:bg-slate-800 p-6 rounded-2xl mb-8 border border-slate-100 dark:border-slate-700">
+                <div class="bg-slate-50 dark:bg-dark-800 p-5 rounded-2xl mb-8 border border-slate-200/80 dark:border-slate-700">
                     <div class="flex justify-between items-center mb-4">
-                        <h3 class="font-bold flex items-center gap-2"><i class="fas fa-plus-circle text-green-500"></i> <span id="form-title">إضافة منتج جديد</span></h3>
-                        <button id="cancel-edit-btn" onclick="window.app.cancelEdit()" class="hidden text-xs text-red-500 hover:bg-red-500/10 px-3 py-1 rounded-lg">إلغاء التعديل ✕</button>
+                        <h3 class="font-black flex items-center gap-2"><i class="fas fa-plus-circle text-emerald-500"></i> <span id="form-title">إضافة منتج جديد</span></h3>
+                        <button id="cancel-edit-btn" onclick="window.app.cancelEdit()" class="hidden text-xs font-bold text-red-500 hover:bg-red-500/10 px-3 py-1 rounded-lg">إلغاء التعديل ✕</button>
                     </div>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <input type="text" id="p-name" placeholder="الاسم (لابتوب أو إكسسوار)" class="input-field md:col-span-2">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5">
+                        <input type="text" id="p-name" placeholder="موديل الجهاز (مثال: Dell Precision 5540)" class="input-field md:col-span-2">
                         
-                        <select id="p-type" class="input-field md:col-span-2 text-slate-800 bg-amber-50">
+                        <select id="p-type" class="input-field font-bold">
                             <option value="used">💼 لابتوب مستعمل</option>
                             <option value="new">🔥 لابتوب جديد (ضمان سنة)</option>
-                            <option value="accessory">🎧 إكسسوارات (حقائب، ماوسات...)</option>
+                            <option value="accessory">🎧 إكسسوارات وملحقات</option>
+                        </select>
+
+                        <select id="p-cat" class="input-field font-bold">
+                            <option value="engineering">هندسة وتصميم ثقيل</option>
+                            <option value="student">طلاب وأعمال</option>
+                            <option value="gaming">ألعاب (Gaming)</option>
+                            <option value="other">عام / إكسسوارات</option>
                         </select>
                         
-                        <input type="text" id="p-price" placeholder="السعر" class="input-field direction-ltr text-right">
-                        <select id="p-cat" class="input-field text-slate-500">
-                            <option value="student">طلاب / أعمال</option>
-                            <option value="engineering">هندسة / تصميم</option>
-                            <option value="gaming">ألعاب</option>
-                            <option value="other">أخرى / إكسسوار</option>
-                        </select>
+                        <input type="text" id="p-price" placeholder="السعر (مثال: 450 $ أو 650,000 د.ع)" class="input-field md:col-span-2 direction-ltr text-right font-bold">
                         
-                        <div class="md:col-span-2 bg-slate-100 dark:bg-slate-700/50 p-4 rounded-xl border border-slate-200 dark:border-slate-600 mt-2">
-                            <h4 class="font-bold text-sm mb-3 flex items-center gap-2"><i class="fas fa-microchip text-brand-500"></i> تفاصيل المواصفات</h4>
+                        <div class="md:col-span-2 bg-white dark:bg-slate-900 p-4 rounded-xl border border-slate-200 dark:border-slate-700 mt-1">
+                            <h4 class="font-bold text-xs mb-3 flex items-center gap-2 text-brand-500"><i class="fas fa-microchip"></i> المواصفات التقنية الدقيقة</h4>
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                                <input type="text" id="p-cpu" placeholder="المعالج (مثال: Core i7 12th)" class="input-field bg-white dark:bg-slate-800">
-                                <input type="text" id="p-ram" placeholder="الرام (مثال: 16GB DDR5)" class="input-field bg-white dark:bg-slate-800">
-                                <input type="text" id="p-storage" placeholder="التخزين (مثال: 512GB SSD)" class="input-field bg-white dark:bg-slate-800">
-                                <input type="text" id="p-gpu" placeholder="كرت الشاشة (مثال: RTX 3060 6GB)" class="input-field bg-white dark:bg-slate-800">
-                                <input type="text" id="p-screen" placeholder="الشاشة (مثال: 15.6 FHD 144Hz)" class="input-field bg-white dark:bg-slate-800 md:col-span-2">
+                                <input type="text" id="p-cpu" placeholder="المعالج (مثال: Core i7-10850H)" class="input-field">
+                                <input type="text" id="p-ram" placeholder="الرام (مثال: 16GB DDR4)" class="input-field">
+                                <input type="text" id="p-storage" placeholder="التخزين (مثال: 512GB NVMe)" class="input-field">
+                                <input type="text" id="p-gpu" placeholder="كرت الشاشة (مثال: Quadro T1000 4GB)" class="input-field">
+                                <input type="text" id="p-screen" placeholder="الشاشة (مثال: 15.6 FHD IPS)" class="input-field sm:col-span-2">
                             </div>
                         </div>
 
-                        <input type="text" id="p-desc" placeholder="وصف تسويقي أو ملاحظات إضافية" class="input-field md:col-span-2 mt-2">
+                        <input type="text" id="p-desc" placeholder="ملاحظات النظافة أو الملحقات (مثال: مع الشاحن الأصلي وحقيبة)" class="input-field md:col-span-2">
 
-                        <div class="md:col-span-2 mt-2 flex gap-2">
-                            <input type="text" id="p-img" placeholder="رابط الصورة سيظهر هنا..." class="input-field flex-1 text-left direction-ltr">
-                            <label class="bg-brand-600 hover:bg-brand-500 text-white px-6 py-3 rounded-xl cursor-pointer flex items-center gap-2 transition-all font-bold shadow-md">
-                                <i class="fas fa-upload"></i> رفع
+                        <div class="md:col-span-2 flex gap-2">
+                            <input type="text" id="p-img" placeholder="رابط الصورة المباشر..." class="input-field flex-1 direction-ltr text-left">
+                            <label class="bg-brand-600 hover:bg-brand-500 text-white px-5 py-3 rounded-xl cursor-pointer flex items-center gap-2 transition-all font-bold text-sm shrink-0 shadow-sm">
+                                <i class="fas fa-upload"></i> رفع صورة
                                 <input type="file" id="p-img-upload" accept="image/*" class="hidden" onchange="window.app.handleImageUpload(event)">
                             </label>
                         </div>
-
                     </div>
-                    <button id="save-btn" onclick="window.app.saveProduct()" class="w-full mt-6 bg-green-500 hover:bg-green-600 text-white font-bold py-4 rounded-xl flex justify-center items-center gap-2"><span>حفظ المنتج</span> <i class="fas fa-save"></i></button>
+                    <button id="save-btn" onclick="window.app.saveProduct()" class="w-full mt-5 bg-emerald-500 hover:bg-emerald-600 text-white font-black py-3.5 rounded-xl flex justify-center items-center gap-2 shadow-md">
+                        <span>حفظ ونشر في المتجر</span> <i class="fas fa-save"></i>
+                    </button>
                 </div>
-                <h3 class="font-bold mb-4 border-b border-slate-200 pb-2">قائمة المنتجات الحالية</h3>
-                <div id="admin-list" class="space-y-3 max-h-80 overflow-y-auto pr-2 custom-scrollbar p-1"></div>
+
+                <h3 class="font-black text-sm mb-3 border-b border-slate-200 dark:border-slate-800 pb-2">المنتجات المعروضة حالياً</h3>
+                <div id="admin-list" class="space-y-2.5 max-h-72 overflow-y-auto pr-1"></div>
             </div>
 
+            <!-- Admin Repairs View -->
             <div id="admin-view-repairs" class="hidden">
-                <div class="bg-slate-50 dark:bg-slate-800 p-6 rounded-2xl mb-8 border border-slate-100 dark:border-slate-700">
+                <div class="bg-slate-50 dark:bg-dark-800 p-5 rounded-2xl mb-8 border border-slate-200/80 dark:border-slate-700">
                     <div class="flex justify-between items-center mb-4">
-                        <h3 class="font-bold flex items-center gap-2"><i class="fas fa-tools text-accent-gold"></i> تحديث حالة جهاز صيانة</h3>
-                        <button id="cancel-repair-btn" onclick="window.app.clearRepairForm()" class="hidden text-xs text-red-500 hover:bg-red-500/10 px-3 py-1 rounded-lg">إلغاء التعديل ✕</button>
+                        <h3 class="font-black flex items-center gap-2"><i class="fas fa-tools text-accent-gold"></i> تسجيل أو تحديث وصل صيانة</h3>
+                        <button id="cancel-repair-btn" onclick="window.app.clearRepairForm()" class="hidden text-xs font-bold text-red-500 hover:bg-red-500/10 px-3 py-1 rounded-lg">إلغاء التعديل ✕</button>
                     </div>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <input type="number" id="r-receipt" placeholder="رقم الوصل (مثلاً 1045)" class="input-field md:col-span-2 direction-ltr text-right">
-                        <input type="text" id="r-name" placeholder="اسم الزبون أو نوع الجهاز" class="input-field md:col-span-2">
-                        <select id="r-status" class="input-field md:col-span-2 text-slate-800 font-bold">
-                            <option value="checking">🔍 قيد الفحص والصيانة</option>
+                    <div class="grid grid-cols-1 gap-3.5">
+                        <input type="number" id="r-receipt" placeholder="رقم الوصل (مثال: 1045)" class="input-field direction-ltr text-right font-bold">
+                        <input type="text" id="r-name" placeholder="اسم الزبون وموديل الجهاز" class="input-field">
+                        <select id="r-status" class="input-field font-bold">
+                            <option value="checking">🔍 قيد الفحص والصيانة الهندسية</option>
                             <option value="waiting_parts">⏳ بانتظار توفر القطع</option>
                             <option value="ready">✅ جاهز للاستلام</option>
                         </select>
                     </div>
-                    <button onclick="window.app.saveRepair()" class="w-full mt-6 bg-brand-600 hover:bg-brand-700 text-white font-bold py-4 rounded-xl flex justify-center items-center gap-2"><span>حفظ وتحديث الحالة</span> <i class="fas fa-sync-alt"></i></button>
+                    <button onclick="window.app.saveRepair()" class="w-full mt-5 bg-brand-600 hover:bg-brand-500 text-white font-black py-3.5 rounded-xl flex justify-center items-center gap-2 shadow-md">
+                        <span>حفظ حالة الوصل</span> <i class="fas fa-sync-alt"></i>
+                    </button>
                 </div>
-                <h3 class="font-bold mb-4 border-b border-slate-200 pb-2">الأجهزة المسجلة في الصيانة</h3>
-                <div id="admin-repairs-list" class="space-y-3 max-h-80 overflow-y-auto pr-2 custom-scrollbar p-1"></div>
+                <h3 class="font-black text-sm mb-3 border-b border-slate-200 dark:border-slate-800 pb-2">سجل الصيانة</h3>
+                <div id="admin-repairs-list" class="space-y-2.5 max-h-72 overflow-y-auto pr-1"></div>
             </div>
-
         </div>
     </div>
 
+    <!-- ==================== APPLICATION LOGIC ==================== -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getFirestore, collection, addDoc, deleteDoc, updateDoc, doc, onSnapshot, query, orderBy, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
@@ -598,91 +768,187 @@
             storage = getStorage(app);
             productsRef = collection(db, "products");
             repairsRef = collection(db, "repairs");
-        } catch (error) { console.error("Firebase Error:", error); }
+        } catch (error) {
+            console.error("Firebase Init Error:", error);
+        }
 
         let allProducts = [];
         let allRepairs = [];
-        let currentCategory = 'all';
+        let currentStoreTab = 'used'; // 'used', 'new', 'accessory'
+        let currentCategory = 'all';  // 'all', 'engineering', 'student', 'gaming'
         let editingId = null;
         let cart = JSON.parse(localStorage.getItem('lapmosul_cart')) || [];
         
-        function saveCart() { localStorage.setItem('lapmosul_cart', JSON.stringify(cart)); updateCartUI(); }
+        function saveCart() {
+            localStorage.setItem('lapmosul_cart', JSON.stringify(cart));
+            updateCartUI();
+        }
+
+        function parseNumericPrice(priceStr) {
+            if (!priceStr) return 0;
+            let raw = priceStr.toString().replace(/،/g, ',');
+            let clean = raw.replace(/[^\d.,]/g, '').replace(/,/g, '');
+            let parts = clean.split('.');
+            if (parts.length > 1) {
+                if (parts[parts.length - 1].length === 3) clean = clean.replace(/\./g, '');
+                else clean = parts.slice(0, -1).join('') + '.' + parts[parts.length - 1];
+            }
+            return parseFloat(clean) || 0;
+        }
 
         function updateCartUI() {
+            const totalQty = cart.reduce((sum, item) => sum + (item.qty || 1), 0);
             const badge = document.getElementById('cart-badge');
             const mobileBadge = document.getElementById('mobile-cart-badge');
-            badge.innerText = cart.length; if(mobileBadge) mobileBadge.innerText = cart.length;
             
-            if(cart.length > 0) { badge.classList.remove('hidden'); if(mobileBadge) mobileBadge.classList.remove('hidden'); } 
-            else { badge.classList.add('hidden'); if(mobileBadge) mobileBadge.classList.add('hidden'); }
+            badge.innerText = totalQty;
+            if (mobileBadge) mobileBadge.innerText = totalQty;
+            
+            if (totalQty > 0) {
+                badge.classList.remove('hidden');
+                if (mobileBadge) mobileBadge.classList.remove('hidden');
+            } else {
+                badge.classList.add('hidden');
+                if (mobileBadge) mobileBadge.classList.add('hidden');
+            }
             
             const container = document.getElementById('cart-items');
             const totalEl = document.getElementById('cart-total');
-            if(!container) return;
+            if (!container) return;
             
-            if(cart.length === 0) {
-                container.innerHTML = '<div class="text-center text-slate-400 mt-20"><i class="fas fa-box-open text-6xl mb-4 opacity-50"></i><p class="font-bold">السلة فارغة حالياً</p></div>';
-                totalEl.innerText = '0'; return;
+            if (cart.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center text-slate-400 py-16">
+                        <i class="fas fa-shopping-basket text-5xl mb-3 opacity-40"></i>
+                        <p class="font-bold text-sm">سلة المشتريات فارغة</p>
+                    </div>`;
+                totalEl.innerText = '0';
+                return;
             }
             
             container.innerHTML = '';
-            let total = 0; let isDollar = false;
+            let totalUSD = 0;
+            let totalIQD = 0;
             
             cart.forEach((item, index) => {
-                let rawPrice = item.price.toString().replace(/،/g, ','); 
-                let cleanStr = rawPrice.replace(/[^\d.,]/g, '').replace(/,/g, '');
-                let parts = cleanStr.split('.');
-                if (parts.length > 1) {
-                    if (parts[parts.length - 1].length === 3) cleanStr = cleanStr.replace(/\./g, ''); 
-                    else cleanStr = parts.join('') + '.' + parts.pop();
+                const qty = item.qty || 1;
+                const priceNum = parseNumericPrice(item.price) * qty;
+                const priceStr = (item.price || '').toString();
+                
+                if (priceStr.includes('$') || priceNum < 5000) {
+                    totalUSD += priceNum;
+                } else {
+                    totalIQD += priceNum;
                 }
-                const priceNum = parseFloat(cleanStr) || 0;
-                total += priceNum; if(item.price.includes('$')) isDollar = true;
                 
                 container.innerHTML += `
-                    <div class="flex gap-4 bg-white dark:bg-slate-800 p-3 rounded-2xl border border-slate-100 dark:border-slate-700 shadow-sm relative group overflow-hidden">
-                        <div class="w-20 h-20 bg-slate-50 dark:bg-slate-900 rounded-xl flex items-center justify-center p-2 shrink-0 border border-slate-100 dark:border-slate-700">
-                            <img src="${item.img}" class="w-full h-full object-contain drop-shadow-md" onerror="this.src='https://placehold.co/100'">
+                    <div class="flex items-center gap-3 bg-white dark:bg-dark-800 p-3 rounded-2xl border border-slate-200/70 dark:border-slate-800 shadow-sm">
+                        <div class="w-16 h-16 bg-slate-50 dark:bg-slate-900 rounded-xl flex items-center justify-center p-1.5 shrink-0 border border-slate-100 dark:border-slate-700">
+                            <img src="${item.img}" class="w-full h-full object-contain" onerror="this.src='https://placehold.co/100x100/1e293b/ffffff?text=LAP'">
                         </div>
-                        <div class="flex-1 flex flex-col justify-center py-1">
-                            <h4 class="font-bold text-sm text-slate-800 dark:text-white line-clamp-1 mb-1">${item.name}</h4>
-                            <p class="text-brand-500 font-black text-sm direction-ltr">${item.price}</p>
+                        <div class="flex-1 min-w-0">
+                            <h4 class="font-bold text-xs sm:text-sm text-slate-800 dark:text-white truncate">${item.name}</h4>
+                            <p class="text-brand-500 font-black text-xs direction-ltr mt-0.5">${item.price || ''}</p>
+                            <div class="flex items-center gap-2 mt-2">
+                                <button onclick="window.app.changeQty(${index}, -1)" class="w-6 h-6 rounded-lg bg-slate-100 dark:bg-slate-700 text-xs font-bold hover:bg-brand-500 hover:text-white transition-colors">-</button>
+                                <span class="text-xs font-black px-1">${qty}</span>
+                                <button onclick="window.app.changeQty(${index}, 1)" class="w-6 h-6 rounded-lg bg-slate-100 dark:bg-slate-700 text-xs font-bold hover:bg-brand-500 hover:text-white transition-colors">+</button>
+                            </div>
                         </div>
-                        <button onclick="window.app.removeFromCart(${index})" class="absolute left-0 top-0 bottom-0 w-12 bg-red-500 text-white flex items-center justify-center transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300"><i class="fas fa-trash"></i></button>
+                        <button onclick="window.app.removeFromCart(${index})" class="w-8 h-8 rounded-xl text-red-500 hover:bg-red-50 dark:hover:bg-red-500/10 flex items-center justify-center transition-colors shrink-0">
+                            <i class="fas fa-trash-alt text-sm"></i>
+                        </button>
                     </div>`;
             });
-            totalEl.innerText = total.toLocaleString('en-US') + (isDollar ? ' $' : ' د.ع');
+
+            let totalsText = [];
+            if (totalUSD > 0) totalsText.push(`${totalUSD.toLocaleString('en-US')} $`);
+            if (totalIQD > 0) totalsText.push(`${totalIQD.toLocaleString('en-US')} د.ع`);
+            totalEl.innerText = totalsText.join(' + ') || '0';
         }
 
-        function generateProductCardHTML(p, badgeText, badgeColorClass) {
+        function generateProductCardHTML(p) {
+            let badgeText = '<i class="fas fa-check-circle"></i> متوفر';
+            let badgeColorClass = 'bg-emerald-500';
+
+            if (p.type === 'new') {
+                badgeText = '<i class="fas fa-shield-alt"></i> جديد - ضمان سنة';
+                badgeColorClass = 'bg-brand-600';
+            } else if (p.type === 'accessory') {
+                badgeText = 'ملحقات أصلية';
+                badgeColorClass = 'bg-purple-600';
+            }
+
+            const quickSpecs = [p.cpu, p.ram, p.storage, p.gpu].filter(Boolean).join(' • ') || p.specs || '';
+
             return `
-                <div onclick="window.app.openProductModal('${p.id}')" class="group bg-white dark:bg-slate-800 rounded-2xl md:rounded-[2rem] p-3 md:p-4 border border-slate-100 dark:border-slate-700 shadow-sm flex flex-col h-full overflow-hidden cursor-pointer hover:shadow-xl transition-all hover:-translate-y-1">
-                    <div class="relative h-32 md:h-56 bg-slate-50 dark:bg-slate-900/50 rounded-xl md:rounded-3xl mb-3 md:mb-4 p-2 md:p-6 flex items-center justify-center overflow-hidden">
-                        <img src="${p.img}" class="w-full h-full object-contain transform group-hover:scale-125 transition-transform duration-500 ease-in-out drop-shadow-xl" onerror="this.src='https://placehold.co/400x300'">
-                        <div class="absolute top-2 right-2 ${badgeColorClass} text-white text-[9px] md:text-[10px] font-bold px-2 py-1 rounded-full z-10 flex items-center gap-1">${badgeText}</div>
+                <div onclick="window.app.openProductModal('${p.id}')" class="group bg-white dark:bg-dark-800 rounded-2xl md:rounded-3xl p-3 md:p-4 border border-slate-200/80 dark:border-slate-800 shadow-sm flex flex-col h-full overflow-hidden cursor-pointer hover:shadow-xl hover:border-brand-500/50 transition-all duration-300 hover:-translate-y-1">
+                    <div class="relative h-36 md:h-52 bg-slate-50 dark:bg-slate-900/70 rounded-xl md:rounded-2xl mb-3 p-3 md:p-5 flex items-center justify-center overflow-hidden">
+                        <img src="${p.img}" alt="${p.name}" loading="lazy" class="w-full h-full object-contain transform group-hover:scale-110 transition-transform duration-500 drop-shadow-md" onerror="this.src='https://placehold.co/400x300/1e293b/38bdf8?text=LAP+MOSUL'">
+                        <div class="absolute top-2.5 right-2.5 ${badgeColorClass} text-white text-[9px] md:text-[10px] font-black px-2.5 py-1 rounded-full z-10 flex items-center gap-1 shadow-sm">${badgeText}</div>
                     </div>
-                    <h3 class="font-bold text-sm md:text-lg mb-1 md:mb-2 text-slate-800 dark:text-white group-hover:text-brand-500 transition-colors line-clamp-2 md:line-clamp-1">${p.name}</h3>
-                    <p class="text-[10px] md:text-xs text-slate-500 dark:text-slate-400 mb-2 md:mb-4 flex-1 line-clamp-2">${p.specs}</p>
-                    <div class="flex justify-between items-center mt-auto pt-2 md:pt-3 border-t border-slate-100 dark:border-slate-700/50">
-                        <span class="font-black text-slate-800 dark:text-white text-sm md:text-lg direction-ltr">${p.price || ''}</span>
-                        <button onclick="event.stopPropagation(); window.app.openProductModal('${p.id}')" class="w-8 h-8 md:w-10 md:h-10 rounded-lg md:rounded-xl bg-brand-50 text-brand-600 dark:bg-brand-500/20 dark:text-brand-400 flex items-center justify-center hover:bg-brand-500 hover:text-white transition-all shadow-sm hover:scale-110"><i class="fas fa-eye text-xs md:text-base"></i></button>
+                    <h3 class="font-black text-xs sm:text-sm md:text-base mb-1.5 text-slate-900 dark:text-white group-hover:text-brand-500 transition-colors line-clamp-1">${p.name}</h3>
+                    <p class="text-[11px] md:text-xs text-slate-500 dark:text-slate-400 mb-3 flex-1 line-clamp-2 font-medium direction-ltr text-right">${quickSpecs}</p>
+                    <div class="flex justify-between items-center mt-auto pt-2.5 border-t border-slate-100 dark:border-slate-700/60">
+                        <span class="font-black text-brand-600 dark:text-brand-400 text-xs sm:text-sm md:text-base direction-ltr">${p.price || 'تواصل للسعر'}</span>
+                        <div class="flex gap-1.5">
+                            <button onclick="event.stopPropagation(); window.app.addToCart('${p.id}')" title="أضف للسلة" class="w-8 h-8 md:w-9 md:h-9 rounded-xl bg-slate-100 text-slate-700 dark:bg-slate-700 dark:text-slate-200 flex items-center justify-center hover:bg-emerald-500 hover:text-white transition-all">
+                                <i class="fas fa-cart-plus text-xs"></i>
+                            </button>
+                            <button onclick="event.stopPropagation(); window.app.openProductModal('${p.id}')" title="التفاصيل" class="w-8 h-8 md:w-9 md:h-9 rounded-xl bg-brand-50 text-brand-600 dark:bg-brand-500/20 dark:text-brand-400 flex items-center justify-center hover:bg-brand-500 hover:text-white transition-all">
+                                <i class="fas fa-eye text-xs"></i>
+                            </button>
+                        </div>
                     </div>
                 </div>`;
         }
 
+        function updateUI() {
+            const searchInput = document.getElementById('searchInput');
+            const queryStr = searchInput ? searchInput.value.toLowerCase().trim() : '';
+            const container = document.getElementById('products-container');
+            const noResults = document.getElementById('no-results');
+            if (!container) return;
+
+            const filtered = allProducts.filter(p => {
+                const pType = p.type || 'used';
+                const matchTab = pType === currentStoreTab;
+                const matchCat = currentStoreTab === 'accessory' || currentCategory === 'all' || p.category === currentCategory;
+                const searchableText = `${p.name || ''} ${p.specs || ''} ${p.cpu || ''} ${p.ram || ''} ${p.gpu || ''} ${p.storage || ''} ${p.desc || ''}`.toLowerCase();
+                const matchSearch = !queryStr || searchableText.includes(queryStr);
+                return matchTab && matchCat && matchSearch;
+            });
+
+            container.innerHTML = '';
+            if (filtered.length === 0) {
+                noResults.classList.remove('hidden');
+            } else {
+                noResults.classList.add('hidden');
+                filtered.forEach(p => {
+                    container.innerHTML += generateProductCardHTML(p);
+                });
+            }
+        }
+
         function refreshData() {
             updateUI();
-            updateAdminList(); renderNewProducts(); renderAccessories(); updateCartUI();
+            updateAdminList();
+            updateCartUI();
             const spinner = document.getElementById('loading-spinner');
-            if(spinner) spinner.style.display = 'none';
+            if (spinner) spinner.style.display = 'none';
             document.getElementById('products-container').classList.remove('hidden');
         }
 
         if (productsRef) {
             onSnapshot(query(productsRef, orderBy("createdAt", "desc")), (snapshot) => {
                 allProducts = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-                allProducts.sort((a, b) => a.name.localeCompare(b.name, 'en', { sensitivity: 'base' }));
+                allProducts.sort((a, b) => (a.name || '').localeCompare(b.name || '', 'en', { sensitivity: 'base' }));
                 refreshData();
+            }, (err) => {
+                console.error("Firestore Read Error:", err);
+                const spinner = document.getElementById('loading-spinner');
+                if (spinner) spinner.style.display = 'none';
+                document.getElementById('no-results').classList.remove('hidden');
             });
         }
         
@@ -693,348 +959,332 @@
             });
         }
 
-        function renderNewProducts() {
-            const container = document.getElementById('new-products-container');
-            if(!container) return; container.innerHTML = '';
-            allProducts.filter(p => p.type === 'new').forEach(p => {
-                container.innerHTML += generateProductCardHTML(p, '<i class="fas fa-shield-alt"></i> ضمان', 'bg-blue-500');
-            });
-        }
-
-        function renderAccessories() {
-            const container = document.getElementById('accessory-products-container');
-            if(!container) return; container.innerHTML = '';
-            allProducts.filter(p => p.type === 'accessory').forEach(p => {
-                container.innerHTML += generateProductCardHTML(p, 'ملحقات', 'bg-purple-500');
-            });
-        }
-
-        function updateUI() {
-            const queryStr = document.getElementById('searchInput').value.toLowerCase();
-            const container = document.getElementById('products-container');
-            const filtered = allProducts.filter(p => {
-                const isUsed = p.type === 'used' || !p.type;
-                const matchCat = currentCategory === 'all' || p.category === currentCategory;
-                const matchSearch = p.name.toLowerCase().includes(queryStr) || (p.specs && p.specs.toLowerCase().includes(queryStr));
-                return isUsed && matchCat && matchSearch;
-            });
-
-            container.innerHTML = '';
-            if (filtered.length === 0) { document.getElementById('no-results').classList.remove('hidden'); } 
-            else {
-                document.getElementById('no-results').classList.add('hidden');
-                filtered.forEach(p => container.innerHTML += generateProductCardHTML(p, '<i class="fas fa-check-circle"></i> متوفر', 'bg-emerald-500'));
-            }
-        }
-
         window.app = {
             showView: (name) => {
                 document.querySelectorAll('.view-section').forEach(el => el.classList.remove('active'));
-                document.getElementById(`view-${name}`).classList.add('active'); window.scrollTo(0,0);
+                document.getElementById(`view-${name}`).classList.add('active');
+                
+                const homeLink = document.getElementById('nav-link-home');
+                const storeLink = document.getElementById('nav-link-store');
+                if (homeLink && storeLink) {
+                    homeLink.classList.toggle('text-brand-500', name === 'home');
+                    storeLink.classList.toggle('text-brand-500', name === 'store');
+                }
+                window.scrollTo({ top: 0, behavior: 'smooth' });
             },
+
+            scrollToSection: (sectionId) => {
+                window.app.showView('home');
+                setTimeout(() => {
+                    const el = document.getElementById(sectionId);
+                    if (el) el.scrollIntoView({ behavior: 'smooth' });
+                }, 100);
+            },
+
             switchStoreTab: (tab) => {
-                ['used', 'new', 'accessory'].forEach(t => document.getElementById(`${t}-section`).classList.add('hidden'));
-                document.getElementById(`${tab}-section`).classList.remove('hidden');
-                document.querySelectorAll('[id^="tab-"]').forEach(btn => btn.className = "px-6 sm:px-10 py-3 rounded-xl text-sm font-bold text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-700 transition-all duration-300");
-                document.getElementById(`tab-${tab}`).className = "px-6 sm:px-10 py-3 rounded-xl text-sm font-bold bg-brand-600 text-white shadow-lg transition-all duration-300";
+                currentStoreTab = tab;
+                const tabs = {
+                    used: '<i class="fas fa-laptop ml-1.5"></i> اللابتوبات المستعملة',
+                    new: '<i class="fas fa-box-open ml-1.5 text-amber-400"></i> الجديد (ضمان سنة)',
+                    accessory: '<i class="fas fa-headphones ml-1.5 text-purple-400"></i> الإكسسوارات والملحقات'
+                };
+                Object.keys(tabs).forEach(t => {
+                    const btn = document.getElementById(`tab-${t}`);
+                    if (t === tab) {
+                        btn.className = "px-5 sm:px-8 py-3 rounded-xl text-xs sm:text-sm font-black transition-all duration-300 bg-brand-600 text-white shadow-md";
+                    } else {
+                        btn.className = "px-5 sm:px-8 py-3 rounded-xl text-xs sm:text-sm font-bold transition-all duration-300 text-slate-500 hover:text-slate-800 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-700/50";
+                    }
+                });
+
+                const catBar = document.getElementById('category-filters-bar');
+                if (catBar) {
+                    catBar.style.display = tab === 'accessory' ? 'none' : 'flex';
+                }
+                updateUI();
             },
+
             toggleTheme: () => {
                 document.documentElement.classList.toggle('dark');
                 localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
             },
+
             filterCategory: (cat) => {
                 currentCategory = cat;
-                document.querySelectorAll('.cat-btn').forEach(b => { b.classList.remove('bg-brand-500', 'text-white'); b.classList.add('bg-white', 'dark:bg-slate-800'); });
-                event.target.classList.remove('bg-white', 'dark:bg-slate-800'); event.target.classList.add('bg-brand-500', 'text-white'); updateUI();
+                document.querySelectorAll('.cat-btn').forEach(b => {
+                    b.className = "cat-btn px-5 py-2.5 rounded-xl bg-white dark:bg-dark-800 border border-slate-200 dark:border-slate-700 text-xs sm:text-sm font-bold hover:border-brand-500 transition-all shrink-0";
+                });
+                const activeBtn = document.getElementById(`cat-btn-${cat}`);
+                if (activeBtn) {
+                    activeBtn.className = "cat-btn px-5 py-2.5 rounded-xl bg-brand-600 text-white text-xs sm:text-sm font-bold transition-all shrink-0 shadow-sm";
+                }
+                updateUI();
             },
+
             filterProducts: () => updateUI(),
             openAdminLogin: () => document.getElementById('pin-modal').classList.remove('hidden'),
             
             toggleCart: () => {
                 const sidebar = document.getElementById('cart-sidebar');
                 const overlay = document.getElementById('cart-overlay');
-                if(sidebar.classList.contains('-translate-x-full')) {
+                if (sidebar.classList.contains('-translate-x-full')) {
                     sidebar.classList.remove('-translate-x-full');
-                    overlay.classList.remove('hidden'); setTimeout(() => overlay.classList.remove('opacity-0'), 10);
+                    overlay.classList.remove('hidden');
+                    setTimeout(() => overlay.classList.remove('opacity-0'), 10);
                 } else {
                     sidebar.classList.add('-translate-x-full');
-                    overlay.classList.add('opacity-0'); setTimeout(() => overlay.classList.add('hidden'), 300);
+                    overlay.classList.add('opacity-0');
+                    setTimeout(() => overlay.classList.add('hidden'), 300);
                 }
             },
             
             addToCart: (id) => {
                 const product = allProducts.find(p => p.id === id);
-                if(product) {
-                    cart.push(product);
+                if (product) {
+                    const existing = cart.find(item => item.id === id);
+                    if (existing) {
+                        existing.qty = (existing.qty || 1) + 1;
+                    } else {
+                        cart.push({ ...product, qty: 1 });
+                    }
                     saveCart();
+                    
                     const toast = document.createElement('div');
-                    toast.className = 'fixed top-24 left-1/2 -translate-x-1/2 bg-slate-900 dark:bg-white text-white dark:text-slate-900 px-6 py-3 rounded-full shadow-2xl z-[500] flex items-center gap-3 font-bold text-sm animate-bounce-toast';
-                    toast.innerHTML = `<i class="fas fa-check-circle text-emerald-400"></i> تم إضافة ${product.name} للسلة`;
+                    toast.className = 'fixed top-24 left-1/2 -translate-x-1/2 bg-slate-900 dark:bg-white text-white dark:text-slate-900 px-5 py-3 rounded-2xl shadow-2xl z-[500] flex items-center gap-2.5 font-bold text-xs sm:text-sm animate-bounce-toast';
+                    toast.innerHTML = `<i class="fas fa-check-circle text-emerald-400 dark:text-emerald-600 text-base"></i> <span>تمت إضافة <b>${product.name}</b> للسلة</span>`;
                     document.body.appendChild(toast);
-                    setTimeout(() => { toast.style.opacity = '0'; setTimeout(() => toast.remove(), 500); }, 2500);
+                    setTimeout(() => { toast.style.opacity = '0'; setTimeout(() => toast.remove(), 400); }, 2200);
                 }
             },
+
+            changeQty: (index, delta) => {
+                if (!cart[index]) return;
+                cart[index].qty = (cart[index].qty || 1) + delta;
+                if (cart[index].qty <= 0) cart.splice(index, 1);
+                saveCart();
+            },
             
-            removeFromCart: (index) => { cart.splice(index, 1); saveCart(); },
+            removeFromCart: (index) => {
+                cart.splice(index, 1);
+                saveCart();
+            },
+
             checkoutCart: () => {
-                if(cart.length === 0) return alert('السلة فارغة!');
-                let msg = "🛒 *طلب جديد من متجر لاب الموصل*\n\nالمنتجات المطلوبة:\n";
-                cart.forEach(item => msg += `▪️ ${item.name} | السعر: ${item.price}\n`);
-                msg += `\n💰 *المجموع:* ${document.getElementById('cart-total').innerText}\n\nأرجو تأكيد الطلب.`;
+                if (cart.length === 0) return alert('السلة فارغة حالياً!');
+                const custName = document.getElementById('cust-name').value.trim();
+                const custAddress = document.getElementById('cust-address').value.trim();
+
+                let msg = "🛒 *طلب حجز جديد - متجر لاب الموصل (LAP MOSUL)*\n";
+                msg += "──────────────────\n";
+                if (custName) msg += `👤 *الاسم:* ${custName}\n`;
+                if (custAddress) msg += `📍 *العنوان/الاستلام:* ${custAddress}\n`;
+                msg += "\n📦 *الأجهزة المطلوبة:*\n";
+                
+                cart.forEach(item => {
+                    const qty = item.qty || 1;
+                    msg += `▫️ ${item.name} (العدد: ${qty}) | السعر: ${item.price}\n`;
+                });
+                
+                msg += `\n💰 *المجموع الكلي:* ${document.getElementById('cart-total').innerText}\n`;
+                msg += "──────────────────\n";
+                msg += "يرجى تأكيد التوفر وإجراءات الاستلام.";
+                
                 window.open(`https://wa.me/9647777111558?text=${encodeURIComponent(msg)}`, '_blank');
-                cart = []; saveCart(); window.app.toggleCart();
             },
 
             openProductModal: (id) => {
                 const p = allProducts.find(item => item.id === id);
-                if(!p) return;
+                if (!p) return;
                 
-                document.getElementById('modal-img').src = p.img;
+                document.getElementById('modal-img').src = p.img || 'https://placehold.co/400x300/1e293b/38bdf8?text=LAP+MOSUL';
                 document.getElementById('modal-title').innerText = p.name;
-                document.getElementById('modal-cat').innerText = p.type === 'accessory' ? 'إكسسوارات' : (p.type === 'new' ? 'أجهزة جديدة' : 'أجهزة مستعملة (نظافة عالية)');
+                document.getElementById('modal-cat').innerText = p.type === 'accessory' ? 'قسم الإكسسوارات والملحقات' : (p.type === 'new' ? 'لابتوب جديد (ضمان سنة)' : 'لابتوب مستعمل مفحوص (ضمان استبدال 10 أيام)');
                 
                 const specsContainer = document.getElementById('modal-specs');
                 let html = '';
 
                 const buildCard = (title, value, icon, colorClass) => `
-                    <div class="flex items-center bg-white dark:bg-slate-800 p-2.5 rounded-[1.25rem] mb-3 shadow-[0_2px_8px_rgba(0,0,0,0.02)] border border-slate-100 dark:border-slate-700">
-                        <div class="w-12 shrink-0"></div> <div class="flex-1 text-center px-2">
-                            <p class="text-[11px] text-slate-500 dark:text-slate-400 font-bold mb-1">${title}</p>
-                            <p class="font-bold text-slate-800 dark:text-white text-sm">${value.replace(/[💻🚀💾🎮📺]/g, '').trim()}</p>
-                        </div>
-                        <div class="w-11 h-11 rounded-xl flex items-center justify-center text-lg shrink-0 ${colorClass}">
-                            <i class="fas ${icon}"></i>
+                    <div class="flex items-center justify-between bg-white dark:bg-dark-800 p-3 rounded-2xl border border-slate-200/70 dark:border-slate-800">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-xl flex items-center justify-center text-base shrink-0 ${colorClass}">
+                                <i class="fas ${icon}"></i>
+                            </div>
+                            <div>
+                                <p class="text-[11px] text-slate-400 font-bold">${title}</p>
+                                <p class="font-black text-slate-800 dark:text-white text-xs sm:text-sm direction-ltr text-right">${value.replace(/[💻🚀💾🎮📺]/g, '').trim()}</p>
+                            </div>
                         </div>
                     </div>
                 `;
+
                 if (p.cpu || p.ram || p.storage || p.gpu || p.screen) {
-                    if(p.cpu) html += buildCard('المعالج', p.cpu, 'fa-microchip', 'bg-blue-50 text-blue-500 dark:bg-blue-500/20 dark:text-blue-400');
-                    if(p.ram) html += buildCard('الذاكرة (RAM)', p.ram, 'fa-memory', 'bg-purple-50 text-purple-500 dark:bg-purple-500/20 dark:text-purple-400');
-                    if(p.storage) html += buildCard('سعة التخزين', p.storage, 'fa-hdd', 'bg-emerald-50 text-emerald-500 dark:bg-emerald-500/20 dark:text-emerald-400');
-                    if(p.screen) html += buildCard('حجم الشاشة', p.screen, 'fa-desktop', 'bg-amber-50 text-amber-500 dark:bg-amber-500/20 dark:text-amber-400');
-                    if(p.gpu) html += buildCard('كرت الشاشة', p.gpu, 'fa-video', 'bg-red-50 text-red-500 dark:bg-red-500/20 dark:text-red-400');
-                    if(p.desc) html += `<div class="mt-2 p-4 bg-white dark:bg-slate-800 rounded-[1.25rem] border border-slate-100 dark:border-slate-700 shadow-[0_2px_8px_rgba(0,0,0,0.02)]"><p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed text-center">${p.desc}</p></div>`;
+                    if (p.cpu) html += buildCard('المعالج (Processor)', p.cpu, 'fa-microchip', 'bg-blue-50 text-blue-500 dark:bg-blue-500/15 dark:text-blue-400');
+                    if (p.ram) html += buildCard('الذاكرة العشوائية (RAM)', p.ram, 'fa-memory', 'bg-purple-50 text-purple-500 dark:bg-purple-500/15 dark:text-purple-400');
+                    if (p.storage) html += buildCard('التخزين (Storage)', p.storage, 'fa-hdd', 'bg-emerald-50 text-emerald-500 dark:bg-emerald-500/15 dark:text-emerald-400');
+                    if (p.gpu) html += buildCard('كرت الشاشة (Graphics)', p.gpu, 'fa-video', 'bg-red-50 text-red-500 dark:bg-red-500/15 dark:text-red-400');
+                    if (p.screen) html += buildCard('الشاشة (Display)', p.screen, 'fa-desktop', 'bg-amber-50 text-amber-500 dark:bg-amber-500/15 dark:text-amber-400');
+                    if (p.desc) html += `<div class="mt-2 p-3.5 bg-white dark:bg-dark-800 rounded-2xl border border-slate-200/70 dark:border-slate-800"><p class="text-xs font-bold text-slate-600 dark:text-slate-300 leading-relaxed">${p.desc}</p></div>`;
                 } else if (p.specs) {
-                    let parts = p.specs.split('|').map(s=>s.trim());
+                    let parts = p.specs.split('|').map(s => s.trim());
                     parts.forEach(part => {
-                        if(part.includes('💻') || part.toLowerCase().includes('core') || part.toLowerCase().includes('ryzen')) html += buildCard('المعالج', part, 'fa-microchip', 'bg-blue-50 text-blue-500 dark:bg-blue-500/20 dark:text-blue-400');
-                        else if(part.includes('🚀') || part.toLowerCase().includes('ram') || part.toLowerCase().includes('gb')) html += buildCard('الذاكرة (RAM)', part, 'fa-memory', 'bg-purple-50 text-purple-500 dark:bg-purple-500/20 dark:text-purple-400');
-                        else if(part.includes('💾') || part.toLowerCase().includes('ssd') || part.toLowerCase().includes('hdd') || part.toLowerCase().includes('tb')) html += buildCard('سعة التخزين', part, 'fa-hdd', 'bg-emerald-50 text-emerald-500 dark:bg-emerald-500/20 dark:text-emerald-400');
-                        else if(part.includes('🎮') || part.toLowerCase().includes('rtx') || part.toLowerCase().includes('gtx') || part.toLowerCase().includes('radeon')) html += buildCard('كرت الشاشة', part, 'fa-video', 'bg-red-50 text-red-500 dark:bg-red-500/20 dark:text-red-400');
-                        else if(part.includes('📺') || part.toLowerCase().includes('fhd') || part.toLowerCase().includes('hz') || part.includes('"')) html += buildCard('حجم الشاشة', part, 'fa-desktop', 'bg-amber-50 text-amber-500 dark:bg-amber-500/20 dark:text-amber-400');
-                        else if(part !== '') html += `<div class="mt-2 p-3 bg-white dark:bg-slate-800 rounded-[1.25rem] text-center text-sm text-slate-600 shadow-[0_2px_8px_rgba(0,0,0,0.02)] border border-slate-100">${part}</div>`;
+                        if (part.includes('💻') || part.toLowerCase().includes('core') || part.toLowerCase().includes('ryzen')) html += buildCard('المعالج', part, 'fa-microchip', 'bg-blue-50 text-blue-500 dark:bg-blue-500/15 dark:text-blue-400');
+                        else if (part.includes('🚀') || part.toLowerCase().includes('ram') || part.toLowerCase().includes('gb')) html += buildCard('الذاكرة (RAM)', part, 'fa-memory', 'bg-purple-50 text-purple-500 dark:bg-purple-500/15 dark:text-purple-400');
+                        else if (part.includes('💾') || part.toLowerCase().includes('ssd') || part.toLowerCase().includes('nvme')) html += buildCard('سعة التخزين', part, 'fa-hdd', 'bg-emerald-50 text-emerald-500 dark:bg-emerald-500/15 dark:text-emerald-400');
+                        else if (part.includes('🎮') || part.toLowerCase().includes('rtx') || part.toLowerCase().includes('gtx') || part.toLowerCase().includes('quadro')) html += buildCard('كرت الشاشة', part, 'fa-video', 'bg-red-50 text-red-500 dark:bg-red-500/15 dark:text-red-400');
+                        else if (part.includes('📺') || part.toLowerCase().includes('fhd') || part.toLowerCase().includes('hz')) html += buildCard('الشاشة', part, 'fa-desktop', 'bg-amber-50 text-amber-500 dark:bg-amber-500/15 dark:text-amber-400');
+                        else if (part !== '') html += `<div class="p-3 bg-white dark:bg-dark-800 rounded-2xl text-xs font-bold text-slate-600 dark:text-slate-300 border border-slate-200/70 dark:border-slate-800">${part}</div>`;
                     });
                 } else {
-                    html = '<p class="text-center text-slate-500 text-sm py-4">لا توجد تفاصيل إضافية.</p>';
+                    html = '<p class="text-center text-slate-400 text-xs py-4 font-bold">تواصل معنا لمعرفة كافة التفاصيل الدقيقة للجهاز.</p>';
                 }
 
                 specsContainer.innerHTML = html;
-                document.getElementById('modal-price').innerText = p.price || '';
+                document.getElementById('modal-price').innerText = p.price || 'تواصل للسعر';
                 
-                const addBtn = document.getElementById('modal-add-btn');
-                addBtn.onclick = () => { 
+                document.getElementById('modal-add-btn').onclick = () => { 
                     window.app.addToCart(p.id); 
                     window.app.closeProductModal();
                 };
+
+                document.getElementById('modal-whatsapp-btn').onclick = () => {
+                    const directMsg = `مرحباً لاب الموصل، أود الاستفسار أو حجز جهاز:\n*${p.name}*\nالسعر المعروض: ${p.price || ''}`;
+                    window.open(`https://wa.me/9647777111558?text=${encodeURIComponent(directMsg)}`, '_blank');
+                };
                 
-                const modal = document.getElementById('product-modal'); const content = document.getElementById('product-modal-content');
-                modal.classList.remove('hidden'); setTimeout(() => { modal.classList.remove('opacity-0'); content.classList.remove('scale-95'); content.classList.add('scale-100'); }, 10);
+                const modal = document.getElementById('product-modal');
+                const content = document.getElementById('product-modal-content');
+                modal.classList.remove('hidden');
+                setTimeout(() => {
+                    modal.classList.remove('opacity-0');
+                    content.classList.remove('scale-95');
+                    content.classList.add('scale-100');
+                }, 10);
             },
             
             closeProductModal: () => {
                 const modal = document.getElementById('product-modal');
                 const content = document.getElementById('product-modal-content');
-                modal.classList.add('opacity-0'); content.classList.remove('scale-100'); content.classList.add('scale-95');
+                modal.classList.add('opacity-0');
+                content.classList.remove('scale-100');
+                content.classList.add('scale-95');
                 setTimeout(() => modal.classList.add('hidden'), 300);
             },
 
             checkLogin: async () => {
-                const email = document.getElementById('login-user').value;
+                const email = document.getElementById('login-user').value.trim();
                 const pass = document.getElementById('login-pass').value;
-                if (!email || !pass) return alert("يرجى ملء جميع الحقول");
+                if (!email || !pass) return alert("يرجى إدخال البريد الإلكتروني وكلمة المرور");
                 try {
                     await signInWithEmailAndPassword(auth, email, pass);
                     document.getElementById('pin-modal').classList.add('hidden');
                     document.getElementById('admin-modal').classList.remove('hidden');
-                } catch (error) { alert("خطأ في تسجيل الدخول."); }
+                } catch (error) {
+                    alert("بيانات الدخول غير صحيحة.");
+                }
             },
-            closeAdmin: () => { window.app.cancelEdit(); document.getElementById('admin-modal').classList.add('hidden'); },
+
+            closeAdmin: () => {
+                window.app.cancelEdit();
+                document.getElementById('admin-modal').classList.add('hidden');
+            },
+
             switchAdminTab: (tab) => {
                 document.getElementById('admin-view-products').classList.add('hidden');
                 document.getElementById('admin-view-repairs').classList.add('hidden');
                 document.getElementById(`admin-view-${tab}`).classList.remove('hidden');
-                document.getElementById('admin-tab-products').className = "font-bold text-slate-500 px-2 pb-2 transition-all";
-                document.getElementById('admin-tab-repairs').className = "font-bold text-slate-500 px-2 pb-2 transition-all";
-                document.getElementById(`admin-tab-${tab}`).className = "font-bold text-brand-500 border-b-2 border-brand-500 px-2 pb-2 transition-all";
+                document.getElementById('admin-tab-products').className = "font-bold text-slate-500 px-3 pb-2 transition-all";
+                document.getElementById('admin-tab-repairs').className = "font-bold text-slate-500 px-3 pb-2 transition-all";
+                document.getElementById(`admin-tab-${tab}`).className = "font-black text-brand-500 border-b-2 border-brand-500 px-3 pb-2 transition-all";
             },
 
             handleImageUpload: async (event) => {
                 const file = event.target.files[0];
                 if (!file) return;
                 const urlInput = document.getElementById('p-img');
-                urlInput.value = "جاري رفع الصورة... ⏳"; urlInput.disabled = true;
+                urlInput.value = "جاري رفع الصورة... ⏳";
+                urlInput.disabled = true;
                 try {
                     const storageRef = ref(storage, 'products/' + Date.now() + '_' + file.name);
                     await uploadBytes(storageRef, file);
                     const downloadURL = await getDownloadURL(storageRef);
                     urlInput.value = downloadURL;
-                    alert("تم رفع الصورة بنجاح ✅");
                 } catch (error) {
                     console.error("Upload error:", error);
-                    alert("حدث خطأ أثناء رفع الصورة. يرجى تفعيل Storage Rules في Firebase.");
+                    alert("تعذر رفع الصورة. تأكد من صلاحيات Firebase Storage.");
                     urlInput.value = "";
-                } finally { urlInput.disabled = false; event.target.value = ''; }
+                } finally {
+                    urlInput.disabled = false;
+                    event.target.value = '';
+                }
             },
 
             saveProduct: async () => {
-                const name = document.getElementById('p-name').value;
-                const price = document.getElementById('p-price').value;
-                const img = document.getElementById('p-img').value; const type = document.getElementById('p-type').value;
+                const name = document.getElementById('p-name').value.trim();
+                const price = document.getElementById('p-price').value.trim();
+                const img = document.getElementById('p-img').value.trim();
+                const type = document.getElementById('p-type').value;
                 const category = document.getElementById('p-cat').value;
-                const cpu = document.getElementById('p-cpu').value;
-                const ram = document.getElementById('p-ram').value;
-                const storage = document.getElementById('p-storage').value; const gpu = document.getElementById('p-gpu').value;
-                const screen = document.getElementById('p-screen').value; const desc = document.getElementById('p-desc').value;
-                let specsArr = [];
-                if(cpu) specsArr.push(`💻 ${cpu}`); if(ram) specsArr.push(`🚀 ${ram}`);
-                if(storage) specsArr.push(`💾 ${storage}`); if(gpu) specsArr.push(`🎮 ${gpu}`);
-                if(screen) specsArr.push(`📺 ${screen}`);
-                let specs = specsArr.join(' | ');
-                if(desc) specs += (specsArr.length > 0 ? `\n📝 ${desc}` : desc);
-                if(type === 'accessory' && specsArr.length === 0) specs = desc || 'بدون تفاصيل إضافية';
+                const cpu = document.getElementById('p-cpu').value.trim();
+                const ram = document.getElementById('p-ram').value.trim();
+                const storage = document.getElementById('p-storage').value.trim();
+                const gpu = document.getElementById('p-gpu').value.trim();
+                const screen = document.getElementById('p-screen').value.trim();
+                const desc = document.getElementById('p-desc').value.trim();
 
-                if(!name) return alert("يرجى كتابة الاسم");
-                if (!auth.currentUser) return alert("يجب تسجيل الدخول أولاً");
+                let specsArr = [];
+                if (cpu) specsArr.push(`💻 ${cpu}`);
+                if (ram) specsArr.push(`🚀 ${ram}`);
+                if (storage) specsArr.push(`💾 ${storage}`);
+                if (gpu) specsArr.push(`🎮 ${gpu}`);
+                if (screen) specsArr.push(`📺 ${screen}`);
+                let specs = specsArr.join(' | ');
+                if (desc) specs += (specsArr.length > 0 ? ` | 📝 ${desc}` : desc);
+                if (type === 'accessory' && specsArr.length === 0) specs = desc || 'ملحقات أصلية';
+
+                if (!name) return alert("يرجى كتابة اسم المنتج");
+                if (!auth.currentUser) return alert("انتهت جلسة الدخول، يرجى تسجيل الدخول مجدداً");
 
                 try {
                     const productData = { name, price, specs, img, type, category, cpu, ram, storage, gpu, screen, desc };
-                    if(editingId) { await updateDoc(doc(db, "products", editingId), productData); } 
-                    else { productData.createdAt = Date.now(); await addDoc(productsRef, productData); }
-                    alert("تم الحفظ بنجاح ✅");
+                    if (editingId) {
+                        await updateDoc(doc(db, "products", editingId), productData);
+                    } else {
+                        productData.createdAt = Date.now();
+                        await addDoc(productsRef, productData);
+                    }
                     window.app.cancelEdit();
-                } catch(e) { alert("خطأ في الحفظ"); }
-            },
-            editProduct: (id) => {
-                const p = allProducts.find(item => item.id === id);
-                document.getElementById('p-name').value = p.name || ''; document.getElementById('p-price').value = p.price || '';
-                document.getElementById('p-img').value = p.img || ''; document.getElementById('p-type').value = p.type || 'used';
-                document.getElementById('p-cat').value = p.category || 'student';
-                document.getElementById('p-cpu').value = p.cpu || ''; document.getElementById('p-ram').value = p.ram || '';
-                document.getElementById('p-storage').value = p.storage || '';
-                document.getElementById('p-gpu').value = p.gpu || '';
-                document.getElementById('p-screen').value = p.screen || ''; document.getElementById('p-desc').value = p.desc || '';
-                if(p.specs && !p.cpu && !p.ram && !p.desc) document.getElementById('p-desc').value = p.specs;
-
-                editingId = id; document.getElementById('form-title').innerText = "تعديل المنتج";
-                document.getElementById('cancel-edit-btn').classList.remove('hidden');
-            },
-            cancelEdit: () => {
-                editingId = null;
-                document.querySelectorAll('#admin-view-products .input-field').forEach(i => i.value = '');
-                document.getElementById('form-title').innerText = "إضافة منتج جديد"; document.getElementById('cancel-edit-btn').classList.add('hidden');
-            },
-            deleteProduct: async (id) => { if(confirm("حذف المنتج؟")) await deleteDoc(doc(db, "products", id)); },
-
-            saveRepair: async () => {
-                const receipt = document.getElementById('r-receipt').value.trim();
-                const name = document.getElementById('r-name').value.trim();
-                const status = document.getElementById('r-status').value;
-                if(!receipt || !name) return alert("يرجى إدخال رقم الوصل واسم الزبون");
-                if(!auth.currentUser) return alert("يجب تسجيل الدخول أولاً");
-
-                try {
-                    await setDoc(doc(db, "repairs", receipt), { name, status, updatedAt: Date.now() });
-                    alert("تم الحفظ بنجاح ✅"); window.app.clearRepairForm();
-                } catch(e) { alert("خطأ في الحفظ."); }
-            },
-            editRepair: (id) => {
-                const r = allRepairs.find(item => item.id === id);
-                if(r) {
-                    document.getElementById('r-receipt').value = r.id;
-                    document.getElementById('r-receipt').setAttribute('readonly', true);
-                    document.getElementById('r-receipt').classList.add('opacity-50', 'cursor-not-allowed', 'bg-slate-200');
-                    document.getElementById('r-name').value = r.name || '';
-                    document.getElementById('r-status').value = r.status || 'checking';
-                    document.getElementById('cancel-repair-btn').classList.remove('hidden');
+                } catch(e) {
+                    alert("حدث خطأ أثناء حفظ المنتج.");
                 }
             },
-            clearRepairForm: () => {
-                document.getElementById('r-receipt').value = '';
-                document.getElementById('r-receipt').removeAttribute('readonly');
-                document.getElementById('r-receipt').classList.remove('opacity-50', 'cursor-not-allowed', 'bg-slate-200');
-                document.getElementById('r-name').value = ''; document.getElementById('r-status').value = 'checking';
-                document.getElementById('cancel-repair-btn').classList.add('hidden');
+
+            editProduct: (id) => {
+                const p = allProducts.find(item => item.id === id);
+                if (!p) return;
+                document.getElementById('p-name').value = p.name || '';
+                document.getElementById('p-price').value = p.price || '';
+                document.getElementById('p-img').value = p.img || '';
+                document.getElementById('p-type').value = p.type || 'used';
+                document.getElementById('p-cat').value = p.category || 'engineering';
+                document.getElementById('p-cpu').value = p.cpu || '';
+                document.getElementById('p-ram').value = p.ram || '';
+                document.getElementById('p-storage').value = p.storage || '';
+                document.getElementById('p-gpu').value = p.gpu || '';
+                document.getElementById('p-screen').value = p.screen || '';
+                document.getElementById('p-desc').value = p.desc || '';
+                if (p.specs && !p.cpu && !p.ram && !p.desc) document.getElementById('p-desc').value = p.specs;
+
+                editingId = id;
+                document.getElementById('form-title').innerText = "تعديل بيانات المنتج";
+                document.getElementById('cancel-edit-btn').classList.remove('hidden');
             },
-            deleteRepair: async (id) => { if(confirm("حذف هذا الوصل؟")) await deleteDoc(doc(db, "repairs", id)); },
 
-            checkRepairStatus: async () => {
-                const input = document.getElementById('repair-receipt-input').value.trim();
-                const resultDiv = document.getElementById('repair-status-result');
-                if(!input) return alert("يرجى إدخال رقم الوصل");
+            cancelEdit: () => {
+                editingId = null;
+                document.querySelectorAll('#admin-view-products input.input-field').forEach(i => i.value = '');
+                document.getElementById('form-title').innerText = "إضافة منتج جديد";
+                document.getElementById('cancel-edit-btn').classList.add('hidden');
+            },
 
-                resultDiv.classList.remove('hidden', 'text-green-600', 'text-yellow-600', 'text-red-600');
-                resultDiv.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري البحث...';
-
-                try {
-                    const repairDoc = await getDoc(doc(db, "repairs", input));
-                    if(repairDoc.exists()) {
-                        const data = repairDoc.data();
-                        if(data.status === 'ready') {
-                            resultDiv.className = "mt-4 text-sm font-bold p-4 rounded-xl border border-green-200 bg-green-50 text-green-600 dark:bg-green-900/20 dark:border-green-800 dark:text-green-400";
-                            resultDiv.innerHTML = `<i class="fas fa-check-circle text-lg"></i> الجهاز جاهز للاستلام يا (${data.name}).`;
-                        } else if(data.status === 'waiting_parts') {
-                            resultDiv.className = "mt-4 text-sm font-bold p-4 rounded-xl border border-red-200 bg-red-50 text-red-600 dark:bg-red-900/20 dark:border-red-800 dark:text-red-400";
-                            resultDiv.innerHTML = `<i class="fas fa-clock text-lg"></i> جهازك (${data.name}) بانتظار توفر القطع.`;
-                        } else {
-                            resultDiv.className = "mt-4 text-sm font-bold p-4 rounded-xl border border-yellow-200 bg-yellow-50 text-yellow-600 dark:bg-yellow-900/20 dark:border-yellow-800 dark:text-yellow-400";
-                            resultDiv.innerHTML = `<i class="fas fa-tools text-lg"></i> جهازك (${data.name}) قيد الفحص والصيانة حالياً.`;
-                        }
-                    } else {
-                        resultDiv.className = "mt-4 text-sm font-bold p-4 rounded-xl border border-red-200 bg-red-50 text-red-600 dark:bg-red-900/20 dark:border-red-800 dark:text-red-400";
-                        resultDiv.innerHTML = `<i class="fas fa-exclamation-circle text-lg"></i> رقم الوصل غير صحيح.`;
-                    }
-                } catch(e) { resultDiv.innerHTML = "حدث خطأ في الاتصال بالبيانات."; }
-            }
-        };
-
-        function updateAdminList() {
-            const list = document.getElementById('admin-list'); if(!list) return;
-            list.innerHTML = '';
-            allProducts.forEach(p => {
-                list.innerHTML += `
-                    <div class="flex justify-between items-center bg-slate-50 dark:bg-slate-800 p-3 rounded-xl border border-slate-100 dark:border-slate-700 mb-2">
-                        <div class="flex items-center gap-3">
-                            <img src="${p.img}" class="w-10 h-10 rounded-lg object-cover bg-white" onerror="this.src='https://placehold.co/50'">
-                            <div><p class="font-bold text-sm">${p.name}</p><p class="text-[10px] text-slate-500">${p.type || 'used'}</p></div>
-                        </div>
-                        <div class="flex gap-2">
-                            <button onclick="window.app.editProduct('${p.id}')" class="text-blue-500 hover:scale-110"><i class="fas fa-pencil-alt"></i></button>
-                            <button onclick="window.app.deleteProduct('${p.id}')" class="text-red-500 hover:scale-110"><i class="fas fa-trash"></i></button>
-                        </div>
-                    </div>`;
-            });
-        }
-
-        function updateAdminRepairsList() {
-            const list = document.getElementById('admin-repairs-list');
-            if(!list) return; list.innerHTML = '';
-            allRepairs.forEach(r => {
-                let statusText = r.status === 'ready' ? '✅ جاهز' : (r.status === 'waiting_parts' ? '⏳ بانتظار قطع' : '🔍 قيد الصيانة');
-                list.innerHTML += `
-                    <div class="flex justify-between items-center bg-white dark:bg-slate-800 p-3 rounded-xl border border-slate-100 dark:border-slate-700 mb-2 shadow-sm">
-                        <div>
-                            <p class="font-bold text-sm">وصل: <span class="text-brand-500 direction-ltr">${r.id}</span></p>
-                            <p class="text-xs text-slate-500">${r.name} - ${statusText}</p>
-                        </div>
-                        <div class="flex gap-2">
-                            <button onclick="window.app.editRepair('${r.id}')" class="text-blue-500 hover:scale-110 bg-blue-50 dark:bg-blue-500/10 w-8 h-8 rounded-lg flex items-center justify-center transition-transform"><i class="fas fa-edit"></i></button>
-                            <button onclick="window.app.deleteRepair('${r.id}')" class="text-red-500 hover:scale-110 bg-red-50 dark:bg-red-500/10 w-8 h-8 rounded-lg flex items-center justify-center transition-transform"><i class="fas fa-trash"></i></button>
-                        </div>
-                    </div>`;
-            });
-        }
-
-        window.onload = () => { setTimeout(() => { document.getElementById('splash-screen').style.opacity = '0'; setTimeout(() => document.getElementById('splash-screen').style.display = 'none', 800); }, 2200); };
-    </script>
-</body>
-</html>
+            deleteProduct: async (id) => {
+                if (confirm("هل أنت متأكد من حذف هذا المنتج
