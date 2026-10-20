@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="description" content="لاب الموصل (LAP MOSUL) - الوجهة الرائدة لفخامة التقنية في الموصل والعراق. أحدث اللابتوبات، محطات العمل الهندسية، الإكسسوارات، وخدمات الصيانة والبرمجة.">
+    <meta name="description" content="لاب الموصل (LAP MOSUL) - الوجهة الرائدة لفخامة التقنية في الموصل والعراق. لابتوبات بنظافة 100% مفحوصة عبر منظومة الفحص الهندسي الشامل.">
     <title>LAP MOSUL | لاب الموصل - المتجر السحابي</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -43,6 +43,17 @@
         } else {
             document.documentElement.classList.remove('dark');
         }
+
+        function hideSplashScreen() {
+            const splash = document.getElementById('splash-screen');
+            if (splash && splash.style.display !== 'none') {
+                splash.style.opacity = '0';
+                splash.style.pointerEvents = 'none';
+                setTimeout(() => { splash.style.display = 'none'; }, 600);
+            }
+        }
+        setTimeout(hideSplashScreen, 1300);
+        window.addEventListener('load', () => setTimeout(hideSplashScreen, 800));
     </script>
     <style>
         /* Custom Scrollbar */
@@ -53,7 +64,7 @@
         ::-webkit-scrollbar-thumb:hover { background: #0ea5e9; }
 
         /* Splash Screen */
-        #splash-screen { position: fixed; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 10000; transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1); background-color: #020617; }
+        #splash-screen { position: fixed; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 10000; transition: opacity 0.6s ease; background-color: #020617; cursor: pointer; }
 
         /* Glassmorphism */
         .glass-card { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 1px solid rgba(226, 232, 240, 0.8); }
@@ -100,11 +111,10 @@
 
         /* Cinematic Animations */
         @keyframes cinematicFocus {
-            0% { transform: scale(1.2); filter: blur(15px) brightness(0); opacity: 0; }
-            50% { transform: scale(1.03); filter: blur(2px) brightness(1.5) drop-shadow(0 0 40px rgba(14, 165, 233, 0.7)); opacity: 0.9; }
-            100% { transform: scale(1); filter: blur(0px) brightness(1) drop-shadow(0 0 25px rgba(245, 158, 11, 0.45)); opacity: 1; }
+            0% { transform: scale(1.15); filter: blur(10px); opacity: 0; }
+            100% { transform: scale(1); filter: blur(0px) drop-shadow(0 0 25px rgba(14, 165, 233, 0.45)); opacity: 1; }
         }
-        .animate-premium-reveal { animation: cinematicFocus 1.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
+        .animate-premium-reveal { animation: cinematicFocus 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
 
         @keyframes premiumFloat {
             0%, 100% { transform: translateY(0); filter: drop-shadow(0 15px 25px rgba(14, 165, 233, 0.35)); }
@@ -113,6 +123,39 @@
         .animate-premium-float { animation: premiumFloat 6s ease-in-out infinite; }
 
         .text-glow { text-shadow: 0 0 20px rgba(14, 165, 233, 0.45); }
+
+        /* ==================== DIAGNOSTIC ANIMATIONS ==================== */
+        @keyframes scanLine {
+            0% { top: 0%; opacity: 0.9; }
+            50% { top: 92%; opacity: 1; }
+            100% { top: 0%; opacity: 0.9; }
+        }
+        .animate-scan-line { animation: scanLine 2.4s ease-in-out infinite; }
+
+        @keyframes rgbCycle {
+            0%, 100% { background: rgba(239, 68, 68, 0.25); border-color: #ef4444; }
+            33% { background: rgba(34, 197, 94, 0.25); border-color: #22c55e; }
+            66% { background: rgba(59, 130, 246, 0.25); border-color: #3b82f6; }
+        }
+        .animate-rgb-pixel { animation: rgbCycle 3s infinite; }
+
+        @keyframes keyTest {
+            0%, 100% { background-color: rgba(30, 41, 59, 0.8); color: #94a3b8; border-color: #334155; transform: scale(1); }
+            50% { background-color: #10b981; color: #ffffff; border-color: #34d399; transform: scale(1.08); box-shadow: 0 0 12px rgba(16, 185, 129, 0.6); }
+        }
+        .key-anim { animation: keyTest 1.6s infinite; }
+
+        @keyframes barWave {
+            0%, 100% { height: 35%; }
+            50% { height: 95%; }
+        }
+        .bar-wave { animation: barWave 1.2s ease-in-out infinite; }
+
+        @keyframes batteryFill {
+            0% { width: 15%; }
+            100% { width: 100%; }
+        }
+        .animate-battery-fill { animation: batteryFill 2s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
     </style>
 </head>
 
@@ -121,14 +164,14 @@
     <!-- Top Announcement Bar -->
     <div class="fixed top-0 left-0 right-0 h-9 bg-gradient-to-r from-slate-900 via-brand-600 to-slate-900 text-white text-xs font-bold flex items-center justify-center z-[110] shadow-md px-4">
         <div class="flex items-center gap-2 sm:gap-4 text-center">
-            <span class="flex items-center gap-1.5"><i class="fas fa-truck-fast text-accent-gold"></i> توصيل مجاني لكل محافظات العراق</span>
+            <span class="flex items-center gap-1.5"><i class="fas fa-sparkles text-accent-gold"></i> نظافة 100% وفحص شامل لكل قطعة</span>
             <span class="opacity-40">|</span>
-            <span class="flex items-center gap-1.5"><i class="fas fa-shield-halved text-emerald-400"></i> ضمان فحص واستبدال حقيقـي 10 أيام</span>
+            <span class="flex items-center gap-1.5"><i class="fas fa-truck-fast text-emerald-400"></i> توصيل مجاني لكل العراق وضمان 10 أيام</span>
         </div>
     </div>
 
     <!-- Splash Screen -->
-    <div id="splash-screen">
+    <div id="splash-screen" onclick="hideSplashScreen()">
         <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-slate-900 via-[#020617] to-[#020617] z-0"></div>
         <div class="relative w-64 md:w-80 h-auto flex flex-col items-center justify-center z-10 animate-premium-reveal">
             <img src="logo.png" alt="LAP MOSUL" class="w-full h-full object-contain" onerror="this.style.display='none'; document.getElementById('splash-fallback').classList.remove('hidden');">
@@ -139,7 +182,7 @@
                 <h1 class="text-4xl font-black tracking-wider text-white">LAP <span class="text-brand-500">MOSUL</span></h1>
             </div>
         </div>
-        <p class="text-brand-400 mt-8 font-bold tracking-[0.35em] text-xs uppercase animate-pulse text-glow z-10 direction-ltr">System Initializing...</p>
+        <p class="text-brand-400 mt-8 font-bold tracking-[0.3em] text-xs uppercase animate-pulse text-glow z-10 direction-ltr">LAP MOSUL SYSTEM</p>
     </div>
 
     <!-- Main Navigation -->
@@ -163,11 +206,14 @@
             </div>
 
             <!-- Desktop Navigation Links -->
-            <div class="hidden md:flex items-center gap-8 text-sm font-bold text-slate-600 dark:text-slate-300">
+            <div class="hidden md:flex items-center gap-7 text-sm font-bold text-slate-600 dark:text-slate-300">
                 <button onclick="window.app.showView('home')" id="nav-link-home" class="hover:text-brand-500 text-brand-500 transition-colors">الرئيسية</button>
                 <button onclick="window.app.showView('store')" id="nav-link-store" class="hover:text-brand-500 transition-colors">المعرض الرقمي</button>
+                <button onclick="window.app.scrollToSection('diagnostic-section')" class="hover:text-brand-500 transition-colors flex items-center gap-1.5">
+                    <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span> برنامج الفحص الشامل
+                </button>
                 <button onclick="window.app.scrollToSection('services')" class="hover:text-brand-500 transition-colors">الخدمات والصيانة</button>
-                <button onclick="window.app.scrollToSection('footer-contact')" class="hover:text-brand-500 transition-colors">موقعنا وتواصل</button>
+                <button onclick="window.app.scrollToSection('footer-contact')" class="hover:text-brand-500 transition-colors">موقعنا</button>
             </div>
 
             <!-- Action Buttons -->
@@ -204,8 +250,8 @@
             <div class="max-w-5xl mx-auto text-center relative z-10 flex flex-col items-center">
                 
                 <div class="inline-flex items-center gap-2.5 px-5 py-2 rounded-full bg-white/80 dark:bg-slate-800/80 border border-slate-200/80 dark:border-slate-700 text-slate-700 dark:text-slate-300 text-xs font-bold mb-8 shadow-sm backdrop-blur-md">
-                    <span class="flex h-2.5 w-2.5 rounded-full bg-brand-500 animate-ping"></span>
-                    من قلب نينوى.. معيار جديد للفخامة التقنية <span class="text-accent-gold font-black">LAP MOSUL</span>
+                    <span class="flex h-2.5 w-2.5 rounded-full bg-emerald-500 animate-ping"></span>
+                    أجهزة منتقاة بنظافة 100% ومفحوصة قطعة قطعة في <span class="text-accent-gold font-black">LAP MOSUL</span>
                 </div>
                 
                 <!-- Hero Logo / Visual -->
@@ -224,7 +270,7 @@
                 </h2>
 
                 <p class="text-slate-600 dark:text-slate-400 text-base md:text-lg mb-10 mx-auto max-w-2xl font-medium leading-relaxed">
-                    نختار لك نخبة الأجهزة الأوروبية والأمريكية المفحوصة بأعلى المعايير الهندسية، لتلبي طموحاتك في التصميم، البرمجة، والأعمال الثقيلة.
+                    نستورد وننتقي أنظف اللابتوبات بنسبة 100%، ونخضع كل جهاز لبرنامج فحص هندسي شامل يختبر كافة القطع الداخلية والخارجية قبل تسليمه لك.
                 </p>
                 
                 <div class="flex flex-col sm:flex-row justify-center items-center gap-4 w-full sm:w-auto">
@@ -232,9 +278,9 @@
                         <span>الدخول للمتجر الرقمي</span>
                         <i class="fas fa-shopping-bag"></i>
                     </button>
-                    <button onclick="window.app.scrollToSection('services')" class="w-full sm:w-auto px-8 py-4 bg-white dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-800 dark:text-white border border-slate-200 dark:border-slate-700 rounded-2xl font-bold transition-all duration-300 flex items-center justify-center gap-2 text-base shadow-sm">
-                        <i class="fas fa-tools text-accent-gold"></i>
-                        <span>تتبع حالة الصيانة</span>
+                    <button onclick="window.app.scrollToSection('diagnostic-section')" class="w-full sm:w-auto px-8 py-4 bg-white dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-800 dark:text-white border border-slate-200 dark:border-slate-700 rounded-2xl font-bold transition-all duration-300 flex items-center justify-center gap-2.5 text-base shadow-sm">
+                        <i class="fas fa-microchip text-brand-500"></i>
+                        <span>شاهد كيف نفحص أجهزتنا</span>
                     </button>
                 </div>
 
@@ -242,7 +288,7 @@
                 <div class="grid grid-cols-3 gap-4 md:gap-12 mt-14 pt-8 border-t border-slate-200/70 dark:border-slate-800/80 w-full max-w-2xl">
                     <div class="text-center">
                         <p class="text-xl md:text-2xl font-black text-brand-500">100%</p>
-                        <p class="text-xs font-bold text-slate-500 dark:text-slate-400 mt-0.5">فحص هندسي شامل</p>
+                        <p class="text-xs font-bold text-slate-500 dark:text-slate-400 mt-0.5">نظافة وفحص 7 مراحل</p>
                     </div>
                     <div class="text-center">
                         <p class="text-xl md:text-2xl font-black text-accent-gold">10 أيام</p>
@@ -256,28 +302,107 @@
             </div>
         </section>
 
-        <!-- Trusted Brands Marquee (Fixed for RTL) -->
+        <!-- Trusted Brands Marquee -->
         <section class="py-8 border-y border-slate-200 dark:border-slate-800/80 bg-white dark:bg-dark-900 overflow-hidden relative z-10">
             <div class="max-w-7xl mx-auto px-6 mb-4 text-center">
                 <p class="text-[11px] font-bold text-slate-400 uppercase tracking-widest">نخبة العلامات التجارية المتوفرة لدينا</p>
             </div>
             <div class="relative flex overflow-x-hidden opacity-75 hover:opacity-100 transition-opacity" dir="ltr">
                 <div class="animate-marquee-rtl flex items-center gap-14 px-8 text-2xl text-slate-500 dark:text-slate-400 whitespace-nowrap">
-                    <span class="font-black tracking-wider">DELL Precision</span>
+                    <span class="font-black tracking-wider">DELL Precision & Latitude</span>
                     <span class="font-black tracking-wider">Lenovo ThinkPad</span>
                     <span class="font-black tracking-wider text-red-500/80">MSI Gaming</span>
-                    <span class="font-black tracking-wider">HP EliteBook</span>
+                    <span class="font-black tracking-wider">HP EliteBook & ProBook</span>
                     <span class="font-black tracking-wider">Microsoft Surface</span>
                     <span class="font-black tracking-wider">ASUS ROG</span>
-                    <span class="font-black tracking-wider"><i class="fab fa-apple mr-1"></i>MacBook</span>
-                    <!-- Duplicate for seamless loop -->
-                    <span class="font-black tracking-wider">DELL Precision</span>
+                    <!-- Duplicate for loop -->
+                    <span class="font-black tracking-wider">DELL Precision & Latitude</span>
                     <span class="font-black tracking-wider">Lenovo ThinkPad</span>
                     <span class="font-black tracking-wider text-red-500/80">MSI Gaming</span>
-                    <span class="font-black tracking-wider">HP EliteBook</span>
+                    <span class="font-black tracking-wider">HP EliteBook & ProBook</span>
                     <span class="font-black tracking-wider">Microsoft Surface</span>
                     <span class="font-black tracking-wider">ASUS ROG</span>
-                    <span class="font-black tracking-wider"><i class="fab fa-apple mr-1"></i>MacBook</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== NEW INTERACTIVE ANIMATED DIAGNOSTIC SECTION ==================== -->
+        <section id="diagnostic-section" class="py-24 px-4 sm:px-6 relative bg-slate-900 text-white overflow-hidden border-b border-slate-800">
+            <!-- Background Effects -->
+            <div class="absolute top-0 right-1/4 w-96 h-96 bg-brand-500/10 rounded-full blur-[130px] pointer-events-none"></div>
+            <div class="absolute bottom-0 left-1/4 w-96 h-96 bg-emerald-500/10 rounded-full blur-[130px] pointer-events-none"></div>
+
+            <div class="max-w-7xl mx-auto relative z-10">
+                <!-- Section Header -->
+                <div class="text-center mb-14">
+                    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-black mb-4">
+                        <i class="fas fa-shield-check"></i> سر تميّز أجهزتنا في لاب الموصل
+                    </div>
+                    <h2 class="text-3xl md:text-5xl font-black mb-4 leading-tight">
+                        نظافة <span class="text-brand-400">100%</span> + منظومة الفحص الشامل لـ <span class="text-accent-gold">7 مراحل</span>
+                    </h2>
+                    <p class="text-slate-300 font-medium text-sm md:text-base max-w-3xl mx-auto leading-relaxed">
+                        في <span class="text-white font-black">LAP MOSUL</span> لا نبيع جهازاً بالحظ! ننتقي اللابتوبات بنظافة 100%، ثم نخضع كل جهاز لبرنامج فحص متخصص يختبر كل قطعة داخلية وخارجية بدقة متناهية قبل تسليمه للزبون.
+                    </p>
+                </div>
+
+                <!-- Interactive Split Layout: Right (7 Steps Text) | Left (Animated Visual Monitor) -->
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                    
+                    <!-- Right Column: The 7 Diagnostic Tests List -->
+                    <div class="lg:col-span-6 space-y-2.5" id="diag-steps-list">
+                        <!-- Populated & Controlled dynamically via JS -->
+                    </div>
+
+                    <!-- Left Column: Live Animated Diagnostic Screen -->
+                    <div class="lg:col-span-6 flex flex-col items-center">
+                        <div class="w-full bg-slate-950 rounded-3xl border-2 border-slate-800 shadow-[0_0_50px_rgba(14,165,233,0.15)] overflow-hidden relative">
+                            
+                            <!-- Top Window Bar -->
+                            <div class="bg-slate-900 px-4 py-3 border-b border-slate-800 flex items-center justify-between">
+                                <div class="flex items-center gap-2">
+                                    <span class="w-3 h-3 rounded-full bg-red-500"></span>
+                                    <span class="w-3 h-3 rounded-full bg-amber-500"></span>
+                                    <span class="w-3 h-3 rounded-full bg-emerald-500"></span>
+                                </div>
+                                <div class="text-[11px] font-black tracking-wider text-brand-400 direction-ltr flex items-center gap-2">
+                                    <i class="fas fa-microchip animate-spin"></i> LAP MOSUL DIAGNOSTIC PRO v7.0
+                                </div>
+                                <span id="diag-counter-badge" class="text-[11px] font-black bg-brand-500/20 text-brand-300 px-2.5 py-0.5 rounded-full direction-ltr">1 / 7</span>
+                            </div>
+
+                            <!-- Animated Canvas Area -->
+                            <div class="p-6 sm:p-8 min-h-[340px] sm:min-h-[380px] flex flex-col justify-between relative bg-[radial-gradient(#1e293b_1px,transparent_1px)] [background-size:20px_20px]">
+                                
+                                <!-- Dynamic Animation Stage -->
+                                <div id="diag-visual-stage" class="flex-1 flex flex-col items-center justify-center w-full my-auto py-4">
+                                    <!-- Injected via JS -->
+                                </div>
+
+                                <!-- Bottom Info & Live Status inside Monitor -->
+                                <div class="mt-4 pt-4 border-t border-slate-800/90 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 bg-slate-900/70 p-4 rounded-2xl backdrop-blur-md">
+                                    <div>
+                                        <p id="diag-screen-title" class="font-black text-base text-white mb-0.5"></p>
+                                        <p id="diag-screen-desc" class="text-xs text-slate-300 font-medium"></p>
+                                    </div>
+                                    <div class="shrink-0 flex items-center gap-2 bg-emerald-500/15 border border-emerald-500/40 text-emerald-400 px-3.5 py-2 rounded-xl text-xs font-black">
+                                        <i class="fas fa-check-circle text-sm"></i>
+                                        <span id="diag-screen-result">PASSED 100%</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Auto-play Progress Bar -->
+                            <div class="h-1.5 w-full bg-slate-900 overflow-hidden">
+                                <div id="diag-progress-bar" class="h-full bg-gradient-to-r from-brand-500 via-emerald-400 to-accent-gold transition-all duration-300" style="width: 14%"></div>
+                            </div>
+                        </div>
+
+                        <!-- Laptop Base Stand Decoration -->
+                        <div class="w-3/4 h-3 bg-gradient-to-b from-slate-700 to-slate-800 rounded-b-2xl mx-auto shadow-lg"></div>
+                        <p class="text-[11px] text-slate-400 font-bold mt-3"><i class="fas fa-hand-pointer text-brand-400 ml-1"></i> اضغط على أي فحص من القائمة لمعاينة الاختبار مباشرة</p>
+                    </div>
+
                 </div>
             </div>
         </section>
@@ -342,73 +467,7 @@
                         <h3 class="text-lg font-black mb-2 flex items-center gap-3">
                             <i class="fas fa-cubes text-accent-purple text-xl"></i> البرامج الهندسية وبيئات العمل
                         </h3>
-                        <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">تنصيب وتفعيل حزم البرامج الهندسية والإحصائية والتصميمية (AutoCAD, Revit, Lumion, 3ds Max, Adobe, ArcGIS, SPSS) مع ضبط تعريفات كرت الشاشة.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Customer Reviews Section -->
-        <section class="py-20 px-6 relative bg-slate-100/70 dark:bg-dark-900/60 border-y border-slate-200/60 dark:border-slate-800/60 overflow-hidden">
-            <div class="max-w-7xl mx-auto">
-                <div class="text-center mb-12">
-                    <h2 class="text-3xl md:text-4xl font-black mb-3 flex justify-center items-center gap-2.5">
-                        <span>ثقة عملائنا</span> <i class="fas fa-heart text-red-500 text-2xl"></i>
-                    </h2>
-                    <p class="text-slate-500 dark:text-slate-400 font-bold text-sm">نفخر بخدمة المهندسين، الطلاب، والشركات في الموصل وكافة المحافظات.</p>
-                </div>
-
-                <div class="flex overflow-x-auto gap-6 pb-4 snap-x snap-mandatory scrollbar-hide px-2">
-                    <div class="snap-center shrink-0 w-72 md:w-80 bg-white dark:bg-dark-800 rounded-3xl p-4 shadow-md border border-slate-200/70 dark:border-slate-800 hover:-translate-y-1 transition-transform duration-300">
-                        <div class="flex items-center gap-3 mb-3">
-                            <div class="w-10 h-10 rounded-xl bg-green-50 dark:bg-green-900/30 text-green-500 flex items-center justify-center text-xl"><i class="fab fa-whatsapp"></i></div>
-                            <div>
-                                <p class="font-bold text-sm text-slate-800 dark:text-white">طلب توصيل للمحافظات</p>
-                                <div class="flex text-amber-400 text-[10px] mt-0.5"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                            </div>
-                        </div>
-                        <div class="w-full h-52 bg-slate-100 dark:bg-slate-900 rounded-2xl overflow-hidden">
-                            <img src="https://placehold.co/300x400/10b981/ffffff?text=WhatsApp+Feedback" alt="رأي زبون واتساب" class="w-full h-full object-cover">
-                        </div>
-                    </div>
-
-                    <div class="snap-center shrink-0 w-72 md:w-80 bg-white dark:bg-dark-800 rounded-3xl p-4 shadow-md border border-slate-200/70 dark:border-slate-800 hover:-translate-y-1 transition-transform duration-300">
-                        <div class="flex items-center gap-3 mb-3">
-                            <div class="w-10 h-10 rounded-xl bg-blue-50 dark:bg-blue-900/30 text-blue-600 flex items-center justify-center text-xl"><i class="fab fa-facebook-messenger"></i></div>
-                            <div>
-                                <p class="font-bold text-sm text-slate-800 dark:text-white">تقييم عبر فيسبوك</p>
-                                <div class="flex text-amber-400 text-[10px] mt-0.5"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                            </div>
-                        </div>
-                        <div class="w-full h-52 bg-slate-100 dark:bg-slate-900 rounded-2xl overflow-hidden">
-                            <img src="https://placehold.co/300x400/0284c7/ffffff?text=Facebook+Review" alt="رأي زبون فيسبوك" class="w-full h-full object-cover">
-                        </div>
-                    </div>
-
-                    <div class="snap-center shrink-0 w-72 md:w-80 bg-white dark:bg-dark-800 rounded-3xl p-4 shadow-md border border-slate-200/70 dark:border-slate-800 hover:-translate-y-1 transition-transform duration-300">
-                        <div class="flex items-center gap-3 mb-3">
-                            <div class="w-10 h-10 rounded-xl bg-pink-50 dark:bg-pink-900/30 text-pink-600 flex items-center justify-center text-xl"><i class="fab fa-instagram"></i></div>
-                            <div>
-                                <p class="font-bold text-sm text-slate-800 dark:text-white">عميل عبر انستغرام</p>
-                                <div class="flex text-amber-400 text-[10px] mt-0.5"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                            </div>
-                        </div>
-                        <div class="w-full h-52 bg-slate-100 dark:bg-slate-900 rounded-2xl overflow-hidden">
-                            <img src="https://placehold.co/300x400/db2777/ffffff?text=Instagram+Client" alt="رأي زبون انستغرام" class="w-full h-full object-cover">
-                        </div>
-                    </div>
-
-                    <div class="snap-center shrink-0 w-72 md:w-80 bg-white dark:bg-dark-800 rounded-3xl p-4 shadow-md border border-slate-200/70 dark:border-slate-800 hover:-translate-y-1 transition-transform duration-300">
-                        <div class="flex items-center gap-3 mb-3">
-                            <div class="w-10 h-10 rounded-xl bg-brand-50 dark:bg-brand-900/30 text-brand-500 flex items-center justify-center text-xl"><i class="fas fa-store"></i></div>
-                            <div>
-                                <p class="font-bold text-sm text-slate-800 dark:text-white">استلام من المعرض</p>
-                                <div class="flex text-amber-400 text-[10px] mt-0.5"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                            </div>
-                        </div>
-                        <div class="w-full h-52 bg-slate-100 dark:bg-slate-900 rounded-2xl overflow-hidden">
-                            <img src="https://placehold.co/300x400/0f172a/38bdf8?text=LAP+MOSUL+Store" alt="تسليم جهاز بالمعرض" class="w-full h-full object-cover">
-                        </div>
+                        <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">تنصيب وتفعيل حزم البرامج الهندسية والإحصائية والتصميمية (AutoCAD, Revit, Lumion, 3ds Max, D5 Render, ArcGIS, SPSS) مع ضبط تعريفات كرت الشاشة.</p>
                     </div>
                 </div>
             </div>
@@ -422,7 +481,7 @@
                         <img src="logo.png" alt="LAP MOSUL" class="h-16 md:h-20 w-auto object-contain mb-3 mx-auto md:mx-0" onerror="this.style.display='none'">
                         <h3 class="text-xl font-black text-slate-900 dark:text-white">لاب الموصل | LAP MOSUL</h3>
                         <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed max-w-sm mx-auto md:mx-0 mt-2">
-                            الوجهة الموثوقة لشراء اللابتوبات الاحترافية والحلول التقنية في الموصل. فحص دقيق، مواصفات حقيقية، وضمان فعلي.
+                            الوجهة الموثوقة لشراء اللابتوبات الاحترافية والحلول التقنية في الموصل. نظافة 100%، فحص شامل لكل قطعة، وضمان فعلي.
                         </p>
                     </div>
                     
@@ -473,14 +532,14 @@
                         <span>المعرض <span class="text-brand-500">الرقمي</span></span>
                         <span class="w-2.5 h-2.5 bg-emerald-500 rounded-full animate-pulse shadow-[0_0_10px_#10b981]"></span>
                     </h2>
-                    <p class="text-xs text-slate-500 dark:text-slate-400 font-bold mt-1">تحديث مباشر للمخزون المتوفر في المعرض</p>
+                    <p class="text-xs text-slate-500 dark:text-slate-400 font-bold mt-1">جميع اللابتوبات المعروضة بنظافة 100% ومفحوصة بالكامل</p>
                 </div>
                 <button onclick="window.app.showView('home')" class="text-xs font-bold text-slate-500 hover:text-brand-500 flex items-center gap-2 bg-white dark:bg-dark-800 px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
                     <i class="fas fa-arrow-right"></i> العودة للرئيسية
                 </button>
             </div>
 
-            <!-- Main Store Type Tabs (Used / New / Accessory) -->
+            <!-- Main Store Type Tabs -->
             <div class="flex justify-center mb-6 overflow-x-auto pb-2 scrollbar-hide">
                 <div class="bg-white dark:bg-dark-800 p-1.5 rounded-2xl border border-slate-200 dark:border-slate-800 inline-flex shadow-sm gap-1.5 whitespace-nowrap">
                     <button onclick="window.app.switchStoreTab('used')" id="tab-used" class="px-5 sm:px-8 py-3 rounded-xl text-xs sm:text-sm font-black transition-all duration-300 bg-brand-600 text-white shadow-md">
@@ -502,7 +561,6 @@
                     <i class="fas fa-search absolute right-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
                 </div>
 
-                <!-- Sub-category buttons (Shown for laptops) -->
                 <div id="category-filters-bar" class="flex gap-2.5 overflow-x-auto pb-2 scrollbar-hide">
                     <button id="cat-btn-all" onclick="window.app.filterCategory('all')" class="cat-btn px-5 py-2.5 rounded-xl bg-brand-600 text-white text-xs sm:text-sm font-bold transition-all shrink-0 shadow-sm">الكل</button>
                     <button id="cat-btn-engineering" onclick="window.app.filterCategory('engineering')" class="cat-btn px-5 py-2.5 rounded-xl bg-white dark:bg-dark-800 border border-slate-200 dark:border-slate-700 text-xs sm:text-sm font-bold hover:border-brand-500 transition-all shrink-0">هندسة وتصميم ثقيل</button>
@@ -543,7 +601,6 @@
 
         <div id="cart-items" class="flex-1 overflow-y-auto p-4 space-y-3"></div>
 
-        <!-- Quick Customer Info & Checkout -->
         <div class="p-5 border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-dark-800 space-y-3">
             <div class="grid grid-cols-1 gap-2.5">
                 <input type="text" id="cust-name" placeholder="الاسم الكريم (اختياري)" class="input-field py-2.5 text-xs font-bold">
@@ -569,18 +626,16 @@
                 <i class="fas fa-times"></i>
             </button>
             
-            <!-- Product Visual Side -->
             <div class="w-full md:w-1/2 bg-white dark:bg-dark-800 pt-10 pb-6 px-6 flex flex-col items-center justify-center relative border-b md:border-b-0 md:border-l border-slate-200/70 dark:border-slate-800">
                 <img id="modal-img" src="" alt="صورة المنتج" class="max-w-full h-48 md:h-64 object-contain drop-shadow-xl hover:scale-105 transition-transform duration-500 mb-5">
                 
                 <div class="text-center w-full">
-                    <span id="modal-badge" class="inline-block text-[11px] font-black px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-500 mb-2">متوفر للفحص والاستلام</span>
+                    <span id="modal-badge" class="inline-block text-[11px] font-black px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-500 mb-2">مفحوص 100% وجاهز للتسليم</span>
                     <h2 id="modal-title" class="text-2xl md:text-3xl font-black mb-1 text-slate-900 dark:text-white"></h2>
                     <p id="modal-cat" class="text-xs text-slate-500 font-bold"></p>
                 </div>
             </div>
             
-            <!-- Technical Specs Side -->
             <div class="w-full md:w-1/2 p-6 flex flex-col justify-between bg-slate-50 dark:bg-dark-900">
                 <div>
                     <h4 class="font-black mb-4 text-sm flex items-center gap-2 text-slate-800 dark:text-white">
@@ -744,7 +799,281 @@
         </div>
     </div>
 
-    <!-- ==================== APPLICATION LOGIC ==================== -->
+    <!-- ==================== INTERACTIVE DIAGNOSTIC ANIMATION SCRIPT ==================== -->
+    <script>
+        const diagnosticSteps = [
+            {
+                id: 0,
+                title: "1. الانتقاء والنظافة الخارجية 100%",
+                subtitle: "فحص الهيكل، المفاصل، والشكل الخارجي (Grade A+)",
+                desc: "ننتقي اللابتوبات بنظافة 100% خالية من الكسور أو الصدمات، مع فحص متانة المفاصل والهيكل الخارجي بالكامل.",
+                result: "CLEAN 100% (A+)",
+                icon: "fa-gem",
+                color: "text-brand-400",
+                visual: `
+                    <div class="relative w-52 h-36 rounded-2xl border-2 border-brand-500/50 bg-slate-900/90 flex flex-col items-center justify-center overflow-hidden shadow-[0_0_30px_rgba(14,165,233,0.2)]">
+                        <div class="absolute left-0 right-0 h-1 bg-gradient-to-r from-transparent via-brand-400 to-transparent shadow-[0_0_15px_#38bdf8] animate-scan-line"></div>
+                        <i class="fas fa-laptop text-6xl text-white mb-2 drop-shadow-[0_0_15px_rgba(56,189,248,0.5)]"></i>
+                        <span class="text-[11px] font-black text-brand-300 tracking-widest uppercase">Body & Hinges Scan</span>
+                        <div class="absolute top-2 right-2 text-accent-gold text-sm animate-pulse"><i class="fas fa-star"></i></div>
+                        <div class="absolute bottom-2 left-2 text-emerald-400 text-xs font-black">100% Grade A+</div>
+                    </div>
+                `
+            },
+            {
+                id: 1,
+                title: "2. فحص كرت الشاشة والمعالج تحت الضغط",
+                subtitle: "اختبار الحرارة واستقرار الـ FPS بأقصى حمل",
+                desc: "تشغيل برنامج فحص متخصص لضغط كرت الشاشة (GPU) والمعالج (CPU) للتأكد من ثبات الفريمات وعدم ارتفاع الحرارة.",
+                result: "TEMP 66°C | STABLE",
+                icon: "fa-fire-flame-curved",
+                color: "text-red-400",
+                visual: `
+                    <div class="w-full max-w-xs bg-slate-900/90 p-4 rounded-2xl border border-red-500/40 shadow-[0_0_30px_rgba(239,68,68,0.15)]">
+                        <div class="flex justify-between items-center text-xs font-black mb-3 direction-ltr">
+                            <span class="text-red-400"><i class="fas fa-Bolt mr-1"></i> GPU STRESS TEST</span>
+                            <span class="bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded">120 FPS</span>
+                        </div>
+                        <div class="flex items-end justify-between gap-2 h-24 px-2 pt-4 border-b border-slate-800">
+                            <div class="w-full bg-gradient-to-t from-brand-600 to-brand-400 rounded-t bar-wave" style="animation-delay: 0.1s"></div>
+                            <div class="w-full bg-gradient-to-t from-brand-600 to-emerald-400 rounded-t bar-wave" style="animation-delay: 0.3s"></div>
+                            <div class="w-full bg-gradient-to-t from-brand-600 to-amber-400 rounded-t bar-wave" style="animation-delay: 0.2s"></div>
+                            <div class="w-full bg-gradient-to-t from-brand-600 to-red-500 rounded-t bar-wave" style="animation-delay: 0.5s"></div>
+                            <div class="w-full bg-gradient-to-t from-brand-600 to-emerald-400 rounded-t bar-wave" style="animation-delay: 0.15s"></div>
+                            <div class="w-full bg-gradient-to-t from-brand-600 to-brand-400 rounded-t bar-wave" style="animation-delay: 0.4s"></div>
+                        </div>
+                        <div class="flex justify-between text-[11px] font-bold text-slate-400 mt-2.5 direction-ltr">
+                            <span>Core Load: 100%</span>
+                            <span class="text-emerald-400">Max Temp: 66°C</span>
+                        </div>
+                    </div>
+                `
+            },
+            {
+                id: 2,
+                title: "3. فحص الشاشة والبكسلات الميتة (Dead Pixels)",
+                subtitle: "مسح ضوئي للألوان (RGB) والإضاءة الخلفية",
+                desc: "اختبار كل بكسل في الشاشة عبر تمرير الألوان الأساسية للتأكد من خلوها تماماً من البكسلات الميتة أو البقع الضوئية.",
+                result: "0 DEAD PIXELS",
+                icon: "fa-desktop",
+                color: "text-purple-400",
+                visual: `
+                    <div class="w-60 h-36 rounded-2xl border-2 border-white/20 p-3 flex flex-col justify-between animate-rgb-pixel relative overflow-hidden shadow-lg">
+                        <div class="grid grid-cols-6 gap-1.5 opacity-60">
+                            ${Array(18).fill('<div class="h-3 rounded-sm bg-white/30"></div>').join('')}
+                        </div>
+                        <div class="bg-slate-950/85 backdrop-blur-md px-3 py-2 rounded-xl text-center border border-white/10">
+                            <p class="text-xs font-black text-white direction-ltr">RGB PIXEL MATRIX SCAN</p>
+                            <p class="text-[10px] text-emerald-400 font-bold mt-0.5">0 Dead Pixels | 100% sRGB Clean</p>
+                        </div>
+                    </div>
+                `
+            },
+            {
+                id: 3,
+                title: "4. فحص البطارية وصحة الخلايا (Battery Health)",
+                subtitle: "قياس السعة الفعلية واستقرار الشحن والتفريغ",
+                desc: "نفحص صحة البطارية الحقيقية (Battery Health) وعدد دورات الشحن، ونتأكد من ثبات أداء الجهاز على البطارية.",
+                result: "HEALTH EXCELLENT",
+                icon: "fa-battery-full",
+                color: "text-emerald-400",
+                visual: `
+                    <div class="flex flex-col items-center">
+                        <div class=" flex items-center">
+                            <div class="w-52 h-24 rounded-2xl border-4 border-emerald-400 p-2 bg-slate-900 flex items-center relative shadow-[0_0_25px_rgba(16,185,129,0.2)]">
+                                <div class="h-full bg-gradient-to-r from-emerald-600 to-emerald-400 rounded-xl animate-battery-fill flex items-center justify-center">
+                                    <i class="fas fa-bolt text-2xl text-slate-950"></i>
+                                </div>
+                            </div>
+                            <div class="w-3 h-10 bg-emerald-400 rounded-l-md mr-0.5"></div>
+                        </div>
+                        <div class="flex gap-4 mt-4 text-xs font-black direction-ltr">
+                            <span class="bg-slate-900 border border-slate-700 px-3 py-1 rounded-lg text-emerald-400">Cells: 100% OK</span>
+                            <span class="bg-slate-900 border border-slate-700 px-3 py-1 rounded-lg text-brand-400">AC Original Charger</span>
+                        </div>
+                    </div>
+                `
+            },
+            {
+                id: 4,
+                title: "5. فحص الكيبورد والتاتش باد (Keyboard Test)",
+                subtitle: "اختبار استجابة كل زر على حدة مع الإضاءة",
+                desc: "يتم فحص جميع أزرار الكيبورد زراً بعد زر عبر البرنامج للتأكد من سرعة الاستجابة، مع فحص البصمة والتاتش باد.",
+                result: "ALL KEYS 100% OK",
+                icon: "fa-keyboard",
+                color: "text-amber-400",
+                visual: `
+                    <div class="w-full max-w-xs bg-slate-900 p-4 rounded-2xl border border-slate-700 shadow-inner">
+                        <div class="grid grid-cols-6 gap-1.5 mb-2 direction-ltr">
+                            <div class="h-7 rounded border flex items-center justify-center text-[10px] font-black key-anim" style="animation-delay:0.1s">ESC</div>
+                            <div class="h-7 rounded border flex items-center justify-center text-[10px] font-black key-anim" style="animation-delay:0.3s">W</div>
+                            <div class="h-7 rounded border flex items-center justify-center text-[10px] font-black key-anim" style="animation-delay:0.5s">A</div>
+                            <div class="h-7 rounded border flex items-center justify-center text-[10px] font-black key-anim" style="animation-delay:0.2s">S</div>
+                            <div class="h-7 rounded border flex items-center justify-center text-[10px] font-black key-anim" style="animation-delay:0.6s">D</div>
+                            <div class="h-7 rounded border flex items-center justify-center text-[10px] font-black key-anim" style="animation-delay:0.4s">ENT</div>
+                        </div>
+                        <div class="grid grid-cols-4 gap-1.5 mb-2 direction-ltr">
+                            <div class="h-7 rounded border flex items-center justify-center text-[10px] font-black key-anim" style="animation-delay:0.25s">SHIFT</div>
+                            <div class="h-7 col-span-2 rounded border flex items-center justify-center text-[10px] font-black key-anim" style="animation-delay:0.45s">SPACE BAR</div>
+                            <div class="h-7 rounded border flex items-center justify-center text-[10px] font-black key-anim" style="animation-delay:0.15s">CTRL</div>
+                        </div>
+                        <div class="w-24 h-10 mx-auto bg-slate-950 rounded-lg border border-emerald-500/40 flex items-center justify-center text-[10px] text-emerald-400 font-bold">
+                            Touchpad OK
+                        </div>
+                    </div>
+                `
+            },
+            {
+                id: 5,
+                title: "6. فحص المنافذ والـ USB والكاميرا والصوت",
+                subtitle: "اختبار USB 3.2, Type-C, HDMI, Wi-Fi, Audio",
+                desc: "فحص عملي لكل منفذ USB و Type-C و HDMI للتأكد من سرعة نقل البيانات والشحن، مع اختبار نقاء السماعات والمايك والكاميرا.",
+                result: "ALL PORTS ACTIVE",
+                icon: "fa-plug",
+                color: "text-cyan-400",
+                visual: `
+                    <div class="grid grid-cols-3 gap-2.5 w-full max-w-xs direction-ltr">
+                        <div class="bg-slate-900 border border-emerald-500/50 p-3 rounded-xl text-center">
+                            <i class="fab fa-usb text-xl text-emerald-400 mb-1"></i>
+                            <p class="text-[10px] font-black text-white">USB 3.2</p>
+                            <span class="text-[9px] text-emerald-400">PASS ✓</span>
+                        </div>
+                        <div class="bg-slate-900 border border-emerald-500/50 p-3 rounded-xl text-center">
+                            <i class="fas fa-bolt text-xl text-brand-400 mb-1"></i>
+                            <p class="text-[10px] font-black text-white">Type-C / TB</p>
+                            <span class="text-[9px] text-emerald-400">PASS ✓</span>
+                        </div>
+                        <div class="bg-slate-900 border border-emerald-500/50 p-3 rounded-xl text-center">
+                            <i class="fas fa-tv text-xl text-purple-400 mb-1"></i>
+                            <p class="text-[10px] font-black text-white">HDMI Out</p>
+                            <span class="text-[9px] text-emerald-400">PASS ✓</span>
+                        </div>
+                        <div class="bg-slate-900 border border-emerald-500/50 p-3 rounded-xl text-center">
+                            <i class="fas fa-wifi text-xl text-amber-400 mb-1"></i>
+                            <p class="text-[10px] font-black text-white">Wi-Fi / BT</p>
+                            <span class="text-[9px] text-emerald-400">PASS ✓</span>
+                        </div>
+                        <div class="bg-slate-900 border border-emerald-500/50 p-3 rounded-xl text-center">
+                            <i class="fas fa-volume-high text-xl text-pink-400 mb-1"></i>
+                            <p class="text-[10px] font-black text-white">Speakers</p>
+                            <span class="text-[9px] text-emerald-400">PASS ✓</span>
+                        </div>
+                        <div class="bg-slate-900 border border-emerald-500/50 p-3 rounded-xl text-center">
+                            <i class="fas fa-camera text-xl text-cyan-400 mb-1"></i>
+                            <p class="text-[10px] font-black text-white">Webcam</p>
+                            <span class="text-[9px] text-emerald-400">PASS ✓</span>
+                        </div>
+                    </div>
+                `
+            },
+            {
+                id: 6,
+                title: "7. فحص صحة وسرعة الهارد والرام (SSD & RAM)",
+                subtitle: "اختبار NVMe Read/Write & Memory Stability",
+                desc: "فحص سلامة الهارد SSD NVMe للتأكد من أن صحته 100% وخلوه من أي قطاعات تالفة، مع اختبار استقرار الرامات.",
+                result: "SSD HEALTH 100%",
+                icon: "fa-hard-drive",
+                color: "text-teal-400",
+                visual: `
+                    <div class="w-full max-w-xs bg-slate-900 p-4 rounded-2xl border border-teal-500/40 space-y-3 direction-ltr">
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs font-black text-teal-400"><i class="fas fa-hdd mr-1"></i> NVMe SSD BENCHMARK</span>
+                            <span class="text-xs font-black bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded">Health: 100%</span>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-[11px] font-bold mb-1">
+                                <span class="text-slate-300">Read Speed</span>
+                                <span class="text-brand-400">3,450 MB/s</span>
+                            </div>
+                            <div class="w-full h-2 bg-slate-800 rounded-full overflow-hidden">
+                                <div class="h-full bg-brand-500 animate-battery-fill"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-[11px] font-bold mb-1">
+                                <span class="text-slate-300">Write Speed</span>
+                                <span class="text-emerald-400">3,100 MB/s</span>
+                            </div>
+                            <div class="w-full h-2 bg-slate-800 rounded-full overflow-hidden">
+                                <div class="h-full bg-emerald-500 animate-battery-fill"></div>
+                            </div>
+                        </div>
+                    </div>
+                `
+            }
+        ];
+
+        let activeDiagIndex = 0;
+        let diagInterval = null;
+
+        function renderDiagnosticList() {
+            const listEl = document.getElementById('diag-steps-list');
+            if (!listEl) return;
+            listEl.innerHTML = diagnosticSteps.map((step, idx) => {
+                const isActive = idx === activeDiagIndex;
+                return `
+                    <div onclick="selectDiagnosticStep(${idx})" class="cursor-pointer p-3.5 sm:p-4 rounded-2xl border transition-all duration-300 flex items-center justify-between ${isActive ? 'bg-slate-800/95 border-brand-500 shadow-[0_0_25px_rgba(14,165,233,0.2)] translate-x-[-4px]' : 'bg-slate-900/60 border-slate-800/80 hover:bg-slate-800/40 opacity-75 hover:opacity-100'}">
+                        <div class="flex items-center gap-3.5">
+                            <div class="w-11 h-11 rounded-xl flex items-center justify-center text-lg shrink-0 ${isActive ? 'bg-brand-500 text-white shadow-md shadow-brand-500/30' : 'bg-slate-800 ' + step.color}">
+                                <i class="fas ${step.icon}"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-black text-sm sm:text-base ${isActive ? 'text-white' : 'text-slate-200'}">${step.title}</h3>
+                                <p class="text-xs ${isActive ? 'text-brand-300' : 'text-slate-400'} font-medium mt-0.5">${step.subtitle}</p>
+                            </div>
+                        </div>
+                        <div class="shrink-0 mr-2">
+                            ${isActive 
+                                ? '<span class="px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-400 text-[10px] font-black flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span> يفحص الآن</span>' 
+                                : '<i class="fas fa-check-circle text-emerald-500/60 text-base"></i>'}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function updateDiagnosticScreen() {
+            const step = diagnosticSteps[activeDiagIndex];
+            const stage = document.getElementById('diag-visual-stage');
+            const title = document.getElementById('diag-screen-title');
+            const desc = document.getElementById('diag-screen-desc');
+            const result = document.getElementById('diag-screen-result');
+            const counter = document.getElementById('diag-counter-badge');
+            const progress = document.getElementById('diag-progress-bar');
+
+            if (!stage) return;
+            stage.innerHTML = step.visual;
+            title.innerText = step.title;
+            desc.innerText = step.desc;
+            result.innerText = step.result;
+            counter.innerText = `${activeDiagIndex + 1} / ${diagnosticSteps.length}`;
+            progress.style.width = `${((activeDiagIndex + 1) / diagnosticSteps.length) * 100}%`;
+        }
+
+        window.selectDiagnosticStep = function(index) {
+            activeDiagIndex = index;
+            renderDiagnosticList();
+            updateDiagnosticScreen();
+            resetDiagTimer();
+        };
+
+        function resetDiagTimer() {
+            if (diagInterval) clearInterval(diagInterval);
+            diagInterval = setInterval(() => {
+                activeDiagIndex = (activeDiagIndex + 1) % diagnosticSteps.length;
+                renderDiagnosticList();
+                updateDiagnosticScreen();
+            }, 3800);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderDiagnosticList();
+            updateDiagnosticScreen();
+            resetDiagTimer();
+        });
+    </script>
+
+    <!-- ==================== FIREBASE & STORE LOGIC ==================== -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getFirestore, collection, addDoc, deleteDoc, updateDoc, doc, onSnapshot, query, orderBy, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
@@ -774,8 +1103,8 @@
 
         let allProducts = [];
         let allRepairs = [];
-        let currentStoreTab = 'used'; // 'used', 'new', 'accessory'
-        let currentCategory = 'all';  // 'all', 'engineering', 'student', 'gaming'
+        let currentStoreTab = 'used';
+        let currentCategory = 'all';
         let editingId = null;
         let cart = JSON.parse(localStorage.getItem('lapmosul_cart')) || [];
         
@@ -868,7 +1197,7 @@
         }
 
         function generateProductCardHTML(p) {
-            let badgeText = '<i class="fas fa-check-circle"></i> متوفر';
+            let badgeText = '<i class="fas fa-check-circle"></i> مفحوص 100%';
             let badgeColorClass = 'bg-emerald-500';
 
             if (p.type === 'new') {
@@ -983,12 +1312,7 @@
 
             switchStoreTab: (tab) => {
                 currentStoreTab = tab;
-                const tabs = {
-                    used: '<i class="fas fa-laptop ml-1.5"></i> اللابتوبات المستعملة',
-                    new: '<i class="fas fa-box-open ml-1.5 text-amber-400"></i> الجديد (ضمان سنة)',
-                    accessory: '<i class="fas fa-headphones ml-1.5 text-purple-400"></i> الإكسسوارات والملحقات'
-                };
-                Object.keys(tabs).forEach(t => {
+                ['used', 'new', 'accessory'].forEach(t => {
                     const btn = document.getElementById(`tab-${t}`);
                     if (t === tab) {
                         btn.className = "px-5 sm:px-8 py-3 rounded-xl text-xs sm:text-sm font-black transition-all duration-300 bg-brand-600 text-white shadow-md";
@@ -1098,7 +1422,7 @@
                 
                 document.getElementById('modal-img').src = p.img || 'https://placehold.co/400x300/1e293b/38bdf8?text=LAP+MOSUL';
                 document.getElementById('modal-title').innerText = p.name;
-                document.getElementById('modal-cat').innerText = p.type === 'accessory' ? 'قسم الإكسسوارات والملحقات' : (p.type === 'new' ? 'لابتوب جديد (ضمان سنة)' : 'لابتوب مستعمل مفحوص (ضمان استبدال 10 أيام)');
+                document.getElementById('modal-cat').innerText = p.type === 'accessory' ? 'قسم الإكسسوارات والملحقات' : (p.type === 'new' ? 'لابتوب جديد (ضمان سنة)' : 'نظافة 100% - مفحوص بـ 7 مراحل (ضمان 10 أيام)');
                 
                 const specsContainer = document.getElementById('modal-specs');
                 let html = '';
@@ -1407,16 +1731,6 @@
                     </div>`;
             });
         }
-
-        window.addEventListener('DOMContentLoaded', () => {
-            setTimeout(() => {
-                const splash = document.getElementById('splash-screen');
-                if (splash) {
-                    splash.style.opacity = '0';
-                    setTimeout(() => splash.style.display = 'none', 700);
-                }
-            }, 1500);
-        });
     </script>
 </body>
 </html>
