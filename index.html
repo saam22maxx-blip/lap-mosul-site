@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="description" content="لاب الموصل (LAP MOSUL) - الوجهة الرائدة لفخامة التقنية في الموصل والعراق. لابتوبات بنظافة تصل إلى 100% مفحوصة عبر منظومة الفحص الهندسي الشامل.">
-    <title>LAP MOSUL | لاب الموصل - المتجر السحابي</title>
+    <meta name="description" content="لاب الموصل (LAP MOSUL) - بيع اللابتوبات بنظافة تصل إلى 100%، صيانة هندسية احترافية، وبرمجة أنظمة الكاشير والمواقع في الموصل والعراق.">
+    <title>LAP MOSUL | لاب الموصل - بيع • صيانة • برمجة</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -49,11 +49,11 @@
             if (splash && splash.style.display !== 'none') {
                 splash.style.opacity = '0';
                 splash.style.pointerEvents = 'none';
-                setTimeout(() => { splash.style.display = 'none'; }, 600);
+                setTimeout(() => { splash.style.display = 'none'; }, 650);
             }
         }
-        setTimeout(hideSplashScreen, 1300);
-        window.addEventListener('load', () => setTimeout(hideSplashScreen, 800));
+        setTimeout(hideSplashScreen, 2100);
+        window.addEventListener('load', () => setTimeout(hideSplashScreen, 1800));
     </script>
     <style>
         /* Custom Scrollbar */
@@ -64,7 +64,7 @@
         ::-webkit-scrollbar-thumb:hover { background: #0ea5e9; }
 
         /* Splash Screen */
-        #splash-screen { position: fixed; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 10000; transition: opacity 0.6s ease; background-color: #020617; cursor: pointer; }
+        #splash-screen { position: fixed; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 10000; transition: opacity 0.65s ease; background-color: #020617; cursor: pointer; }
 
         /* Glassmorphism */
         .glass-card { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 1px solid rgba(226, 232, 240, 0.8); }
@@ -72,8 +72,8 @@
 
         /* Hero Mesh Background */
         .hero-bg {
-            background-image: radial-gradient(rgba(14, 165, 233, 0.12) 1px, transparent 1px);
-            background-size: 32px 32px;
+            background-image: radial-gradient(rgba(14, 165, 233, 0.13) 1px, transparent 1px);
+            background-size: 30px 30px;
         }
         .dark .hero-bg {
             background-image: radial-gradient(rgba(14, 165, 233, 0.08) 1px, transparent 1px);
@@ -109,27 +109,41 @@
         .scrollbar-hide::-webkit-scrollbar { display: none; }
         .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
 
-        /* Cinematic Animations */
-        @keyframes cinematicFocus {
-            0% { transform: scale(1.15); filter: blur(10px); opacity: 0; }
-            100% { transform: scale(1); filter: blur(0px) drop-shadow(0 0 25px rgba(14, 165, 233, 0.45)); opacity: 1; }
+        /* ==================== NEW HERO & SPLASH STAGGER ANIMATIONS ==================== */
+        @keyframes popUpBadge {
+            0% { opacity: 0; transform: translateY(25px) scale(0.85); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
         }
-        .animate-premium-reveal { animation: cinematicFocus 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
+        .badge-pop-1 { opacity: 0; animation: popUpBadge 0.65s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards; }
+        .badge-pop-2 { opacity: 0; animation: popUpBadge 0.65s cubic-bezier(0.16, 1, 0.3, 1) 0.45s forwards; }
+        .badge-pop-3 { opacity: 0; animation: popUpBadge 0.65s cubic-bezier(0.16, 1, 0.3, 1) 0.7s forwards; }
 
-        @keyframes premiumFloat {
-            0%, 100% { transform: translateY(0); filter: drop-shadow(0 15px 25px rgba(14, 165, 233, 0.35)); }
-            50% { transform: translateY(-12px); filter: drop-shadow(0 25px 35px rgba(245, 158, 11, 0.35)); }
+        @keyframes floatSlow {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
         }
-        .animate-premium-float { animation: premiumFloat 6s ease-in-out infinite; }
+        .float-card-1 { animation: floatSlow 4.5s ease-in-out infinite; }
+        .float-card-2 { animation: floatSlow 5.2s ease-in-out 0.6s infinite; }
+        .float-card-3 { animation: floatSlow 4.8s ease-in-out 1.2s infinite; }
 
-        .text-glow { text-shadow: 0 0 20px rgba(14, 165, 233, 0.45); }
+        @keyframes splashProgress {
+            0% { width: 0%; }
+            100% { width: 100%; }
+        }
+        .animate-splash-bar { animation: splashProgress 1.6s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
+
+        @keyframes logoReveal {
+            0% { opacity: 0; transform: scale(0.85); filter: blur(8px); }
+            100% { opacity: 1; transform: scale(1); filter: blur(0px); }
+        }
+        .animate-logo-center { animation: logoReveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
 
         /* ==================== REALISTIC DIAGNOSTIC ANIMATIONS ==================== */
         @keyframes realDeadPixelCycle {
-            0%, 24% { background-color: #ef4444; }   /* Red Test */
-            25%, 49% { background-color: #22c55e; }  /* Green Test */
-            50%, 74% { background-color: #3b82f6; }  /* Blue Test */
-            75%, 100% { background-color: #f8fafc; } /* Pure White Test */
+            0%, 24% { background-color: #ef4444; }
+            25%, 49% { background-color: #22c55e; }
+            50%, 74% { background-color: #3b82f6; }
+            75%, 100% { background-color: #f8fafc; }
         }
         .animate-real-screen-test { animation: realDeadPixelCycle 4s infinite; }
 
@@ -164,19 +178,40 @@
         </div>
     </div>
 
-    <!-- Splash Screen -->
+    <!-- ==================== NEW CINEMATIC SPLASH SCREEN ==================== -->
     <div id="splash-screen" onclick="hideSplashScreen()">
-        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-slate-900 via-[#020617] to-[#020617] z-0"></div>
-        <div class="relative w-64 md:w-80 h-auto flex flex-col items-center justify-center z-10 animate-premium-reveal">
-            <img src="logo.png" alt="LAP MOSUL" class="w-full h-full object-contain" onerror="this.style.display='none'; document.getElementById('splash-fallback').classList.remove('hidden');">
-            <div id="splash-fallback" class="hidden text-center">
-                <div class="w-20 h-20 mx-auto mb-4 rounded-3xl bg-gradient-to-br from-brand-500 to-brand-900 flex items-center justify-center shadow-[0_0_40px_rgba(14,165,233,0.5)] border border-white/10">
-                    <i class="fas fa-laptop-code text-4xl text-white"></i>
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-brand-900/40 via-[#020617] to-[#020617] z-0"></div>
+        
+        <div class="relative z-10 flex flex-col items-center max-w-md w-full px-6">
+            <!-- Three Pillars Popping Above Logo in Splash -->
+            <div class="flex items-center justify-center gap-2.5 sm:gap-3 mb-7">
+                <div class="badge-pop-1 px-3.5 py-1.5 rounded-full bg-brand-500/15 border border-brand-500/40 text-brand-400 text-xs font-black flex items-center gap-1.5 shadow-lg">
+                    <i class="fas fa-laptop"></i> بيع
                 </div>
-                <h1 class="text-4xl font-black tracking-wider text-white">LAP <span class="text-brand-500">MOSUL</span></h1>
+                <div class="badge-pop-2 px-3.5 py-1.5 rounded-full bg-amber-500/15 border border-amber-500/40 text-amber-400 text-xs font-black flex items-center gap-1.5 shadow-lg">
+                    <i class="fas fa-screwdriver-wrench"></i> صيانة
+                </div>
+                <div class="badge-pop-3 px-3.5 py-1.5 rounded-full bg-purple-500/15 border border-purple-500/40 text-purple-400 text-xs font-black flex items-center gap-1.5 shadow-lg">
+                    <i class="fas fa-code"></i> برمجة
+                </div>
+            </div>
+
+            <!-- Main Logo in Splash -->
+            <div class="w-56 sm:w-64 h-auto flex flex-col items-center justify-center animate-logo-center">
+                <img src="logo.png" alt="LAP MOSUL" class="w-full h-full object-contain drop-shadow-[0_0_30px_rgba(14,165,233,0.4)]" onerror="this.style.display='none'; document.getElementById('splash-fallback').classList.remove('hidden');">
+                <div id="splash-fallback" class="hidden text-center">
+                    <div class="w-20 h-20 mx-auto mb-3 rounded-3xl bg-gradient-to-br from-brand-500 to-brand-800 flex items-center justify-center shadow-[0_0_40px_rgba(14,165,233,0.5)] border border-white/15">
+                        <i class="fas fa-laptop-code text-3xl text-white"></i>
+                    </div>
+                    <h1 class="text-3xl font-black tracking-wider text-white">LAP <span class="text-brand-500">MOSUL</span></h1>
+                </div>
+            </div>
+
+            <!-- Smooth Loading Bar -->
+            <div class="w-48 h-1 bg-slate-800 rounded-full overflow-hidden mt-8">
+                <div class="h-full bg-gradient-to-r from-brand-500 via-accent-gold to-emerald-400 animate-splash-bar"></div>
             </div>
         </div>
-        <p class="text-brand-400 mt-8 font-bold tracking-[0.3em] text-xs uppercase animate-pulse text-glow z-10 direction-ltr">LAP MOSUL SYSTEM</p>
     </div>
 
     <!-- Main Navigation -->
@@ -193,7 +228,7 @@
                         </div>
                         <div class="flex flex-col">
                             <span class="font-black text-lg tracking-tight leading-none text-slate-900 dark:text-white">LAP <span class="text-brand-500">MOSUL</span></span>
-                            <span class="text-[10px] font-bold text-slate-400">لاب الموصل للتقنية</span>
+                            <span class="text-[10px] font-bold text-slate-400">بيع • صيانة • برمجة</span>
                         </div>
                     </div>
                 </div>
@@ -206,7 +241,7 @@
                 <button onclick="window.app.scrollToSection('diagnostic-section')" class="hover:text-brand-500 transition-colors flex items-center gap-1.5">
                     <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span> فحص اللابتوبات الحقيقي
                 </button>
-                <button onclick="window.app.scrollToSection('services')" class="hover:text-brand-500 transition-colors">الخدمات والصيانة</button>
+                <button onclick="window.app.scrollToSection('services')" class="hover:text-brand-500 transition-colors">الصيانة والبرمجة</button>
                 <button onclick="window.app.scrollToSection('footer-contact')" class="hover:text-brand-500 transition-colors">موقعنا</button>
             </div>
 
@@ -237,62 +272,100 @@
     <!-- ==================== HOME VIEW ==================== -->
     <main id="view-home" class="view-section active pt-20 pb-20 md:pb-0">
         
-        <!-- Hero Section -->
-        <section class="relative pt-12 pb-20 px-6 overflow-hidden min-h-[82vh] flex flex-col justify-center hero-bg">
-            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-brand-500/10 dark:bg-brand-500/15 rounded-full blur-[120px] pointer-events-none z-0"></div>
+        <!-- ==================== NEW REDESIGNED HERO SECTION (LOGO + 3 PILLARS) ==================== -->
+        <section class="relative pt-10 pb-20 px-4 sm:px-6 overflow-hidden min-h-[86vh] flex flex-col justify-center hero-bg">
+            <!-- Ambient Backlight Glows -->
+            <div class="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[340px] sm:w-[550px] h-[340px] sm:h-[550px] bg-gradient-to-tr from-brand-500/15 via-purple-500/10 to-amber-500/15 rounded-full blur-[110px] pointer-events-none z-0"></div>
 
-            <div class="max-w-5xl mx-auto text-center relative z-10 flex flex-col items-center">
+            <div class="max-w-5xl mx-auto text-center relative z-10 flex flex-col items-center w-full">
                 
-                <div class="inline-flex items-center gap-2.5 px-5 py-2 rounded-full bg-white/80 dark:bg-slate-800/80 border border-slate-200/80 dark:border-slate-700 text-slate-700 dark:text-slate-300 text-xs font-bold mb-8 shadow-sm backdrop-blur-md">
-                    <span class="flex h-2.5 w-2.5 rounded-full bg-emerald-500 animate-ping"></span>
-                    أجهزة منتقاة بنظافة تصل إلى 100% ومفحوصة بالكامل في <span class="text-accent-gold font-black">LAP MOSUL</span>
+                <!-- THE 3 FLOATING PILLARS ABOVE THE LOGO (بيع • صيانة • برمجة) -->
+                <div class="grid grid-cols-3 gap-2.5 sm:gap-5 w-full max-w-2xl mb-8 sm:mb-10">
+                    
+                    <!-- Pillar 1: بيع (Sales) -->
+                    <div onclick="window.app.showView('store')" class="badge-pop-1 float-card-1 cursor-pointer group bg-white/90 dark:bg-slate-900/90 backdrop-blur-xl p-3 sm:p-4 rounded-2xl sm:rounded-3xl border border-slate-200/90 dark:border-slate-800 hover:border-brand-500 dark:hover:border-brand-500 shadow-lg hover:shadow-brand-500/20 transition-all duration-300 flex flex-col items-center text-center">
+                        <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-brand-50 dark:bg-brand-500/15 text-brand-500 flex items-center justify-center text-lg sm:text-xl mb-2 group-hover:scale-110 group-hover:bg-brand-500 group-hover:text-white transition-all">
+                            <i class="fas fa-laptop"></i>
+                        </div>
+                        <span class="font-black text-xs sm:text-base text-slate-900 dark:text-white group-hover:text-brand-500 transition-colors">بيع اللابتوبات</span>
+                        <span class="text-[10px] sm:text-xs font-bold text-slate-400 mt-0.5 hidden sm:block">نظافة تصل لـ 100%</span>
+                    </div>
+
+                    <!-- Pillar 2: صيانة (Maintenance - slightly elevated in center) -->
+                    <div onclick="window.app.scrollToSection('services')" class="badge-pop-2 float-card-2 cursor-pointer group bg-white/90 dark:bg-slate-900/90 backdrop-blur-xl p-3 sm:p-4 rounded-2xl sm:rounded-3xl border border-slate-200/90 dark:border-slate-800 hover:border-accent-gold dark:hover:border-accent-gold shadow-lg hover:shadow-amber-500/20 transition-all duration-300 flex flex-col items-center text-center -translate-y-2 sm:-translate-y-3">
+                        <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-amber-50 dark:bg-amber-500/15 text-accent-gold flex items-center justify-center text-lg sm:text-xl mb-2 group-hover:scale-110 group-hover:bg-accent-gold group-hover:text-white transition-all">
+                            <i class="fas fa-screwdriver-wrench"></i>
+                        </div>
+                        <span class="font-black text-xs sm:text-base text-slate-900 dark:text-white group-hover:text-accent-gold transition-colors">صيانة هندسية</span>
+                        <span class="text-[10px] sm:text-xs font-bold text-slate-400 mt-0.5 hidden sm:block">فحص 7 مراحل وتبريد</span>
+                    </div>
+
+                    <!-- Pillar 3: برمجة (Programming) -->
+                    <div onclick="window.app.scrollToSection('services')" class="badge-pop-3 float-card-3 cursor-pointer group bg-white/90 dark:bg-slate-900/90 backdrop-blur-xl p-3 sm:p-4 rounded-2xl sm:rounded-3xl border border-slate-200/90 dark:border-slate-800 hover:border-accent-purple dark:hover:border-accent-purple shadow-lg hover:shadow-purple-500/20 transition-all duration-300 flex flex-col items-center text-center">
+                        <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-purple-50 dark:bg-purple-500/15 text-accent-purple flex items-center justify-center text-lg sm:text-xl mb-2 group-hover:scale-110 group-hover:bg-accent-purple group-hover:text-white transition-all">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <span class="font-black text-xs sm:text-base text-slate-900 dark:text-white group-hover:text-accent-purple transition-colors">برمجة وأنظمة</span>
+                        <span class="text-[10px] sm:text-xs font-bold text-slate-400 mt-0.5 hidden sm:block">كاشير • مواقع • برامج</span>
+                    </div>
+
                 </div>
-                
-                <!-- Hero Logo / Visual -->
-                <div class="w-64 md:w-[420px] h-auto mb-8 relative cursor-pointer animate-premium-float" onclick="window.app.showView('store')">
-                    <img src="logo.png" alt="LAP MOSUL" class="w-full h-full object-contain relative z-10" onerror="this.style.display='none'; document.getElementById('hero-logo-fallback').classList.remove('hidden');">
-                    <div id="hero-logo-fallback" class="hidden py-6">
-                        <h1 class="text-5xl md:text-7xl font-black tracking-tight text-slate-900 dark:text-white">
-                            LAP <span class="text-transparent bg-clip-text bg-gradient-to-l from-brand-400 to-brand-600">MOSUL</span>
-                        </h1>
-                        <p class="text-sm font-bold text-accent-gold mt-2 tracking-widest uppercase">Workstations & Gaming Laptops</p>
+
+                <!-- CENTERPIECE: LAP MOSUL LOGO STAGE -->
+                <div class="relative flex flex-col items-center justify-center mb-8 group cursor-pointer" onclick="window.app.showView('store')">
+                    <!-- Subtle glowing ring behind logo -->
+                    <div class="absolute inset-0 bg-gradient-to-r from-brand-500/20 via-amber-500/15 to-purple-500/20 rounded-full blur-2xl scale-90 group-hover:scale-105 transition-transform duration-500"></div>
+                    
+                    <div class="w-60 sm:w-80 md:w-[390px] h-auto relative z-10 transition-transform duration-500 group-hover:scale-105">
+                        <img src="logo.png" alt="LAP MOSUL" class="w-full h-full object-contain drop-shadow-[0_15px_30px_rgba(14,165,233,0.3)]" onerror="this.style.display='none'; document.getElementById('hero-logo-fallback').classList.remove('hidden');">
+                        
+                        <!-- Elegant Fallback if logo.png is missing -->
+                        <div id="hero-logo-fallback" class="hidden py-6 px-8 rounded-3xl bg-white/80 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 backdrop-blur-xl shadow-2xl">
+                            <h1 class="text-4xl sm:text-6xl font-black tracking-tight text-slate-900 dark:text-white">
+                                LAP <span class="text-transparent bg-clip-text bg-gradient-to-l from-brand-400 to-brand-600">MOSUL</span>
+                            </h1>
+                            <p class="text-xs sm:text-sm font-black text-accent-gold mt-1.5 tracking-widest">لاب الموصل للتقنية الحديثة</p>
+                        </div>
                     </div>
                 </div>
-                
-                <h2 class="text-2xl md:text-4xl font-black text-slate-900 dark:text-white mb-4 leading-tight">
-                    قوة الـ Workstation، أناقة الـ Business، وأداء الـ Gaming
+
+                <!-- Main Tagline & Description -->
+                <h2 class="text-xl sm:text-3xl md:text-4xl font-black text-slate-900 dark:text-white mb-4 leading-snug max-w-3xl">
+                    وجهتك الأولى لنخبة أجهزة الـ <span class="text-brand-500">Workstation</span> والـ <span class="text-accent-gold">Gaming</span> في الموصل
                 </h2>
 
-                <p class="text-slate-600 dark:text-slate-400 text-base md:text-lg mb-10 mx-auto max-w-2xl font-medium leading-relaxed">
-                    نستورد وننتقي أنظف اللابتوبات بنظافة تصل إلى 100%، ونخضع كل جهاز لبرنامج فحص هندسي شامل يختبر كافة القطع الداخلية والخارجية قبل تسليمه لك.
+                <p class="text-slate-600 dark:text-slate-400 text-sm sm:text-base md:text-lg mb-9 mx-auto max-w-2xl font-medium leading-relaxed">
+                    ننتقي لك أنظف اللابتوبات الأوروبية والأمريكية بنظافة تصل إلى 100%، مفحوصة عبر منظومة فحص هندسي لـ 7 مراحل، مع خدمات الصيانة الاحترافية وبرمجة الأنظمة.
                 </p>
                 
-                <div class="flex flex-col sm:flex-row justify-center items-center gap-4 w-full sm:w-auto">
+                <!-- Call To Action Buttons -->
+                <div class="flex flex-col sm:flex-row justify-center items-center gap-3.5 w-full sm:w-auto">
                     <button onclick="window.app.showView('store')" class="w-full sm:w-auto px-9 py-4 bg-brand-600 hover:bg-brand-500 text-white rounded-2xl font-black shadow-[0_10px_25px_-5px_rgba(14,165,233,0.5)] hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-3 text-base">
-                        <span>الدخول للمتجر الرقمي</span>
+                        <span>تصفح اللابتوبات المتوفرة</span>
                         <i class="fas fa-shopping-bag"></i>
                     </button>
-                    <button onclick="window.app.scrollToSection('diagnostic-section')" class="w-full sm:w-auto px-8 py-4 bg-white dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-800 dark:text-white border border-slate-200 dark:border-slate-700 rounded-2xl font-bold transition-all duration-300 flex items-center justify-center gap-2.5 text-base shadow-sm">
-                        <i class="fas fa-microchip text-brand-500"></i>
-                        <span>شاهد مراحل فحص اللابتوب</span>
+                    <button onclick="window.app.scrollToSection('diagnostic-section')" class="w-full sm:w-auto px-7 py-4 bg-white dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-800 dark:text-white border border-slate-200 dark:border-slate-700 rounded-2xl font-bold transition-all duration-300 flex items-center justify-center gap-2.5 text-base shadow-sm">
+                        <i class="fas fa-shield-halved text-emerald-500"></i>
+                        <span>شاهد الفحوصات الـ 7</span>
                     </button>
                 </div>
 
-                <!-- Quick Trust Badges -->
-                <div class="grid grid-cols-3 gap-4 md:gap-12 mt-14 pt-8 border-t border-slate-200/70 dark:border-slate-800/80 w-full max-w-2xl">
+                <!-- Bottom Quick Guarantees -->
+                <div class="grid grid-cols-3 gap-3 md:gap-10 mt-12 pt-7 border-t border-slate-200/70 dark:border-slate-800/80 w-full max-w-2xl">
                     <div class="text-center">
-                        <p class="text-xl md:text-2xl font-black text-brand-500">تصل لـ 100%</p>
-                        <p class="text-xs font-bold text-slate-500 dark:text-slate-400 mt-0.5">نظافة وفحص 7 مراحل</p>
+                        <p class="text-lg sm:text-2xl font-black text-brand-500">تصل لـ 100%</p>
+                        <p class="text-[11px] sm:text-xs font-bold text-slate-500 dark:text-slate-400 mt-0.5">نظافة وفحص شامل</p>
                     </div>
                     <div class="text-center">
-                        <p class="text-xl md:text-2xl font-black text-accent-gold">10 أيام</p>
-                        <p class="text-xs font-bold text-slate-500 dark:text-slate-400 mt-0.5">ضمان حقيقي للاستبدال</p>
+                        <p class="text-lg sm:text-2xl font-black text-accent-gold">10 أيام</p>
+                        <p class="text-[11px] sm:text-xs font-bold text-slate-500 dark:text-slate-400 mt-0.5">ضمان حقيقي للاستبدال</p>
                     </div>
                     <div class="text-center">
-                        <p class="text-xl md:text-2xl font-black text-emerald-500">مجاني</p>
-                        <p class="text-xs font-bold text-slate-500 dark:text-slate-400 mt-0.5">توصيل لكل العراق</p>
+                        <p class="text-lg sm:text-2xl font-black text-emerald-500">مجاني</p>
+                        <p class="text-[11px] sm:text-xs font-bold text-slate-500 dark:text-slate-400 mt-0.5">توصيل لكل العراق</p>
                     </div>
                 </div>
+
             </div>
         </section>
 
@@ -391,8 +464,8 @@
         <section id="services" class="py-20 px-6 relative">
             <div class="max-w-7xl mx-auto">
                 <div class="text-center mb-14">
-                    <h2 class="text-3xl md:text-4xl font-black mb-3">حلول تقنية وهندسية متكاملة</h2>
-                    <p class="text-slate-400 font-bold tracking-widest uppercase text-xs">Hardware & Software Engineering</p>
+                    <h2 class="text-3xl md:text-4xl font-black mb-3">خدمات الصيانة والبرمجة المتكاملة</h2>
+                    <p class="text-slate-400 font-bold tracking-widest uppercase text-xs">Hardware Maintenance & Software Solutions</p>
                 </div>
                 
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
@@ -817,7 +890,6 @@
                 visual: `
                     <img src="https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?auto=format&fit=crop&w=1000&q=85" alt="فحص الشاشة" class="absolute inset-0 w-full h-full object-cover opacity-50">
                     <div class="absolute inset-0 bg-slate-950/50"></div>
-                    <!-- Realistic Laptop Screen Running LCD Dead Pixel Test -->
                     <div class="relative z-10 flex flex-col items-center">
                         <div class="w-72 sm:w-80 h-44 rounded-t-xl border-[6px] border-slate-800 shadow-2xl animate-real-screen-test flex flex-col justify-between p-3 relative">
                             <div class="bg-slate-950/80 backdrop-blur-sm text-white text-[11px] font-bold px-3 py-1 rounded-lg self-start direction-ltr">
@@ -843,7 +915,6 @@
                 visual: `
                     <img src="https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&fit=crop&w=1000&q=85" alt="فحص الكيبورد" class="absolute inset-0 w-full h-full object-cover animate-photo-zoom opacity-60">
                     <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/60 to-slate-950/30"></div>
-                    <!-- Real Keyboard Tester Software UI -->
                     <div class="relative z-10 w-full max-w-md bg-slate-900/90 backdrop-blur-md border border-white/15 p-4 rounded-2xl shadow-2xl mx-4 direction-ltr">
                         <div class="flex justify-between items-center mb-3 text-xs font-bold text-slate-300">
                             <span><i class="fas fa-keyboard text-emerald-400 mr-1.5"></i> Keyboard Tester Utility</span>
@@ -878,7 +949,7 @@
                             <div class="py-1.5 rounded border real-key-test" style="animation-delay:0.6s">ALT</div>
                             <div class="py-1.5 col-span-2 rounded border real-key-test" style="animation-delay:0.4s">SPACE</div>
                             <div class="py-1.5 rounded border real-key-test" style="animation-delay:0.7s">FN</div>
-                            <div class="py-1.5 rounded border real-key-test" style="animation-delay:0.2s">arrows</div>
+                            <div class="py-1.5 rounded border real-key-test" style="animation-delay:0.2s">ARW</div>
                         </div>
                     </div>
                 `
@@ -894,7 +965,6 @@
                 visual: `
                     <img src="https://images.unsplash.com/photo-1603302576837-37561b2e2302?auto=format&fit=crop&w=1000&q=85" alt="فحص كرت الشاشة" class="absolute inset-0 w-full h-full object-cover animate-photo-zoom opacity-70">
                     <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent"></div>
-                    <!-- Real Telemetry HUD -->
                     <div class="relative z-10 w-full max-w-md mx-4 bg-slate-950/85 backdrop-blur-md border border-white/15 p-4 rounded-2xl shadow-2xl direction-ltr">
                         <div class="flex justify-between items-center border-b border-slate-800 pb-2.5 mb-3">
                             <span class="text-xs font-black text-amber-400"><i class="fas fa-gauge-high mr-1"></i> GPU / CPU BENCHMARK</span>
